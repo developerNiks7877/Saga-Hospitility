@@ -1,215 +1,535 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 const AuthContext = createContext(null);
 
-const API_BASE = 'https://saga-javaai.onrender.com';
-const LOGIN_URL = `${API_BASE}/api/saga/login`;
-const SIGNUP_URL = `${API_BASE}/api/saga/signup`;
 
-const DEFAULT_USER = {
-  fullName: 'Aisha Sharma',
-  firstName: 'Aisha',
-  lastName: 'Sharma',
-  email: 'aisha.sharma@example.com',
-  phoneNumber: '+91 98765 43210',
-  address: '123 Serenity Lane, Bandra West, Mumbai, MH',
-  avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face',
-  twoFactorEnabled: false,
-  preferences: {
-    room: ['High Floor', 'Quiet Room', 'Extra Pillows', 'Palace View'],
-    dining: ['Vegetarian', 'Gluten-Free', 'Ayurvedic Herbals'],
-    wellness: ['Spa Access', 'Yoga Classes', 'Morning Meditation']
+ const API_BASE = 'http://localhost:5001';
+
+const LOGIN_URL = `${API_BASE}/api/auth/login`;
+const SIGNUP_URL = `${API_BASE}/api/auth/signup`;
+const GOOGLE_URL = `${API_BASE}/api/auth/google`;
+const REFRESH_URL = `${API_BASE}/api/auth/refresh`;
+
+const getStoredUser = () => {
+  try {
+    const saved = localStorage.getItem('saga_user');
+
+    if (!saved) {
+      return null;
+    }
+
+    return JSON.parse(saved);
+  } catch {
+    return null;
   }
 };
 
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(() => localStorage.getItem('token') || 'demo-jwt-token');
-  const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem('user');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        return { ...DEFAULT_USER, ...parsed };
-      } catch (e) {
-        return DEFAULT_USER;
-      }
+  const [user, setUser] = useState(
+    getStoredUser
+  );
+
+  const [token, setToken] = useState(
+    () =>
+      localStorage.getItem(
+        'saga_access_token'
+      ) || null
+  );
+
+  const [refreshToken, setRefreshToken] =
+    useState(
+      () =>
+        localStorage.getItem(
+          'saga_refresh_token'
+        ) || null
+    );
+
+  const [loading, setLoading] =
+    useState(false);
+
+  /* =========================
+     STORE AUTH SESSION
+  ========================= */
+
+  const storeSession = ({
+    user: nextUser,
+    accessToken,
+    refreshToken:
+      nextRefreshToken,
+  }) => {
+    if (nextUser) {
+      setUser(nextUser);
+
+      localStorage.setItem(
+        'saga_user',
+        JSON.stringify(nextUser)
+      );
     }
-    return DEFAULT_USER;
-  });
 
-  const [loading, setLoading] = useState(false);
+    if (accessToken) {
+      setToken(accessToken);
 
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem(
+        'saga_access_token',
+        accessToken
+      );
     }
-  }, [user]);
 
-  const login = async (email, password) => {
+    if (nextRefreshToken) {
+      setRefreshToken(
+        nextRefreshToken
+      );
+
+      localStorage.setItem(
+        'saga_refresh_token',
+        nextRefreshToken
+      );
+    }
+  };
+
+  /* =========================
+     CLEAR SESSION
+  ========================= */
+
+  const clearSession = () => {
+    setUser(null);
+    setToken(null);
+    setRefreshToken(null);
+
+    localStorage.removeItem(
+      'saga_user'
+    );
+
+    localStorage.removeItem(
+      'saga_access_token'
+    );
+
+    localStorage.removeItem(
+      'saga_refresh_token'
+    );
+
+    // Remove old demo auth
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  };
+
+  /* =========================
+     LOGIN
+  ========================= */
+
+  const login = async (
+    email,
+    password
+  ) => {
     setLoading(true);
-    try {
-      const response = await fetch(LOGIN_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          email: email.trim(),
-          password: password
-        })
-      });
 
-      let data = null;
-      const contentType = response.headers.get('content-type') || '';
-      if (contentType.includes('application/json')) {
-        data = await response.json();
-      } else {
-        const text = await response.text();
-        try {
-          data = JSON.parse(text);
-        } catch {
-          data = { message: text };
+    try {
+      const response = await fetch(
+        LOGIN_URL,
+        {
+          method: 'POST',
+
+          headers: {
+            'Content-Type':
+              'application/json',
+            Accept:
+              'application/json',
+          },
+
+          body: JSON.stringify({
+            email: email
+              .trim()
+              .toLowerCase(),
+
+            password,
+          }),
         }
-      }
+      );
 
-      if (!response.ok) {
-        const msg = (data && (data.message || data.error || data.msg)) || `Login failed (${response.status})`;
-        throw new Error(msg);
-      }
+      const result =
+        await response.json();
 
-      if (data.token) {
-        setToken(data.token);
-        localStorage.setItem('token', data.token);
-      }
-
-      const receivedUser = data.response || data.user || {
-        fullName: email.split('@')[0],
-        email: email
-      };
-
-      const parts = (receivedUser.fullName || '').split(' ');
-      const enrichedUser = {
-        ...DEFAULT_USER,
-        ...receivedUser,
-        firstName: parts[0] || 'Guest',
-        lastName: parts.slice(1).join(' ') || ''
-      };
-
-      setUser(enrichedUser);
-      localStorage.setItem('user', JSON.stringify(enrichedUser));
-      return { success: true, user: enrichedUser, message: data.message || 'Login successful' };
-    } catch (err) {
-      // Fallback for development/testing when CORS or remote API is unavailable
       if (
-        err.message.includes('Network / CORS') ||
-        err.message.includes('Failed to fetch') ||
-        err.message.includes('NetworkError')
+        !response.ok ||
+        !result.success
       ) {
-        // Allow mock demo login
-        const mockUser = {
-          ...DEFAULT_USER,
-          email: email,
-          fullName: email.split('@')[0]
-        };
-        setUser(mockUser);
-        setToken('mock-jwt-token');
-        return { success: true, user: mockUser, message: 'Signed in with demo access' };
+        throw new Error(
+          result.message ||
+            'Login failed'
+        );
       }
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  const signup = async (payload) => {
-    setLoading(true);
-    try {
-      const response = await fetch(SIGNUP_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          fullName: payload.fullName.trim(),
-          email: payload.email.trim().toLowerCase(),
-          password: payload.password,
-          phoneNumber: payload.phoneNumber ? payload.phoneNumber.trim() : ''
-        })
+      const authData =
+        result.data;
+
+      if (
+        !authData?.accessToken ||
+        !authData?.user
+      ) {
+        throw new Error(
+          'Invalid authentication response'
+        );
+      }
+
+      storeSession({
+        user: authData.user,
+
+        accessToken:
+          authData.accessToken,
+
+        refreshToken:
+          authData.refreshToken,
       });
 
-      let data = {};
-      try {
-        data = await response.json();
-      } catch (e) {
-        // Non-JSON
-      }
-
-      if (!response.ok) {
-        const msg = data.message || data.error || `Registration failed (${response.status})`;
-        throw new Error(msg);
-      }
-
-      const parts = payload.fullName.split(' ');
-      const newUser = {
-        ...DEFAULT_USER,
-        fullName: payload.fullName,
-        firstName: parts[0] || payload.fullName,
-        lastName: parts.slice(1).join(' ') || '',
-        email: payload.email,
-        phoneNumber: payload.phoneNumber || ''
+      return {
+        success: true,
+        user: authData.user,
+        message:
+          result.message ||
+          'Login successful',
       };
-
-      setUser(newUser);
-      return { success: true, message: data.message || 'Account created successfully!' };
-    } catch (err) {
-      if (
-        err.message.includes('Failed to fetch') ||
-        err.message.includes('NetworkError')
-      ) {
-        const parts = payload.fullName.split(' ');
-        const newUser = {
-          ...DEFAULT_USER,
-          fullName: payload.fullName,
-          firstName: parts[0],
-          lastName: parts.slice(1).join(' '),
-          email: payload.email,
-          phoneNumber: payload.phoneNumber
-        };
-        setUser(newUser);
-        return { success: true, message: 'Account created (Demo Mode)' };
-      }
-      throw err;
     } finally {
       setLoading(false);
     }
   };
+
+  /* =========================
+     SIGNUP
+  ========================= */
+
+  const signup = async (
+    payload
+  ) => {
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        SIGNUP_URL,
+        {
+          method: 'POST',
+
+          headers: {
+            'Content-Type':
+              'application/json',
+            Accept:
+              'application/json',
+          },
+
+          body: JSON.stringify({
+            fullName:
+              payload.fullName
+                .trim(),
+
+            email:
+              payload.email
+                .trim()
+                .toLowerCase(),
+
+            phone:
+              (
+                payload.phone ||
+                payload.phoneNumber ||
+                ''
+              ).trim(),
+
+            password:
+              payload.password,
+
+            travelPreferences:
+              payload.travelPreferences ||
+              [],
+
+            termsAccepted:
+              payload.termsAccepted ??
+              true,
+          }),
+        }
+      );
+
+      const result =
+        await response.json();
+
+      if (
+        !response.ok ||
+        !result.success
+      ) {
+        throw new Error(
+          result.message ||
+            'Registration failed'
+        );
+      }
+
+      const authData =
+        result.data;
+
+      if (
+        !authData?.accessToken ||
+        !authData?.user
+      ) {
+        throw new Error(
+          'Invalid authentication response'
+        );
+      }
+
+      storeSession({
+        user: authData.user,
+
+        accessToken:
+          authData.accessToken,
+
+        refreshToken:
+          authData.refreshToken,
+      });
+
+      return {
+        success: true,
+        user: authData.user,
+        message:
+          result.message ||
+          'Account created successfully',
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* =========================
+     GOOGLE LOGIN
+  ========================= */
+
+  const googleLogin = async (
+    credential
+  ) => {
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        GOOGLE_URL,
+        {
+          method: 'POST',
+
+          headers: {
+            'Content-Type':
+              'application/json',
+            Accept:
+              'application/json',
+          },
+
+          body: JSON.stringify({
+            credential,
+          }),
+        }
+      );
+
+      const result =
+        await response.json();
+
+      if (
+        !response.ok ||
+        !result.success
+      ) {
+        throw new Error(
+          result.message ||
+            'Google login failed'
+        );
+      }
+
+      const authData =
+        result.data;
+
+      storeSession({
+        user: authData.user,
+
+        accessToken:
+          authData.accessToken,
+
+        refreshToken:
+          authData.refreshToken,
+      });
+
+      return {
+        success: true,
+        user: authData.user,
+        message:
+          result.message,
+      };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* =========================
+     REFRESH ACCESS TOKEN
+  ========================= */
+
+  const refreshAccessToken =
+    async () => {
+      if (!refreshToken) {
+        clearSession();
+        return null;
+      }
+
+      try {
+        const response =
+          await fetch(
+            REFRESH_URL,
+            {
+              method: 'POST',
+
+              headers: {
+                'Content-Type':
+                  'application/json',
+
+                Accept:
+                  'application/json',
+              },
+
+              body:
+                JSON.stringify({
+                  refreshToken,
+                }),
+            }
+          );
+
+        const result =
+          await response.json();
+
+        if (
+          !response.ok ||
+          !result.success
+        ) {
+          throw new Error(
+            result.message ||
+              'Session expired'
+          );
+        }
+
+        const newAccessToken =
+          result.data
+            ?.accessToken;
+
+        if (!newAccessToken) {
+          throw new Error(
+            'Access token missing'
+          );
+        }
+
+        setToken(
+          newAccessToken
+        );
+
+        localStorage.setItem(
+          'saga_access_token',
+          newAccessToken
+        );
+
+        if (
+          result.data
+            ?.refreshToken
+        ) {
+          setRefreshToken(
+            result.data
+              .refreshToken
+          );
+
+          localStorage.setItem(
+            'saga_refresh_token',
+            result.data
+              .refreshToken
+          );
+        }
+
+        return newAccessToken;
+      } catch (error) {
+        clearSession();
+        return null;
+      }
+    };
+
+  /* =========================
+     LOGOUT
+  ========================= */
 
   const logout = () => {
-    setToken(null);
-    localStorage.removeItem('token');
+    clearSession();
   };
 
-  const updateProfile = (updatedData) => {
+  /* =========================
+     PROFILE LOCAL SYNC
+  ========================= */
+
+  const updateProfile = (
+    updatedData
+  ) => {
     setUser((prev) => {
-      const next = { ...prev, ...updatedData };
-      localStorage.setItem('user', JSON.stringify(next));
+      if (!prev) {
+        return prev;
+      }
+
+      const next = {
+        ...prev,
+        ...updatedData,
+      };
+
+      localStorage.setItem(
+        'saga_user',
+        JSON.stringify(next)
+      );
+
       return next;
     });
   };
+
+  /* =========================
+     CLEAN OLD DEMO SESSION
+     ON FIRST LOAD
+  ========================= */
+
+  useEffect(() => {
+    const oldToken =
+      localStorage.getItem(
+        'token'
+      );
+
+    if (
+      oldToken ===
+        'demo-jwt-token' ||
+      oldToken ===
+        'mock-jwt-token'
+    ) {
+      localStorage.removeItem(
+        'token'
+      );
+    }
+  }, []);
 
   return (
     <AuthContext.Provider
       value={{
         user,
         token,
-        isAuthenticated: !!token,
+
+        accessToken: token,
+        refreshToken,
+
+        isAuthenticated:
+          Boolean(token && user),
+
         loading,
+
         login,
         signup,
+        googleLogin,
         logout,
-        updateProfile
+        updateProfile,
+        refreshAccessToken,
+
+        apiBase: API_BASE,
       }}
     >
       {children}
@@ -218,9 +538,14 @@ export function AuthProvider({ children }) {
 }
 
 export function useAuth() {
-  const context = useContext(AuthContext);
+  const context =
+    useContext(AuthContext);
+
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error(
+      'useAuth must be used within an AuthProvider'
+    );
   }
+
   return context;
 }

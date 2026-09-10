@@ -1,207 +1,744 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+
 import { hotelData } from '../data/hotelData';
+import API_BASE_URL from '../config/api';
 
 const BookingContext = createContext(null);
 
+/* =========================
+   ROOM TYPE MAPPING
+
+   Backend availability currently
+   filters roomType against room.name.
+========================= */
+
+const mapRoomTypeForApi = (roomType) => {
+  const roomMap = {
+    Deluxe: 'Deluxe Room',
+    'Super Deluxe': 'Super Deluxe Room',
+    Suite: 'Executive Suite',
+  };
+
+  return roomMap[roomType] || roomType || 'all';
+};
+
+/* =========================
+   DATE HELPERS
+========================= */
+
+const formatDisplayDate = (dateString) => {
+  if (!dateString) return '';
+
+  const date = new Date(`${dateString}T00:00:00`);
+
+  if (Number.isNaN(date.getTime())) {
+    return dateString;
+  }
+
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+};
+
+const calculateNights = (checkIn, checkOut) => {
+  if (!checkIn || !checkOut) return 1;
+
+  const start = new Date(`${checkIn}T00:00:00`);
+  const end = new Date(`${checkOut}T00:00:00`);
+
+  const difference =
+    end.getTime() - start.getTime();
+
+  const nights = Math.ceil(
+    difference / (1000 * 60 * 60 * 24)
+  );
+
+  return nights > 0 ? nights : 1;
+};
+
 export const BookingProvider = ({ children }) => {
-  // Search parameters for SAGA JAWAAI
-  const [searchParams, setSearchParams] = useState({
-    checkIn: '2026-10-14',
-    checkOut: '2026-10-17',
-    guests: '2 Guests, 1 Room',
-    roomType: 'all'
-  });
+  /* =========================
+     ROOMS
+  ========================= */
 
-  // Active Booking Draft (Single Hotel: SAGA JAWAAI)
-  const [activeDraft, setActiveDraft] = useState({
-    stay: hotelData,
-    room: hotelData.rooms[0],
-    dates: {
-      checkIn: 'Oct 14, 2026',
-      checkOut: 'Oct 17, 2026',
-      nights: 3
-    },
-    guestDetails: {
-      firstName: 'Aisha',
-      lastName: 'Sharma',
-      email: 'aisha.sharma@example.com',
-      phone: '+91 98765 43210',
-      specialRequests: '',
-      preferences: ['High Floor', 'Quiet Room', 'King Bed']
-    },
-    pricing: {
-      nightlyRate: 28500,
-      nights: 3,
-      roomTotal: 85500,
-      taxes: 15390, // 18% GST
-      resortFee: 3500,
-      discount: 0,
-      promoCode: null,
-      total: 104390
-    }
-  });
+  const [rooms, setRooms] = useState(
+    hotelData.rooms || []
+  );
 
-  // Confirmed Reservations Store
-  const [bookings, setBookings] = useState(() => {
-    const saved = localStorage.getItem('saga_user_bookings');
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch (e) {
-        // fallback
-      }
-    }
-    return [
-      {
-        id: 'SJ-9482',
-        reference: 'SJ-9482',
-        hotelName: 'SAGA JAWAAI Resort & Safari',
-        roomName: 'Royal Jawai Safari Villa',
-        location: 'Jawai Bandh, Pali District, Rajasthan',
-        image: hotelData.rooms[1].image,
+  const [roomsLoading, setRoomsLoading] =
+    useState(true);
+
+  const [roomsError, setRoomsError] =
+    useState(null);
+
+  /* =========================
+     AVAILABILITY
+  ========================= */
+
+  const [
+    availabilityRooms,
+    setAvailabilityRooms,
+  ] = useState([]);
+
+  const [
+    availabilityLoading,
+    setAvailabilityLoading,
+  ] = useState(false);
+
+  const [
+    availabilityError,
+    setAvailabilityError,
+  ] = useState(null);
+
+  const [
+    hasCheckedAvailability,
+    setHasCheckedAvailability,
+  ] = useState(false);
+
+  /* =========================
+     SEARCH PARAMS
+  ========================= */
+
+  const [searchParams, setSearchParams] =
+    useState({
+      checkIn: '2026-10-14',
+      checkOut: '2026-10-17',
+      guests: '2 Guests, 1 Room',
+      roomType: 'all',
+    });
+
+  /* =========================
+     ACTIVE BOOKING DRAFT
+  ========================= */
+
+  const [activeDraft, setActiveDraft] =
+    useState({
+      stay: hotelData,
+
+      room:
+        hotelData.rooms?.[0] || null,
+
+      dates: {
         checkIn: 'Oct 14, 2026',
         checkOut: 'Oct 17, 2026',
-        guests: '2 Guests',
-        totalAmount: 168400,
-        status: 'upcoming',
-        bookedOn: '2026-08-15'
+        nights: 3,
       },
-      {
-        id: 'SJ-7391',
-        reference: 'SJ-7391',
-        hotelName: 'SAGA JAWAAI Resort & Safari',
-        roomName: 'Deluxe Heritage Suite',
-        location: 'Jawai Bandh, Pali District, Rajasthan',
-        image: hotelData.rooms[0].image,
-        checkIn: 'Mar 10, 2026',
-        checkOut: 'Mar 13, 2026',
-        guests: '2 Guests',
-        totalAmount: 98500,
-        status: 'completed',
-        bookedOn: '2026-02-28'
+
+      guestDetails: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        specialRequests: '',
+        preferences: [],
+      },
+
+      pricing: {
+        nightlyRate: 0,
+        nights: 3,
+        roomTotal: 0,
+        taxes: 0,
+        resortFee: 3500,
+        discount: 0,
+        promoCode: null,
+        total: 3500,
+      },
+    });
+
+  /* =========================
+     BOOKINGS
+  ========================= */
+
+  const [bookings, setBookings] = useState(
+    () => {
+      const saved = localStorage.getItem(
+        'saga_user_bookings'
+      );
+
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (error) {
+          console.error(
+            'Failed to parse saved bookings:',
+            error
+          );
+        }
       }
-    ];
-  });
 
-  const [latestConfirmedBooking, setLatestConfirmedBooking] = useState(null);
+      return [];
+    }
+  );
 
-  // Sync bookings to localStorage
+  const [
+    latestConfirmedBooking,
+    setLatestConfirmedBooking,
+  ] = useState(null);
+
+  /* =========================
+     FETCH ALL ROOMS
+  ========================= */
+
   useEffect(() => {
-    localStorage.setItem('saga_user_bookings', JSON.stringify(bookings));
+    let cancelled = false;
+
+    const fetchRooms = async () => {
+      try {
+        setRoomsLoading(true);
+        setRoomsError(null);
+
+        const response = await fetch(
+          `${API_BASE_URL}/api/rooms`,
+          {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+            },
+          }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(
+            result.message ||
+              'Failed to fetch rooms'
+          );
+        }
+
+        const backendRooms =
+          result?.data?.rooms;
+
+        if (!Array.isArray(backendRooms)) {
+          throw new Error(
+            'Invalid rooms response'
+          );
+        }
+
+        if (cancelled) return;
+
+        setRooms(backendRooms);
+
+        if (backendRooms.length > 0) {
+          const defaultRoom =
+            backendRooms[0];
+
+          setActiveDraft((prev) => ({
+            ...prev,
+
+            stay: {
+              ...hotelData,
+              rooms: backendRooms,
+            },
+
+            room: defaultRoom,
+
+            pricing: recalculatePrice(
+              defaultRoom.pricePerNight,
+              prev.dates.nights
+            ),
+          }));
+        }
+      } catch (error) {
+        console.error(
+          'Failed to fetch rooms:',
+          error
+        );
+
+        if (!cancelled) {
+          setRoomsError(error.message);
+
+          setRooms(
+            hotelData.rooms || []
+          );
+        }
+      } finally {
+        if (!cancelled) {
+          setRoomsLoading(false);
+        }
+      }
+    };
+
+    fetchRooms();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  /* =========================
+     HOTEL OBJECT
+  ========================= */
+
+  const hotel = {
+    ...hotelData,
+    rooms,
+  };
+
+  /* =========================
+     LOCAL STORAGE
+  ========================= */
+
+  useEffect(() => {
+    localStorage.setItem(
+      'saga_user_bookings',
+      JSON.stringify(bookings)
+    );
   }, [bookings]);
 
-  // Recalculate Pricing
-  const recalculatePrice = (rate, nights = 3, discountPercent = 0, promoCode = null) => {
-    const roomTotal = rate * nights;
-    const taxes = Math.round(roomTotal * 0.18);
+  /* =========================
+     PRICE CALCULATION
+  ========================= */
+
+  function recalculatePrice(
+    rate = 0,
+    nights = 1,
+    discountPercent = 0,
+    promoCode = null
+  ) {
+    const safeRate = Number(rate) || 0;
+    const safeNights =
+      Number(nights) > 0
+        ? Number(nights)
+        : 1;
+
+    const roomTotal =
+      safeRate * safeNights;
+
+    const taxes = Math.round(
+      roomTotal * 0.18
+    );
+
     const resortFee = 3500;
-    const discount = discountPercent > 0 ? Math.round((roomTotal + taxes + resortFee) * (discountPercent / 100)) : 0;
-    const total = roomTotal + taxes + resortFee - discount;
+
+    const subtotal =
+      roomTotal + taxes + resortFee;
+
+    const discount =
+      discountPercent > 0
+        ? Math.round(
+            subtotal *
+              (discountPercent / 100)
+          )
+        : 0;
+
+    const total =
+      subtotal - discount;
 
     return {
-      nightlyRate: rate,
-      nights,
+      nightlyRate: safeRate,
+      nights: safeNights,
       roomTotal,
       taxes,
       resortFee,
       discount,
       promoCode,
-      total
+      total,
     };
-  };
+  }
 
-  // Select a room directly at SAGA JAWAAI
-  const selectRoom = (room, nights = 3) => {
-    const pricing = recalculatePrice(room.pricePerNight, nights, activeDraft.pricing.promoCode ? 15 : 0, activeDraft.pricing.promoCode);
-    setActiveDraft((prev) => ({
-      ...prev,
-      stay: hotelData,
-      room,
-      pricing
-    }));
-  };
+  /* =========================
+     CHECK AVAILABILITY
+  ========================= */
 
-  // Update guest details in draft
-  const updateDraftGuests = (guestInfo) => {
-    setActiveDraft((prev) => ({
-      ...prev,
-      guestDetails: { ...prev.guestDetails, ...guestInfo }
-    }));
-  };
+  const checkAvailability = async (
+    overrideParams = {}
+  ) => {
+    const params = {
+      ...searchParams,
+      ...overrideParams,
+    };
 
-  // Apply promo discount
-  const applyPromoDiscount = (discountPercent, code) => {
-    setActiveDraft((prev) => {
-      const pricing = recalculatePrice(
-        prev.room.pricePerNight,
-        prev.dates.nights,
-        discountPercent,
-        code
+    try {
+      setAvailabilityLoading(true);
+      setAvailabilityError(null);
+
+      if (
+        !params.checkIn ||
+        !params.checkOut
+      ) {
+        throw new Error(
+          'Please select check-in and check-out dates.'
+        );
+      }
+
+      const nights = calculateNights(
+        params.checkIn,
+        params.checkOut
       );
+
+      if (nights <= 0) {
+        throw new Error(
+          'Check-out date must be after check-in date.'
+        );
+      }
+
+      const requestBody = {
+        checkIn: params.checkIn,
+        checkOut: params.checkOut,
+        guests: params.guests,
+        roomType:
+          params.roomType === 'all'
+            ? 'all'
+            : mapRoomTypeForApi(
+                params.roomType
+              ),
+      };
+
+      const response = await fetch(
+        `${API_BASE_URL}/api/rooms/availability`,
+        {
+          method: 'POST',
+
+          headers: {
+            'Content-Type':
+              'application/json',
+            Accept: 'application/json',
+          },
+
+          body: JSON.stringify(
+            requestBody
+          ),
+        }
+      );
+
+      const result =
+        await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message ||
+            'Unable to check room availability.'
+        );
+      }
+
+      const data = result.data;
+
+      const availableRooms =
+        Array.isArray(data?.rooms)
+          ? data.rooms
+          : [];
+
+      setSearchParams(params);
+
+      setAvailabilityRooms(
+        availableRooms
+      );
+
+      setHasCheckedAvailability(true);
+
+      setActiveDraft((prev) => ({
+        ...prev,
+
+        dates: {
+          checkIn: formatDisplayDate(
+            data.checkIn
+          ),
+
+          checkOut: formatDisplayDate(
+            data.checkOut
+          ),
+
+          nights:
+            data.nights || nights,
+        },
+
+        guestDetails: {
+          ...prev.guestDetails,
+          guests:
+            params.guests ||
+            '2 Guests, 1 Room',
+        },
+      }));
+
+      return {
+        success: true,
+        data,
+      };
+    } catch (error) {
+      console.error(
+        'Availability API error:',
+        error
+      );
+
+      setAvailabilityError(
+        error.message
+      );
+
+      setAvailabilityRooms([]);
+
+      setHasCheckedAvailability(true);
+
+      return {
+        success: false,
+        message: error.message,
+      };
+    } finally {
+      setAvailabilityLoading(false);
+    }
+  };
+
+  /* =========================
+     SELECT ROOM
+  ========================= */
+
+  const selectRoom = (
+    room,
+    nightsOverride
+  ) => {
+    if (!room) return;
+
+    const nights =
+      nightsOverride ||
+      room.nights ||
+      activeDraft.dates.nights ||
+      calculateNights(
+        searchParams.checkIn,
+        searchParams.checkOut
+      );
+
+    const discountPercent =
+      activeDraft.pricing.promoCode
+        ? 15
+        : 0;
+
+    const pricing =
+      recalculatePrice(
+        room.pricePerNight,
+        nights,
+        discountPercent,
+        activeDraft.pricing.promoCode
+      );
+
+    setActiveDraft((prev) => ({
+      ...prev,
+
+      stay: hotel,
+
+      room,
+
+      dates: {
+        ...prev.dates,
+
+        checkIn:
+          prev.dates.checkIn ||
+          formatDisplayDate(
+            searchParams.checkIn
+          ),
+
+        checkOut:
+          prev.dates.checkOut ||
+          formatDisplayDate(
+            searchParams.checkOut
+          ),
+
+        nights,
+      },
+
+      pricing,
+    }));
+  };
+
+  /* =========================
+     UPDATE GUEST DETAILS
+  ========================= */
+
+  const updateDraftGuests = (
+    guestInfo
+  ) => {
+    setActiveDraft((prev) => ({
+      ...prev,
+
+      guestDetails: {
+        ...prev.guestDetails,
+        ...guestInfo,
+      },
+    }));
+  };
+
+  /* =========================
+     PROMO
+  ========================= */
+
+  const applyPromoDiscount = (
+    discountPercent,
+    code
+  ) => {
+    setActiveDraft((prev) => {
+      if (!prev.room) {
+        return prev;
+      }
+
+      const pricing =
+        recalculatePrice(
+          prev.room.pricePerNight,
+          prev.dates.nights,
+          discountPercent,
+          code
+        );
+
       return {
         ...prev,
-        pricing
+        pricing,
       };
     });
   };
 
-  // Complete checkout & convert draft to booking
-  const completeBooking = (paymentMethod = 'Credit Card') => {
-    const randomRef = `SJ-${Math.floor(100000 + Math.random() * 900000)}`;
+  /* =========================
+     COMPLETE LOCAL BOOKING
+     Temporary until create-booking
+     API is connected.
+  ========================= */
+
+  const completeBooking = (
+    paymentMethod = 'Credit Card'
+  ) => {
+    if (!activeDraft.room) {
+      return null;
+    }
+
+    const randomRef = `SJ-${Math.floor(
+      100000 + Math.random() * 900000
+    )}`;
+
     const newBooking = {
       id: randomRef,
       reference: randomRef,
-      hotelName: hotelData.name,
-      roomName: activeDraft.room.name,
-      location: hotelData.location,
-      image: activeDraft.room.image || hotelData.heroImage,
-      checkIn: activeDraft.dates.checkIn,
-      checkOut: activeDraft.dates.checkOut,
-      guests: activeDraft.guestDetails.guests || '2 Guests',
-      totalAmount: activeDraft.pricing.total,
+
+      hotelName:
+        hotel.name ||
+        'SAGA JAWAI',
+
+      roomName:
+        activeDraft.room.name,
+
+      location:
+        hotel.location ||
+        'Jawai, Rajasthan',
+
+      image:
+        activeDraft.room.image ||
+        hotel.heroImage,
+
+      checkIn:
+        activeDraft.dates.checkIn,
+
+      checkOut:
+        activeDraft.dates.checkOut,
+
+      guests:
+        activeDraft.guestDetails
+          .guests ||
+        searchParams.guests ||
+        '2 Guests, 1 Room',
+
+      totalAmount:
+        activeDraft.pricing.total,
+
       paymentMethod,
+
       status: 'upcoming',
-      bookedOn: new Date().toISOString().split('T')[0]
+
+      bookedOn: new Date()
+        .toISOString()
+        .split('T')[0],
     };
 
-    setBookings((prev) => [newBooking, ...prev]);
-    setLatestConfirmedBooking(newBooking);
+    setBookings((prev) => [
+      newBooking,
+      ...prev,
+    ]);
+
+    setLatestConfirmedBooking(
+      newBooking
+    );
+
     return newBooking;
   };
 
-  // Cancel reservation
-  const cancelBooking = (bookingId) => {
-    setBookings((prev) =>
-      prev.map((b) => (b.id === bookingId ? { ...b, status: 'cancelled' } : b))
-    );
-  };
+  /* =========================
+     CANCEL LOCAL BOOKING
+  ========================= */
 
-  // Modify dates
-  const modifyBookingDates = (bookingId, newCheckIn, newCheckOut) => {
+  const cancelBooking = (
+    bookingId
+  ) => {
     setBookings((prev) =>
-      prev.map((b) =>
-        b.id === bookingId
-          ? { ...b, checkIn: newCheckIn, checkOut: newCheckOut }
-          : b
+      prev.map((booking) =>
+        booking.id === bookingId
+          ? {
+              ...booking,
+              status: 'cancelled',
+            }
+          : booking
       )
     );
   };
 
+  /* =========================
+     MODIFY LOCAL BOOKING
+  ========================= */
+
+  const modifyBookingDates = (
+    bookingId,
+    newCheckIn,
+    newCheckOut
+  ) => {
+    setBookings((prev) =>
+      prev.map((booking) =>
+        booking.id === bookingId
+          ? {
+              ...booking,
+
+              checkIn: newCheckIn,
+              checkOut: newCheckOut,
+            }
+          : booking
+      )
+    );
+  };
+
+  /* =========================
+     CONTEXT
+  ========================= */
+
   return (
     <BookingContext.Provider
       value={{
-        hotel: hotelData,
+        hotel,
+
+        rooms,
+        roomsLoading,
+        roomsError,
+
         searchParams,
         setSearchParams,
+
+        availabilityRooms,
+        availabilityLoading,
+        availabilityError,
+        hasCheckedAvailability,
+        checkAvailability,
+
         activeDraft,
         selectRoom,
         updateDraftGuests,
         applyPromoDiscount,
+
         completeBooking,
+
         bookings,
         latestConfirmedBooking,
+
         cancelBooking,
-        modifyBookingDates
+        modifyBookingDates,
       }}
     >
       {children}
@@ -210,9 +747,14 @@ export const BookingProvider = ({ children }) => {
 };
 
 export const useBooking = () => {
-  const context = useContext(BookingContext);
+  const context =
+    useContext(BookingContext);
+
   if (!context) {
-    throw new Error('useBooking must be used within a BookingProvider');
+    throw new Error(
+      'useBooking must be used within a BookingProvider'
+    );
   }
+
   return context;
 };

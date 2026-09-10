@@ -1,13 +1,19 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
+
 import { AuthProvider } from './context/AuthContext';
 import { BookingProvider } from './context/BookingContext';
 import { ToastProvider } from './context/ToastContext';
 
-// Layouts
 import UserLayout from './components/layout/UserLayout';
 
-// Pages
+import SagaHome from "./SagaHome";
+
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
@@ -25,34 +31,119 @@ export default function App() {
       <AuthProvider>
         <BookingProvider>
           <ToastProvider>
+
             <Routes>
-              {/* Authentication Routes */}
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
 
-              {/* Dedicated Single-Hotel Booking & Checkout Flow */}
-              <Route path="/booking/guest" element={<GuestDetails />} />
-              <Route path="/booking/payment" element={<Payment />} />
-              <Route path="/booking/confirmation" element={<BookingConfirmed />} />
+              {/* SAGA JAWAI LUXURY WEBSITE */}
+              <Route
+                path="/"
+                element={<SagaHome />}
+              />
 
-              {/* Main SAGA JAWAAI User Panel Portal */}
+
+              {/* AUTH */}
+              <Route
+                path="/login"
+                element={<Login />}
+              />
+
+              <Route
+                path="/signup"
+                element={<Signup />}
+              />
+
+
+              {/* BOOKING FLOW */}
+              <Route
+                path="/booking/guest"
+                element={<GuestDetails />}
+              />
+
+              <Route
+                path="/booking/payment"
+                element={<Payment />}
+              />
+
+              <Route
+                path="/booking/confirmation"
+                element={<BookingConfirmed />}
+              />
+
+
+              {/* MAIN USER / ROOM INTERFACE */}
               <Route element={<UserLayout />}>
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/rooms" element={<Rooms />} />
-                <Route path="/offers" element={<Offers />} />
-                <Route path="/my-bookings" element={<MyBookings />} />
-                <Route path="/profile" element={<MyProfile />} />
 
-                {/* Compatibility redirects for old URLs */}
-                <Route path="/hotel" element={<Navigate to="/rooms" replace />} />
-                <Route path="/search" element={<Navigate to="/rooms" replace />} />
-                <Route path="/details/:id" element={<Navigate to="/rooms" replace />} />
+                <Route
+                  path="/dashboard"
+                  element={<Dashboard />}
+                />
+
+                <Route
+                  path="/rooms"
+                  element={<Rooms />}
+                />
+
+                <Route
+                  path="/offers"
+                  element={<Offers />}
+                />
+
+                <Route
+                  path="/my-bookings"
+                  element={<MyBookings />}
+                />
+
+                <Route
+                  path="/profile"
+                  element={<MyProfile />}
+                />
+
+                <Route
+                  path="/hotel"
+                  element={
+                    <Navigate
+                      to="/rooms"
+                      replace
+                    />
+                  }
+                />
+
+                <Route
+                  path="/search"
+                  element={
+                    <Navigate
+                      to="/rooms"
+                      replace
+                    />
+                  }
+                />
+
+                <Route
+                  path="/details/:id"
+                  element={
+                    <Navigate
+                      to="/rooms"
+                      replace
+                    />
+                  }
+                />
+
               </Route>
 
-              {/* Catch-all */}
-              <Route path="*" element={<Navigate to="/dashboard" replace />} />
+
+              {/* FALLBACK */}
+              <Route
+                path="*"
+                element={
+                  <Navigate
+                    to="/"
+                    replace
+                  />
+                }
+              />
+
             </Routes>
+
           </ToastProvider>
         </BookingProvider>
       </AuthProvider>
