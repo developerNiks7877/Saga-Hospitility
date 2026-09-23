@@ -34,7 +34,7 @@ export default function App() {
 
             <Routes>
 
-              {/* SAGA JAWAI LUXURY WEBSITE */}
+              {/* SAGA LUXURY WEBSITE */}
               <Route
                 path="/"
                 element={<SagaHome />}

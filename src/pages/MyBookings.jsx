@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { MapPin, Calendar, Users, Eye, AlertTriangle, CheckCircle, Clock } from 'lucide-react';
-import { useBooking } from '../context/BookingContext';
 import { useToast } from '../context/ToastContext';
+import API_BASE_URL from '../config/api';
+import authFetch from '../utils/authFetch';
 import Card from '../components/ui/Card';
 import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
@@ -10,8 +11,132 @@ import Modal from '../components/ui/Modal';
 
 export default function MyBookings() {
   const navigate = useNavigate();
-  const { bookings, cancelBooking, modifyBookingDates } = useBooking();
   const { showToast } = useToast();
+
+  const [bookings, setBookings] = useState([]);
+  const [bookingsLoading, setBookingsLoading] = useState(true);
+  const [bookingsError, setBookingsError] = useState(null);
+
+  const formatBookingDate = (value) => {
+    if (!value) return '';
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+      return value;
+    }
+
+    return date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    });
+  };
+
+  const mapBooking = (booking) => {
+    const bookingStatus =
+      booking.bookingStatus || 'pending';
+
+    let status = 'upcoming';
+
+    if (bookingStatus === 'cancelled') {
+      status = 'cancelled';
+    } else if (bookingStatus === 'completed') {
+      status = 'completed';
+    }
+
+    return {
+      id: booking.bookingId,
+      reference: booking.bookingId,
+
+      hotelName: 'SAGA',
+      location: 'Jawai, Rajasthan',
+
+      image: booking.room?.image || '',
+      roomName: booking.room?.name || 'SAGA Room',
+
+      checkIn: booking.checkIn,
+      checkOut: booking.checkOut,
+
+      guests: booking.guests,
+      nights: booking.nights,
+
+      guestDetails: booking.guestDetails,
+
+      pricing: booking.pricing,
+      totalAmount: booking.pricing?.total || 0,
+
+      bookingStatus,
+      paymentStatus: booking.paymentStatus || 'pending',
+      paymentMethod: booking.paymentMethod,
+
+      status,
+
+      createdAt: booking.createdAt,
+      updatedAt: booking.updatedAt,
+    };
+  };
+
+  const fetchMyBookings = async () => {
+    try {
+      setBookingsLoading(true);
+      setBookingsError(null);
+
+      const accessToken =
+        localStorage.getItem('saga_access_token');
+
+      if (!accessToken) {
+        throw new Error(
+          'Please login to view your bookings.'
+        );
+      }
+
+      const response = await authFetch(
+        `${API_BASE_URL}/api/bookings/my`,
+        {
+          method: 'GET',
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        if (response.status === 401) {
+          throw new Error(
+            'Your session has expired. Please login again.'
+          );
+        }
+
+        throw new Error(
+          result.message ||
+            'Unable to fetch your bookings.'
+        );
+      }
+
+      const backendBookings =
+        Array.isArray(result?.data?.bookings)
+          ? result.data.bookings
+          : [];
+
+      setBookings(
+        backendBookings.map(mapBooking)
+      );
+    } catch (error) {
+      console.error(
+        'My bookings API error:',
+        error
+      );
+
+      setBookingsError(error.message);
+      setBookings([]);
+    } finally {
+      setBookingsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchMyBookings();
+  }, []);
 
   const [activeTab, setActiveTab] = useState('upcoming');
   const [selectedBookingForCancel, setSelectedBookingForCancel] = useState(null);
@@ -27,19 +152,129 @@ export default function MyBookings() {
   const completedCount = bookings.filter((b) => b.status === 'completed').length;
   const cancelledCount = bookings.filter((b) => b.status === 'cancelled').length;
 
-  const handleConfirmCancel = () => {
-    if (selectedBookingForCancel) {
-      cancelBooking(selectedBookingForCancel.id);
-      showToast('error', `Reservation ${selectedBookingForCancel.reference || selectedBookingForCancel.id} has been cancelled.`);
+  const handleConfirmCancel = async () => {
+    if (!selectedBookingForCancel) {
+      return;
+    }
+
+    try {
+      const accessToken =
+        localStorage.getItem('saga_access_token');
+
+      if (!accessToken) {
+        throw new Error(
+          'Please login again before cancelling this reservation.'
+        );
+      }
+
+      const response = await authFetch(
+        `${API_BASE_URL}/api/bookings/${selectedBookingForCancel.id}/cancel`,
+        {
+          method: 'PATCH',
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message ||
+            'Unable to cancel reservation.'
+        );
+      }
+
+      showToast(
+        'success',
+        `Reservation ${
+          selectedBookingForCancel.reference ||
+          selectedBookingForCancel.id
+        } has been cancelled.`
+      );
+
       setSelectedBookingForCancel(null);
+
+      await fetchMyBookings();
+    } catch (error) {
+      console.error(
+        'Cancel booking error:',
+        error
+      );
+
+      showToast(
+        'error',
+        error.message ||
+          'Unable to cancel reservation.'
+      );
     }
   };
 
-  const handleConfirmModify = () => {
-    if (selectedBookingForModify && newCheckIn && newCheckOut) {
-      modifyBookingDates(selectedBookingForModify.id, newCheckIn, newCheckOut);
-      showToast('success', `Reservation dates updated successfully.`);
+  const handleConfirmModify = async () => {
+    if (
+      !selectedBookingForModify ||
+      !newCheckIn ||
+      !newCheckOut
+    ) {
+      showToast(
+        'error',
+        'Please select valid check-in and check-out dates.'
+      );
+      return;
+    }
+
+    try {
+      const accessToken =
+        localStorage.getItem('saga_access_token');
+
+      if (!accessToken) {
+        throw new Error(
+          'Please login again before modifying this reservation.'
+        );
+      }
+
+      const response = await authFetch(
+        `${API_BASE_URL}/api/bookings/${selectedBookingForModify.id}/dates`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            checkIn: newCheckIn,
+            checkOut: newCheckOut,
+          }),
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message ||
+            'Unable to modify reservation dates.'
+        );
+      }
+
+      showToast(
+        'success',
+        'Reservation dates updated successfully.'
+      );
+
       setSelectedBookingForModify(null);
+      setNewCheckIn('');
+      setNewCheckOut('');
+
+      await fetchMyBookings();
+    } catch (error) {
+      console.error(
+        'Modify booking error:',
+        error
+      );
+
+      showToast(
+        'error',
+        error.message ||
+          'Unable to modify reservation dates.'
+      );
     }
   };
 
@@ -173,7 +408,11 @@ export default function MyBookings() {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
                 <div style={{ position: 'absolute', top: '12px', right: '12px' }}>
-                  {b.status === 'upcoming' && <Badge variant="olive">Confirmed</Badge>}
+                  {b.status === 'upcoming' && (
+                    <Badge variant={b.bookingStatus === 'confirmed' ? 'olive' : 'gold'}>
+                      {b.bookingStatus === 'confirmed' ? 'Confirmed' : 'Pending'}
+                    </Badge>
+                  )}
                   {b.status === 'completed' && <Badge variant="gold">Completed</Badge>}
                   {b.status === 'cancelled' && <Badge variant="red">Cancelled</Badge>}
                 </div>
@@ -223,11 +462,11 @@ export default function MyBookings() {
                   >
                     <div>
                       <span style={{ fontSize: '11px', color: 'var(--aravalli-stone)', textTransform: 'uppercase', display: 'block' }}>Check-in</span>
-                      <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--deep-olive)' }}>{b.checkIn}</span>
+                      <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--deep-olive)' }}>{formatBookingDate(b.checkIn)}</span>
                     </div>
                     <div>
                       <span style={{ fontSize: '11px', color: 'var(--aravalli-stone)', textTransform: 'uppercase', display: 'block' }}>Check-out</span>
-                      <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--deep-olive)' }}>{b.checkOut}</span>
+                      <span style={{ fontSize: '14px', fontWeight: 600, color: 'var(--deep-olive)' }}>{formatBookingDate(b.checkOut)}</span>
                     </div>
                     <div>
                       <span style={{ fontSize: '11px', color: 'var(--aravalli-stone)', textTransform: 'uppercase', display: 'block' }}>Guests</span>
@@ -252,7 +491,7 @@ export default function MyBookings() {
                   }}
                 >
                   <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--deep-olive)' }}>
-                    Total: ₹{b.totalAmount.toLocaleString()}
+                    Total: ₹{Number(b.totalAmount || 0).toLocaleString('en-IN')}
                   </div>
 
                   <div style={{ display: 'flex', gap: '16px' }}>
@@ -275,8 +514,8 @@ export default function MyBookings() {
                         <button
                           onClick={() => {
                             setSelectedBookingForModify(b);
-                            setNewCheckIn(b.checkIn);
-                            setNewCheckOut(b.checkOut);
+                            setNewCheckIn(b.checkIn?.slice(0, 10) || '');
+                            setNewCheckOut(b.checkOut?.slice(0, 10) || '');
                           }}
                           style={{
                             background: 'none',

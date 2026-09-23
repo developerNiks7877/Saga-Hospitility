@@ -298,7 +298,7 @@ export default function Payment() {
       };
 
       const booking =
-        completeBooking(
+        await completeBooking(
           methodLabels[
             activeMethod
           ]
@@ -1444,7 +1444,7 @@ export default function Payment() {
               }}
             >
               By confirming, you agree to
-              SAGA JAWAI&apos;s booking
+              SAGA&apos;s booking
               and cancellation terms.
             </p>
           </Card>

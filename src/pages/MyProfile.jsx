@@ -33,9 +33,9 @@ export default function MyProfile() {
 
   // Form State
   const [profileData, setProfileData] = useState({
-    firstName: user?.firstName || 'Aisha',
-    lastName: user?.lastName || 'Sharma',
-    email: user?.email || 'aisha.sharma@example.com',
+    firstName: user?.firstName || user?.fullName?.trim().split(/\s+/)[0] || '',
+    lastName: user?.lastName || user?.fullName?.trim().split(/\s+/).slice(1).join(' ') || '',
+    email: user?.email || '',
     phoneNumber: user?.phoneNumber || '+91 98765 43210',
     address: user?.address || '123 Serenity Lane, Bandra West, Mumbai, Maharashtra'
   });
@@ -73,9 +73,9 @@ export default function MyProfile() {
 
   const handleDiscard = () => {
     setProfileData({
-      firstName: user?.firstName || 'Aisha',
-      lastName: user?.lastName || 'Sharma',
-      email: user?.email || 'aisha.sharma@example.com',
+      firstName: user?.firstName || user?.fullName?.trim().split(/\s+/)[0] || '',
+      lastName: user?.lastName || user?.fullName?.trim().split(/\s+/).slice(1).join(' ') || '',
+      email: user?.email || '',
       phoneNumber: user?.phoneNumber || '+91 98765 43210',
       address: user?.address || '123 Serenity Lane, Bandra West, Mumbai'
     });
@@ -242,7 +242,7 @@ export default function MyProfile() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
               <div style={{ position: 'relative' }}>
                 <img
-                  src={user?.avatar || 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face'}
+                  src={user?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent((user?.fullName || `${user?.firstName || 'Guest'} ${user?.lastName || ''}`.trim()))}&background=5f5c3a&color=ffffff&size=200`}
                   alt="Profile Avatar"
                   style={{
                     width: '80px',

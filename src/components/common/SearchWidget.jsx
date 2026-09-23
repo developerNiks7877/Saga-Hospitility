@@ -50,7 +50,7 @@ export default function SearchWidget() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Sparkles size={16} style={{ color: 'var(--leopard-ochre)' }} />
           <span style={{ fontSize: '13px', fontWeight: 600, color: 'var(--deep-olive)', letterSpacing: '0.04em' }}>
-            Direct Booking Privilege • Best Rate Guaranteed at SAGA JAWAI
+            Direct Booking Privilege • Best Rate Guaranteed at SAGA
           </span>
         </div>
         <span style={{ fontSize: '12px', color: 'var(--aravalli-stone)' }}>

@@ -273,7 +273,7 @@ export default function Rooms() {
               fontSize: '13px',
             }}
           >
-            Loading SAGA JAWAI rooms.
+            Loading SAGA rooms.
           </p>
 
           <style>
@@ -394,7 +394,7 @@ export default function Rooms() {
               'uppercase',
           }}
         >
-          SAGA JAWAI
+          SAGA
         </span>
 
         <h1

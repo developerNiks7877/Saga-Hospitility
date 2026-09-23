@@ -43,16 +43,28 @@ export default function Login() {
     }
   };
 
-  const handleGoogleSuccess = (credentialResponse) => {
-    const credential = credentialResponse.credential;
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      const credential = credentialResponse?.credential;
 
-    console.log('GOOGLE ID TOKEN:');
-    console.log(credential);
+      if (!credential) {
+        throw new Error('Google credential was not received');
+      }
 
-    showToast(
-      'success',
-      'Google credential received'
-    );
+      const result = await googleLogin(credential);
+
+      showToast(
+        'success',
+        result?.message || 'Google login successful'
+      );
+
+      navigate('/dashboard');
+    } catch (err) {
+      showToast(
+        'error',
+        err.message || 'Google login failed'
+      );
+    }
   };
 
   const handleGoogleError = () => {
@@ -132,8 +144,8 @@ export default function Login() {
             }}
           >
             <img
-              src="/SAGA-JAWAI-LOGO.png"
-              alt="SAGA JAWAI"
+              src="/assets/logo/saga-hospitality-logo.png"
+              alt="SAGA"
               style={{
                 width: '48px',
                 height: '48px',
@@ -152,7 +164,7 @@ export default function Login() {
                   textTransform: 'uppercase'
                 }}
               >
-                SAGA JAWAI
+                SAGA
               </div>
 
               <span
@@ -240,15 +252,7 @@ export default function Login() {
                 marginBottom: '8px'
               }}
             >
-              <img
-                src="/SAGA-JAWAI-LOGO.png"
-                alt="SAGA JAWAI"
-                style={{
-                  width: '36px',
-                  height: '36px',
-                  objectFit: 'contain'
-                }}
-              />
+              
 
               <span
                 style={{
@@ -273,7 +277,7 @@ export default function Login() {
                 marginTop: '4px'
               }}
             >
-              Access SAGA JAWAI
+              Access SAGA
             </h2>
 
             <p
@@ -333,7 +337,7 @@ export default function Login() {
                   type="email"
                   className="input-control"
                   style={{ paddingLeft: '42px' }}
-                  placeholder="aisha.sharma@example.com"
+                  placeholder="you@example.com"
                   value={email}
                   onChange={(e) =>
                     setEmail(e.target.value)

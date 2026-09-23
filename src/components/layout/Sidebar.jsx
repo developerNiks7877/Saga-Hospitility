@@ -97,8 +97,8 @@ export default function Sidebar({ isOpen, onClose }) {
               }}
             >
               <img
-                src="/SAGA-JAWAI-LOGO.png"
-                alt="SAGA JAWAI"
+                src="/assets/logo/saga-hospitality-logo.png"
+                alt="SAGA"
                 style={{
                   width: '100%',
                   maxHeight: '88px',
@@ -230,15 +230,15 @@ export default function Sidebar({ isOpen, onClose }) {
               }}
             >
               <img
-                src={user?.avatar || 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face'}
-                alt={user?.firstName || 'User'}
+                src={user?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent((user?.fullName || `${user?.firstName || 'Guest'} ${user?.lastName || ''}`.trim()))}&background=5f5c3a&color=ffffff&size=100`}
+                alt={user?.fullName || user?.firstName || 'User'}
                 style={{ width: '34px', height: '34px', borderRadius: '50%', objectFit: 'cover', border: '1.5px solid var(--warm-gold)' }}
               />
               <div style={{ overflow: 'hidden' }}>
                 <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--dusky-ivory)', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
-                  {user?.firstName || 'Aisha'} {user?.lastName || 'Sharma'}
+                  {user ? (user.fullName || `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Guest') : 'Guest'}
                 </div>
-                <span style={{ fontSize: '11px', color: 'var(--warm-gold)' }}>Royal Guest</span>
+                <span style={{ fontSize: '11px', color: 'var(--warm-gold)' }}>{user ? 'Royal Guest' : 'Guest'}</span>
               </div>
             </div>
 

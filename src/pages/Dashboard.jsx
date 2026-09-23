@@ -178,7 +178,7 @@ export default function Dashboard() {
               lineHeight: 1.15
             }}
           >
-            Welcome to SAGA JAWAI, {user?.firstName || 'Guest'}
+            Welcome to SAGA, {user?.fullName?.split(' ')[0] || user?.firstName || 'Guest'}
           </h1>
           <p className="entry-reveal-text" style={{ fontSize: '15px', color: 'var(--text-muted)', marginTop: '4px' }}>
             Premier luxury hotel offering world-class comfort, elegant accommodations, and personalized hospitality.

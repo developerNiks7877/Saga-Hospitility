@@ -72,8 +72,8 @@ export default function Topbar({ onMenuToggle }) {
         {/* Big Official Logo Display */}
         <Link to="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
           <img
-            src="/SAGA-JAWAI-LOGO.png"
-            alt="SAGA JAWAI"
+            src="/assets/logo/saga-hospitality-logo.png"
+            alt="SAGA"
             style={{
               height: '56px',
               maxWidth: '220px',
@@ -233,7 +233,7 @@ export default function Topbar({ onMenuToggle }) {
             }}
           >
             <img
-              src={user?.avatar || 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face'}
+              src={user?.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent((user?.fullName || `${user?.fullName?.split(' ')[0] || user?.firstName || 'Guest'} ${user?.lastName || ''}`.trim()))}&background=5f5c3a&color=ffffff&size=100`}
               alt=""
               style={{
                 width: '38px',
@@ -245,7 +245,7 @@ export default function Topbar({ onMenuToggle }) {
             />
             <div style={{ textAlign: 'left', lineHeight: 1.2 }}>
               <div style={{ fontSize: '13.5px', fontWeight: 600, color: 'var(--deep-olive)' }}>
-                {user?.firstName || 'Aisha'}
+                {user?.fullName?.split(' ')[0] || user?.firstName || 'Guest'}
               </div>
               <span style={{ fontSize: '11px', color: 'var(--aravalli-stone)' }}>Guest</span>
             </div>

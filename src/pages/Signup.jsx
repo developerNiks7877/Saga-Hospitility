@@ -136,7 +136,7 @@ export default function Signup() {
           <div style={{ maxWidth: '420px', display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img
               src="/SAGA-JAWAI-LOGO.png"
-              alt="SAGA JAWAI"
+              alt="SAGA"
               style={{ width: '48px', height: '48px', objectFit: 'contain' }}
             />
             <div>
@@ -150,7 +150,7 @@ export default function Signup() {
                   textTransform: 'uppercase'
                 }}
               >
-                SAGA JAWAI
+                SAGA
               </div>
               <span style={{ fontSize: '11px', color: 'rgba(245, 240, 228, 0.7)' }}>
                 Wild by Nature, Rooted in Purpose
@@ -212,7 +212,7 @@ export default function Signup() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
               <img
                 src="/SAGA-JAWAI-LOGO.png"
-                alt="SAGA JAWAI"
+                alt="SAGA"
                 style={{ width: '36px', height: '36px', objectFit: 'contain' }}
               />
               <span
@@ -237,7 +237,7 @@ export default function Signup() {
                 marginTop: '4px'
               }}
             >
-              Join SAGA JAWAI
+              Join SAGA
             </h2>
             <p style={{ fontSize: '13.5px', color: 'var(--text-muted)', marginTop: '4px' }}>
               Create an account to unlock direct booking privileges and private safari itineraries.
@@ -263,7 +263,7 @@ export default function Signup() {
                   name="fullName"
                   className="input-control"
                   style={{ paddingLeft: '40px' }}
-                  placeholder="Aisha Sharma"
+                  placeholder="Your full name"
                   value={form.fullName}
                   onChange={handleChange}
                   required
@@ -290,7 +290,7 @@ export default function Signup() {
                   name="email"
                   className="input-control"
                   style={{ paddingLeft: '40px' }}
-                  placeholder="aisha.sharma@example.com"
+                  placeholder="you@example.com"
                   value={form.email}
                   onChange={handleChange}
                   required

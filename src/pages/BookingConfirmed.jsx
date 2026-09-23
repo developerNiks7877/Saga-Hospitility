@@ -7,6 +7,23 @@ import Card from '../components/ui/Card';
 import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
 
+
+const formatBookingDate = (value) => {
+  if (!value) return '';
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return date.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
+};
+
 export default function BookingConfirmed() {
   const navigate = useNavigate();
   const { latestConfirmedBooking, activeDraft } = useBooking();
@@ -85,7 +102,7 @@ export default function BookingConfirmed() {
           lineHeight: 1.15
         }}
       >
-        Your royal stay is confirmed!
+        Your reservation has been received
       </h1>
 
       <p
@@ -177,14 +194,14 @@ export default function BookingConfirmed() {
             <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--aravalli-stone)', textTransform: 'uppercase', display: 'block' }}>
               Check-in
             </span>
-            <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--deep-olive)' }}>{booking.checkIn}</span>
+            <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--deep-olive)' }}>{formatBookingDate(booking.checkIn)}</span>
             <span style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'block' }}>From 3:00 PM</span>
           </div>
           <div>
             <span style={{ fontSize: '11px', fontWeight: 600, color: 'var(--aravalli-stone)', textTransform: 'uppercase', display: 'block' }}>
               Check-out
             </span>
-            <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--deep-olive)' }}>{booking.checkOut}</span>
+            <span style={{ fontSize: '15px', fontWeight: 600, color: 'var(--deep-olive)' }}>{formatBookingDate(booking.checkOut)}</span>
             <span style={{ fontSize: '12px', color: 'var(--text-muted)', display: 'block' }}>Until 11:00 AM</span>
           </div>
         </div>
@@ -200,7 +217,7 @@ export default function BookingConfirmed() {
           }}
         >
           <span style={{ fontSize: '14.5px', fontWeight: 600, color: 'var(--deep-olive)' }}>
-            Total Amount Paid
+            Total Amount
           </span>
           <span style={{ fontFamily: 'var(--font-display)', fontSize: '20px', fontWeight: 700, color: 'var(--deep-olive)' }}>
             ₹{booking.totalAmount.toLocaleString()}
@@ -214,7 +231,7 @@ export default function BookingConfirmed() {
           View My Bookings
         </Button>
         <Button variant="secondary" size="md" icon={<Download size={15} />} onClick={handleDownload}>
-          Download Confirmation Voucher
+          Download Reservation Summary
         </Button>
       </div>
 

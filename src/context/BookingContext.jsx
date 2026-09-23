@@ -7,6 +7,7 @@ import React, {
 
 import { hotelData } from '../data/hotelData';
 import API_BASE_URL from '../config/api';
+import authFetch from '../utils/authFetch';
 
 const BookingContext = createContext(null);
 
@@ -597,27 +598,141 @@ export const BookingProvider = ({ children }) => {
      API is connected.
   ========================= */
 
-  const completeBooking = (
+  const completeBooking = async (
     paymentMethod = 'Credit Card'
   ) => {
     if (!activeDraft.room) {
-      return null;
+      throw new Error('No room selected.');
     }
 
-    const randomRef = `SJ-${Math.floor(
-      100000 + Math.random() * 900000
-    )}`;
+    const accessToken =
+      localStorage.getItem('saga_access_token');
+
+    const refreshToken =
+      localStorage.getItem('saga_refresh_token');
+
+    if (!accessToken && !refreshToken) {
+      throw new Error(
+        'Please login before confirming your reservation.'
+      );
+    }
+
+    const guestDetails =
+      activeDraft.guestDetails || {};
+
+    if (
+      !guestDetails.firstName?.trim() ||
+      !guestDetails.lastName?.trim() ||
+      !guestDetails.email?.trim() ||
+      !guestDetails.phone?.trim()
+    ) {
+      throw new Error(
+        'Please complete all required guest details.'
+      );
+    }
+
+    const roomId =
+      activeDraft.room.slug ||
+      activeDraft.room.id;
+
+    if (!roomId) {
+      throw new Error(
+        'Selected room information is invalid.'
+      );
+    }
+
+    const checkIn =
+      searchParams.checkIn;
+
+    const checkOut =
+      searchParams.checkOut;
+
+    const guests =
+      guestDetails.guests ||
+      searchParams.guests ||
+      '2 Guests, 1 Room';
+
+    const response = await authFetch(
+      `${API_BASE_URL}/api/bookings`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          roomId,
+          checkIn,
+          checkOut,
+          guests,
+          guestDetails: {
+            firstName:
+              guestDetails.firstName.trim(),
+            lastName:
+              guestDetails.lastName.trim(),
+            email:
+              guestDetails.email
+                .trim()
+                .toLowerCase(),
+            phone:
+              guestDetails.phone.trim(),
+            specialRequests:
+              guestDetails.specialRequests?.trim() ||
+              '',
+            preferences:
+              Array.isArray(
+                guestDetails.preferences
+              )
+                ? guestDetails.preferences
+                : [],
+          },
+        }),
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      if (response.status === 401) {
+        throw new Error(
+          'Your session has expired. Please login again.'
+        );
+      }
+
+      if (response.status === 409) {
+        throw new Error(
+          result.message ||
+            'This room is no longer available for the selected dates.'
+        );
+      }
+
+      throw new Error(
+        result.message ||
+          'Unable to create reservation.'
+      );
+    }
+
+    const backendBooking =
+      result?.data?.booking;
+
+    if (!backendBooking?.bookingId) {
+      throw new Error(
+        'Invalid booking response from server.'
+      );
+    }
 
     const newBooking = {
-      id: randomRef,
-      reference: randomRef,
+      id: backendBooking.bookingId,
+      reference: backendBooking.bookingId,
+      bookingId: backendBooking.bookingId,
 
       hotelName:
-        hotel.name ||
-        'SAGA JAWAI',
+        hotel.name || 'SAGA',
 
       roomName:
+        backendBooking.room?.name ||
         activeDraft.room.name,
+
+      room: backendBooking.room,
 
       location:
         hotel.location ||
@@ -627,33 +742,55 @@ export const BookingProvider = ({ children }) => {
         activeDraft.room.image ||
         hotel.heroImage,
 
-      checkIn:
-        activeDraft.dates.checkIn,
+      checkIn: backendBooking.checkIn,
+      checkOut: backendBooking.checkOut,
+      guests: backendBooking.guests,
+      nights: backendBooking.nights,
 
-      checkOut:
-        activeDraft.dates.checkOut,
+      guestDetails:
+        backendBooking.guestDetails,
 
-      guests:
-        activeDraft.guestDetails
-          .guests ||
-        searchParams.guests ||
-        '2 Guests, 1 Room',
+      pricing:
+        backendBooking.pricing,
 
       totalAmount:
-        activeDraft.pricing.total,
+        backendBooking.pricing?.total || 0,
 
       paymentMethod,
 
-      status: 'upcoming',
+      bookingStatus:
+        backendBooking.bookingStatus,
 
-      bookedOn: new Date()
-        .toISOString()
-        .split('T')[0],
+      paymentStatus:
+        backendBooking.paymentStatus,
+
+      status:
+        backendBooking.bookingStatus ===
+        'cancelled'
+          ? 'cancelled'
+          : 'upcoming',
+
+      createdAt:
+        backendBooking.createdAt,
+
+      bookedOn:
+        backendBooking.createdAt
+          ? new Date(
+              backendBooking.createdAt
+            )
+              .toISOString()
+              .split('T')[0]
+          : new Date()
+              .toISOString()
+              .split('T')[0],
     };
 
     setBookings((prev) => [
       newBooking,
-      ...prev,
+      ...prev.filter(
+        (booking) =>
+          booking.id !== newBooking.id
+      ),
     ]);
 
     setLatestConfirmedBooking(

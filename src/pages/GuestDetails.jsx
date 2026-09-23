@@ -303,7 +303,7 @@ export default function GuestDetails() {
             }}
           >
             Please provide your details below to
-            continue your reservation at SAGA JAWAI.
+            continue your reservation at SAGA.
           </p>
         </div>
 
@@ -545,7 +545,7 @@ export default function GuestDetails() {
               {roomImage ? (
                 <img
                   src={roomImage}
-                  alt={room?.name || 'SAGA JAWAI Room'}
+                  alt={room?.name || 'SAGA Room'}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -590,7 +590,7 @@ export default function GuestDetails() {
                     fontWeight: 600,
                   }}
                 >
-                  SAGA JAWAI
+                  SAGA
                 </h3>
 
                 <span
