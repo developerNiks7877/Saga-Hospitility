@@ -6538,3 +6538,1020 @@ body.saga-past-orbit .site-nav .nav-book {
   }
 }
 
+
+/* =========================================================
+   SAGA JAWAI — BRAND KIT / HERO + NAV / PASS 01
+   Visual treatment only. No layout or animation changes.
+========================================================= */
+
+:root {
+  --saga-brand-forest: #1d2119;
+  --saga-brand-forest-deep: #11150f;
+  --saga-brand-olive: #50513b;
+  --saga-brand-ivory: #eee6d5;
+  --saga-brand-gold: #b88a3b;
+  --saga-brand-rust: #9a4f32;
+}
+
+/* HERO — cinematic forest/earth grading */
+.hero-shade {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(12, 17, 12, .18) 0%,
+      rgba(17, 22, 15, .05) 34%,
+      rgba(18, 21, 15, .18) 66%,
+      rgba(12, 15, 10, .68) 100%
+    ),
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(105, 94, 60, .06) 0%,
+      rgba(24, 31, 20, .10) 48%,
+      rgba(10, 13, 9, .32) 100%
+    ) !important;
+}
+
+/* HERO META — warmer, quieter luxury */
+.hero-meta {
+  color: var(--saga-brand-ivory) !important;
+}
+
+.hero-meta > span {
+  color: rgba(238, 230, 213, .72) !important;
+  letter-spacing: .16em !important;
+}
+
+.hero-meta p {
+  color: rgba(238, 230, 213, .94) !important;
+}
+
+/* NAV — antique gold from brand palette */
+.site-nav,
+.site-nav.nav-dark {
+  --nav-gold: var(--saga-brand-gold);
+  --saga-nav-gold: var(--saga-brand-gold);
+}
+
+/* FULLSCREEN MENU — deeper Jawai forest */
+.menu-panel {
+  background:
+    radial-gradient(
+      circle at 56% 38%,
+      rgba(73, 75, 53, .92) 0%,
+      rgba(35, 41, 29, .98) 42%,
+      var(--saga-brand-forest-deep) 100%
+    ) !important;
+}
+
+/* Subtle warm editorial glow */
+.menu-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 78% 72%,
+      rgba(154, 79, 50, .09),
+      transparent 31%
+    );
+  z-index: 0;
+}
+
+/* Keep menu content above atmospheric layer */
+.menu-panel-head,
+.overlay-navigation,
+.menu-panel-bottom {
+  z-index: 2 !important;
+}
+
+/* Brand-kit ivory */
+.overlay-navigation button {
+  color: var(--saga-brand-ivory) !important;
+}
+
+.overlay-navigation button::before {
+  background: var(--saga-brand-gold) !important;
+  box-shadow:
+    0 0 0 3px rgba(184, 138, 59, .10) !important;
+}
+
+/* Controlled gold interaction */
+.overlay-navigation button:hover {
+  color: #c69a50 !important;
+}
+
+.menu-panel-bottom span:last-child::before {
+  background: var(--saga-brand-gold) !important;
+}
+
+
+/* =========================================================
+   SAGA JAWAI — BRAND KIT / PASS 02
+   Hospitality Story + Curated Experiences
+   Visual treatment only
+========================================================= */
+
+/* ---------------------------------------------------------
+   HOSPITALITY STORY
+--------------------------------------------------------- */
+
+.hospitality-story {
+  background:
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(154, 79, 50, .055),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #f3ecdf 0%,
+      #eee5d5 58%,
+      #e8decb 100%
+    ) !important;
+}
+
+.hospitality-story .hospitality-copy h2 {
+  color: #20261c !important;
+}
+
+.hospitality-story .hospitality-copy p {
+  color: rgba(39, 43, 34, .70) !important;
+}
+
+.hospitality-story .hospitality-copy > span,
+.hospitality-story .hospitality-copy small {
+  color: #9d7437 !important;
+}
+
+
+/* ---------------------------------------------------------
+   CURATED EXPERIENCES — BRAND CANVAS
+--------------------------------------------------------- */
+
+.saga-film-experiences {
+  background:
+    radial-gradient(
+      circle at 12% 82%,
+      rgba(154, 79, 50, .065) 0%,
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 78% 14%,
+      rgba(78, 82, 57, .055) 0%,
+      transparent 31%
+    ),
+    linear-gradient(
+      135deg,
+      #f4eee2 0%,
+      #eee5d6 55%,
+      #e8decd 100%
+    ) !important;
+
+  color: #20251c !important;
+}
+
+
+/* remove old generic brown atmospheric glow */
+
+.saga-film-experiences::before {
+  background:
+    radial-gradient(
+      circle,
+      rgba(80, 81, 59, .08),
+      transparent 68%
+    ) !important;
+}
+
+
+/* ---------------------------------------------------------
+   LEFT EDITORIAL COPY
+--------------------------------------------------------- */
+
+.saga-film-kicker,
+.saga-film-count {
+  color: var(--saga-brand-gold) !important;
+}
+
+.saga-film-kicker i {
+  background: var(--saga-brand-gold) !important;
+}
+
+.saga-film-copy h2 {
+  color: #20261c !important;
+}
+
+.saga-film-intro {
+  color: #454637 !important;
+}
+
+.saga-film-detail {
+  color: rgba(47, 49, 39, .66) !important;
+}
+
+
+/* ---------------------------------------------------------
+   EXPERIENCE ATTRIBUTES
+--------------------------------------------------------- */
+
+.saga-film-features {
+  color: rgba(42, 45, 35, .62) !important;
+}
+
+.saga-film-features span::before {
+  border-color: var(--saga-brand-gold) !important;
+}
+
+
+/* ---------------------------------------------------------
+   CTA
+--------------------------------------------------------- */
+
+.saga-film-explore {
+  border-color: #7f6738 !important;
+  background: #263021 !important;
+  color: #f2ead9 !important;
+}
+
+.saga-film-explore:hover {
+  background: transparent !important;
+  color: #263021 !important;
+  border-color: #263021 !important;
+}
+
+
+/* ---------------------------------------------------------
+   MAIN CINEMATIC FILM
+--------------------------------------------------------- */
+
+.saga-film-stage {
+  background: var(--saga-brand-forest-deep) !important;
+
+  box-shadow:
+    0 34px 85px rgba(37, 40, 29, .16) !important;
+}
+
+.saga-film-shade {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(12, 17, 11, .20) 0%,
+      transparent 37%,
+      rgba(10, 14, 9, .27) 100%
+    ) !important;
+}
+
+
+/* ---------------------------------------------------------
+   RIGHT EXPERIENCE SELECTOR
+--------------------------------------------------------- */
+
+.saga-film-item strong {
+  color: #303529 !important;
+}
+
+.saga-film-item {
+  opacity: .46;
+}
+
+.saga-film-item:hover,
+.saga-film-item.is-active {
+  opacity: 1;
+}
+
+.saga-film-thumb {
+  background: #252b20 !important;
+}
+
+.saga-film-rail-line {
+  background: rgba(47, 54, 40, .24) !important;
+}
+
+.saga-film-rail-line::before,
+.saga-film-rail-line::after {
+  background: #394031 !important;
+}
+
+.saga-film-rail-line span {
+  background: var(--saga-brand-gold) !important;
+
+  box-shadow:
+    0 0 0 4px rgba(184, 138, 59, .10);
+}
+
+.saga-film-rail > small {
+  color: rgba(48, 53, 41, .48) !important;
+}
+
+
+/* =========================================================
+   SAGA JAWAI — BRAND KIT / PASS 03
+   Accommodation + 3D Orbit
+   Visual treatment only — geometry untouched
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   ACCOMMODATION & SUITES
+--------------------------------------------------------- */
+
+.home-accommodation {
+  background:
+    radial-gradient(
+      circle at 88% 14%,
+      rgba(154, 79, 50, .055),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #eee5d5 0%,
+      #f3ecdf 48%,
+      #e9dfce 100%
+    ) !important;
+
+  color: #20261c !important;
+}
+
+
+/* Main editorial heading */
+
+.home-accommodation .home-accommodation-head h2 {
+  color: #20261c !important;
+}
+
+
+/* Supporting description */
+
+.home-accommodation-head p {
+  color: rgba(44, 48, 38, .66) !important;
+}
+
+
+/* Room image canvas */
+
+.home-room-image-wrap {
+  background: #d8d0c0 !important;
+
+  box-shadow:
+    0 24px 58px rgba(39, 43, 31, .10);
+}
+
+
+/* Very subtle cinematic treatment */
+
+.home-room-image {
+  filter:
+    saturate(.93)
+    contrast(1.015)
+    sepia(.025);
+}
+
+.home-room-card:hover .home-room-image {
+  filter:
+    saturate(1)
+    contrast(1.025)
+    sepia(0);
+}
+
+
+/* View Room — forest instead of generic cream */
+
+.home-room-view {
+  background: rgba(31, 39, 27, .94) !important;
+  color: #f1e8d6 !important;
+
+  border:
+    1px solid rgba(184, 138, 59, .38);
+}
+
+
+/* Room title */
+
+.home-room-card-bottom h3 {
+  color: #242a20 !important;
+}
+
+
+/* Room specification */
+
+.home-room-card-bottom span {
+  color: rgba(48, 52, 41, .62) !important;
+  opacity: 1 !important;
+}
+
+
+/* Explore rooms CTA */
+
+.home-room-all {
+  color: #30372a !important;
+  border-color: var(--saga-brand-gold) !important;
+  transition:
+    color .3s ease,
+    letter-spacing .3s ease !important;
+}
+
+.home-room-all:hover {
+  color: #8f672d !important;
+  letter-spacing: .25em;
+}
+
+
+/* ---------------------------------------------------------
+   3D ORBIT — BRAND CANVAS
+   IMPORTANT: no geometry / transforms changed here
+--------------------------------------------------------- */
+
+.jawai-orbit-experience {
+  background:
+    radial-gradient(
+      circle at 50% 55%,
+      rgba(255, 249, 237, .90) 0%,
+      rgba(238, 229, 211, .96) 44%,
+      rgba(221, 210, 190, 1) 100%
+    ) !important;
+
+  color: #252b21 !important;
+}
+
+
+/* Atmospheric depth behind orbit */
+
+.jawai-orbit-atmosphere {
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(87, 91, 63, .10) 0%,
+      rgba(154, 79, 50, .045) 35%,
+      transparent 68%
+    ) !important;
+}
+
+
+/* Orbit cards — only surface styling */
+
+.jawai-orbit-photo {
+  background: #252b20 !important;
+
+  box-shadow:
+    0 28px 70px rgba(34, 38, 28, .18) !important;
+}
+
+
+/* Image treatment without transform */
+
+.jawai-orbit-photo img {
+  filter:
+    saturate(.92)
+    contrast(1.025)
+    sepia(.02);
+}
+
+
+/* Number detail */
+
+.jawai-orbit-number {
+  color: rgba(244, 237, 221, .90) !important;
+  border-color: rgba(184, 138, 59, .55) !important;
+}
+
+
+/* ---------------------------------------------------------
+   ORBIT EDITORIAL COPY
+--------------------------------------------------------- */
+
+.jawai-orbit-copy,
+.jawai-orbit-experience:not(.has-selected-photo) .jawai-orbit-copy {
+  color: #252c21 !important;
+}
+
+
+/* Current JSX uses a direct span as eyebrow */
+
+.jawai-orbit-copy > span {
+  color: var(--saga-brand-gold) !important;
+
+  letter-spacing: .30em !important;
+}
+
+
+/* Main heading */
+
+.jawai-orbit-copy h2 {
+  color: #242a20 !important;
+}
+
+
+/* ---------------------------------------------------------
+   SCROLL PROGRESS
+--------------------------------------------------------- */
+
+.jawai-orbit-progress {
+  color: rgba(42, 47, 36, .58) !important;
+}
+
+.jawai-orbit-progress > span {
+  background: var(--saga-brand-gold) !important;
+}
+
+.jawai-orbit-progress small {
+  color: rgba(42, 47, 36, .58) !important;
+}
+
+
+/* Mobile keeps identical visual language */
+
+@media (max-width: 760px) {
+
+  .home-room-view {
+    background: rgba(31, 39, 27, .94) !important;
+    color: #f1e8d6 !important;
+  }
+
+}
+
+
+/* =========================================================
+   SAGA JAWAI — BRAND KIT / PASS 04
+   Gallery + Rabari / The Local Welcome
+   Visual treatment only
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   GALLERY
+--------------------------------------------------------- */
+
+.saga-gallery {
+  background:
+    radial-gradient(
+      circle at 14% 18%,
+      rgba(80, 81, 59, .055),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #f2ebde 0%,
+      #ece2d2 100%
+    ) !important;
+
+  color: #22281e !important;
+}
+
+.saga-gallery .saga-gallery-top h2 {
+  color: #22281e !important;
+}
+
+
+/* Editorial image treatment */
+
+.saga-gallery-frame {
+  background: #252b20 !important;
+}
+
+.saga-gallery-frame img {
+  filter:
+    saturate(.93)
+    contrast(1.02)
+    sepia(.025);
+}
+
+
+/* Gallery navigation */
+
+.saga-gallery-dot {
+  border-color: rgba(39, 46, 34, .38) !important;
+  background: transparent !important;
+}
+
+.saga-gallery-dot.is-active {
+  background: var(--saga-brand-gold) !important;
+  border-color: var(--saga-brand-gold) !important;
+}
+
+
+/* ---------------------------------------------------------
+   RABARI — THE LOCAL WELCOME
+--------------------------------------------------------- */
+
+.rabari-journey {
+  background:
+    radial-gradient(
+      circle at 18% 22%,
+      rgba(184, 138, 59, .075),
+      transparent 32%
+    ),
+    linear-gradient(
+      145deg,
+      #713522 0%,
+      #622d20 44%,
+      #4e281d 100%
+    ) !important;
+
+  color: #f3ead9 !important;
+}
+
+
+/* Eyebrow */
+
+.rabari-eyebrow {
+  color: rgba(239, 218, 184, .70) !important;
+}
+
+
+/* Main editorial heading */
+
+.rabari-journey h2 {
+  color: #f6eee0 !important;
+}
+
+.rabari-journey h2 em {
+  color: #e2bd78 !important;
+}
+
+
+/* Intro */
+
+.rabari-intro {
+  color: rgba(245, 235, 217, .72) !important;
+}
+
+
+/* ---------------------------------------------------------
+   EXPERIENCE DESCRIPTION
+--------------------------------------------------------- */
+
+.rabari-description {
+  border-color: rgba(226, 189, 120, .22) !important;
+}
+
+.rabari-description > span {
+  color: #d7ad64 !important;
+}
+
+.rabari-description p {
+  color: rgba(245, 235, 217, .64) !important;
+}
+
+
+/* ---------------------------------------------------------
+   JOURNEY TIMELINE
+--------------------------------------------------------- */
+
+.rabari-time strong {
+  color: #e2bd78 !important;
+}
+
+.rabari-time span {
+  color: rgba(245, 235, 217, .48) !important;
+}
+
+.rabari-time i {
+  background: rgba(215, 173, 100, .52) !important;
+}
+
+.rabari-time i::before,
+.rabari-time i::after {
+  background: #d7ad64 !important;
+}
+
+
+/* ---------------------------------------------------------
+   FOUR EXPERIENCE HIGHLIGHTS
+--------------------------------------------------------- */
+
+.rabari-highlights {
+  border-top-color: rgba(241, 224, 195, .16) !important;
+  border-bottom-color: rgba(241, 224, 195, .16) !important;
+}
+
+.rabari-highlights > div:nth-child(odd) {
+  border-right-color: rgba(241, 224, 195, .13) !important;
+}
+
+.rabari-highlights > div:nth-child(-n+2) {
+  border-bottom-color: rgba(241, 224, 195, .13) !important;
+}
+
+.rabari-highlights small {
+  color: #d7ad64 !important;
+}
+
+.rabari-highlights strong {
+  color: #f4ead9 !important;
+}
+
+.rabari-highlights span {
+  color: rgba(245, 235, 217, .52) !important;
+}
+
+
+/* ---------------------------------------------------------
+   RABARI CTA
+--------------------------------------------------------- */
+
+.rabari-journey-footer > span {
+  color: rgba(245, 235, 217, .46) !important;
+}
+
+.rabari-journey-footer button {
+  color: #e2bd78 !important;
+  border-bottom-color: rgba(226, 189, 120, .58) !important;
+
+  transition:
+    color .3s ease,
+    border-color .3s ease,
+    gap .35s cubic-bezier(.22,1,.36,1) !important;
+}
+
+.rabari-journey-footer button:hover {
+  color: #f4e7cd !important;
+  border-bottom-color: #d7ad64 !important;
+  gap: 24px !important;
+}
+
+
+/* ---------------------------------------------------------
+   RABARI IMAGE
+--------------------------------------------------------- */
+
+.rabari-journey-media {
+  background: #25281e !important;
+}
+
+.rabari-journey-media > img {
+  filter:
+    saturate(.90)
+    contrast(1.035)
+    sepia(.055);
+}
+
+
+/* Brand-toned cinematic overlay */
+
+.rabari-media-shade {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(73, 39, 26, .32) 0%,
+      rgba(73, 39, 26, .08) 24%,
+      transparent 48%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(19, 25, 17, .40) 0%,
+      transparent 42%
+    ) !important;
+}
+
+
+/* Location metadata */
+
+.rabari-location {
+  color: #f5ecdc !important;
+}
+
+.rabari-location span {
+  color: rgba(245, 236, 220, .94) !important;
+}
+
+.rabari-location small {
+  color: rgba(226, 189, 120, .78) !important;
+  opacity: 1 !important;
+}
+
+
+/* Mobile highlight separators */
+
+@media (max-width: 600px) {
+
+  .rabari-highlights > div,
+  .rabari-highlights > div:nth-child(even) {
+    border-bottom-color:
+      rgba(241, 224, 195, .13) !important;
+  }
+
+}
+
+
+/* =========================================================
+   SAGA JAWAI — BRAND KIT / PASS 05
+   Statement + Final Footer
+   Visual treatment only
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   SAGA STATEMENT
+--------------------------------------------------------- */
+
+.founder-quote-with-leopard {
+  background:
+    radial-gradient(
+      circle at 72% 28%,
+      rgba(184, 138, 59, .09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 22% 82%,
+      rgba(154, 79, 50, .10),
+      transparent 32%
+    ),
+    linear-gradient(
+      145deg,
+      #20271c 0%,
+      #171d14 56%,
+      #10140e 100%
+    ) !important;
+
+  color: #f1e8d7 !important;
+}
+
+
+/* Main philosophy quote */
+
+.founder-quote-with-leopard blockquote {
+  color: #f1e8d7 !important;
+  text-shadow:
+    0 2px 28px rgba(0, 0, 0, .14);
+}
+
+
+/* Supporting philosophy line */
+
+.founder-quote-with-leopard .founder-credit {
+  color: rgba(239, 229, 210, .68) !important;
+}
+
+.founder-quote-with-leopard .founder-credit strong {
+  color: var(--saga-brand-gold) !important;
+}
+
+.founder-quote-with-leopard .founder-credit span {
+  color: rgba(226, 189, 120, .76) !important;
+}
+
+
+/* Saga signature */
+
+.founder-quote-with-leopard .founder-signature {
+  color: rgba(239, 229, 210, .72) !important;
+}
+
+
+/* Leopard — integrate with dark forest canvas */
+
+.founder-quote-with-leopard .quote-leopard img {
+  filter:
+    saturate(.90)
+    contrast(1.04)
+    sepia(.035);
+}
+
+
+/* Existing leopard atmospheric layer */
+
+.founder-quote-with-leopard .quote-leopard::after {
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(16, 20, 14, .06) 54%,
+      rgba(16, 20, 14, .32) 100%
+    ) !important;
+}
+
+
+/* ---------------------------------------------------------
+   FINAL FOOTER
+--------------------------------------------------------- */
+
+.saga-final-footer {
+  background:
+    radial-gradient(
+      circle at 82% 12%,
+      rgba(154, 79, 50, .10),
+      transparent 29%
+    ),
+    radial-gradient(
+      circle at 18% 86%,
+      rgba(184, 138, 59, .055),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #1c2319 0%,
+      #141a12 60%,
+      #0f130d 100%
+    ) !important;
+
+  color: #eee5d4 !important;
+}
+
+
+/* Top rule */
+
+.saga-final-footer .saga-footer-rule {
+  background: rgba(184, 138, 59, .42) !important;
+  border-color: rgba(184, 138, 59, .42) !important;
+}
+
+
+/* Footer headings */
+
+.saga-footer-grid h3 {
+  color: #f0e7d6 !important;
+}
+
+
+/* Supporting copy */
+
+.saga-footer-grid p {
+  color: rgba(238, 229, 212, .58) !important;
+}
+
+
+/* Navigation links */
+
+.saga-footer-links button {
+  color: rgba(238, 229, 212, .68) !important;
+
+  transition:
+    color .3s ease,
+    transform .3s ease !important;
+}
+
+.saga-footer-links button:hover {
+  color: #d9b36d !important;
+  transform: translateX(4px);
+}
+
+
+/* Contact + signup buttons */
+
+.saga-final-footer .footer-signup {
+  color: #e1bd78 !important;
+  border-color: rgba(225, 189, 120, .52) !important;
+
+  transition:
+    color .3s ease,
+    border-color .3s ease !important;
+}
+
+.saga-final-footer .footer-signup:hover {
+  color: #f2e8d5 !important;
+  border-color: #d9b36d !important;
+}
+
+
+/* Newsletter input */
+
+.saga-footer-newsletter > input[type="email"] {
+  color: #eee5d4 !important;
+
+  border-color:
+    rgba(238, 229, 212, .28) !important;
+
+  background: transparent !important;
+}
+
+.saga-footer-newsletter > input[type="email"]:focus {
+  border-color:
+    rgba(217, 179, 109, .72) !important;
+}
+
+.saga-footer-newsletter > input::placeholder {
+  color:
+    rgba(238, 229, 212, .40) !important;
+}
+
+
+/* Terms */
+
+.footer-accept {
+  color:
+    rgba(238, 229, 212, .48) !important;
+}
+
+
+/* Footer bottom */
+
+.saga-footer-bottom {
+  color:
+    rgba(238, 229, 212, .48) !important;
+
+  border-color:
+    rgba(238, 229, 212, .14) !important;
+}
+
+
+/* Wildlife artwork treatment — if present */
+
+.saga-footer-wildlife-shade {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(18, 24, 16, .02) 0%,
+      rgba(18, 24, 16, .48) 100%
+    ) !important;
+}
+
