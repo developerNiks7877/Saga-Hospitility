@@ -1,0 +1,34 @@
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch
+
+# End of https://mrkandreev.name/snippets/gitignore-generator/#react
+dist/
+*.save
+
+# Local recovery / development backups
+*.backup-*
+*.backup-*
+*.backup
+*.before-*
+*.before-*
+*.before-*
+*.pre-*
+*.pre-3d-v2
+
+public/assets/experiences/videos-backup-old/
+public/assets/logo/saga-hospitality-logo-backup.png
+
+# Large local experience videos
+public/assets/experiences/videos/*.mp4

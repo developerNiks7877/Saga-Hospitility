@@ -1,0 +1,7588 @@
+/* SAGA JAWAI — CLEAN HOME STYLES
+   Removed unused legacy chapter / stay / old gallery / old footer rules.
+*/
+
+:root {
+  --black: #11110e;
+  --deep: #24251c;
+  --olive: #50513b;
+  --cream: #f1ede3;
+  --paper: #e7e0d2;
+  --gold: #b69a65;
+  --red: #961d15;
+  --line: rgba(20, 20, 17, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--cream);
+  color: var(--black);
+}
+
+button {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.saga-page {
+  width: 100%;
+  overflow: clip;
+  background: var(--cream);
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.site-nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: 105px;
+  padding: 0 3.3vw;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  color: #fff;
+  pointer-events: none;
+}
+
+.site-nav > * {
+  pointer-events: auto;
+}
+
+.site-nav.nav-dark {
+  color: var(--black);
+}
+
+.menu-trigger {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 10px;
+  letter-spacing: .24em;
+}
+
+.menu-lines {
+  width: 27px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menu-lines i {
+  display: block;
+  height: 1px;
+  background: currentColor;
+}
+
+.menu-lines i:last-child {
+  width: 18px;
+}
+
+.site-logo {
+  width: 110px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+}
+
+.site-logo img {
+  width: auto;
+  max-width: 110px;
+  max-height: 62px;
+  object-fit: contain;
+}
+
+.nav-book {
+  justify-self: end;
+  position: relative;
+  padding: 13px 0;
+  font-size: 10px;
+  letter-spacing: .23em;
+}
+
+.nav-book::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 7px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+}
+
+/* =========================
+   FULL SCREEN MENU
+========================= */
+
+.menu-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  padding: 36px 4vw 30px;
+  background: #37392a;
+  color: #f4efe6;
+  transform: translateY(-105%);
+  transition: transform .8s cubic-bezier(.77, 0, .18, 1);
+}
+
+.menu-panel.is-open {
+  transform: translateY(0);
+}
+
+.menu-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.menu-panel-head img {
+  width: 105px;
+}
+
+.close-menu {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 10px;
+  letter-spacing: .22em;
+}
+
+.close-menu span {
+  font-size: 26px;
+  font-weight: 200;
+}
+
+.overlay-navigation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(850px, 90vw);
+  transform: translate(-50%, -50%);
+}
+
+.overlay-navigation button {
+  width: 100%;
+  padding: 11px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  color: #f4efe6;
+  font-family: "Bigila", "Times New Roman", serif;
+  font-size: clamp(40px, 5.5vw, 90px);
+  line-height: .95;
+  text-align: left;
+}
+
+.overlay-navigation small {
+  margin-top: 9px;
+  font-family: Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: .18em;
+}
+
+.menu-panel-bottom {
+  position: absolute;
+  left: 4vw;
+  right: 4vw;
+  bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  letter-spacing: .22em;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  overflow: hidden;
+  background: #111;
+  color: #fff;
+}
+
+.hero-media {
+  position: absolute;
+  inset: -8%;
+  width: 116%;
+  height: 116%;
+  object-fit: cover;
+  object-position: center;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.hero-video {
+  border: 0;
+  pointer-events: none;
+}
+
+.hero-main-logo {
+  display: block;
+  width: clamp(260px, 38vw, 620px);
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .18));
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, .32),
+    rgba(0, 0, 0, .03) 40%,
+    rgba(0, 0, 0, .34)
+  );
+}
+
+.hero-word {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  will-change: transform;
+}
+
+.hero-word span {
+  display: block;
+  margin-bottom: 3px;
+  padding-left: .58em;
+  font-size: 11px;
+  letter-spacing: .58em;
+}
+
+.hero-word h1 {
+  margin: 0;
+  font-family: "Bigila", "Times New Roman", serif;
+  font-size: clamp(86px, 12vw, 205px);
+  font-weight: 400;
+  line-height: .78;
+  letter-spacing: -.04em;
+}
+
+.hero-meta {
+  position: absolute;
+  left: 3.3vw;
+  right: 3.3vw;
+  bottom: 42px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  font-size: 8px;
+  letter-spacing: .22em;
+}
+
+.hero-meta p {
+  margin: 0;
+  text-align: center;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 10px;
+  line-height: 1.7;
+  letter-spacing: .12em;
+}
+
+.hero-meta span:last-child {
+  text-align: right;
+}
+
+.hero-scroll {
+  display: none;
+}
+
+/* =========================
+   INTRO
+========================= */
+
+.editorial-section {
+  position: relative;
+}
+
+.intro-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 15vh 6vw 12vh;
+  display: grid;
+  grid-template-columns: 46% 48%;
+  gap: 6%;
+  align-items: center;
+  background: var(--cream);
+}
+
+.intro-number {
+  position: absolute;
+  top: 15vh;
+  left: 2.5vw;
+  font-size: 8px;
+  letter-spacing: .2em;
+}
+
+.intro-copy {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-left: 4vw;
+}
+
+.eyebrow,
+.intro-copy .eyebrow {
+  display: block;
+  margin-bottom: 32px;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: .28em;
+}
+
+.editorial-title {
+  margin: 0;
+  font-family: "Bigila", "Times New Roman", serif;
+  font-size: clamp(55px, 5.6vw, 105px);
+  font-weight: 400;
+  line-height: .88;
+  letter-spacing: -.035em;
+}
+
+.mask {
+  display: block;
+  overflow: hidden;
+}
+
+.reveal-line {
+  display: block;
+  will-change: transform;
+}
+
+.italic-line {
+  padding-left: 3.5vw;
+  font-style: italic;
+}
+
+.intro-description {
+  width: 82%;
+  max-width: 520px;
+  margin: 55px 0 0 8vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 38px;
+}
+
+.intro-description p {
+  margin: 0;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.intro-visual {
+  position: relative;
+  width: 100%;
+  height: 76vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.intro-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  will-change: transform, clip-path;
+}
+
+.vertical-label {
+  position: absolute;
+  right: 18px;
+  bottom: 25px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  color: #fff;
+  font-size: 7px;
+  letter-spacing: .25em;
+}
+
+/* =========================
+   WILDERNESS SPLIT
+========================= */
+
+.wildlife-split {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  background: var(--red);
+}
+
+.wildlife-split-image {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.wildlife-split-image img {
+  width: 100%;
+  height: 110%;
+  object-fit: cover;
+  object-position: center;
+  will-change: transform;
+}
+
+.wildlife-split-copy {
+  min-height: 100vh;
+  padding: 9vh 7vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--red);
+  color: #f4efe7;
+}
+
+.wildlife-kicker {
+  display: block;
+  margin-bottom: 40px;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: .18em;
+}
+
+.wildlife-split-copy h2 {
+  margin: 0;
+  font-family: "Bigila", "Times New Roman", serif;
+  font-size: clamp(48px, 4vw, 82px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+}
+
+.wildlife-split-copy p {
+  width: 90%;
+  max-width: 650px;
+  margin: 55px 0 42px;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, .88);
+}
+
+.wildlife-link {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  color: #fff;
+  font-size: 8px;
+  letter-spacing: .24em;
+}
+
+.wildlife-link svg {
+  width: 38px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+/* =========================
+   JAWAI ORGANIC 3D ORBIT
+========================= */
+
+.jawai-orbit-experience {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #eee7db;
+}
+
+.jawai-orbit-scene {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  perspective: 1600px;
+  perspective-origin: 50% 48%;
+  transform-style: preserve-3d;
+  isolation: isolate;
+}
+
+.jawai-orbit-atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255,255,255,.92) 0%,
+      rgba(245,239,228,.76) 37%,
+      rgba(226,215,197,.82) 100%
+    );
+}
+
+.jawai-orbit-ring {
+  position: absolute;
+  z-index: 20;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.jawai-orbit-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: clamp(145px, 14vw, 225px);
+  height: clamp(190px, 19vw, 310px);
+  margin:
+    calc(clamp(190px, 19vw, 310px) / -2)
+    0 0
+    calc(clamp(145px, 14vw, 225px) / -2);
+  overflow: hidden;
+  background: #c8bcaa;
+  box-shadow:
+    0 25px 65px rgba(40,29,18,.16);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.jawai-orbit-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      transparent 55%,
+      rgba(12,10,7,.26) 100%
+    );
+  pointer-events: none;
+}
+
+.jawai-orbit-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.035);
+}
+
+.jawai-orbit-number {
+  position: absolute;
+  z-index: 3;
+  right: 13px;
+  bottom: 11px;
+  color: rgba(255,255,255,.9);
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: .2em;
+}
+
+.jawai-orbit-core {
+  position: absolute;
+  z-index: 105;
+  top: 50%;
+  left: 50%;
+  width: clamp(250px, 24vw, 390px);
+  height: min(57vh, 570px);
+  margin: 0;
+  overflow: hidden;
+  transform:
+    translate(-50%, -50%)
+    translateZ(80px);
+  box-shadow:
+    0 40px 95px rgba(36,25,14,.2);
+  will-change: transform, opacity;
+}
+
+.jawai-orbit-core img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.jawai-core-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.02) 42%,
+      rgba(0,0,0,.4) 100%
+    );
+}
+
+.jawai-core-label {
+  position: absolute;
+  z-index: 3;
+  left: 20px;
+  bottom: 18px;
+  color: rgba(255,255,255,.9);
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: .24em;
+}
+
+.jawai-orbit-copy {
+  position: absolute;
+  z-index: 140;
+  top: 50%;
+  left: 50%;
+  width: min(660px, 46vw);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.jawai-orbit-copy .eyebrow {
+  display: block;
+  margin-bottom: 19px;
+  color: #d2aa61;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: .29em;
+  text-shadow:
+    0 2px 14px rgba(0,0,0,.4);
+}
+
+.jawai-orbit-copy h2 {
+  margin: 0;
+  color: #f8f3e9;
+  font-family: "Bigila", "Times New Roman", serif;
+  font-size: clamp(40px, 4vw, 70px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.025em;
+  text-shadow:
+    0 3px 24px rgba(0,0,0,.48);
+}
+
+.jawai-orbit-copy h2 em {
+  font-weight: 400;
+}
+
+.jawai-orbit-copy p {
+  width: min(450px, 78%);
+  margin: 24px auto 0;
+  color: rgba(255,255,255,.86);
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 9px;
+  line-height: 1.8;
+  text-shadow:
+    0 2px 12px rgba(0,0,0,.5);
+}
+
+.jawai-orbit-progress {
+  position: absolute;
+  z-index: 160;
+  left: 50%;
+  bottom: 27px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  transform: translateX(-50%);
+}
+
+.jawai-orbit-progress span {
+  display: block;
+  width: 1px;
+  height: 30px;
+  background:
+    rgba(62,47,31,.42);
+}
+
+.jawai-orbit-progress small {
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 6px;
+  letter-spacing: .28em;
+  color: rgba(47,37,25,.58);
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+
+  .jawai-orbit-scene {
+    perspective: 1100px;
+  }
+
+  .jawai-orbit-photo {
+    width: 27vw;
+    height: 36vw;
+    margin:
+      -18vw 0 0 -13.5vw;
+  }
+
+  .jawai-orbit-core {
+    width: 52vw;
+    height: 52vh;
+  }
+
+  .jawai-orbit-copy {
+    width: 74vw;
+  }
+
+  .jawai-orbit-copy h2 {
+    font-size: 8.5vw;
+  }
+
+  .jawai-orbit-copy p {
+    display: none;
+  }
+
+}
+
+/* =========================
+   EXPERIENCES — NORMAL SCROLL
+========================= */
+
+.experiences-showcase {
+  position: relative;
+  width: 100%;
+  padding: 11vh 0 9vh;
+  background: #f5f2eb;
+  overflow: hidden;
+}
+
+.experiences-head {
+  padding: 0 4.5vw 7vh;
+}
+
+.experiences-head > span {
+  display: block;
+  margin-bottom: 42px;
+
+  font-family: "Garet", Arial, sans-serif;
+  font-size: clamp(38px, 3.2vw, 58px);
+  font-weight: 400;
+}
+
+.experiences-head p {
+  width: min(900px, 80%);
+  margin: 0;
+
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.75;
+
+  color: rgba(35, 32, 28, .72);
+}
+
+
+/* ACTUAL USER SCROLL */
+
+.experiences-track {
+  display: flex;
+  gap: 30px;
+
+  width: 100%;
+
+  padding:
+    0
+    4.5vw
+    35px;
+
+  overflow-x: auto;
+  overflow-y: visible;
+
+  scroll-snap-type: x proximity;
+
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: thin;
+}
+
+
+/* CARD */
+
+.experience-slide-card {
+  flex: 0 0 42vw;
+  width: 42vw;
+
+  scroll-snap-align: start;
+}
+
+
+/* IMAGE */
+
+.experience-slide-card img {
+  width: 100%;
+  height: 52vh;
+
+  object-fit: cover;
+}
+
+
+/* TEXT UNDER IMAGE */
+
+.experience-slide-copy {
+  display: block;
+
+  width: 100%;
+
+  margin-top: 28px;
+  padding-top: 22px;
+  padding-bottom: 20px;
+
+  border-top:
+    1px solid
+    rgba(30, 28, 25, .28);
+
+  color: #24221f;
+}
+
+.experience-slide-copy h3 {
+  display: block;
+
+  margin:
+    0
+    0
+    17px;
+
+  font-family:
+    "Garet",
+    Arial,
+    sans-serif;
+
+  font-size: 20px;
+  font-weight: 500;
+
+  color: #24221f;
+}
+
+.experience-slide-copy p {
+  display: block;
+
+  width: 94%;
+
+  margin: 0;
+
+  font-family:
+    "Garet",
+    Arial,
+    sans-serif;
+
+  font-size: 12px;
+  line-height: 1.8;
+
+  color:
+    rgba(
+      35,
+      32,
+      28,
+      .72
+    );
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .experiences-showcase {
+    padding:
+      90px
+      0
+      65px;
+  }
+
+  .experiences-head {
+    padding:
+      0
+      22px
+      45px;
+  }
+
+  .experiences-head p {
+    width: 100%;
+  }
+
+  .experiences-track {
+    gap: 18px;
+
+    padding:
+      0
+      22px
+      25px;
+  }
+
+  .experience-slide-card {
+    flex: 0 0 82vw;
+    width: 82vw;
+  }
+
+  .experience-slide-card img {
+    height: 58vw;
+  }
+
+  .experience-slide-copy {
+    margin-top: 20px;
+    padding-top: 18px;
+  }
+
+}
+/* =========================
+   WALKING SAFARI
+========================= */
+
+.walking-feature {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  background: #971c15;
+}
+
+.walking-feature-copy {
+  min-height: 100vh;
+  padding: 11vh 7vw 8vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+}
+
+.walking-feature-copy > span {
+  margin-bottom: 35px;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: .2em;
+}
+
+.walking-feature-copy h2 {
+  margin: 0;
+  font-family: "Bigila", "Times New Roman", serif;
+  font-size: clamp(52px, 5vw, 88px);
+  font-weight: 400;
+  line-height: 1.03;
+}
+
+.walking-mark {
+  margin: 70px auto;
+  font-size: 58px;
+  opacity: .45;
+}
+
+.walking-feature-copy p {
+  width: 90%;
+  max-width: 650px;
+  margin: auto auto 0;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.walking-feature-image {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.walking-feature-image img {
+  width: 100%;
+  height: 110%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 950px) {
+  .site-nav {
+    height: 82px;
+  }
+
+  .intro-copy {
+    padding-left: 0;
+  }
+
+  .intro-description {
+    width: 90%;
+    margin-left: 4vw;
+  }
+
+  .experience-slide-card {
+    flex-basis: 55vw;
+    width: 55vw;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+  .site-nav {
+    height: 76px;
+    padding: 0 22px;
+  }
+
+  .menu-trigger span {
+    display: none;
+  }
+
+  .site-logo {
+    width: 85px;
+  }
+
+  .nav-book {
+    font-size: 8px;
+  }
+
+  .hero {
+    min-height: 100svh;
+  }
+
+  .hero-media {
+    inset: -4%;
+  }
+
+  .hero-word h1 {
+    font-size: 23vw;
+  }
+
+  .hero-main-logo {
+    width: min(76vw, 430px);
+  }
+
+  .hero-meta {
+    left: 22px;
+    right: 22px;
+    bottom: 25px;
+  }
+
+  .hero-meta p {
+    display: none;
+  }
+
+  .intro-section {
+    min-height: auto;
+    padding: 120px 22px;
+    grid-template-columns: 1fr;
+    gap: 70px;
+  }
+
+  .intro-number {
+    display: none;
+  }
+
+  .intro-copy {
+    width: 100%;
+    padding: 0;
+  }
+
+  .editorial-title {
+    font-size: 16vw;
+  }
+
+  .italic-line {
+    padding-left: 7vw;
+  }
+
+  .intro-description {
+    width: 88%;
+    margin: 45px 0 0 auto;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .intro-visual {
+    width: 88vw;
+    height: 115vw;
+    min-height: 0;
+  }
+
+  .wildlife-split {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .wildlife-split-image {
+    height: 75vh;
+  }
+
+  .wildlife-split-copy {
+    min-height: 70vh;
+    padding: 80px 24px;
+  }
+
+  .wildlife-split-copy h2 {
+    font-size: 13vw;
+  }
+
+  .wildlife-split-copy p {
+    width: 100%;
+    margin-top: 35px;
+  }
+
+  .experiences-showcase {
+    padding-top: 100px;
+  }
+
+  .experiences-head {
+    padding: 0 22px 55px;
+  }
+
+  .experiences-track {
+    padding-left: 22px;
+    gap: 18px;
+  }
+
+  .experience-slide-card {
+    flex-basis: 82vw;
+    width: 82vw;
+  }
+
+  .experience-slide-card img {
+    height: 55vw;
+  }
+
+  .walking-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .walking-feature-copy {
+    min-height: 70vh;
+    padding: 80px 24px;
+  }
+
+  .walking-feature-copy h2 {
+    font-size: 13vw;
+  }
+
+  .walking-feature-image {
+    height: 75vh;
+  }
+
+  .menu-panel-bottom {
+    gap: 30px;
+    flex-direction: column;
+  }
+}
+.nav-book {
+  position: relative;
+  z-index: 100;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.saga-nav {
+  position: relative;
+  z-index: 1000;
+}
+
+/* =========================
+   SINGLE ANIMATED SAGA LOGO
+   Hero centre -> navigation
+========================= */
+
+.site-nav {
+  grid-template-columns: 1fr 110px 1fr;
+}
+
+.floating-saga-logo {
+  position: fixed;
+  z-index: 1001;
+  top: 50%;
+  left: 50%;
+  width: clamp(260px, 38vw, 620px);
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  line-height: 0;
+  will-change: top, width, transform;
+}
+
+.floating-saga-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 18px rgba(0, 0, 0, .18));
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
+  .site-nav {
+    grid-template-columns: 1fr 85px 1fr;
+  }
+
+  .floating-saga-logo {
+    width: min(76vw, 430px);
+  }
+}
+
+/* FINAL NAV ALIGNMENT */
+.site-nav {
+  grid-template-columns: 1fr 1fr;
+}
+
+.menu-trigger {
+  justify-self: start;
+}
+
+.nav-book {
+  justify-self: end;
+}
+
+@media (max-width: 700px) {
+  .site-nav {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* =========================================
+   SAGA JAWAI — HOSPITALITY STORY
+========================================= */
+
+.hospitality-story {
+  position: relative;
+  min-height: 100vh;
+  padding: 150px 8vw 130px;
+  display: grid;
+  grid-template-columns: minmax(0, .92fr) minmax(500px, 1.08fr);
+  gap: clamp(70px, 8vw, 150px);
+  align-items: center;
+  background: #f4f0e7;
+  color: #24221d;
+}
+
+.hospitality-copy {
+  max-width: 660px;
+}
+
+.hospitality-kicker {
+  display: block;
+  margin-bottom: 25px;
+  font-size: 9px;
+  letter-spacing: .34em;
+}
+
+.hospitality-copy h2 {
+  margin: 0 0 45px;
+  font-family: "Bigila", "Times New Roman", serif;
+  font-size: clamp(48px, 5vw, 82px);
+  line-height: .98;
+  font-weight: 400;
+  letter-spacing: -.025em;
+}
+
+.hospitality-text {
+  max-width: 620px;
+}
+
+.hospitality-text p {
+  margin: 0 0 25px;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.9;
+  letter-spacing: .015em;
+  color: rgba(36, 34, 29, .7);
+}
+
+.hospitality-gallery-btn {
+  margin-top: 18px;
+  min-width: 170px;
+  padding: 15px 28px;
+  border: 1px solid #a98745;
+  border-radius: 100px;
+  background: transparent;
+  color: #8e6c2f;
+  font-family: "Bigila", "Times New Roman", serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition:
+    background .35s ease,
+    color .35s ease,
+    transform .35s ease;
+}
+
+.hospitality-gallery-btn:hover {
+  background: #a98745;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.hospitality-collage {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 245px 330px;
+  gap: 18px;
+  align-items: center;
+}
+
+.hospitality-image {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #ddd6c8;
+}
+
+.hospitality-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s cubic-bezier(.2,.7,.2,1);
+}
+
+.hospitality-image:hover img {
+  transform: scale(1.035);
+}
+
+.hospitality-image-one {
+  height: 245px;
+  align-self: end;
+}
+
+.hospitality-image-two {
+  height: 205px;
+  align-self: end;
+  transform: translateY(34px);
+}
+
+.hospitality-image-three {
+  height: 310px;
+  align-self: start;
+}
+
+.hospitality-image-four {
+  height: 270px;
+  align-self: start;
+  transform: translateY(34px);
+}
+
+@media (max-width: 900px) {
+  .hospitality-story {
+    min-height: auto;
+    padding: 120px 7vw;
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
+
+  .hospitality-copy {
+    max-width: 700px;
+  }
+
+  .hospitality-collage {
+    grid-template-rows: 220px 280px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hospitality-story {
+    padding: 100px 22px;
+    gap: 65px;
+  }
+
+  .hospitality-copy h2 {
+    margin-bottom: 32px;
+    font-size: 46px;
+  }
+
+  .hospitality-text p {
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .hospitality-collage {
+    gap: 10px;
+    grid-template-rows: 170px 220px;
+  }
+
+  .hospitality-image {
+    border-radius: 7px;
+  }
+
+  .hospitality-image-one {
+    height: 170px;
+  }
+
+  .hospitality-image-two {
+    height: 145px;
+    transform: translateY(20px);
+  }
+
+  .hospitality-image-three {
+    height: 210px;
+  }
+
+  .hospitality-image-four {
+    height: 185px;
+    transform: translateY(20px);
+  }
+}
+
+/* =========================================
+   CURATED VIDEO EXPERIENCES
+========================================= */
+
+.video-experiences {
+  position: relative;
+  padding: 145px 8vw 160px;
+  background: #f4f0e7;
+  color: #24221d;
+}
+
+.video-experiences-head {
+  max-width: 900px;
+  margin: 0 auto 85px;
+  text-align: center;
+}
+
+.video-experiences-head > span {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 9px;
+  letter-spacing: .34em;
+}
+
+.video-experiences-head h2 {
+  margin: 0;
+  font-family: "Bigila", "Times New Roman", serif;
+  font-size: clamp(55px, 6vw, 94px);
+  line-height: .95;
+  font-weight: 400;
+  letter-spacing: -.03em;
+}
+
+.video-experiences-head p {
+  max-width: 690px;
+  margin: 30px auto 0;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(36, 34, 29, .65);
+}
+
+.video-experiences-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 80px 34px;
+  max-width: 1420px;
+  margin: 0 auto;
+}
+
+.video-experience-card {
+  min-width: 0;
+}
+
+.video-experience-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #1c1b18;
+}
+
+.experience-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 1.2s cubic-bezier(.2,.7,.2,1);
+}
+
+.video-experience-card:hover .experience-video {
+  transform: scale(1.025);
+}
+
+.video-experience-number {
+  position: absolute;
+  top: 20px;
+  left: 22px;
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-shadow: 0 1px 10px rgba(0,0,0,.4);
+  pointer-events: none;
+}
+
+.video-sound-toggle {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  padding: 10px 13px;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 100px;
+  background: rgba(15,15,15,.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: .18em;
+  cursor: pointer;
+}
+
+.video-experience-copy {
+  padding: 25px 4px 0;
+  border-top: 1px solid rgba(36,34,29,.22);
+  margin-top: 22px;
+}
+
+.video-experience-copy h3 {
+  margin: 0 0 13px;
+  font-family: "Bigila", "Times New Roman", serif;
+  font-size: clamp(29px, 2.4vw, 42px);
+  line-height: 1;
+  font-weight: 400;
+}
+
+.video-experience-copy p {
+  max-width: 560px;
+  margin: 0;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.75;
+  color: rgba(36,34,29,.62);
+}
+
+@media (max-width: 800px) {
+  .video-experiences {
+    padding: 110px 22px 120px;
+  }
+
+  .video-experiences-head {
+    margin-bottom: 60px;
+  }
+
+  .video-experiences-head h2 {
+    font-size: 52px;
+  }
+
+  .video-experiences-grid {
+    grid-template-columns: 1fr;
+    gap: 65px;
+  }
+
+  .video-experience-media {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* =========================================
+   EXPERIENCES — HORIZONTAL VIDEO CAROUSEL
+========================================= */
+
+.video-experiences {
+  overflow: hidden;
+}
+
+.video-experiences-track {
+  display: flex;
+  gap: 28px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0 8vw 28px;
+  margin-left: -8vw;
+  width: calc(100% + 16vw);
+
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.video-experiences-track::-webkit-scrollbar {
+  display: none;
+}
+
+.video-experience-card {
+  flex: 0 0 calc((100vw - 16vw - 28px) / 2);
+  max-width: 690px;
+  scroll-snap-align: start;
+}
+
+.video-experience-media {
+  aspect-ratio: 16 / 10;
+}
+
+/* ICON-ONLY SOUND CONTROL */
+
+.video-sound-toggle {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(255,255,255,.65);
+  border-radius: 50%;
+
+  background: rgba(15,15,15,.28);
+  color: #fff;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.video-sound-toggle svg {
+  width: 18px;
+  height: 18px;
+  overflow: visible;
+}
+
+.video-sound-toggle path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.video-sound-toggle .speaker-body {
+  fill: currentColor;
+  stroke: none;
+}
+
+.video-sound-toggle .speaker-wave {
+  display: none;
+}
+
+.video-sound-toggle .speaker-muted-line {
+  display: block;
+}
+
+.video-sound-toggle.is-unmuted .speaker-wave {
+  display: block;
+}
+
+.video-sound-toggle.is-unmuted .speaker-muted-line {
+  display: none;
+}
+
+/* Small right-side hint that more cards exist */
+.video-experiences-track::after {
+  content: "";
+  flex: 0 0 4vw;
+}
+
+@media (max-width: 800px) {
+  .video-experiences-track {
+    gap: 16px;
+    padding-left: 22px;
+    padding-right: 22px;
+    margin-left: -22px;
+    width: calc(100% + 44px);
+  }
+
+  .video-experience-card {
+    flex: 0 0 84vw;
+    max-width: none;
+  }
+
+  .video-experience-media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .video-sound-toggle {
+    width: 38px;
+    height: 38px;
+    right: 14px;
+    bottom: 14px;
+  }
+}
+
+/* =========================================
+   HOME — ACCOMMODATION & SUITES
+========================================= */
+
+.home-accommodation {
+  position: relative;
+  padding: 110px 5.5vw 120px;
+  background: #f5f1e8;
+  color: #211f1a;
+}
+
+.home-accommodation-head {
+  max-width: 720px;
+  margin: 0 auto 65px;
+  text-align: center;
+}
+
+.home-accommodation-head > span {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 9px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  opacity: .58;
+}
+
+.home-accommodation-head h2 {
+  margin: 0;
+  font-family: "Bigila", "Times New Roman", serif;
+  font-size: clamp(44px, 4.6vw, 76px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.025em;
+}
+
+.home-accommodation-head p {
+  max-width: 570px;
+  margin: 24px auto 0;
+  font-size: 12px;
+  line-height: 1.8;
+  letter-spacing: .035em;
+  opacity: .62;
+}
+
+.home-room-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  max-width: 1480px;
+  margin: 0 auto;
+}
+
+.home-room-card {
+  cursor: pointer;
+  outline: none;
+}
+
+.home-room-image-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 4.25;
+  background: #ded8cd;
+}
+
+.home-room-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    transform .8s cubic-bezier(.2,.7,.2,1),
+    filter .6s ease;
+}
+
+.home-room-card:hover .home-room-image {
+  transform: scale(1.035);
+}
+
+.home-room-view {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+
+  padding: 11px 15px;
+
+  background: rgba(245, 241, 232, .92);
+  color: #211f1a;
+
+  font-size: 8px;
+  letter-spacing: .18em;
+
+  opacity: 0;
+  transform: translateY(8px);
+
+  transition:
+    opacity .35s ease,
+    transform .35s ease;
+}
+
+.home-room-card:hover .home-room-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.home-room-card-bottom {
+  padding: 22px 4px 0;
+  text-align: center;
+}
+
+.home-room-card-bottom h3 {
+  margin: 0;
+
+  font-family: "Bigila", "Times New Roman", serif;
+  font-size: clamp(25px, 2vw, 34px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.home-room-card-bottom span {
+  display: block;
+  margin-top: 10px;
+
+  font-size: 8px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .52;
+}
+
+.home-room-all {
+  display: block;
+  margin: 58px auto 0;
+  padding: 13px 2px 11px;
+
+  border-bottom: 1px solid currentColor;
+
+  font-size: 9px;
+  letter-spacing: .22em;
+}
+
+/* TABLET */
+
+@media (max-width: 1000px) {
+  .home-accommodation {
+    padding: 90px 32px 100px;
+  }
+
+  .home-room-grid {
+    gap: 18px;
+  }
+
+  .home-room-image-wrap {
+    aspect-ratio: 3 / 4;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+  .home-accommodation {
+    padding: 80px 22px 90px;
+  }
+
+  .home-accommodation-head {
+    margin-bottom: 45px;
+  }
+
+  .home-accommodation-head h2 {
+    font-size: 46px;
+  }
+
+  .home-accommodation-head p {
+    font-size: 11px;
+  }
+
+  .home-room-grid {
+    display: flex;
+    gap: 15px;
+
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+
+    margin-left: -22px;
+    margin-right: -22px;
+    padding: 0 22px 15px;
+
+    scrollbar-width: none;
+  }
+
+  .home-room-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-room-card {
+    flex: 0 0 82vw;
+    scroll-snap-align: start;
+  }
+
+  .home-room-image-wrap {
+    aspect-ratio: 4 / 5;
+  }
+
+  .home-room-card-bottom h3 {
+    font-size: 29px;
+  }
+
+  .home-room-view {
+    opacity: 1;
+    transform: none;
+  }
+
+  .home-room-all {
+    margin-top: 42px;
+  }
+}
+
+/* =========================================
+   QUOTE — LEOPARD ART DIRECTION
+========================================= */
+
+.founder-quote-with-leopard {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.founder-quote-with-leopard .founder-quote-inner {
+  position: relative;
+  z-index: 2;
+}
+
+/*
+  Leopard intentionally enters from bottom-right.
+  Keep it secondary to the quote.
+*/
+.quote-leopard {
+  position: absolute;
+  z-index: 1;
+
+  right: -4vw;
+  bottom: -8vw;
+
+  width: clamp(290px, 29vw, 520px);
+
+  pointer-events: none;
+  user-select: none;
+
+  opacity: .92;
+
+  transform:
+    rotate(-2deg)
+    translateZ(0);
+
+  transform-origin: bottom right;
+}
+
+.quote-leopard img {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  filter:
+    saturate(.82)
+    contrast(.96);
+}
+
+/*
+  Very subtle fade so the leopard integrates
+  into the editorial background.
+*/
+.quote-leopard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(245,241,232,.45) 0%,
+      transparent 38%
+    );
+
+  pointer-events: none;
+}
+
+
+/* TABLET */
+
+@media (max-width: 1000px) {
+
+  .quote-leopard {
+    right: -9vw;
+    bottom: -3vw;
+    width: clamp(250px, 34vw, 390px);
+    opacity: .82;
+  }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+  .quote-leopard {
+    right: -85px;
+    bottom: -20px;
+    width: 260px;
+    opacity: .5;
+  }
+
+  .quote-leopard::after {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(245,241,232,.7),
+        transparent 60%
+      );
+  }
+}
+
+/* ==================================================
+   SAGA STATEMENT — FINAL LEOPARD COMPOSITION
+================================================== */
+
+.founder-quote-with-leopard {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #f5f1e8;
+  isolation: isolate;
+}
+
+/* Quote stays above leopard */
+.founder-quote-with-leopard .founder-quote-inner {
+  position: relative;
+  z-index: 3;
+}
+
+/* SINGLE WALKING LEOPARD */
+.founder-quote-with-leopard .quote-leopard {
+  position: absolute;
+
+  right: -2.5vw;
+  bottom: -2vh;
+
+  width: clamp(420px, 32vw, 610px);
+  height: auto;
+
+  z-index: 2;
+
+  opacity: 1;
+  pointer-events: none;
+  user-select: none;
+
+  transform: none;
+}
+
+/* Kill previous overlay/fade */
+.founder-quote-with-leopard .quote-leopard::after {
+  display: none !important;
+}
+
+.founder-quote-with-leopard .quote-leopard img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+
+  opacity: 1;
+
+  filter: none;
+}
+
+
+/* =========================================
+   DESKTOP — quote spacing like reference
+========================================= */
+
+@media (min-width: 1001px) {
+
+  .founder-quote-with-leopard .founder-quote-inner {
+    width: min(78vw, 1320px);
+    margin: 0 auto;
+
+    padding-top: 8vh;
+    padding-bottom: 13vh;
+  }
+
+  .founder-quote-with-leopard blockquote {
+    position: relative;
+    z-index: 3;
+  }
+
+  .founder-quote-with-leopard .quote-leopard {
+    width: clamp(470px, 34vw, 650px);
+
+    right: -4vw;
+    bottom: -4vh;
+  }
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+  .founder-quote-with-leopard .quote-leopard {
+    width: 430px;
+
+    right: -110px;
+    bottom: -15px;
+
+    opacity: 1;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .founder-quote-with-leopard {
+    min-height: 100svh;
+    padding-bottom: 230px;
+  }
+
+  .founder-quote-with-leopard .quote-leopard {
+    width: 330px;
+
+    right: -95px;
+    bottom: -10px;
+
+    opacity: 1;
+  }
+
+  .founder-quote-with-leopard .founder-quote-inner {
+    position: relative;
+    z-index: 3;
+  }
+}
+
+/* ==================================================
+   QUOTE SECTION — COMPACT FINAL LAYOUT
+   Leopard size remains unchanged
+================================================== */
+
+.founder-quote-with-leopard {
+  min-height: 100vh !important;
+  height: 100vh;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+/* Reduce overall empty vertical space */
+.founder-quote-with-leopard .founder-quote-inner {
+  width: min(76vw, 1220px) !important;
+  height: 100%;
+
+  margin: 0 auto !important;
+  padding: 8vh 0 5vh !important;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Main statement — smaller + tighter */
+.founder-quote-with-leopard blockquote {
+  width: 100%;
+  max-width: 1180px;
+
+  margin: 0 auto !important;
+
+  font-size: clamp(34px, 3.55vw, 62px) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.025em !important;
+
+  text-align: center;
+}
+
+/* Bring brand credit closer to quote */
+.founder-quote-with-leopard .founder-credit {
+  margin-top: 5vh !important;
+}
+
+.founder-quote-with-leopard .founder-credit strong {
+  font-size: 14px;
+}
+
+.founder-quote-with-leopard .founder-credit span {
+  margin-top: 8px;
+}
+
+/* Signature closer as well */
+.founder-quote-with-leopard .founder-signature {
+  margin-top: 3vh !important;
+}
+
+/*
+  IMPORTANT:
+  No width/scale override for .quote-leopard here.
+  Existing leopard size stays exactly the same.
+*/
+
+
+@media (max-width: 1000px) {
+
+  .founder-quote-with-leopard .founder-quote-inner {
+    width: 84vw !important;
+    padding-top: 10vh !important;
+  }
+
+  .founder-quote-with-leopard blockquote {
+    font-size: clamp(30px, 4.5vw, 48px) !important;
+  }
+
+  .founder-quote-with-leopard .founder-credit {
+    margin-top: 4vh !important;
+  }
+}
+
+
+@media (max-width: 700px) {
+
+  .founder-quote-with-leopard {
+    height: auto;
+    min-height: 100svh !important;
+  }
+
+  .founder-quote-with-leopard .founder-quote-inner {
+    width: calc(100% - 44px) !important;
+    padding: 105px 0 220px !important;
+  }
+
+  .founder-quote-with-leopard blockquote {
+    font-size: clamp(25px, 7vw, 36px) !important;
+    line-height: 1.12 !important;
+  }
+
+  .founder-quote-with-leopard .founder-credit {
+    margin-top: 38px !important;
+  }
+
+  .founder-quote-with-leopard .founder-signature {
+    margin-top: 22px !important;
+  }
+}
+
+/* ========================================
+   RABARI WALKING EXPERIENCE
+   ======================================== */
+
+.rabari-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  background: #a9231a;
+  overflow: hidden;
+}
+
+.rabari-split-copy {
+  order: 1;
+  position: relative;
+  min-height: 100vh;
+  padding: clamp(120px, 13vh, 165px)
+           clamp(70px, 8vw, 145px)
+           clamp(75px, 9vh, 110px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  background: #a9231a;
+  color: #f8f0e5;
+}
+
+.rabari-split-image {
+  order: 2;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.rabari-split-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.rabari-split-copy .wildlife-kicker {
+  color: rgba(255,255,255,.82);
+  letter-spacing: .28em;
+  font-size: 11px;
+  margin-bottom: 48px;
+}
+
+.rabari-split-copy h2 {
+  color: #fff7ed;
+  margin: 0;
+  max-width: 560px;
+  font-size: clamp(48px, 4.5vw, 78px);
+  line-height: 1.05;
+  font-weight: 400;
+}
+
+.rabari-star {
+  margin-top: clamp(55px, 10vh, 110px);
+  margin-left: 27%;
+  color: #fff;
+  font-size: 48px;
+  line-height: 1;
+}
+
+.rabari-split-copy p {
+  margin-top: auto;
+  margin-bottom: 40px;
+  max-width: 570px;
+
+  color: rgba(255,255,255,.9);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.rabari-split-copy .wildlife-link {
+  color: #fff;
+}
+
+.rabari-split-copy .wildlife-link svg {
+  stroke: #fff;
+}
+
+@media (max-width: 800px) {
+  .rabari-split {
+    grid-template-columns: 1fr;
+  }
+
+  .rabari-split-copy {
+    order: 2;
+    min-height: 620px;
+    padding: 70px 28px;
+  }
+
+  .rabari-split-image {
+    order: 1;
+    min-height: 65vh;
+  }
+
+  .rabari-split-image img {
+    min-height: 65vh;
+  }
+
+  .rabari-star {
+    margin: 55px auto 80px;
+  }
+}
+
+
+/* =========================================
+   CURATED EXPERIENCES — CAROUSEL INSET FIX
+========================================= */
+
+.video-experiences-track {
+  padding-left: clamp(55px, 6vw, 100px) !important;
+  padding-right: clamp(55px, 6vw, 100px) !important;
+  box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+  .video-experiences-track {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+  }
+}
+
+
+
+
+
+/* =========================================
+   SAGA JAWAI — FINAL 3D ORBIT
+========================================= */
+
+.jawai-orbit-experience {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #eee7db;
+}
+
+.jawai-orbit-scene {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  perspective: 1900px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  isolation: isolate;
+}
+
+.jawai-orbit-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 30;
+  transform-style: preserve-3d;
+}
+
+.jawai-orbit-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 205px;
+  height: 285px;
+
+  margin: -142.5px 0 0 -102.5px;
+
+  overflow: hidden;
+
+  transform-origin: center center;
+  transform-style: preserve-3d;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  cursor: pointer;
+  user-select: none;
+
+  will-change:
+    transform,
+    opacity,
+    filter;
+
+  box-shadow:
+    0 24px 65px
+    rgba(38, 27, 16, .15);
+}
+
+.jawai-orbit-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.jawai-orbit-photo::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+
+  border:
+    1px solid
+    rgba(255,255,255,.16);
+
+  pointer-events: none;
+}
+
+.jawai-orbit-photo::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10,8,5,0) 45%,
+      rgba(10,8,5,.24) 100%
+    );
+
+  pointer-events: none;
+}
+
+.jawai-orbit-photo.is-selected {
+  box-shadow:
+    0 42px 110px
+    rgba(36,24,13,.27);
+}
+
+.jawai-orbit-number {
+  position: absolute;
+  z-index: 5;
+  right: 13px;
+  bottom: 11px;
+
+  color:
+    rgba(255,255,255,.9);
+
+  font-family:
+    "Garet", Arial, sans-serif;
+
+  font-size: 7px;
+  letter-spacing: .2em;
+}
+
+.jawai-orbit-core {
+  display: none !important;
+}
+
+.jawai-orbit-copy {
+  position: absolute;
+
+  z-index: 190;
+
+  top: 50%;
+  left: 50%;
+
+  width:
+    min(680px, 44vw);
+
+  transform:
+    translate(-50%, -50%);
+
+  text-align: center;
+
+  pointer-events: none;
+}
+
+.jawai-orbit-copy .eyebrow {
+  display: block;
+
+  margin-bottom: 19px;
+
+  color: #d4aa5c;
+
+  font-family:
+    "Garet", Arial, sans-serif;
+
+  font-size: 7px;
+  letter-spacing: .29em;
+
+  text-shadow:
+    0 2px 14px
+    rgba(0,0,0,.4);
+}
+
+.jawai-orbit-copy h2 {
+  margin: 0;
+
+  color: #f8f3e9;
+
+  font-family:
+    "Bigila",
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(40px, 4vw, 70px);
+
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.025em;
+
+  text-shadow:
+    0 3px 28px
+    rgba(0,0,0,.62);
+}
+
+.jawai-orbit-copy h2 em {
+  font-weight: 400;
+}
+
+.jawai-orbit-copy p {
+  width:
+    min(450px, 78%);
+
+  margin:
+    24px auto 0;
+
+  color:
+    rgba(255,255,255,.88);
+
+  font-family:
+    "Garet", Arial, sans-serif;
+
+  font-size: 9px;
+  line-height: 1.8;
+
+  text-shadow:
+    0 2px 14px
+    rgba(0,0,0,.62);
+}
+
+.jawai-orbit-progress {
+  position: absolute;
+
+  z-index: 200;
+
+  left: 50%;
+  bottom: 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  transform:
+    translateX(-50%);
+
+  pointer-events: none;
+}
+
+.jawai-orbit-progress span {
+  width: 1px;
+  height: 28px;
+
+  background:
+    rgba(56,42,27,.4);
+}
+
+.jawai-orbit-progress small {
+  font-family:
+    "Garet", Arial, sans-serif;
+
+  font-size: 6px;
+  letter-spacing: .28em;
+
+  color:
+    rgba(47,37,25,.58);
+
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+
+  .jawai-orbit-scene {
+    perspective: 1200px;
+  }
+
+  .jawai-orbit-photo {
+    width: 112px;
+    height: 160px;
+
+    margin:
+      -80px 0 0 -56px;
+  }
+
+  .jawai-orbit-copy {
+    width: 74vw;
+  }
+
+  .jawai-orbit-copy h2 {
+    font-size: 8vw;
+  }
+
+  .jawai-orbit-copy p {
+    display: none;
+  }
+}
+
+
+/* =========================================
+   ORBIT — KEEP COPY CLEAR OF SELECTED IMAGE
+========================================= */
+
+.jawai-orbit-copy {
+  transition:
+    top 0.8s cubic-bezier(.22, 1, .36, 1),
+    transform 0.8s cubic-bezier(.22, 1, .36, 1);
+}
+
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+  top: 17%;
+  transform: translate(-50%, 0);
+}
+
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy .eyebrow {
+  margin-bottom: 10px;
+  color: #b98a3e;
+  text-shadow: none;
+}
+
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2 {
+  color: #46382a;
+  font-size: clamp(30px, 2.8vw, 48px);
+  line-height: 0.98;
+  text-shadow: none;
+}
+
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy p {
+  margin-top: 13px;
+  color: rgba(47, 37, 25, .68);
+  text-shadow: none;
+}
+
+@media (max-width: 760px) {
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+    top: 13%;
+  }
+
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2 {
+    font-size: 7vw;
+  }
+}
+
+/* =========================================================
+   SAGA JAWAI — ORBIT REFERENCE LAYOUT
+   Copy above / selected image below / no overlap
+========================================================= */
+
+.jawai-orbit-experience {
+  height: 100vh;
+  min-height: 760px;
+  background: #eee7db;
+  overflow: hidden;
+}
+
+.jawai-orbit-scene {
+  height: 100%;
+  min-height: 760px;
+  perspective: 1900px;
+  perspective-origin: 50% 62%;
+}
+
+/* Orbit centre moves DOWN so the selected image
+   has its own visual area below the copy */
+.jawai-orbit-ring {
+  top: 63%;
+  left: 50%;
+}
+
+/* Selected/side image base size */
+.jawai-orbit-photo {
+  width: 205px;
+  height: 285px;
+  margin: -142.5px 0 0 -102.5px;
+}
+
+/* COPY IS NOW A SEPARATE TOP LAYER */
+.jawai-orbit-copy,
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+  top: 15%;
+  left: 50%;
+
+  width: min(720px, 70vw);
+
+  transform: translate(-50%, 0);
+
+  text-align: center;
+
+  z-index: 300;
+  pointer-events: none;
+
+  transition:
+    top .75s cubic-bezier(.22,1,.36,1),
+    transform .75s cubic-bezier(.22,1,.36,1);
+}
+
+.jawai-orbit-copy .eyebrow,
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy .eyebrow {
+  display: block;
+
+  margin: 0 0 12px;
+
+  color: #bd8d43;
+
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: .30em;
+
+  text-shadow: none;
+}
+
+.jawai-orbit-copy h2,
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy h2 {
+  margin: 0;
+
+  color: #403428;
+
+  font-family:
+    "Bigila",
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(34px, 3vw, 52px);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.025em;
+
+  text-shadow: none;
+}
+
+.jawai-orbit-copy h2 em,
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy h2 em {
+  font-weight: 400;
+}
+
+.jawai-orbit-copy p,
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy p {
+  width: min(520px, 80%);
+
+  margin: 16px auto 0;
+
+  color: rgba(47,37,25,.68);
+
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 9px;
+  line-height: 1.65;
+
+  text-shadow: none;
+}
+
+/* Scroll indicator stays underneath image */
+.jawai-orbit-progress {
+  z-index: 300;
+  bottom: 18px;
+}
+
+.jawai-orbit-progress span {
+  background: rgba(56,42,27,.38);
+}
+
+.jawai-orbit-progress small {
+  color: rgba(47,37,25,.55);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+
+  .jawai-orbit-ring {
+    top: 62%;
+  }
+
+  .jawai-orbit-copy,
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy {
+    top: 14%;
+    width: 78vw;
+  }
+
+  .jawai-orbit-copy h2,
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy h2 {
+    font-size: clamp(32px, 4.5vw, 46px);
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 760px) {
+
+  .jawai-orbit-experience,
+  .jawai-orbit-scene {
+    min-height: 700px;
+  }
+
+  .jawai-orbit-scene {
+    perspective: 1200px;
+  }
+
+  .jawai-orbit-ring {
+    top: 61%;
+  }
+
+  .jawai-orbit-photo {
+    width: 112px;
+    height: 160px;
+    margin: -80px 0 0 -56px;
+  }
+
+  .jawai-orbit-copy,
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy {
+    top: 12%;
+    width: 82vw;
+  }
+
+  .jawai-orbit-copy .eyebrow,
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy .eyebrow {
+    margin-bottom: 9px;
+  }
+
+  .jawai-orbit-copy h2,
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy h2 {
+    font-size: 7vw;
+    line-height: 1;
+  }
+
+  .jawai-orbit-copy p,
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy p {
+    display: block;
+
+    width: 90%;
+    margin-top: 10px;
+
+    font-size: 8px;
+    line-height: 1.5;
+  }
+}
+
+
+/* =========================================================
+   SAGA JAWAI — FINAL ORBIT SPACING FIX
+   Text higher + selected image smaller
+========================================================= */
+
+/* Move copy clearly above the selected photograph */
+.jawai-orbit-copy,
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+  top: 9% !important;
+  left: 50% !important;
+  width: min(720px, 70vw) !important;
+  transform: translate(-50%, 0) !important;
+  z-index: 300 !important;
+}
+
+/* Slightly tighten typography */
+.jawai-orbit-copy .eyebrow,
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy .eyebrow {
+  margin-bottom: 9px !important;
+}
+
+.jawai-orbit-copy h2,
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2 {
+  font-size: clamp(31px, 2.6vw, 46px) !important;
+  line-height: 0.98 !important;
+}
+
+.jawai-orbit-copy p,
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy p {
+  width: min(500px, 78%) !important;
+  margin-top: 11px !important;
+  line-height: 1.55 !important;
+}
+
+/* Give image its own lower zone */
+.jawai-orbit-ring {
+  top: 64% !important;
+}
+
+/* Make ONLY the selected centre image smaller.
+   Existing GSAP gives desktop selected card scale: 2.12.
+   CSS base reduction keeps orbit geometry unchanged. */
+.jawai-orbit-photo {
+  width: 180px !important;
+  height: 250px !important;
+  margin: -125px 0 0 -90px !important;
+}
+
+
+/* TABLET */
+@media (max-width: 1000px) {
+
+  .jawai-orbit-copy,
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+    top: 8% !important;
+  }
+
+  .jawai-orbit-ring {
+    top: 64% !important;
+  }
+}
+
+
+/* MOBILE */
+@media (max-width: 760px) {
+
+  .jawai-orbit-copy,
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+    top: 8% !important;
+    width: 84vw !important;
+  }
+
+  .jawai-orbit-copy h2,
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2 {
+    font-size: 6.5vw !important;
+  }
+
+  .jawai-orbit-copy p,
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy p {
+    font-size: 7px !important;
+  }
+
+  .jawai-orbit-ring {
+    top: 63% !important;
+  }
+
+  .jawai-orbit-photo {
+    width: 100px !important;
+    height: 142px !important;
+    margin: -71px 0 0 -50px !important;
+  }
+}
+
+
+/* =========================================================
+   SAGA JAWAI — DYNAMIC ORBIT COPY
+   Default = centre
+   Clicked = animated to top
+========================================================= */
+
+/* DEFAULT STATE — text stays between orbit images */
+.jawai-orbit-copy {
+  top: 50% !important;
+  left: 50% !important;
+
+  width: min(680px, 44vw) !important;
+
+  transform:
+    translate(-50%, -50%) !important;
+
+  text-align: center;
+  z-index: 300 !important;
+
+  transition:
+    top 0.9s cubic-bezier(.22, 1, .36, 1),
+    transform 0.9s cubic-bezier(.22, 1, .36, 1),
+    width 0.9s cubic-bezier(.22, 1, .36, 1) !important;
+}
+
+/* Initial text styling — readable in centre */
+.jawai-orbit-copy .eyebrow {
+  margin-bottom: 16px !important;
+  color: #bd8d43 !important;
+}
+
+.jawai-orbit-copy h2 {
+  color: #403428 !important;
+
+  font-size:
+    clamp(36px, 3.4vw, 58px) !important;
+
+  line-height: 1 !important;
+
+  text-shadow: none !important;
+
+  transition:
+    font-size 0.9s cubic-bezier(.22, 1, .36, 1),
+    color 0.6s ease !important;
+}
+
+.jawai-orbit-copy p {
+  width: min(470px, 80%) !important;
+
+  margin:
+    20px auto 0 !important;
+
+  color:
+    rgba(47, 37, 25, .66) !important;
+
+  line-height: 1.7 !important;
+
+  text-shadow: none !important;
+
+  transition:
+    margin 0.9s cubic-bezier(.22, 1, .36, 1) !important;
+}
+
+
+/* =========================================================
+   CLICKED STATE
+   Text smoothly travels above selected photograph
+========================================================= */
+
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy {
+  top: 8% !important;
+
+  width:
+    min(720px, 70vw) !important;
+
+  transform:
+    translate(-50%, 0) !important;
+}
+
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy .eyebrow {
+  margin-bottom: 9px !important;
+}
+
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy h2 {
+  font-size:
+    clamp(31px, 2.6vw, 46px) !important;
+
+  line-height: .98 !important;
+}
+
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy p {
+  width:
+    min(500px, 78%) !important;
+
+  margin-top:
+    11px !important;
+
+  line-height:
+    1.55 !important;
+}
+
+
+/* Keep orbit/image position as currently approved */
+.jawai-orbit-ring {
+  top: 64% !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+  .jawai-orbit-copy {
+    top: 48% !important;
+
+    width:
+      78vw !important;
+
+    transform:
+      translate(-50%, -50%) !important;
+  }
+
+  .jawai-orbit-copy h2 {
+    font-size:
+      8vw !important;
+  }
+
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy {
+    top: 7% !important;
+
+    width:
+      84vw !important;
+
+    transform:
+      translate(-50%, 0) !important;
+  }
+
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy h2 {
+    font-size:
+      6.5vw !important;
+  }
+}
+
+
+/* =========================================================
+   SAGA JAWAI — FINAL COPY POSITIONING
+   INITIAL:
+   heading = centre between images
+   paragraph = below images
+
+   CLICK:
+   complete copy = moves smoothly to top
+========================================================= */
+
+
+/* ---------- INITIAL HEADING ---------- */
+
+.jawai-orbit-copy {
+  top: 50% !important;
+  left: 50% !important;
+
+  width: min(620px, 40vw) !important;
+
+  transform: translate(-50%, -50%) !important;
+
+  text-align: center;
+  z-index: 300 !important;
+  pointer-events: none;
+
+  transition:
+    top 0.95s cubic-bezier(.22,1,.36,1),
+    transform 0.95s cubic-bezier(.22,1,.36,1),
+    width 0.95s cubic-bezier(.22,1,.36,1) !important;
+}
+
+
+.jawai-orbit-copy .eyebrow {
+  display: block;
+
+  margin-bottom: 13px !important;
+
+  color: #bd8d43 !important;
+
+  transition:
+    margin 0.95s cubic-bezier(.22,1,.36,1) !important;
+}
+
+
+.jawai-orbit-copy h2 {
+  margin: 0 !important;
+
+  color: #403428 !important;
+
+  font-size:
+    clamp(34px, 3vw, 52px) !important;
+
+  line-height: 1 !important;
+
+  text-shadow: none !important;
+
+  transition:
+    font-size 0.95s cubic-bezier(.22,1,.36,1) !important;
+}
+
+
+/* ---------- INITIAL DESCRIPTION ----------
+   Separate it visually from heading.
+   It sits BELOW the orbit images.
+------------------------------------------------ */
+
+.jawai-orbit-copy p {
+  position: fixed !important;
+
+  left: 50% !important;
+  top: auto !important;
+  bottom: 8% !important;
+
+  width: min(600px, 48vw) !important;
+
+  margin: 0 !important;
+
+  transform: translateX(-50%) !important;
+
+  color: rgba(47,37,25,.62) !important;
+
+  font-size: 9px !important;
+  line-height: 1.65 !important;
+
+  text-align: center;
+
+  text-shadow: none !important;
+
+  transition:
+    bottom 0.95s cubic-bezier(.22,1,.36,1),
+    transform 0.95s cubic-bezier(.22,1,.36,1),
+    width 0.95s cubic-bezier(.22,1,.36,1) !important;
+}
+
+
+/* =========================================================
+   AFTER IMAGE CLICK
+   Heading + paragraph move into upper clean area
+========================================================= */
+
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy {
+  top: 7% !important;
+
+  width: min(720px, 70vw) !important;
+
+  transform: translate(-50%, 0) !important;
+}
+
+
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy .eyebrow {
+  margin-bottom: 9px !important;
+}
+
+
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy h2 {
+  font-size:
+    clamp(30px, 2.5vw, 44px) !important;
+
+  line-height: .98 !important;
+}
+
+
+/* Description joins heading after click */
+
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy p {
+  position: static !important;
+
+  width: min(500px, 78%) !important;
+
+  margin: 12px auto 0 !important;
+
+  transform: none !important;
+
+  font-size: 9px !important;
+  line-height: 1.55 !important;
+}
+
+
+/* =========================================================
+   SCROLL INDICATOR
+========================================================= */
+
+.jawai-orbit-progress {
+  bottom: 2.5% !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+  .jawai-orbit-copy {
+    top: 48% !important;
+    width: 70vw !important;
+  }
+
+  .jawai-orbit-copy h2 {
+    font-size: 7.5vw !important;
+  }
+
+  .jawai-orbit-copy p {
+    bottom: 9% !important;
+    width: 76vw !important;
+    font-size: 7px !important;
+  }
+
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy {
+    top: 6% !important;
+    width: 84vw !important;
+  }
+
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy h2 {
+    font-size: 6.2vw !important;
+  }
+
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy p {
+    width: 90% !important;
+    margin-top: 9px !important;
+  }
+}
+
+
+/* =========================================================
+   ORBIT — FINAL TEXT PLACEMENT
+========================================================= */
+
+/* INITIAL:
+   heading exactly in the empty centre between images */
+.jawai-orbit-copy {
+  top: 64% !important;
+  left: 50% !important;
+
+  width: 330px !important;
+
+  transform: translate(-50%, -50%) !important;
+
+  text-align: center !important;
+  z-index: 300 !important;
+  pointer-events: none;
+
+  transition:
+    top .95s cubic-bezier(.22,1,.36,1),
+    transform .95s cubic-bezier(.22,1,.36,1),
+    width .95s cubic-bezier(.22,1,.36,1) !important;
+}
+
+.jawai-orbit-copy .eyebrow {
+  margin: 0 0 10px !important;
+}
+
+.jawai-orbit-copy h2 {
+  margin: 0 !important;
+
+  font-size: clamp(29px, 2.35vw, 41px) !important;
+  line-height: 1 !important;
+
+  color: #403428 !important;
+  text-shadow: none !important;
+}
+
+
+/* INITIAL DESCRIPTION:
+   completely separate from heading
+   and below ALL orbit photographs */
+.jawai-orbit-copy p {
+  position: fixed !important;
+
+  left: 50% !important;
+  top: auto !important;
+  bottom: 7.5% !important;
+
+  width: 560px !important;
+  max-width: 60vw !important;
+
+  margin: 0 !important;
+
+  transform: translateX(-50%) !important;
+
+  text-align: center !important;
+
+  color: rgba(47,37,25,.58) !important;
+
+  font-size: 8px !important;
+  line-height: 1.65 !important;
+
+  text-shadow: none !important;
+
+  transition:
+    bottom .95s cubic-bezier(.22,1,.36,1),
+    transform .95s cubic-bezier(.22,1,.36,1) !important;
+}
+
+
+/* Scroll indicator below description */
+.jawai-orbit-progress {
+  bottom: 1.8% !important;
+}
+
+
+/* =========================================================
+   AFTER CLICK
+   Entire copy moves above selected photograph
+========================================================= */
+
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy {
+  top: 7% !important;
+
+  width: min(700px, 70vw) !important;
+
+  transform: translate(-50%, 0) !important;
+}
+
+
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy h2 {
+  font-size: clamp(30px, 2.5vw, 44px) !important;
+}
+
+
+/* Paragraph rejoins heading after click */
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy p {
+  position: static !important;
+
+  width: min(500px, 80%) !important;
+  max-width: none !important;
+
+  margin: 11px auto 0 !important;
+
+  transform: none !important;
+
+  font-size: 8px !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 760px) {
+
+  .jawai-orbit-copy {
+    top: 61% !important;
+    width: 42vw !important;
+  }
+
+  .jawai-orbit-copy h2 {
+    font-size: 6vw !important;
+  }
+
+  .jawai-orbit-copy p {
+    bottom: 8% !important;
+
+    width: 78vw !important;
+    max-width: 78vw !important;
+
+    font-size: 7px !important;
+  }
+
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy {
+    top: 6% !important;
+    width: 84vw !important;
+  }
+
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy h2 {
+    font-size: 6.2vw !important;
+  }
+}
+
+
+/* =========================================================
+   SAGA JAWAI — CLEAN ORBIT FINAL ADJUSTMENT
+========================================================= */
+
+/* Main heading — larger and clean in centre */
+.jawai-orbit-copy {
+  top: 63% !important;
+  left: 50% !important;
+
+  width: 390px !important;
+
+  transform: translate(-50%, -50%) !important;
+
+  text-align: center !important;
+  z-index: 300 !important;
+}
+
+.jawai-orbit-copy h2 {
+  margin: 0 !important;
+
+  font-size: clamp(36px, 3vw, 52px) !important;
+  line-height: 1.02 !important;
+
+  color: #403428 !important;
+  text-shadow: none !important;
+
+  transition:
+    font-size .9s cubic-bezier(.22,1,.36,1) !important;
+}
+
+
+/* Slightly larger orbit photographs */
+.jawai-orbit-photo {
+  width: 195px !important;
+  height: 270px !important;
+
+  margin:
+    -135px 0 0 -97.5px !important;
+}
+
+
+/* Clicked state:
+   heading smoothly moves above selected image */
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy {
+  top: 8% !important;
+
+  width: 600px !important;
+
+  transform: translate(-50%, 0) !important;
+}
+
+.jawai-orbit-experience.has-selected-photo
+.jawai-orbit-copy h2 {
+  font-size: clamp(34px, 2.8vw, 48px) !important;
+}
+
+
+/* Mobile */
+@media (max-width: 760px) {
+
+  .jawai-orbit-copy {
+    top: 61% !important;
+    width: 48vw !important;
+  }
+
+  .jawai-orbit-copy h2 {
+    font-size: 7vw !important;
+  }
+
+  .jawai-orbit-photo {
+    width: 108px !important;
+    height: 154px !important;
+
+    margin:
+      -77px 0 0 -54px !important;
+  }
+
+  .jawai-orbit-experience.has-selected-photo
+  .jawai-orbit-copy {
+    top: 7% !important;
+    width: 82vw !important;
+  }
+}
+
+
+/* =========================================
+   ORBIT CLICK HEADING – FINAL ADJUSTMENT
+========================================= */
+
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy{
+  top: 12% !important;
+  width: 680px !important;
+}
+
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2{
+  font-size: clamp(42px, 3.4vw, 58px) !important;
+  line-height: 1.02 !important;
+  margin: 0 !important;
+}
+
+@media(max-width:760px){
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy{
+    top: 11% !important;
+    width: 86vw !important;
+  }
+
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2{
+    font-size: 7vw !important;
+  }
+}
+
+
+
+/* =========================================================
+   SAGA — POST ORBIT NAVIGATION
+========================================================= */
+
+
+/* MENU + BOOK NOW — PERMANENT GOLD */
+
+.site-nav,
+.site-nav.nav-dark {
+  --nav-gold: #b88a3b;
+}
+
+.site-nav .menu-label,
+.site-nav .nav-menu-label,
+.site-nav .menu-text,
+.site-nav .book-now,
+.site-nav .nav-book,
+.site-nav a[href*="book"] {
+  color: var(--nav-gold) !important;
+}
+
+
+/* Hamburger lines gold */
+
+.site-nav .menu-toggle span,
+.site-nav .hamburger span,
+.site-nav .menu-icon span {
+  background-color: var(--nav-gold) !important;
+}
+
+
+/* Book Now underline gold */
+
+.site-nav .book-now::after,
+.site-nav .nav-book::after,
+.site-nav a[href*="book"]::after {
+  background-color: var(--nav-gold) !important;
+}
+
+
+/* =========================================================
+   CENTER SAGA HOSPITALITY LOGO
+   Default = visible
+========================================================= */
+
+.site-nav .nav-logo,
+.site-nav .site-logo,
+.site-nav > img,
+.site-nav a img {
+  opacity: 1;
+
+  transform:
+    translateY(0) scale(1);
+
+  transition:
+    opacity .65s cubic-bezier(.22,1,.36,1),
+    transform .75s cubic-bezier(.22,1,.36,1);
+
+  will-change:
+    opacity,
+    transform;
+}
+
+
+/* =========================================================
+   AFTER 3D ORBIT
+   Logo disappears
+========================================================= */
+
+.site-nav.nav-after-orbit .nav-logo,
+.site-nav.nav-after-orbit .site-logo,
+.site-nav.nav-after-orbit > img,
+.site-nav.nav-after-orbit a img {
+  opacity: 0 !important;
+
+  transform:
+    translateY(-18px)
+    scale(.94) !important;
+
+  pointer-events: none !important;
+}
+
+
+/* MENU + BOOK NOW remain visible after orbit */
+
+.site-nav.nav-after-orbit .menu-label,
+.site-nav.nav-after-orbit .nav-menu-label,
+.site-nav.nav-after-orbit .menu-text,
+.site-nav.nav-after-orbit .book-now,
+.site-nav.nav-after-orbit .nav-book,
+.site-nav.nav-after-orbit a[href*="book"] {
+  opacity: 1 !important;
+  color: var(--nav-gold) !important;
+}
+
+
+/* Mobile */
+
+@media (max-width: 760px) {
+
+  .site-nav.nav-after-orbit .nav-logo,
+  .site-nav.nav-after-orbit .site-logo,
+  .site-nav.nav-after-orbit > img,
+  .site-nav.nav-after-orbit a img {
+    transform:
+      translateY(-12px)
+      scale(.94) !important;
+  }
+}
+
+
+
+/* =========================================================
+   NAV — FINAL GOLD + POST ORBIT LOGO RULES
+========================================================= */
+
+:root {
+  --saga-nav-gold: #b98a3e;
+}
+
+
+/* ---------------------------------------------------------
+   MENU TEXT — GOLD
+--------------------------------------------------------- */
+
+.site-nav button,
+.site-nav .menu-label,
+.site-nav .menu-text,
+.site-nav .nav-menu-label {
+  color: var(--saga-nav-gold) !important;
+}
+
+
+/* Hamburger — gold */
+
+.site-nav button span,
+.site-nav .hamburger span,
+.site-nav .menu-toggle span,
+.site-nav .menu-icon span {
+  border-color: var(--saga-nav-gold) !important;
+}
+
+
+/* Target common line implementations */
+
+.site-nav .hamburger span,
+.site-nav .menu-toggle span,
+.site-nav .menu-icon span {
+  background-color: var(--saga-nav-gold) !important;
+}
+
+
+/* ---------------------------------------------------------
+   BOOK NOW — GOLD
+--------------------------------------------------------- */
+
+.site-nav .book-now,
+.site-nav .nav-book,
+.site-nav a[href*="book" i] {
+  color: var(--saga-nav-gold) !important;
+  border-color: var(--saga-nav-gold) !important;
+}
+
+.site-nav .book-now::after,
+.site-nav .nav-book::after,
+.site-nav a[href*="book" i]::after {
+  background: var(--saga-nav-gold) !important;
+}
+
+
+/* ---------------------------------------------------------
+   CENTER LOGO — NORMAL STATE
+--------------------------------------------------------- */
+
+.site-nav img {
+  transition:
+    opacity .55s cubic-bezier(.22,1,.36,1),
+    transform .65s cubic-bezier(.22,1,.36,1),
+    visibility .55s !important;
+}
+
+
+/* ---------------------------------------------------------
+   AFTER ORBIT — HIDE ONLY CENTER LOGO
+
+   Screenshot shows SAGA Hospitality is the nav image.
+--------------------------------------------------------- */
+
+.site-nav.nav-after-orbit img {
+  opacity: 0 !important;
+
+  visibility: hidden !important;
+
+  transform:
+    translateY(-16px)
+    scale(.94) !important;
+
+  pointer-events: none !important;
+}
+
+
+/* Menu + Book Now must stay visible */
+
+.site-nav.nav-after-orbit button,
+.site-nav.nav-after-orbit .menu-label,
+.site-nav.nav-after-orbit .menu-text,
+.site-nav.nav-after-orbit .nav-menu-label,
+.site-nav.nav-after-orbit .book-now,
+.site-nav.nav-after-orbit .nav-book,
+.site-nav.nav-after-orbit a[href*="book" i] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: var(--saga-nav-gold) !important;
+}
+
+
+
+/* =========================================================
+   FINAL FIX — NAV CENTER LOGO AFTER 3D ORBIT
+========================================================= */
+
+.site-nav .nav-logo,
+.site-nav .site-logo,
+.site-nav .nav-brand,
+.site-nav > img,
+.site-nav a.logo,
+.site-nav .logo {
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    visibility 0.45s ease !important;
+}
+
+body.saga-past-orbit .site-nav .nav-logo,
+body.saga-past-orbit .site-nav .site-logo,
+body.saga-past-orbit .site-nav .nav-brand,
+body.saga-past-orbit .site-nav > img,
+body.saga-past-orbit .site-nav a.logo,
+body.saga-past-orbit .site-nav .logo {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(-14px) scale(.94) !important;
+}
+
+/* Menu + Book Now always remain visible */
+body.saga-past-orbit .site-nav .menu-toggle,
+body.saga-past-orbit .site-nav .menu-label,
+body.saga-past-orbit .site-nav .menu-text,
+body.saga-past-orbit .site-nav .book-now,
+body.saga-past-orbit .site-nav .nav-book {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+
+
+/* =========================================================
+   SAGA JAWAI — LUXURY EDITORIAL DISPLAY FONT
+   Replaces handwritten/cursive display typography
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
+
+/* Main editorial / section headings */
+
+.wildlife-split-copy h2,
+.rabari-split-copy h2,
+.jawai-orbit-copy h2,
+.founder-quote blockquote,
+.saga-legacy h2,
+.legacy-copy h2,
+.accommodation-section h2,
+.accommodation-copy h2,
+.section-title,
+.display-title {
+  font-family:
+    "Cormorant Garamond",
+    "Times New Roman",
+    serif !important;
+
+  font-weight: 400 !important;
+  letter-spacing: -0.025em !important;
+}
+
+
+/* Keep emphasis sophisticated rather than handwritten */
+
+.wildlife-split-copy h2 em,
+.rabari-split-copy h2 em,
+.jawai-orbit-copy h2 em,
+.saga-legacy h2 em,
+.legacy-copy h2 em,
+.accommodation-section h2 em,
+.accommodation-copy h2 em,
+.section-title em,
+.display-title em {
+  font-family:
+    "Cormorant Garamond",
+    "Times New Roman",
+    serif !important;
+
+  font-style: italic !important;
+  font-weight: 400 !important;
+}
+
+
+/* Legacy heading specifically */
+
+.saga-legacy h2,
+.legacy-copy h2 {
+  font-size: clamp(52px, 5vw, 82px) !important;
+  line-height: .92 !important;
+}
+
+
+/* Accommodation & Suites */
+
+.accommodation-section h2,
+.accommodation-copy h2 {
+  font-size: clamp(48px, 4.5vw, 76px) !important;
+  line-height: .95 !important;
+}
+
+
+/* 3D orbit title */
+
+.jawai-orbit-copy h2 {
+  font-size: clamp(46px, 4.2vw, 72px) !important;
+  line-height: .96 !important;
+}
+
+
+
+
+/* =========================================================
+   SAGA JAWAI — FINAL LUXURY TYPOGRAPHY FIX
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Italiana&display=swap');
+
+
+/* ---------------------------------------------------------
+   01. LEGACY OF WILD HOSPITALITY
+   Remove handwritten/cursive appearance
+   --------------------------------------------------------- */
+
+.hospitality-story .hospitality-copy h2 {
+  font-family: "Italiana", "Cormorant Garamond", "Times New Roman", serif !important;
+
+  font-size: clamp(54px, 4.7vw, 78px) !important;
+  font-weight: 400 !important;
+
+  line-height: 0.98 !important;
+  letter-spacing: -0.035em !important;
+
+  font-style: normal !important;
+}
+
+
+/* ---------------------------------------------------------
+   02. ACCOMMODATION & SUITES
+   --------------------------------------------------------- */
+
+.home-accommodation .home-accommodation-head h2 {
+  font-family: "Italiana", "Cormorant Garamond", "Times New Roman", serif !important;
+
+  font-size: clamp(52px, 4.4vw, 74px) !important;
+  font-weight: 400 !important;
+
+  line-height: 1 !important;
+  letter-spacing: -0.035em !important;
+
+  font-style: normal !important;
+}
+
+
+/* ---------------------------------------------------------
+   03. 3D ORBIT TITLE
+   --------------------------------------------------------- */
+
+.jawai-orbit-copy {
+  width: min(620px, 46vw) !important;
+
+  text-align: center !important;
+
+  z-index: 30 !important;
+
+  pointer-events: none !important;
+}
+
+
+.jawai-orbit-copy h2 {
+  margin: 0 !important;
+
+  font-family:
+    "Cormorant Garamond",
+    "Times New Roman",
+    serif !important;
+
+  font-size: clamp(48px, 4vw, 68px) !important;
+
+  font-weight: 400 !important;
+
+  line-height: 0.92 !important;
+
+  letter-spacing: -0.035em !important;
+
+  color: #33281f !important;
+}
+
+
+.jawai-orbit-copy h2 em {
+  font-family:
+    "Cormorant Garamond",
+    "Times New Roman",
+    serif !important;
+
+  font-size: 1.05em !important;
+
+  font-weight: 400 !important;
+
+  font-style: italic !important;
+
+  letter-spacing: -0.04em !important;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .hospitality-story .hospitality-copy h2 {
+    font-size: clamp(44px, 12vw, 62px) !important;
+    line-height: 0.98 !important;
+  }
+
+  .home-accommodation .home-accommodation-head h2 {
+    font-size: clamp(42px, 11vw, 60px) !important;
+  }
+
+  .jawai-orbit-copy {
+    width: 82vw !important;
+  }
+
+  .jawai-orbit-copy h2 {
+    font-size: clamp(38px, 10vw, 54px) !important;
+  }
+
+}
+
+
+
+/* =========================================================
+   FINAL POLISH — ORBIT + SAGA STATEMENT
+   ========================================================= */
+
+
+/* =========================================================
+   01 — 3D ORBIT
+   Heading stays ABOVE the image orbit
+   Center remains clean for selected image
+   ========================================================= */
+
+.jawai-orbit-copy {
+  position: absolute !important;
+
+  top: 14% !important;
+  left: 50% !important;
+
+  width: min(760px, 70vw) !important;
+
+  transform: translateX(-50%) !important;
+
+  text-align: center !important;
+
+  z-index: 50 !important;
+
+  pointer-events: none !important;
+}
+
+
+.jawai-orbit-copy h2 {
+  margin: 0 !important;
+
+  font-family:
+    "Cormorant Garamond",
+    "Times New Roman",
+    serif !important;
+
+  font-size: clamp(42px, 3.4vw, 58px) !important;
+
+  font-weight: 400 !important;
+
+  line-height: .94 !important;
+
+  letter-spacing: -.035em !important;
+
+  color: #33281f !important;
+}
+
+
+.jawai-orbit-copy h2 em {
+  font-family:
+    "Cormorant Garamond",
+    "Times New Roman",
+    serif !important;
+
+  font-style: italic !important;
+
+  font-weight: 400 !important;
+}
+
+
+/* Move orbit/image system slightly downward
+   so selected image never collides with title */
+
+.jawai-orbit-ring {
+  top: 58% !important;
+}
+
+
+/* Give the selected / orbit cards a little more
+   visual breathing room */
+
+.jawai-orbit-photo {
+  width: clamp(185px, 18vw, 300px) !important;
+}
+
+
+/* =========================================================
+   02 — SAGA STATEMENT / QUOTE
+   Smaller, cleaner, more editorial
+   ========================================================= */
+
+.founder-quote blockquote {
+  width: min(1180px, 78vw) !important;
+
+  margin-left: auto !important;
+  margin-right: auto !important;
+
+  font-family:
+    "Cormorant Garamond",
+    "Times New Roman",
+    serif !important;
+
+  font-size: clamp(34px, 3.15vw, 54px) !important;
+
+  line-height: 1.08 !important;
+
+  letter-spacing: -.025em !important;
+
+  font-weight: 400 !important;
+}
+
+
+/* Keep supporting text subtle */
+
+.founder-quote .quote-sub,
+.founder-quote .quote-meta,
+.founder-quote p {
+  font-size: 14px !important;
+
+  letter-spacing: .01em !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .jawai-orbit-copy {
+    top: 16% !important;
+    width: 88vw !important;
+  }
+
+  .jawai-orbit-copy h2 {
+    font-size: clamp(34px, 9vw, 46px) !important;
+    line-height: .96 !important;
+  }
+
+  .jawai-orbit-ring {
+    top: 60% !important;
+  }
+
+  .jawai-orbit-photo {
+    width: clamp(145px, 42vw, 220px) !important;
+  }
+
+  .founder-quote blockquote {
+    width: 86vw !important;
+
+    font-size: clamp(28px, 7.5vw, 40px) !important;
+
+    line-height: 1.1 !important;
+  }
+}
+
+
+
+/* =========================================================
+   SAGA JAWAI — ORBIT FINAL LAYOUT OVERRIDE
+   Initial: heading above + image in centre
+   Click: heading disappears + selected image owns centre
+   ========================================================= */
+
+.jawai-orbit-experience {
+  position: relative !important;
+  min-height: 100vh !important;
+  overflow: hidden !important;
+}
+
+/* IMAGE ORBIT
+   Move the whole orbit slightly lower so the heading
+   gets its own clean space above the photography.
+*/
+.jawai-orbit-ring {
+  position: absolute !important;
+  left: 50% !important;
+  top: 58% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 1px !important;
+  height: 1px !important;
+  transform-style: preserve-3d !important;
+}
+
+/* Base card */
+.jawai-orbit-photo {
+  width: clamp(205px, 18vw, 290px) !important;
+  aspect-ratio: 4 / 5 !important;
+  transform-origin: center center !important;
+}
+
+/* Heading gets a completely separate area ABOVE images */
+.jawai-orbit-copy,
+.jawai-orbit-experience:not(.has-selected-photo) .jawai-orbit-copy {
+  position: absolute !important;
+
+  top: 16% !important;
+  left: 50% !important;
+
+  width: min(760px, 82vw) !important;
+
+  transform: translateX(-50%) !important;
+
+  text-align: center !important;
+
+  z-index: 300 !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  pointer-events: none !important;
+
+  transition:
+    opacity 0.45s ease,
+    transform 0.55s cubic-bezier(.22, 1, .36, 1),
+    visibility 0.45s ease !important;
+}
+
+/* Luxury heading sizing */
+.jawai-orbit-copy h2 {
+  margin: 0 !important;
+
+  font-size: clamp(40px, 4vw, 66px) !important;
+  line-height: 0.98 !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.035em !important;
+
+  color: #352b22 !important;
+}
+
+.jawai-orbit-copy h2 em {
+  display: inline-block !important;
+  font-weight: 400 !important;
+}
+
+/* =========================================================
+   CLICK STATE
+   Your JS already adds:
+   .has-selected-photo
+   ========================================================= */
+
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+  opacity: 0 !important;
+
+  transform:
+    translateX(-50%)
+    translateY(-28px) !important;
+
+  visibility: hidden !important;
+
+  pointer-events: none !important;
+}
+
+/* Selected centre image stays above every other card */
+.jawai-orbit-photo.is-selected {
+  z-index: 250 !important;
+}
+
+/* Progress stays at bottom */
+.jawai-orbit-progress {
+  position: absolute !important;
+  left: 50% !important;
+  bottom: 3.5% !important;
+  transform: translateX(-50%) !important;
+  z-index: 310 !important;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 760px) {
+
+  .jawai-orbit-ring {
+    top: 59% !important;
+  }
+
+  .jawai-orbit-photo {
+    width: clamp(145px, 42vw, 190px) !important;
+  }
+
+  .jawai-orbit-copy,
+  .jawai-orbit-experience:not(.has-selected-photo) .jawai-orbit-copy {
+    top: 17% !important;
+    width: 88vw !important;
+  }
+
+  .jawai-orbit-copy h2 {
+    font-size: clamp(31px, 9vw, 45px) !important;
+    line-height: 1 !important;
+  }
+
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+    transform:
+      translateX(-50%)
+      translateY(-20px) !important;
+  }
+}
+
+
+
+/* =====================================================
+   SAGA STATEMENT — REFINED LUXURY QUOTE
+   Smaller typography + slightly lower placement
+   ===================================================== */
+
+.founder-quote-with-leopard .founder-quote-inner {
+  padding-top: 105px !important;
+}
+
+.founder-quote-with-leopard blockquote {
+  width: min(1120px, 76vw) !important;
+  max-width: 1120px !important;
+
+  margin: 0 auto !important;
+
+  font-size: clamp(30px, 3vw, 48px) !important;
+  line-height: 1.18 !important;
+
+  letter-spacing: -0.025em !important;
+  font-weight: 400 !important;
+
+  text-align: center !important;
+}
+
+
+/* Tablet */
+
+@media (max-width: 1024px) {
+
+  .founder-quote-with-leopard .founder-quote-inner {
+    padding-top: 95px !important;
+  }
+
+  .founder-quote-with-leopard blockquote {
+    width: 82vw !important;
+    font-size: clamp(28px, 4vw, 42px) !important;
+    line-height: 1.2 !important;
+  }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 760px) {
+
+  .founder-quote-with-leopard .founder-quote-inner {
+    padding-top: 85px !important;
+  }
+
+  .founder-quote-with-leopard blockquote {
+    width: 88vw !important;
+
+    font-size: clamp(24px, 7vw, 34px) !important;
+    line-height: 1.22 !important;
+
+    letter-spacing: -0.015em !important;
+  }
+
+}
+
+
+
+/* =========================================================
+   SAGA JAWAI — LUXURY FULLSCREEN MENU OVERRIDE
+   ========================================================= */
+
+/* Menu overlay should remain locked to viewport */
+.menu-overlay,
+.nav-overlay,
+.fullscreen-menu,
+.menu-panel {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  overflow: hidden !important;
+  z-index: 99999 !important;
+}
+
+/* Glass / blurred page behind menu */
+.menu-overlay::before,
+.nav-overlay::before,
+.fullscreen-menu::before,
+.menu-panel::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(29, 31, 23, 0.82) !important;
+  backdrop-filter: blur(18px) saturate(75%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(75%) !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+}
+
+/* Luxury editorial menu typography */
+.menu-overlay a,
+.nav-overlay a,
+.fullscreen-menu a,
+.menu-panel a {
+  font-family: "Cormorant Garamond", "Times New Roman", serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.035em !important;
+}
+
+/* Main navigation titles */
+.menu-overlay nav a,
+.nav-overlay nav a,
+.fullscreen-menu nav a,
+.menu-panel nav a {
+  font-size: clamp(48px, 5vw, 82px) !important;
+  line-height: 0.98 !important;
+}
+
+/* Small menu numbers */
+.menu-overlay .menu-number,
+.nav-overlay .menu-number,
+.fullscreen-menu .menu-number,
+.menu-panel .menu-number {
+  font-family: Arial, sans-serif !important;
+  font-size: 10px !important;
+  letter-spacing: 0.18em !important;
+}
+
+/* Elegant hover */
+.menu-overlay nav a,
+.nav-overlay nav a,
+.fullscreen-menu nav a,
+.menu-panel nav a {
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s cubic-bezier(.2,.8,.2,1),
+    color 0.35s ease !important;
+}
+
+.menu-overlay nav a:hover,
+.nav-overlay nav a:hover,
+.fullscreen-menu nav a:hover,
+.menu-panel nav a:hover {
+  color: #c89a4b !important;
+  transform: translateX(12px) !important;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+  .menu-overlay nav a,
+  .nav-overlay nav a,
+  .fullscreen-menu nav a,
+  .menu-panel nav a {
+    font-size: clamp(38px, 11vw, 58px) !important;
+  }
+}
+
+
+/* =========================================================
+   SAGA JAWAI — EDITORIAL FULLSCREEN MENU
+========================================================= */
+
+.menu-panel {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(54, 54, 42, .98) 0%,
+      rgba(37, 39, 29, .99) 48%,
+      #1d2018 100%
+    ) !important;
+
+  z-index: 9999 !important;
+  overflow: hidden !important;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+
+/* CLOSE
+--------------------------------------------------------- */
+
+.menu-panel-head {
+  position: absolute !important;
+  top: 54px !important;
+  left: 56px !important;
+  right: auto !important;
+
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+
+  z-index: 20;
+}
+
+.close-menu {
+  display: flex !important;
+  align-items: center !important;
+  gap: 26px !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+
+  color: rgba(245, 239, 224, .88) !important;
+
+  font-family:
+    Arial,
+    sans-serif !important;
+
+  font-size: 11px !important;
+  font-weight: 400 !important;
+
+  letter-spacing: .30em !important;
+
+  cursor: pointer;
+}
+
+.close-menu span {
+  font-family: Arial, sans-serif !important;
+  font-size: 24px !important;
+  font-weight: 200 !important;
+  line-height: 1 !important;
+
+  transform: translateY(-1px);
+}
+
+
+/* NAVIGATION AREA
+--------------------------------------------------------- */
+
+.overlay-navigation {
+  position: absolute !important;
+
+  top: 50% !important;
+  left: 23% !important;
+
+  transform: translateY(-50%) !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  gap: 18px !important;
+
+  width: min(720px, 56vw) !important;
+
+  padding-left: 70px !important;
+
+  border-left:
+    1px solid rgba(238, 230, 209, .62) !important;
+}
+
+
+/* individual menu links */
+
+.overlay-navigation button {
+  position: relative !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  width: fit-content !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  border: 0 !important;
+  background: transparent !important;
+
+  color: #eee5d2 !important;
+
+  font-family:
+    "Cormorant Garamond",
+    "Times New Roman",
+    Georgia,
+    serif !important;
+
+  font-style: normal !important;
+  font-weight: 400 !important;
+
+  font-size:
+    clamp(54px, 5vw, 82px) !important;
+
+  line-height: .98 !important;
+
+  letter-spacing:
+    -.035em !important;
+
+  text-align: left !important;
+
+  cursor: pointer;
+
+  transition:
+    color .35s ease,
+    transform .45s cubic-bezier(.22,1,.36,1) !important;
+}
+
+
+/* Numbers */
+
+.overlay-navigation button small {
+  position: absolute !important;
+
+  right: calc(100% + 92px) !important;
+  top: 50% !important;
+
+  transform: translateY(-50%) !important;
+
+  width: 30px !important;
+
+  color:
+    rgba(242, 235, 217, .78) !important;
+
+  font-family:
+    Arial,
+    sans-serif !important;
+
+  font-size: 10px !important;
+  font-weight: 400 !important;
+
+  letter-spacing: .18em !important;
+}
+
+
+/* Dot on vertical line */
+
+.overlay-navigation button::before {
+  content: "";
+
+  position: absolute;
+
+  left: -74px;
+  top: 50%;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #eee7d8;
+
+  transform:
+    translate(-50%, -50%);
+
+  box-shadow:
+    0 0 0 2px
+    rgba(238,231,216,.08);
+}
+
+
+/* Luxury hover */
+
+.overlay-navigation button:hover {
+  color: #c89b48 !important;
+
+  transform:
+    translateX(12px) !important;
+}
+
+
+/* RIGHT-SIDE PHILOSOPHY DETAIL
+--------------------------------------------------------- */
+
+.menu-panel::after {
+  content:
+    "A deeper\A connection\A with the land.";
+
+  white-space: pre;
+
+  position: absolute;
+
+  right: 8.5%;
+  top: 44%;
+
+  padding-left: 24px;
+
+  border-left:
+    1px solid rgba(238,230,209,.65);
+
+  color:
+    rgba(238,230,209,.55);
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(18px, 1.35vw, 25px);
+
+  font-style: italic;
+
+  line-height: 1.45;
+
+  letter-spacing: .01em;
+}
+
+
+/* BOTTOM DETAILS
+--------------------------------------------------------- */
+
+.menu-panel-bottom {
+  position: absolute !important;
+
+  left: 56px !important;
+  right: 56px !important;
+  bottom: 52px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  color:
+    rgba(242,235,217,.74) !important;
+
+  font-family:
+    Arial,
+    sans-serif !important;
+
+  font-size: 9px !important;
+
+  letter-spacing:
+    .32em !important;
+}
+
+
+/* Gold line before WILD BY NATURE */
+
+.menu-panel-bottom span:last-child {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.menu-panel-bottom span:last-child::before {
+  content: "";
+
+  display: block;
+
+  width: 54px;
+  height: 1px;
+
+  background: #b58a3e;
+}
+
+
+/* =========================================================
+   RESPONSIVE MENU
+========================================================= */
+
+@media (max-width: 760px) {
+
+  .menu-panel-head {
+    top: 30px !important;
+    left: 24px !important;
+  }
+
+  .close-menu {
+    gap: 15px !important;
+    font-size: 9px !important;
+  }
+
+  .overlay-navigation {
+    left: 21% !important;
+    top: 49% !important;
+
+    width: 74vw !important;
+
+    padding-left: 38px !important;
+
+    gap: 22px !important;
+  }
+
+  .overlay-navigation button {
+    font-size:
+      clamp(40px, 11vw, 58px) !important;
+
+    line-height: .95 !important;
+  }
+
+  .overlay-navigation button small {
+    right:
+      calc(100% + 48px) !important;
+
+    font-size: 8px !important;
+  }
+
+  .overlay-navigation button::before {
+    left: -42px;
+    width: 5px;
+    height: 5px;
+  }
+
+  .menu-panel::after {
+    display: none;
+  }
+
+  .menu-panel-bottom {
+    left: 24px !important;
+    right: 24px !important;
+    bottom: 28px !important;
+
+    font-size: 7px !important;
+    letter-spacing: .20em !important;
+  }
+
+  .menu-panel-bottom span:last-child::before {
+    width: 25px;
+  }
+}
+
+
+/* SAGA — SIMPLE MENU FINAL CLEANUP */
+
+/* Remove every old logo from menu header */
+.menu-panel-head img {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* Keep close button clean */
+.menu-panel-head {
+  width: auto !important;
+}
+
+.close-menu {
+  margin: 0 !important;
+}
+
+/* Slightly smaller typography for longer real section names */
+.overlay-navigation button {
+  font-size: clamp(48px, 4.4vw, 72px) !important;
+  line-height: 1.02 !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* Keep menu clean — no unnecessary decorative logo */
+.menu-panel-head::before,
+.menu-panel-head::after {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .overlay-navigation button {
+    font-size: clamp(36px, 9.5vw, 52px) !important;
+  }
+}
+
+
+/* SAGA — 7 SECTION MENU */
+
+.overlay-navigation {
+  gap: 8px !important;
+}
+
+.overlay-navigation button {
+  font-size: clamp(38px, 3.55vw, 58px) !important;
+  line-height: 1.02 !important;
+}
+
+.overlay-navigation button small {
+  font-size: 9px !important;
+}
+
+@media (max-width: 760px) {
+  .overlay-navigation {
+    gap: 14px !important;
+  }
+
+  .overlay-navigation button {
+    font-size: clamp(29px, 8vw, 43px) !important;
+  }
+}
+
+
+/* =========================================================
+   SAGA JAWAI — CINEMATIC EXPERIENCE FILM LIBRARY
+========================================================= */
+
+.saga-film-experiences {
+  position: relative;
+  min-height: 100vh;
+  padding: 125px 4vw 95px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 46% 44%, #faf6ed 0%, #f3ecdf 56%, #ebe1d1 100%);
+  color: #1e201a;
+}
+
+.saga-film-experiences::before {
+  content: "";
+  position: absolute;
+  inset: auto auto -22% -7%;
+  width: 42vw;
+  height: 42vw;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(117,98,67,.07), transparent 68%);
+  pointer-events: none;
+}
+
+.saga-film-shell {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1540px;
+  min-height: 700px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns:
+    minmax(280px, .78fr)
+    minmax(620px, 1.75fr)
+    minmax(205px, .48fr);
+
+  gap: clamp(30px, 3vw, 60px);
+  align-items: center;
+}
+
+
+/* LEFT COPY */
+
+.saga-film-copy {
+  align-self: center;
+  padding-right: 10px;
+}
+
+.saga-film-kicker {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  margin-bottom: 36px;
+
+  color: #a87b37;
+
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: .38em;
+}
+
+.saga-film-kicker i {
+  width: 46px;
+  height: 1px;
+  background: #b88b45;
+}
+
+.saga-film-count {
+  margin-bottom: 20px;
+
+  color: #a87b37;
+
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: .3em;
+}
+
+.saga-film-count span {
+  margin: 0 9px;
+  opacity: .55;
+}
+
+.saga-film-copy h2 {
+  margin: 0 0 22px;
+
+  max-width: 430px;
+
+  color: #1c1d18;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif !important;
+
+  font-size: clamp(55px, 5vw, 86px) !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+
+  line-height: .84 !important;
+  letter-spacing: -.045em !important;
+}
+
+.saga-film-intro {
+  max-width: 390px;
+  margin: 0 0 24px;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: 21px;
+  font-style: italic;
+
+  line-height: 1.32;
+  color: #3e3c33;
+}
+
+.saga-film-detail {
+  max-width: 390px;
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.65;
+
+  color: rgba(42,40,33,.62);
+}
+
+.saga-film-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+
+  margin-top: 34px;
+
+  color: rgba(38,37,30,.62);
+
+  font-family: Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: .23em;
+}
+
+.saga-film-features span {
+  position: relative;
+  padding-left: 12px;
+}
+
+.saga-film-features span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+
+  width: 4px;
+  height: 4px;
+
+  border: 1px solid #a87b37;
+  border-radius: 50%;
+
+  transform: translateY(-50%);
+}
+
+.saga-film-explore {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: min(275px, 100%);
+  margin-top: 38px;
+  padding: 17px 20px;
+
+  border: 1px solid #aa7d38;
+  background: #a77a36;
+
+  color: #fffaf0;
+
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: .25em;
+
+  cursor: pointer;
+
+  transition:
+    background .35s ease,
+    color .35s ease,
+    transform .35s ease;
+}
+
+.saga-film-explore:hover {
+  background: transparent;
+  color: #8f672d;
+  transform: translateY(-2px);
+}
+
+
+/* MAIN FILM */
+
+.saga-film-stage {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 1.38 / 1;
+
+  overflow: hidden;
+
+  background: #181a15;
+  border-radius: 5px;
+
+  box-shadow:
+    0 32px 80px rgba(65,48,27,.13);
+}
+
+.saga-film-video {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  animation:
+    sagaFilmReveal .85s
+    cubic-bezier(.22,1,.36,1)
+    both;
+}
+
+@keyframes sagaFilmReveal {
+  from {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.saga-film-shade {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10,12,8,.16),
+      transparent 38%,
+      rgba(8,10,7,.20)
+    );
+}
+
+.saga-film-video-count {
+  position: absolute;
+  top: 28px;
+  left: 30px;
+
+  color: rgba(255,255,255,.92);
+
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: .18em;
+}
+
+.saga-film-sound {
+  position: absolute;
+  right: 25px;
+  bottom: 22px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  color: #fff;
+
+  font-family: Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: .22em;
+
+  cursor: pointer;
+}
+
+.saga-film-sound-icon {
+  display: grid;
+  place-items: center;
+
+  width: 39px;
+  height: 39px;
+
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 50%;
+
+  font-size: 16px;
+}
+
+
+/* RIGHT FILM SELECTOR */
+
+.saga-film-rail {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: 1fr 14px;
+  gap: 16px;
+
+  min-height: 610px;
+}
+
+.saga-film-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+
+.saga-film-item {
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  align-items: center;
+  gap: 14px;
+
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+
+  text-align: left;
+
+  opacity: .48;
+
+  cursor: pointer;
+
+  transition:
+    opacity .45s ease,
+    transform .45s cubic-bezier(.22,1,.36,1);
+}
+
+.saga-film-item:hover,
+.saga-film-item.is-active {
+  opacity: 1;
+}
+
+.saga-film-item.is-active {
+  transform: translateX(-7px);
+}
+
+.saga-film-thumb {
+  position: relative;
+
+  width: 82px;
+  height: 72px;
+
+  overflow: hidden;
+
+  border-radius: 3px;
+
+  background: #292a24;
+}
+
+.saga-film-thumb video {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  pointer-events: none;
+}
+
+.saga-film-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: rgba(15,16,12,.18);
+}
+
+.saga-film-thumb span {
+  position: absolute;
+  z-index: 2;
+  top: 7px;
+  left: 8px;
+
+  color: #fff;
+
+  font-family: Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: .12em;
+}
+
+.saga-film-item strong {
+  color: #292a23;
+
+  font-family: Arial, sans-serif;
+  font-size: 8px;
+  font-weight: 500;
+
+  line-height: 1.45;
+  letter-spacing: .19em;
+}
+
+.saga-film-rail-line {
+  position: absolute;
+
+  top: 6%;
+  right: 0;
+
+  width: 1px;
+  height: 88%;
+
+  background: rgba(55,52,43,.24);
+}
+
+.saga-film-rail-line::before,
+.saga-film-rail-line::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+  background: #24251f;
+
+  transform: translateX(-50%);
+}
+
+.saga-film-rail-line::before {
+  top: 0;
+}
+
+.saga-film-rail-line::after {
+  bottom: 0;
+}
+
+.saga-film-rail-line span {
+  position: absolute;
+  left: 50%;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #a77a36;
+
+  transform: translate(-50%, -50%);
+
+  transition:
+    top .65s
+    cubic-bezier(.22,1,.36,1);
+}
+
+.saga-film-rail > small {
+  position: absolute;
+  right: -25px;
+  bottom: 25px;
+
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+
+  color: rgba(42,40,34,.48);
+
+  font-family: Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: .3em;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+
+  .saga-film-shell {
+    grid-template-columns: .8fr 1.55fr;
+  }
+
+  .saga-film-rail {
+    grid-column: 1 / -1;
+
+    min-height: auto;
+
+    display: block;
+  }
+
+  .saga-film-items {
+    flex-direction: row;
+  }
+
+  .saga-film-item {
+    flex: 1;
+    grid-template-columns: 55px 1fr;
+  }
+
+  .saga-film-thumb {
+    width: 55px;
+    height: 48px;
+  }
+
+  .saga-film-rail-line,
+  .saga-film-rail > small {
+    display: none;
+  }
+}
+
+
+@media (max-width: 760px) {
+
+  .saga-film-experiences {
+    min-height: auto;
+    padding: 100px 20px 80px;
+  }
+
+  .saga-film-shell {
+    display: flex;
+    flex-direction: column;
+
+    min-height: auto;
+    gap: 35px;
+  }
+
+  .saga-film-copy {
+    width: 100%;
+  }
+
+  .saga-film-copy h2 {
+    font-size: clamp(50px, 16vw, 72px) !important;
+  }
+
+  .saga-film-stage {
+    order: 2;
+    aspect-ratio: 4 / 5;
+  }
+
+  .saga-film-rail {
+    order: 3;
+
+    width: 100%;
+    overflow-x: auto;
+
+    scrollbar-width: none;
+  }
+
+  .saga-film-rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .saga-film-items {
+    width: max-content;
+    gap: 12px;
+  }
+
+  .saga-film-item {
+    width: 150px;
+    flex: none;
+  }
+
+  .saga-film-features {
+    gap: 14px;
+  }
+}
+
+
+/* SAGA — 7 EXPERIENCE FILM RAIL */
+
+.saga-film-items {
+  gap: 9px !important;
+}
+
+.saga-film-item {
+  grid-template-columns: 72px 1fr !important;
+  gap: 12px !important;
+}
+
+.saga-film-thumb {
+  width: 72px !important;
+  height: 50px !important;
+}
+
+.saga-film-item strong {
+  font-size: 7px !important;
+  line-height: 1.35 !important;
+  letter-spacing: .16em !important;
+}
+
+.saga-film-rail {
+  min-height: 620px !important;
+}
+
+@media (max-width: 1100px) {
+  .saga-film-items {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .saga-film-items::-webkit-scrollbar {
+    display: none;
+  }
+
+  .saga-film-item {
+    min-width: 150px;
+  }
+}
+
+/* SAGA — GALLERY HEADING FINAL */
+
+.saga-gallery .saga-gallery-top h2 {
+  font-family: "Cormorant Garamond", Georgia, serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: clamp(64px, 7vw, 108px) !important;
+  line-height: 0.9 !important;
+  letter-spacing: -0.045em !important;
+  color: #2d2923 !important;
+}
+
+/* =========================================================
+   SAGA JAWAI — WILDLIFE FOOTER
+   ========================================================= */
+
+.saga-final-footer {
+  position: relative;
+  overflow: hidden;
+  min-height: 810px;
+  padding: 0 5vw 38px;
+  background:
+    radial-gradient(circle at 50% 12%, rgba(155,116,73,.18), transparent 34%),
+    #302a24;
+  color: #e8dfd4;
+}
+
+.saga-footer-brand {
+  position: relative;
+  z-index: 5;
+  display: block;
+  width: 92px;
+  height: auto;
+  margin: 0 auto;
+  padding-top: 18px;
+}
+
+.saga-footer-wildlife {
+  position: relative;
+  width: calc(100% + 10vw);
+  height: 330px;
+  margin-left: -5vw;
+  margin-top: -5px;
+  overflow: hidden;
+}
+
+.saga-footer-wildlife-image {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/footer/saga-wildlife-footer.webp');
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: sepia(.25) saturate(.75) contrast(1.05);
+}
+
+.saga-footer-wildlife-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(48,42,36,.12) 0%,
+      rgba(48,42,36,0) 35%,
+      rgba(48,42,36,.08) 65%,
+      #302a24 100%
+    );
+  pointer-events: none;
+}
+
+.saga-footer-rule {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  height: 1px;
+  margin: -3px 0 48px;
+  background: rgba(226,214,197,.48);
+}
+
+.saga-footer-grid {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: .85fr .75fr 1.25fr;
+  gap: clamp(55px, 8vw, 145px);
+  align-items: start;
+}
+
+.saga-footer-grid h3 {
+  margin: 0 0 34px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(25px, 2vw, 34px);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -.02em;
+  color: #eee4d8;
+}
+
+.saga-footer-grid p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  font-weight: 300;
+  color: rgba(238,228,216,.78);
+}
+
+.saga-footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.saga-footer-links button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(238,228,216,.82);
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: .08em;
+  cursor: pointer;
+}
+
+.saga-footer-newsletter > input[type="email"] {
+  box-sizing: border-box;
+  width: 100%;
+  height: 54px;
+  margin-top: 10px;
+  padding: 0 25px;
+  border: 1px solid rgba(238,228,216,.38);
+  border-radius: 40px;
+  outline: none;
+  background: rgba(255,255,255,.07);
+  color: #f0e7dc;
+  font-size: 13px;
+  letter-spacing: .06em;
+}
+
+.saga-footer-newsletter > input::placeholder {
+  color: rgba(238,228,216,.68);
+}
+
+.footer-accept {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  font-size: 12px;
+  color: rgba(238,228,216,.72);
+}
+
+.footer-signup {
+  min-width: 145px;
+  height: 54px;
+  margin-top: 18px;
+  padding: 0 25px;
+  border: 1px solid rgba(238,228,216,.65);
+  background: transparent;
+  color: #eee4d8;
+  font-size: 12px;
+  letter-spacing: .08em;
+  cursor: pointer;
+  transition: background .3s ease, color .3s ease;
+}
+
+.footer-signup:hover {
+  background: #eee4d8;
+  color: #302a24;
+}
+
+.saga-footer-bottom {
+  position: absolute;
+  z-index: 4;
+  left: 5vw;
+  right: 5vw;
+  bottom: 38px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(238,228,216,.56);
+  font-size: 10px;
+  letter-spacing: .2em;
+}
+
+/* MOBILE */
+
+@media (max-width: 760px) {
+  .saga-final-footer {
+    min-height: auto;
+    padding: 0 24px 35px;
+  }
+
+  .saga-footer-brand {
+    width: 78px;
+  }
+
+  .saga-footer-wildlife {
+    width: calc(100% + 48px);
+    height: 230px;
+    margin-left: -24px;
+  }
+
+  .saga-footer-wildlife-image {
+    background-size: auto 100%;
+    background-position: center bottom;
+  }
+
+  .saga-footer-rule {
+    margin-bottom: 38px;
+  }
+
+  .saga-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .saga-footer-grid h3 {
+    margin-bottom: 20px;
+    font-size: 28px;
+  }
+
+  .saga-footer-bottom {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    margin-top: 65px;
+    gap: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* =========================================================
+   SAGA FOOTER — FINAL WILDLIFE POSITION
+   ========================================================= */
+
+.saga-final-footer {
+  padding-top: 0 !important;
+}
+
+.saga-footer-brand {
+  display: none !important;
+}
+
+/* Wildlife starts immediately at top of footer */
+.saga-footer-wildlife {
+  width: calc(100% + 10vw) !important;
+  height: 340px !important;
+
+  margin-left: -5vw !important;
+  margin-top: 0 !important;
+
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Artwork fills only the area above divider */
+.saga-footer-wildlife-image {
+  position: absolute !important;
+  inset: 0 !important;
+
+  background-size: cover !important;
+  background-position: center bottom !important;
+  background-repeat: no-repeat !important;
+}
+
+/* Remove unnecessary dark empty space */
+.saga-footer-wildlife-shade {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(48,42,36,0) 0%,
+      rgba(48,42,36,0) 72%,
+      rgba(48,42,36,.35) 100%
+    ) !important;
+}
+
+/* Divider sits directly under wildlife */
+.saga-footer-rule {
+  margin-top: 0 !important;
+  margin-bottom: 48px !important;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+
+  .saga-footer-wildlife {
+    width: calc(100% + 48px) !important;
+    height: 220px !important;
+
+    margin-left: -24px !important;
+    margin-top: 0 !important;
+  }
+
+  .saga-footer-wildlife-image {
+    background-size: cover !important;
+    background-position: center bottom !important;
+  }
+}
+
+/* SAGA — DEPTH TUNNEL FINAL POLISH */
+
+.jawai-orbit-experience {
+  overflow: hidden !important;
+  perspective: 1400px !important;
+  perspective-origin: 50% 58% !important;
+}
+
+.jawai-orbit-ring {
+  transform-style: preserve-3d !important;
+  perspective: 1400px !important;
+  perspective-origin: 50% 50% !important;
+}
+
+.jawai-orbit-photo {
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+  will-change: transform, opacity, filter !important;
+  transform-style: preserve-3d !important;
+}
+
+.jawai-orbit-photo img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  backface-visibility: hidden !important;
+}
+
+.jawai-orbit-photo.is-selected {
+  z-index: 250 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jawai-orbit-photo {
+    transition: none !important;
+  }
+}
+
+
+/* =========================================================
+   SAGA — SMOOTH CENTER CAROUSEL FINAL
+   ========================================================= */
+
+.jawai-orbit-experience {
+  overflow: hidden !important;
+  perspective: 1600px !important;
+  perspective-origin: 50% 60% !important;
+}
+
+.jawai-orbit-ring {
+  transform-style: preserve-3d !important;
+  perspective: 1600px !important;
+  perspective-origin: 50% 50% !important;
+}
+
+.jawai-orbit-photo {
+  transform-origin: center center !important;
+  transform-style: preserve-3d !important;
+
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+
+  will-change:
+    transform,
+    opacity,
+    filter !important;
+
+  /*
+   * GSAP controls movement.
+   * CSS transition OFF prevents double-animation/pop.
+   */
+  transition: none !important;
+}
+
+.jawai-orbit-photo img {
+  width: 100% !important;
+  height: 100% !important;
+
+  object-fit: cover !important;
+
+  display: block !important;
+
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.jawai-orbit-photo.is-selected {
+  z-index: 250 !important;
+}
+
+/* No hover scaling — prevents popup effect */
+.jawai-orbit-photo:hover,
+.jawai-orbit-photo.is-selected:hover {
+  transform-origin: center center !important;
+}
+
+/* smoother GPU rendering */
+.jawai-orbit-ring,
+.jawai-orbit-photo,
+.jawai-orbit-photo img {
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (max-width: 760px) {
+
+  .jawai-orbit-experience {
+    perspective: 1100px !important;
+  }
+
+  .jawai-orbit-ring {
+    perspective: 1100px !important;
+  }
+}
+
+
+/* SAGA ORBIT — FINAL SELECTED HEADING VISIBILITY FIX */
+
+.jawai-orbit-copy {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition:
+    opacity 0.55s cubic-bezier(.22, 1, .36, 1),
+    transform 0.55s cubic-bezier(.22, 1, .36, 1),
+    visibility 0s linear 0s !important;
+}
+
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+  transform: translate(-50%, 0) !important;
+  transition:
+    opacity 0.45s cubic-bezier(.22, 1, .36, 1),
+    transform 0.55s cubic-bezier(.22, 1, .36, 1),
+    visibility 0s linear 0.55s !important;
+}
+
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2 {
+  opacity: 1 !important;
+}
+
+/* SAGA FOOTER — FINAL GAP + MAROON FIX */
+
+.saga-final-footer {
+  background: #541c1f !important;
+  padding: 55px 5vw 44px !important;
+  min-height: 0 !important;
+}
+
+/* Remove the empty upper area */
+.saga-final-footer .saga-footer-rule {
+  margin-top: 0 !important;
+  margin-bottom: 55px !important;
+}
+
+/* Keep footer content naturally sized */
+.saga-footer-grid {
+  margin-top: 0 !important;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .saga-final-footer {
+    padding: 40px 6vw 30px !important;
+  }
+
+  .saga-final-footer .saga-footer-rule {
+    margin-bottom: 38px !important;
+  }
+}
+
+
+/* SAGA FOOTER — TRUE COMPACT FINAL */
+.saga-final-footer {
+  background: #541c1f !important;
+  padding: 48px 5vw 38px !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+
+.saga-footer-wildlife,
+.saga-footer-wildlife-image,
+.saga-footer-wildlife-shade {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.saga-final-footer .saga-footer-rule {
+  margin: 0 0 52px !important;
+}
+
+.saga-footer-grid {
+  margin: 0 !important;
+}
+
+@media (max-width: 700px) {
+  .saga-final-footer {
+    padding: 36px 6vw 28px !important;
+  }
+
+  .saga-final-footer .saga-footer-rule {
+    margin-bottom: 36px !important;
+  }
+}
+
+/* =========================================================
+   SAGA — KEEPERS OF THE HILLS
+   ========================================================= */
+
+.rabari-journey {
+  position: relative;
+  display: grid;
+  grid-template-columns: 46% 54%;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #681f1d;
+  color: #f7efe3;
+}
+
+.rabari-journey-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 9vh clamp(48px, 7.8vw, 130px);
+}
+
+.rabari-eyebrow {
+  margin-bottom: 5vh;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: rgba(247,239,227,.68);
+}
+
+.rabari-journey h2 {
+  margin: 0;
+  max-width: 620px;
+  font-family: "Cormorant Garamond", "Times New Roman", serif;
+  font-size: clamp(58px, 5.2vw, 88px);
+  font-weight: 400;
+  line-height: .88;
+  letter-spacing: -.045em;
+  color: #fff8ed;
+}
+
+.rabari-journey h2 em {
+  font-family: inherit;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.rabari-intro {
+  max-width: 520px;
+  margin: 5vh 0 0;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(255,248,237,.74);
+}
+
+.rabari-time {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 22px;
+  width: 100%;
+  max-width: 520px;
+  margin-top: 5vh;
+}
+
+.rabari-time div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rabari-time div:last-child {
+  text-align: right;
+}
+
+.rabari-time strong {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 26px;
+  font-weight: 400;
+  color: #f1d4a0;
+}
+
+.rabari-time span {
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: .2em;
+  color: rgba(255,255,255,.48);
+}
+
+.rabari-time i {
+  position: relative;
+  display: block;
+  height: 1px;
+  background: rgba(224,184,112,.55);
+}
+
+.rabari-time i::before,
+.rabari-time i::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #d7ae67;
+  transform: translateY(-50%);
+}
+
+.rabari-time i::before {
+  left: 0;
+}
+
+.rabari-time i::after {
+  right: 0;
+}
+
+.rabari-highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  max-width: 520px;
+  margin-top: 5vh;
+  border-top: 1px solid rgba(255,255,255,.16);
+  border-bottom: 1px solid rgba(255,255,255,.16);
+}
+
+.rabari-highlights > div {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  padding: 17px 18px 17px 0;
+}
+
+.rabari-highlights > div:nth-child(odd) {
+  border-right: 1px solid rgba(255,255,255,.13);
+}
+
+.rabari-highlights > div:nth-child(even) {
+  padding-left: 22px;
+}
+
+.rabari-highlights > div:nth-child(-n+2) {
+  border-bottom: 1px solid rgba(255,255,255,.13);
+}
+
+.rabari-highlights small {
+  grid-row: 1 / 3;
+  padding-top: 3px;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: .12em;
+  color: #d6ad67;
+}
+
+.rabari-highlights strong {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.rabari-highlights span {
+  margin-top: 5px;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 8px;
+  line-height: 1.45;
+  color: rgba(255,255,255,.52);
+}
+
+.rabari-journey-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 19px;
+  margin-top: 4vh;
+}
+
+.rabari-journey-footer > span {
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: .23em;
+  color: rgba(255,255,255,.45);
+}
+
+.rabari-journey-footer button {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 0 8px;
+  border: 0;
+  border-bottom: 1px solid rgba(232,196,130,.55);
+  background: transparent;
+  color: #f4d9a9;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: .22em;
+  cursor: pointer;
+}
+
+.rabari-journey-footer button svg {
+  width: 30px;
+}
+
+.rabari-journey-media {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: #332b24;
+}
+
+.rabari-journey-media > img {
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.01);
+  animation: rabariCinematicDrift 14s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes rabariCinematicDrift {
+  from {
+    transform: scale(1.01) translate3d(0,0,0);
+  }
+
+  to {
+    transform: scale(1.075) translate3d(-1.2%, -.6%, 0);
+  }
+}
+
+.rabari-media-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(56,25,20,.18) 0%,
+      transparent 24%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(25,18,14,.28) 0%,
+      transparent 35%
+    );
+}
+
+.rabari-location {
+  position: absolute;
+  right: 38px;
+  bottom: 32px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  color: white;
+  text-shadow: 0 2px 14px rgba(0,0,0,.35);
+}
+
+.rabari-location span,
+.rabari-location small {
+  font-family: "Garet", Arial, sans-serif;
+  font-weight: 400;
+}
+
+.rabari-location span {
+  font-size: 8px;
+  letter-spacing: .24em;
+}
+
+.rabari-location small {
+  font-size: 7px;
+  letter-spacing: .15em;
+  opacity: .68;
+}
+
+/* TABLET + MOBILE */
+
+@media (max-width: 900px) {
+
+  .rabari-journey {
+    grid-template-columns: 1fr;
+  }
+
+  .rabari-journey-copy {
+    min-height: auto;
+    padding: 90px 8vw 80px;
+  }
+
+  .rabari-journey h2 {
+    font-size: clamp(52px, 10vw, 76px);
+  }
+
+  .rabari-journey-media {
+    height: 75vh;
+  }
+
+  .rabari-journey-media > img {
+    min-height: 0;
+    height: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .rabari-journey-copy {
+    padding: 72px 7vw 65px;
+  }
+
+  .rabari-eyebrow {
+    margin-bottom: 35px;
+  }
+
+  .rabari-journey h2 {
+    font-size: clamp(47px, 14vw, 64px);
+    line-height: .9;
+  }
+
+  .rabari-intro {
+    margin-top: 36px;
+    font-size: 12px;
+  }
+
+  .rabari-time {
+    margin-top: 38px;
+    gap: 12px;
+  }
+
+  .rabari-highlights {
+    grid-template-columns: 1fr;
+    margin-top: 38px;
+  }
+
+  .rabari-highlights > div,
+  .rabari-highlights > div:nth-child(even) {
+    padding: 17px 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.13);
+  }
+
+  .rabari-highlights > div:last-child {
+    border-bottom: 0;
+  }
+
+  .rabari-journey-media {
+    height: 62vh;
+  }
+
+  .rabari-location {
+    right: 22px;
+    bottom: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rabari-journey-media > img {
+    animation: none;
+  }
+}
+
+
+/* RABARI — EXPERIENCE DESCRIPTION */
+
+.rabari-description {
+  max-width: 520px;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,.14);
+}
+
+.rabari-description > span {
+  display: block;
+  margin-bottom: 14px;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 7px;
+  letter-spacing: .28em;
+  color: #d8b26c;
+}
+
+.rabari-description p {
+  margin: 0 0 11px;
+  font-family: "Garet", Arial, sans-serif;
+  font-size: 10px;
+  line-height: 1.7;
+  color: rgba(255,248,237,.65);
+}
+
+.rabari-description p:last-child {
+  margin-bottom: 0;
+}
+
+/* fit the added information comfortably */
+.rabari-journey-copy {
+  padding-top: 7vh !important;
+  padding-bottom: 7vh !important;
+}
+
+.rabari-journey .rabari-eyebrow {
+  margin-bottom: 3vh !important;
+}
+
+.rabari-journey .rabari-intro {
+  margin-top: 3vh !important;
+}
+
+.rabari-journey .rabari-time,
+.rabari-journey .rabari-highlights {
+  margin-top: 3vh !important;
+}
+
+.rabari-journey .rabari-journey-footer {
+  margin-top: 3vh !important;
+}
+
+@media (max-width: 600px) {
+  .rabari-description {
+    margin-top: 28px;
+    padding-top: 22px;
+  }
+
+  .rabari-description p {
+    font-size: 11px;
+  }
+}
+
+
+/* =========================================================
+   SAGA JAWAI — BRAND KIT / HERO + NAV / PASS 01
+   Visual treatment only. No layout or animation changes.
+========================================================= */
+
+:root {
+  --saga-brand-forest: #1d2119;
+  --saga-brand-forest-deep: #11150f;
+  --saga-brand-olive: #50513b;
+  --saga-brand-ivory: #eee6d5;
+  --saga-brand-gold: #b88a3b;
+  --saga-brand-rust: #9a4f32;
+}
+
+/* HERO — cinematic forest/earth grading */
+.hero-shade {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(12, 17, 12, .18) 0%,
+      rgba(17, 22, 15, .05) 34%,
+      rgba(18, 21, 15, .18) 66%,
+      rgba(12, 15, 10, .68) 100%
+    ),
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(105, 94, 60, .06) 0%,
+      rgba(24, 31, 20, .10) 48%,
+      rgba(10, 13, 9, .32) 100%
+    ) !important;
+}
+
+/* HERO META — warmer, quieter luxury */
+.hero-meta {
+  color: var(--saga-brand-ivory) !important;
+}
+
+.hero-meta > span {
+  color: rgba(238, 230, 213, .72) !important;
+  letter-spacing: .16em !important;
+}
+
+.hero-meta p {
+  color: rgba(238, 230, 213, .94) !important;
+}
+
+/* NAV — antique gold from brand palette */
+.site-nav,
+.site-nav.nav-dark {
+  --nav-gold: var(--saga-brand-gold);
+  --saga-nav-gold: var(--saga-brand-gold);
+}
+
+/* FULLSCREEN MENU — deeper Jawai forest */
+.menu-panel {
+  background:
+    radial-gradient(
+      circle at 56% 38%,
+      rgba(73, 75, 53, .92) 0%,
+      rgba(35, 41, 29, .98) 42%,
+      var(--saga-brand-forest-deep) 100%
+    ) !important;
+}
+
+/* Subtle warm editorial glow */
+.menu-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 78% 72%,
+      rgba(154, 79, 50, .09),
+      transparent 31%
+    );
+  z-index: 0;
+}
+
+/* Keep menu content above atmospheric layer */
+.menu-panel-head,
+.overlay-navigation,
+.menu-panel-bottom {
+  z-index: 2 !important;
+}
+
+/* Brand-kit ivory */
+.overlay-navigation button {
+  color: var(--saga-brand-ivory) !important;
+}
+
+.overlay-navigation button::before {
+  background: var(--saga-brand-gold) !important;
+  box-shadow:
+    0 0 0 3px rgba(184, 138, 59, .10) !important;
+}
+
+/* Controlled gold interaction */
+.overlay-navigation button:hover {
+  color: #c69a50 !important;
+}
+
+.menu-panel-bottom span:last-child::before {
+  background: var(--saga-brand-gold) !important;
+}
+
+
+/* =========================================================
+   SAGA JAWAI — BRAND KIT / PASS 02
+   Hospitality Story + Curated Experiences
+   Visual treatment only
+========================================================= */
+
+/* ---------------------------------------------------------
+   HOSPITALITY STORY
+--------------------------------------------------------- */
+
+.hospitality-story {
+  background:
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(154, 79, 50, .055),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #f3ecdf 0%,
+      #eee5d5 58%,
+      #e8decb 100%
+    ) !important;
+}
+
+.hospitality-story .hospitality-copy h2 {
+  color: #20261c !important;
+}
+
+.hospitality-story .hospitality-copy p {
+  color: rgba(39, 43, 34, .70) !important;
+}
+
+.hospitality-story .hospitality-copy > span,
+.hospitality-story .hospitality-copy small {
+  color: #9d7437 !important;
+}
+
+
+/* ---------------------------------------------------------
+   CURATED EXPERIENCES — BRAND CANVAS
+--------------------------------------------------------- */
+
+.saga-film-experiences {
+  background:
+    radial-gradient(
+      circle at 12% 82%,
+      rgba(154, 79, 50, .065) 0%,
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 78% 14%,
+      rgba(78, 82, 57, .055) 0%,
+      transparent 31%
+    ),
+    linear-gradient(
+      135deg,
+      #f4eee2 0%,
+      #eee5d6 55%,
+      #e8decd 100%
+    ) !important;
+
+  color: #20251c !important;
+}
+
+
+/* remove old generic brown atmospheric glow */
+
+.saga-film-experiences::before {
+  background:
+    radial-gradient(
+      circle,
+      rgba(80, 81, 59, .08),
+      transparent 68%
+    ) !important;
+}
+
+
+/* ---------------------------------------------------------
+   LEFT EDITORIAL COPY
+--------------------------------------------------------- */
+
+.saga-film-kicker,
+.saga-film-count {
+  color: var(--saga-brand-gold) !important;
+}
+
+.saga-film-kicker i {
+  background: var(--saga-brand-gold) !important;
+}
+
+.saga-film-copy h2 {
+  color: #20261c !important;
+}
+
+.saga-film-intro {
+  color: #454637 !important;
+}
+
+.saga-film-detail {
+  color: rgba(47, 49, 39, .66) !important;
+}
+
+
+/* ---------------------------------------------------------
+   EXPERIENCE ATTRIBUTES
+--------------------------------------------------------- */
+
+.saga-film-features {
+  color: rgba(42, 45, 35, .62) !important;
+}
+
+.saga-film-features span::before {
+  border-color: var(--saga-brand-gold) !important;
+}
+
+
+/* ---------------------------------------------------------
+   CTA
+--------------------------------------------------------- */
+
+.saga-film-explore {
+  border-color: #7f6738 !important;
+  background: #263021 !important;
+  color: #f2ead9 !important;
+}
+
+.saga-film-explore:hover {
+  background: transparent !important;
+  color: #263021 !important;
+  border-color: #263021 !important;
+}
+
+
+/* ---------------------------------------------------------
+   MAIN CINEMATIC FILM
+--------------------------------------------------------- */
+
+.saga-film-stage {
+  background: var(--saga-brand-forest-deep) !important;
+
+  box-shadow:
+    0 34px 85px rgba(37, 40, 29, .16) !important;
+}
+
+.saga-film-shade {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(12, 17, 11, .20) 0%,
+      transparent 37%,
+      rgba(10, 14, 9, .27) 100%
+    ) !important;
+}
+
+
+/* ---------------------------------------------------------
+   RIGHT EXPERIENCE SELECTOR
+--------------------------------------------------------- */
+
+.saga-film-item strong {
+  color: #303529 !important;
+}
+
+.saga-film-item {
+  opacity: .46;
+}
+
+.saga-film-item:hover,
+.saga-film-item.is-active {
+  opacity: 1;
+}
+
+.saga-film-thumb {
+  background: #252b20 !important;
+}
+
+.saga-film-rail-line {
+  background: rgba(47, 54, 40, .24) !important;
+}
+
+.saga-film-rail-line::before,
+.saga-film-rail-line::after {
+  background: #394031 !important;
+}
+
+.saga-film-rail-line span {
+  background: var(--saga-brand-gold) !important;
+
+  box-shadow:
+    0 0 0 4px rgba(184, 138, 59, .10);
+}
+
+.saga-film-rail > small {
+  color: rgba(48, 53, 41, .48) !important;
+}
+
+
+/* =========================================================
+   SAGA JAWAI — BRAND KIT / PASS 03
+   Accommodation + 3D Orbit
+   Visual treatment only — geometry untouched
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   ACCOMMODATION & SUITES
+--------------------------------------------------------- */
+
+.home-accommodation {
+  background:
+    radial-gradient(
+      circle at 88% 14%,
+      rgba(154, 79, 50, .055),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #eee5d5 0%,
+      #f3ecdf 48%,
+      #e9dfce 100%
+    ) !important;
+
+  color: #20261c !important;
+}
+
+
+/* Main editorial heading */
+
+.home-accommodation .home-accommodation-head h2 {
+  color: #20261c !important;
+}
+
+
+/* Supporting description */
+
+.home-accommodation-head p {
+  color: rgba(44, 48, 38, .66) !important;
+}
+
+
+/* Room image canvas */
+
+.home-room-image-wrap {
+  background: #d8d0c0 !important;
+
+  box-shadow:
+    0 24px 58px rgba(39, 43, 31, .10);
+}
+
+
+/* Very subtle cinematic treatment */
+
+.home-room-image {
+  filter:
+    saturate(.93)
+    contrast(1.015)
+    sepia(.025);
+}
+
+.home-room-card:hover .home-room-image {
+  filter:
+    saturate(1)
+    contrast(1.025)
+    sepia(0);
+}
+
+
+/* View Room — forest instead of generic cream */
+
+.home-room-view {
+  background: rgba(31, 39, 27, .94) !important;
+  color: #f1e8d6 !important;
+
+  border:
+    1px solid rgba(184, 138, 59, .38);
+}
+
+
+/* Room title */
+
+.home-room-card-bottom h3 {
+  color: #242a20 !important;
+}
+
+
+/* Room specification */
+
+.home-room-card-bottom span {
+  color: rgba(48, 52, 41, .62) !important;
+  opacity: 1 !important;
+}
+
+
+/* Explore rooms CTA */
+
+.home-room-all {
+  color: #30372a !important;
+  border-color: var(--saga-brand-gold) !important;
+  transition:
+    color .3s ease,
+    letter-spacing .3s ease !important;
+}
+
+.home-room-all:hover {
+  color: #8f672d !important;
+  letter-spacing: .25em;
+}
+
+
+/* ---------------------------------------------------------
+   3D ORBIT — BRAND CANVAS
+   IMPORTANT: no geometry / transforms changed here
+--------------------------------------------------------- */
+
+.jawai-orbit-experience {
+  background:
+    radial-gradient(
+      circle at 50% 55%,
+      rgba(255, 249, 237, .90) 0%,
+      rgba(238, 229, 211, .96) 44%,
+      rgba(221, 210, 190, 1) 100%
+    ) !important;
+
+  color: #252b21 !important;
+}
+
+
+/* Atmospheric depth behind orbit */
+
+.jawai-orbit-atmosphere {
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(87, 91, 63, .10) 0%,
+      rgba(154, 79, 50, .045) 35%,
+      transparent 68%
+    ) !important;
+}
+
+
+/* Orbit cards — only surface styling */
+
+.jawai-orbit-photo {
+  background: #252b20 !important;
+
+  box-shadow:
+    0 28px 70px rgba(34, 38, 28, .18) !important;
+}
+
+
+/* Image treatment without transform */
+
+.jawai-orbit-photo img {
+  filter:
+    saturate(.92)
+    contrast(1.025)
+    sepia(.02);
+}
+
+
+/* Number detail */
+
+.jawai-orbit-number {
+  color: rgba(244, 237, 221, .90) !important;
+  border-color: rgba(184, 138, 59, .55) !important;
+}
+
+
+/* ---------------------------------------------------------
+   ORBIT EDITORIAL COPY
+--------------------------------------------------------- */
+
+.jawai-orbit-copy,
+.jawai-orbit-experience:not(.has-selected-photo) .jawai-orbit-copy {
+  color: #252c21 !important;
+}
+
+
+/* Current JSX uses a direct span as eyebrow */
+
+.jawai-orbit-copy > span {
+  color: var(--saga-brand-gold) !important;
+
+  letter-spacing: .30em !important;
+}
+
+
+/* Main heading */
+
+.jawai-orbit-copy h2 {
+  color: #242a20 !important;
+}
+
+
+/* ---------------------------------------------------------
+   SCROLL PROGRESS
+--------------------------------------------------------- */
+
+.jawai-orbit-progress {
+  color: rgba(42, 47, 36, .58) !important;
+}
+
+.jawai-orbit-progress > span {
+  background: var(--saga-brand-gold) !important;
+}
+
+.jawai-orbit-progress small {
+  color: rgba(42, 47, 36, .58) !important;
+}
+
+
+/* Mobile keeps identical visual language */
+
+@media (max-width: 760px) {
+
+  .home-room-view {
+    background: rgba(31, 39, 27, .94) !important;
+    color: #f1e8d6 !important;
+  }
+
+}
+
+
+/* =========================================================
+   SAGA JAWAI — BRAND KIT / PASS 04
+   Gallery + Rabari / The Local Welcome
+   Visual treatment only
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   GALLERY
+--------------------------------------------------------- */
+
+.saga-gallery {
+  background:
+    radial-gradient(
+      circle at 14% 18%,
+      rgba(80, 81, 59, .055),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #f2ebde 0%,
+      #ece2d2 100%
+    ) !important;
+
+  color: #22281e !important;
+}
+
+.saga-gallery .saga-gallery-top h2 {
+  color: #22281e !important;
+}
+
+
+/* Editorial image treatment */
+
+.saga-gallery-frame {
+  background: #252b20 !important;
+}
+
+.saga-gallery-frame img {
+  filter:
+    saturate(.93)
+    contrast(1.02)
+    sepia(.025);
+}
+
+
+/* Gallery navigation */
+
+.saga-gallery-dot {
+  border-color: rgba(39, 46, 34, .38) !important;
+  background: transparent !important;
+}
+
+.saga-gallery-dot.is-active {
+  background: var(--saga-brand-gold) !important;
+  border-color: var(--saga-brand-gold) !important;
+}
+
+
+/* ---------------------------------------------------------
+   RABARI — THE LOCAL WELCOME
+--------------------------------------------------------- */
+
+.rabari-journey {
+  background: #5a1118 !important;
+
+  color: #f3ead9 !important;
+}
+
+
+/* Eyebrow */
+
+.rabari-eyebrow {
+  color: rgba(239, 218, 184, .70) !important;
+}
+
+
+/* Main editorial heading */
+
+.rabari-journey h2 {
+  color: #f6eee0 !important;
+}
+
+.rabari-journey h2 em {
+  color: #e2bd78 !important;
+}
+
+
+/* Intro */
+
+.rabari-intro {
+  color: rgba(245, 235, 217, .72) !important;
+}
+
+
+/* ---------------------------------------------------------
+   EXPERIENCE DESCRIPTION
+--------------------------------------------------------- */
+
+.rabari-description {
+  border-color: rgba(226, 189, 120, .22) !important;
+}
+
+.rabari-description > span {
+  color: #d7ad64 !important;
+}
+
+.rabari-description p {
+  color: rgba(245, 235, 217, .64) !important;
+}
+
+
+/* ---------------------------------------------------------
+   JOURNEY TIMELINE
+--------------------------------------------------------- */
+
+.rabari-time strong {
+  color: #e2bd78 !important;
+}
+
+.rabari-time span {
+  color: rgba(245, 235, 217, .48) !important;
+}
+
+.rabari-time i {
+  background: rgba(215, 173, 100, .52) !important;
+}
+
+.rabari-time i::before,
+.rabari-time i::after {
+  background: #d7ad64 !important;
+}
+
+
+/* ---------------------------------------------------------
+   FOUR EXPERIENCE HIGHLIGHTS
+--------------------------------------------------------- */
+
+.rabari-highlights {
+  border-top-color: rgba(241, 224, 195, .16) !important;
+  border-bottom-color: rgba(241, 224, 195, .16) !important;
+}
+
+.rabari-highlights > div:nth-child(odd) {
+  border-right-color: rgba(241, 224, 195, .13) !important;
+}
+
+.rabari-highlights > div:nth-child(-n+2) {
+  border-bottom-color: rgba(241, 224, 195, .13) !important;
+}
+
+.rabari-highlights small {
+  color: #d7ad64 !important;
+}
+
+.rabari-highlights strong {
+  color: #f4ead9 !important;
+}
+
+.rabari-highlights span {
+  color: rgba(245, 235, 217, .52) !important;
+}
+
+
+/* ---------------------------------------------------------
+   RABARI CTA
+--------------------------------------------------------- */
+
+.rabari-journey-footer > span {
+  color: rgba(245, 235, 217, .46) !important;
+}
+
+.rabari-journey-footer button {
+  color: #e2bd78 !important;
+  border-bottom-color: rgba(226, 189, 120, .58) !important;
+
+  transition:
+    color .3s ease,
+    border-color .3s ease,
+    gap .35s cubic-bezier(.22,1,.36,1) !important;
+}
+
+.rabari-journey-footer button:hover {
+  color: #f4e7cd !important;
+  border-bottom-color: #d7ad64 !important;
+  gap: 24px !important;
+}
+
+
+/* ---------------------------------------------------------
+   RABARI IMAGE
+--------------------------------------------------------- */
+
+.rabari-journey-media {
+  background: #25281e !important;
+}
+
+.rabari-journey-media > img {
+  filter:
+    saturate(.90)
+    contrast(1.035)
+    sepia(.055);
+}
+
+
+/* Brand-toned cinematic overlay */
+
+.rabari-media-shade {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(73, 39, 26, .32) 0%,
+      rgba(73, 39, 26, .08) 24%,
+      transparent 48%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(19, 25, 17, .40) 0%,
+      transparent 42%
+    ) !important;
+}
+
+
+/* Location metadata */
+
+.rabari-location {
+  color: #f5ecdc !important;
+}
+
+.rabari-location span {
+  color: rgba(245, 236, 220, .94) !important;
+}
+
+.rabari-location small {
+  color: rgba(226, 189, 120, .78) !important;
+  opacity: 1 !important;
+}
+
+
+/* Mobile highlight separators */
+
+@media (max-width: 600px) {
+
+  .rabari-highlights > div,
+  .rabari-highlights > div:nth-child(even) {
+    border-bottom-color:
+      rgba(241, 224, 195, .13) !important;
+  }
+
+}
+
+
+/* =========================================================
+   SAGA JAWAI — BRAND KIT / PASS 05
+   Statement + Final Footer
+   Visual treatment only
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   SAGA STATEMENT
+--------------------------------------------------------- */
+
+.founder-quote-with-leopard {
+  background:
+    radial-gradient(
+      circle at 72% 28%,
+      rgba(184, 138, 59, .09),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 22% 82%,
+      rgba(154, 79, 50, .10),
+      transparent 32%
+    ),
+    linear-gradient(
+      145deg,
+      #20271c 0%,
+      #171d14 56%,
+      #10140e 100%
+    ) !important;
+
+  color: #f1e8d7 !important;
+}
+
+
+/* Main philosophy quote */
+
+.founder-quote-with-leopard blockquote {
+  color: #f1e8d7 !important;
+  text-shadow:
+    0 2px 28px rgba(0, 0, 0, .14);
+}
+
+
+/* Supporting philosophy line */
+
+.founder-quote-with-leopard .founder-credit {
+  color: rgba(239, 229, 210, .68) !important;
+}
+
+.founder-quote-with-leopard .founder-credit strong {
+  color: var(--saga-brand-gold) !important;
+}
+
+.founder-quote-with-leopard .founder-credit span {
+  color: rgba(226, 189, 120, .76) !important;
+}
+
+
+/* Saga signature */
+
+.founder-quote-with-leopard .founder-signature {
+  color: rgba(239, 229, 210, .72) !important;
+}
+
+
+/* Leopard — integrate with dark forest canvas */
+
+.founder-quote-with-leopard .quote-leopard img {
+  filter:
+    saturate(.90)
+    contrast(1.04)
+    sepia(.035);
+}
+
+
+/* Existing leopard atmospheric layer */
+
+.founder-quote-with-leopard .quote-leopard::after {
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(16, 20, 14, .06) 54%,
+      rgba(16, 20, 14, .32) 100%
+    ) !important;
+}
+
+/* Match the reference: place the orbit title with the selected photograph. */
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+  top: 42% !important;
+  width: min(680px, 72vw) !important;
+}
+
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy > span {
+  display: none !important;
+}
+
+.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2 {
+  color: #f8f3e9 !important;
+  font-size: clamp(30px, 3.1vw, 46px) !important;
+  line-height: 1.04 !important;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, .7) !important;
+}
+
+/* Keep the philosophy copy clear of the leopard artwork. */
+.founder-quote-with-leopard blockquote {
+  width: min(980px, 70vw) !important;
+  max-width: 980px !important;
+  font-size: clamp(28px, 2.75vw, 40px) !important;
+  line-height: 1.16 !important;
+}
+
+@media (max-width: 760px) {
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+    top: 42% !important;
+    width: 86vw !important;
+  }
+
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2 {
+    font-size: clamp(25px, 7vw, 34px) !important;
+  }
+
+  .founder-quote-with-leopard blockquote {
+    width: 88vw !important;
+    font-size: clamp(24px, 7vw, 34px) !important;
+    line-height: 1.22 !important;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   FINAL FOOTER
+--------------------------------------------------------- */
+
+.saga-final-footer {
+  background:
+    radial-gradient(
+      circle at 82% 12%,
+      rgba(154, 79, 50, .10),
+      transparent 29%
+    ),
+    radial-gradient(
+      circle at 18% 86%,
+      rgba(184, 138, 59, .055),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #1c2319 0%,
+      #141a12 60%,
+      #0f130d 100%
+    ) !important;
+
+  color: #eee5d4 !important;
+}
+
+
+/* Top rule */
+
+.saga-final-footer .saga-footer-rule {
+  background: rgba(184, 138, 59, .42) !important;
+  border-color: rgba(184, 138, 59, .42) !important;
+}
+
+
+/* Footer headings */
+
+.saga-footer-grid h3 {
+  color: #f0e7d6 !important;
+}
+
+
+/* Supporting copy */
+
+.saga-footer-grid p {
+  color: rgba(238, 229, 212, .58) !important;
+}
+
+
+/* Navigation links */
+
+.saga-footer-links button {
+  color: rgba(238, 229, 212, .68) !important;
+
+  transition:
+    color .3s ease,
+    transform .3s ease !important;
+}
+
+.saga-footer-links button:hover {
+  color: #d9b36d !important;
+  transform: translateX(4px);
+}
+
+
+/* Contact + signup buttons */
+
+.saga-final-footer .footer-signup {
+  color: #e1bd78 !important;
+  border-color: rgba(225, 189, 120, .52) !important;
+
+  transition:
+    color .3s ease,
+    border-color .3s ease !important;
+}
+
+.saga-final-footer .footer-signup:hover {
+  color: #f2e8d5 !important;
+  border-color: #d9b36d !important;
+}
+
+
+/* Newsletter input */
+
+.saga-footer-newsletter > input[type="email"] {
+  color: #eee5d4 !important;
+
+  border-color:
+    rgba(238, 229, 212, .28) !important;
+
+  background: transparent !important;
+}
+
+.saga-footer-newsletter > input[type="email"]:focus {
+  border-color:
+    rgba(217, 179, 109, .72) !important;
+}
+
+.saga-footer-newsletter > input::placeholder {
+  color:
+    rgba(238, 229, 212, .40) !important;
+}
+
+
+/* Terms */
+
+.footer-accept {
+  color:
+    rgba(238, 229, 212, .48) !important;
+}
+
+
+/* Footer bottom */
+
+.saga-footer-bottom {
+  color:
+    rgba(238, 229, 212, .48) !important;
+
+  border-color:
+    rgba(238, 229, 212, .14) !important;
+}
+
+
+/* Wildlife artwork treatment — if present */
+
+.saga-footer-wildlife-shade {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(18, 24, 16, .02) 0%,
+      rgba(18, 24, 16, .48) 100%
+    ) !important;
+}
+
