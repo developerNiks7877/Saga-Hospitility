@@ -12,7 +12,7 @@ import {
 import { useAuth } from '../../context/AuthContext';
 import { useBooking } from '../../context/BookingContext';
 
-export default function Topbar({ onMenuToggle }) {
+export default function Topbar({ onMenuClick }) {
   const { user, logout } = useAuth();
   const { hotel } = useBooking();
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ export default function Topbar({ onMenuToggle }) {
       {/* Left: Mobile Toggle & Big Clean Logo */}
       <div className="user-topbar-brand-group" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <button
-          onClick={onMenuToggle}
+          onClick={onMenuClick}
           className="mobile-menu-btn"
           style={{
             background: 'none',
