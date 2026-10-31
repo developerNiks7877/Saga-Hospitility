@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Italiana&display=swap');
+
 /* SAGA JAWAI — CLEAN HOME STYLES
    Removed unused legacy chapter / stay / old gallery / old footer rules.
 */
@@ -3912,9 +3915,6 @@ body.saga-past-orbit .site-nav .nav-book {
    Replaces handwritten/cursive display typography
 ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
-
-
 /* Main editorial / section headings */
 
 .wildlife-split-copy h2,
@@ -3989,9 +3989,6 @@ body.saga-past-orbit .site-nav .nav-book {
 /* =========================================================
    SAGA JAWAI — FINAL LUXURY TYPOGRAPHY FIX
    ========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Italiana&display=swap');
-
 
 /* ---------------------------------------------------------
    01. LEGACY OF WILD HOSPITALITY
@@ -5644,7 +5641,7 @@ body.saga-past-orbit .site-nav .nav-book {
 .saga-footer-wildlife-image {
   position: absolute;
   inset: 0;
-  background-image: url('/assets/footer/saga-wildlife-footer.webp');
+  background-image: url('/assets/footer/footer-wildlife.png');
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
