@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { publicAsset } from './utils/publicAsset';
 import './saga-home.css';
 import { hotelData } from './data/hotelData';
 import React, { useEffect, useRef, useState } from 'react';
@@ -48,10 +49,10 @@ const MEDIA = {
 };
 
 const gallerySlides = [
-  ['/assets/gallery/gallery-01.jpg', '/assets/gallery/gallery-02.jpg'],
-  ['/assets/gallery/gallery-03.jpg', '/assets/gallery/gallery-04.jpg'],
-  ['/assets/gallery/gallery-05.jpg', '/assets/gallery/gallery-06.jpg'],
-  ['/assets/gallery/gallery-07.jpg', '/assets/gallery/gallery-08.jpg'],
+  [publicAsset('/assets/gallery/gallery-01.jpg'), publicAsset('/assets/gallery/gallery-02.jpg')],
+  [publicAsset('/assets/gallery/gallery-03.jpg'), publicAsset('/assets/gallery/gallery-04.jpg')],
+  [publicAsset('/assets/gallery/gallery-05.jpg'), publicAsset('/assets/gallery/gallery-06.jpg')],
+  [publicAsset('/assets/gallery/gallery-07.jpg'), publicAsset('/assets/gallery/gallery-08.jpg')],
 ];
 
 const experiences = [
@@ -1678,7 +1679,7 @@ export default function SagaHome() {
           </button>
 
           <img
-            src="/assets/logo/saga-jawai-logo.png"
+            src={publicAsset('/assets/logo/saga-jawai-logo.png')}
             alt=""
           />
         </div>
@@ -1731,7 +1732,7 @@ export default function SagaHome() {
         }
       >
         <img
-          src="/assets/logo/saga-hospitality-logo.png"
+          src={publicAsset('/assets/logo/saga-hospitality-logo.png')}
           alt="SAGA Hospitality"
         />
       </button>
@@ -1749,7 +1750,7 @@ export default function SagaHome() {
             aria-hidden="true"
           >
             <source
-              src="/assets/video/saga-jawai-hero.mp4"
+              src={publicAsset('/assets/video/saga-jawai-hero.mp4')}
               type="video/mp4"
             />
           </video>
@@ -1825,28 +1826,28 @@ export default function SagaHome() {
           <div className="hospitality-collage">
             <figure className="hospitality-image hospitality-image-one">
               <img
-                src="/assets/legacy/architecture.jpg"
+                src={publicAsset('/assets/legacy/architecture.jpg')}
                 alt="SAGA architecture"
               />
             </figure>
 
             <figure className="hospitality-image hospitality-image-two">
               <img
-                src="/assets/legacy/interior.jpg"
+                src={publicAsset('/assets/legacy/interior.jpg')}
                 alt="SAGA interior"
               />
             </figure>
 
             <figure className="hospitality-image hospitality-image-three">
               <img
-                src="/assets/legacy/room.jpg"
+                src={publicAsset('/assets/legacy/room.jpg')}
                 alt="SAGA room"
               />
             </figure>
 
             <figure className="hospitality-image hospitality-image-four">
               <img
-                src="/assets/legacy/landscape.jpg"
+                src={publicAsset('/assets/legacy/landscape.jpg')}
                 alt="SAGA landscape"
               />
             </figure>
@@ -1865,56 +1866,56 @@ export default function SagaHome() {
                 title: 'Hidden Waters',
                 text: 'A quieter side of Jawai, revealed where water meets the wilderness.',
                 detail: 'Beyond the granite hills, flowing water brings an unexpected softness to the landscape — secluded, refreshing and shaped entirely by nature.',
-                poster: '/assets/legacy/landscape.jpg',
-                video: '/assets/experiences/videos/experience-01.mp4',
+                poster: publicAsset('/assets/legacy/landscape.jpg'),
+                video: publicAsset('/assets/experiences/videos/experience-01.mp4'),
               },
               {
                 eyebrow: 'DESERT EVENINGS',
                 title: 'Rajasthan at Dusk',
                 text: 'Camels, open roads and journeys beneath the fading desert light.',
                 detail: 'As evening settles over Rajasthan, travellers move through the landscape while the desert slowly changes colour beneath the setting sun.',
-                poster: '/assets/legacy/architecture.jpg',
-                video: '/assets/experiences/videos/experience-02.mp4',
+                poster: publicAsset('/assets/legacy/architecture.jpg'),
+                video: publicAsset('/assets/experiences/videos/experience-02.mp4'),
               },
               {
                 eyebrow: 'ON THE ROAD',
                 title: 'Roads of Rajasthan',
                 text: 'Some journeys reveal the character of a place before you ever arrive.',
                 detail: 'A jeep moves through the open road carrying the everyday energy, movement and character of Rajasthan.',
-                poster: '/assets/gallery/gallery-05.jpg',
-                video: '/assets/experiences/videos/experience-03.mp4',
+                poster: publicAsset('/assets/gallery/gallery-05.jpg'),
+                video: publicAsset('/assets/experiences/videos/experience-03.mp4'),
               },
               {
                 eyebrow: 'EVERYDAY LIFE',
                 title: 'A Simple Ritual',
                 text: 'The smallest everyday moments often reveal the most about a place.',
                 detail: 'At a village handpump, a quiet pause for water becomes a glimpse into a life grounded in simplicity and deeply connected to the land.',
-                poster: '/assets/gallery/gallery-08.jpg',
-                video: '/assets/experiences/videos/experience-04.mp4',
+                poster: publicAsset('/assets/gallery/gallery-08.jpg'),
+                video: publicAsset('/assets/experiences/videos/experience-04.mp4'),
               },
               {
                 eyebrow: 'LIVING HERITAGE',
                 title: 'Songs of the Land',
                 text: 'Some stories of Rajasthan are remembered not in words, but in song.',
                 detail: 'A local musician plays and sings, carrying traditions forward through melody, memory and the living culture of Rajasthan.',
-                poster: '/assets/gallery/gallery-02.jpg',
-                video: '/assets/experiences/videos/experience-05.mp4',
+                poster: publicAsset('/assets/gallery/gallery-02.jpg'),
+                video: publicAsset('/assets/experiences/videos/experience-05.mp4'),
               },
               {
                 eyebrow: 'WILDLIFE',
                 title: 'A Dance of Colour',
                 text: 'For a brief moment, the wilderness unfolds in extraordinary colour.',
                 detail: 'A peacock spreads its magnificent feathers against the earthy landscape — a vivid encounter with the quieter wildlife of the region.',
-                poster: '/assets/legacy/interior.jpg',
-                video: '/assets/experiences/videos/experience-06.mp4',
+                poster: publicAsset('/assets/legacy/interior.jpg'),
+                video: publicAsset('/assets/experiences/videos/experience-06.mp4'),
               },
               {
                 eyebrow: 'LEOPARD COUNTRY',
                 title: 'Into the Wild',
                 text: 'Quiet footsteps through the landscape that has become synonymous with Jawai.',
                 detail: 'A leopard moves through its territory with effortless calm — a rare glimpse of the animal at the heart of Jawai’s wilderness.',
-                poster: '/assets/gallery/gallery-01.jpg',
-                video: '/assets/experiences/videos/experience-07.mp4',
+                poster: publicAsset('/assets/gallery/gallery-01.jpg'),
+                video: publicAsset('/assets/experiences/videos/experience-07.mp4'),
               },
             ];
 
@@ -2291,7 +2292,7 @@ export default function SagaHome() {
 
           <div className="rabari-journey-media">
             <img
-              src="/assets/rabari/rabari-walk.png"
+              src={publicAsset('/assets/rabari/rabari-walk.png')}
               alt="Rabari shepherds walking through the landscape of Jawai"
             />
 
@@ -2317,17 +2318,17 @@ export default function SagaHome() {
             <div className="jawai-orbit-ring">
 
               {[
-                '/assets/legacy/architecture.jpg',
-                '/assets/gallery/gallery-01.jpg',
-                '/assets/gallery/gallery-03.jpg',
-                '/assets/gallery/gallery-05.jpg',
-                '/assets/rabari/rabari-walk.png',
-                '/assets/legacy/landscape.jpg',
-                '/assets/legacy/interior.jpg',
-                '/assets/gallery/gallery-04.jpg',
-                '/assets/legacy/room.jpg',
-                '/assets/gallery/gallery-02.jpg',
-                '/assets/gallery/gallery-08.jpg',
+                publicAsset('/assets/legacy/architecture.jpg'),
+                publicAsset('/assets/gallery/gallery-01.jpg'),
+                publicAsset('/assets/gallery/gallery-03.jpg'),
+                publicAsset('/assets/gallery/gallery-05.jpg'),
+                publicAsset('/assets/rabari/rabari-walk.png'),
+                publicAsset('/assets/legacy/landscape.jpg'),
+                publicAsset('/assets/legacy/interior.jpg'),
+                publicAsset('/assets/gallery/gallery-04.jpg'),
+                publicAsset('/assets/legacy/room.jpg'),
+                publicAsset('/assets/gallery/gallery-02.jpg'),
+                publicAsset('/assets/gallery/gallery-08.jpg'),
               ].map((image, index) => (
                 <figure
                   className="jawai-orbit-photo"
@@ -2371,7 +2372,7 @@ export default function SagaHome() {
             aria-hidden="true"
           >
             <img
-              src="/assets/leopard/saga-running-leopard.png"
+              src={publicAsset('/assets/leopard/saga-running-leopard.png')}
               alt=""
             />
           </div>

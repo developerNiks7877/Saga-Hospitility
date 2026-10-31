@@ -5641,7 +5641,7 @@ body.saga-past-orbit .site-nav .nav-book {
 .saga-footer-wildlife-image {
   position: absolute;
   inset: 0;
-  background-image: url('/assets/footer/footer-wildlife.png');
+  background-image: var(--saga-footer-wildlife-image);
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;

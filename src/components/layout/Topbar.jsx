@@ -1,3 +1,4 @@
+import { publicAsset } from '../../utils/publicAsset';
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
@@ -72,7 +73,7 @@ export default function Topbar({ onMenuToggle }) {
         {/* Big Official Logo Display */}
         <Link to="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
           <img
-            src="/assets/logo/saga-hospitality-logo.png"
+            src={publicAsset('/assets/logo/saga-hospitality-logo.png')}
             alt="SAGA"
             style={{
               height: '56px',

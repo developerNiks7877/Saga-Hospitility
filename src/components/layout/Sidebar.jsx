@@ -1,3 +1,4 @@
+import { publicAsset } from '../../utils/publicAsset';
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
@@ -97,7 +98,7 @@ export default function Sidebar({ isOpen, onClose }) {
               }}
             >
               <img
-                src="/assets/logo/saga-hospitality-logo.png"
+                src={publicAsset('/assets/logo/saga-hospitality-logo.png')}
                 alt="SAGA"
                 style={{
                   width: '100%',

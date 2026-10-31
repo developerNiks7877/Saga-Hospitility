@@ -1,3 +1,4 @@
+import { publicAsset } from '../utils/publicAsset';
 import React, { useState } from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate, Link } from 'react-router-dom';
@@ -144,7 +145,7 @@ export default function Login() {
             }}
           >
             <img
-              src="/assets/logo/saga-hospitality-logo.png"
+              src={publicAsset('/assets/logo/saga-hospitality-logo.png')}
               alt="SAGA"
               style={{
                 width: '48px',
