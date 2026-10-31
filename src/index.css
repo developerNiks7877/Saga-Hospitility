@@ -1729,3 +1729,197 @@ input[type="range"] {
 
 }
 
+/* Booking flow: responsive polish */
+@media (max-width: 768px) {
+  .user-layout-main {
+    padding: 22px 16px 36px !important;
+  }
+
+  .user-topbar {
+    height: 64px !important;
+    padding: 0 14px !important;
+  }
+
+  .user-topbar-brand-group,
+  .user-topbar-actions {
+    gap: 10px !important;
+  }
+
+  .user-topbar-brand img {
+    height: 40px !important;
+    max-width: 132px !important;
+  }
+
+  .user-topbar-brand > span {
+    display: none !important;
+  }
+
+  .user-topbar-availability {
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    padding: 0 !important;
+  }
+
+  .user-topbar-availability span {
+    display: none;
+  }
+
+  .user-topbar-actions > div:last-child > div:first-child > div {
+    display: none !important;
+  }
+
+  .booking-flow-header {
+    padding: 12px 16px !important;
+  }
+
+  .booking-flow-header-inner {
+    display: grid !important;
+    grid-template-columns: 1fr auto;
+    gap: 12px !important;
+  }
+
+  .booking-flow-back {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 12px !important;
+  }
+
+  .booking-flow-brand {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 15px !important;
+    letter-spacing: .06em !important;
+  }
+
+  .booking-flow-steps {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-content: space-between;
+    gap: 6px !important;
+    padding-top: 4px;
+  }
+
+  .booking-flow-step-label {
+    display: none;
+  }
+
+  .booking-flow-step-circle {
+    width: 27px !important;
+    height: 27px !important;
+  }
+
+  .booking-flow-step-connector {
+    flex: 1;
+    width: auto !important;
+    max-width: 60px;
+  }
+
+  .booking-flow-main {
+    padding: 26px 16px 44px !important;
+  }
+
+  .booking-flow-title {
+    font-size: clamp(27px, 7vw, 34px) !important;
+    line-height: 1.12 !important;
+  }
+
+  .booking-flow-page .guest-content-grid,
+  .booking-flow-page .payment-content-grid {
+    gap: 18px !important;
+  }
+
+  .booking-content-grid > div:last-child {
+    order: -1;
+  }
+
+  .booking-summary-card {
+    position: static !important;
+    top: auto !important;
+    border-radius: 14px !important;
+  }
+
+  .booking-form-card {
+    padding: 21px 18px !important;
+    border-radius: 14px !important;
+  }
+
+  .booking-flow-page .form-label {
+    margin-bottom: 7px;
+  }
+
+  .booking-flow-page .input-control,
+  .booking-flow-page input,
+  .booking-flow-page select,
+  .booking-flow-page textarea {
+    font-size: 16px !important;
+    min-height: 48px;
+  }
+
+  .rooms-search-card {
+    padding: 18px !important;
+    border-radius: 16px !important;
+  }
+
+  .rooms-booking-page .availability-search-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .rooms-booking-page .availability-search-grid > button {
+    grid-column: 1 / -1;
+    min-height: 48px;
+  }
+
+  .rooms-booking-page .availability-search-grid input,
+  .rooms-booking-page .availability-search-grid select {
+    min-width: 0;
+    font-size: 16px !important;
+  }
+
+  .booking-confirmation-page {
+    padding: 32px 16px !important;
+  }
+
+  .booking-confirmation-title {
+    font-size: clamp(28px, 7vw, 34px) !important;
+  }
+
+  .booking-confirmation-card {
+    border-radius: 15px !important;
+  }
+
+  .booking-confirmation-actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px !important;
+  }
+
+  .booking-confirmation-actions button {
+    width: 100%;
+    min-height: 48px;
+  }
+}
+
+@media (max-width: 420px) {
+  .booking-flow-back span {
+    font-size: 11px;
+  }
+
+  .booking-flow-brand {
+    font-size: 13px !important;
+  }
+
+  .rooms-search-card {
+    padding: 15px !important;
+  }
+
+  .rooms-booking-page .availability-search-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .rooms-booking-page .availability-search-grid > button {
+    grid-column: 1;
+  }
+}
+

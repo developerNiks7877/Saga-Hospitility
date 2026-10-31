@@ -364,7 +364,7 @@ export default function Rooms() {
   }
 
   return (
-    <div
+    <div className="rooms-booking-page"
       style={{
         maxWidth: '1240px',
         margin: '0 auto',
@@ -440,7 +440,7 @@ export default function Rooms() {
           AVAILABILITY SEARCH
       ========================= */}
 
-      <Card
+      <Card className="rooms-search-card"
         style={{
           marginBottom: '30px',
 

@@ -39,6 +39,7 @@ export default function Topbar({ onMenuToggle }) {
 
   return (
     <header
+      className="user-topbar"
       style={{
         height: 'var(--topbar-height)',
         backgroundColor: '#FFFFFF',
@@ -54,7 +55,7 @@ export default function Topbar({ onMenuToggle }) {
       }}
     >
       {/* Left: Mobile Toggle & Big Clean Logo */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div className="user-topbar-brand-group" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <button
           onClick={onMenuToggle}
           className="mobile-menu-btn"
@@ -71,7 +72,7 @@ export default function Topbar({ onMenuToggle }) {
         </button>
 
         {/* Big Official Logo Display */}
-        <Link to="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
+        <Link className="user-topbar-brand" to="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
           <img
             src={publicAsset('/assets/logo/saga-hospitality-logo.png')}
             alt="SAGA"
@@ -99,10 +100,11 @@ export default function Topbar({ onMenuToggle }) {
       </div>
 
       {/* Right Controls: Availability CTA, Notifications & User Avatar */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '18px', position: 'relative' }}>
+      <div className="user-topbar-actions" style={{ display: 'flex', alignItems: 'center', gap: '18px', position: 'relative' }}>
         {/* Fast Booking CTA */}
         <Link
           to="/rooms"
+          className="user-topbar-availability"
           style={{
             backgroundColor: 'var(--bg-card-warm)',
             border: '1px solid var(--border-medium)',

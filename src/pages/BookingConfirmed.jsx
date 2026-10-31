@@ -48,7 +48,7 @@ export default function BookingConfirmed() {
   };
 
   return (
-    <div
+    <div className="booking-confirmation-page"
       style={{
         backgroundColor: 'var(--dusky-ivory)',
         minHeight: '100vh',
@@ -91,7 +91,7 @@ export default function BookingConfirmed() {
       </div>
 
       {/* Confirmation Headline */}
-      <h1
+      <h1 className="booking-confirmation-title"
         style={{
           fontFamily: 'var(--font-display)',
           fontSize: '36px',
@@ -119,7 +119,7 @@ export default function BookingConfirmed() {
       </p>
 
       {/* Booking Receipt Card */}
-      <Card
+      <Card className="booking-confirmation-card"
         style={{
           width: '100%',
           maxWidth: '520px',
@@ -226,7 +226,7 @@ export default function BookingConfirmed() {
       </Card>
 
       {/* Buttons */}
-      <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', justifyContent: 'center' }}>
+      <div className="booking-confirmation-actions" style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', justifyContent: 'center' }}>
         <Button variant="primary" size="md" onClick={() => navigate('/my-bookings')}>
           View My Bookings
         </Button>

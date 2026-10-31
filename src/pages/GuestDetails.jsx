@@ -246,7 +246,7 @@ export default function GuestDetails() {
   }
 
   return (
-    <div
+    <div className="booking-flow-page booking-flow-page--guest"
       style={{
         backgroundColor: 'var(--dusky-ivory)',
         minHeight: '100vh',
@@ -258,7 +258,7 @@ export default function GuestDetails() {
         backText="Back to Rooms"
       />
 
-      <main
+      <main className="booking-flow-main"
         style={{
           maxWidth: '1100px',
           margin: '0 auto',
@@ -282,7 +282,7 @@ export default function GuestDetails() {
             Step 1 of 2
           </span>
 
-          <h1
+          <h1 className="booking-flow-title"
             style={{
               fontFamily: 'var(--font-display)',
               fontSize: '36px',
@@ -312,7 +312,7 @@ export default function GuestDetails() {
         ========================= */}
 
         <div
-          className="guest-content-grid"
+          className="guest-content-grid booking-content-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr 380px',
@@ -324,7 +324,7 @@ export default function GuestDetails() {
               LEFT FORM
           ========================= */}
 
-          <Card style={{ padding: '32px' }}>
+          <Card className="booking-form-card" style={{ padding: '32px' }}>
             <form onSubmit={handleContinue}>
               {/* NAMES */}
 
@@ -526,7 +526,7 @@ export default function GuestDetails() {
               BOOKING SUMMARY
           ========================= */}
 
-          <Card
+          <Card className="booking-summary-card"
             style={{
               padding: '0',
               overflow: 'hidden',

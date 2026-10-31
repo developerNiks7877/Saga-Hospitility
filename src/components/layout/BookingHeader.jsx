@@ -13,6 +13,7 @@ export default function BookingHeader({ currentStep = 1, backTo = '/search', bac
 
   return (
     <header
+      className="booking-flow-header"
       style={{
         backgroundColor: '#FFFFFF',
         borderBottom: '1px solid var(--border-light)',
@@ -23,6 +24,7 @@ export default function BookingHeader({ currentStep = 1, backTo = '/search', bac
       }}
     >
       <div
+        className="booking-flow-header-inner"
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
@@ -35,6 +37,7 @@ export default function BookingHeader({ currentStep = 1, backTo = '/search', bac
       >
         {/* Back Link */}
         <button
+          className="booking-flow-back"
           onClick={() => navigate(backTo)}
           style={{
             background: 'none',
@@ -55,6 +58,7 @@ export default function BookingHeader({ currentStep = 1, backTo = '/search', bac
 
         {/* Brand Center */}
         <Link
+          className="booking-flow-brand"
           to="/dashboard"
           style={{
             fontFamily: 'var(--font-display)',
@@ -70,15 +74,20 @@ export default function BookingHeader({ currentStep = 1, backTo = '/search', bac
         </Link>
 
         {/* Step Indicator */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div className="booking-flow-steps" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           {steps.map((s, idx) => {
             const isCompleted = currentStep > s.step;
             const isActive = currentStep === s.step;
 
             return (
               <React.Fragment key={s.step}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <div
+                  className={`booking-flow-step${isActive ? ' is-active' : ''}${isCompleted ? ' is-completed' : ''}`}
+                  aria-current={isActive ? 'step' : undefined}
+                  style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+                >
                   <div
+                    className="booking-flow-step-circle"
                     style={{
                       width: '24px',
                       height: '24px',
@@ -104,20 +113,19 @@ export default function BookingHeader({ currentStep = 1, backTo = '/search', bac
                     {isCompleted ? <Check size={14} /> : s.step}
                   </div>
                   <span
+                    className="booking-flow-step-label"
                     style={{
                       fontSize: '13px',
                       fontWeight: isActive ? 600 : 400,
                       color: isActive ? 'var(--deep-olive)' : 'var(--text-muted)',
-                      display: 'none',
-                      '@media (min-width: 640px)': { display: 'inline' }
                     }}
-                    className="step-label-text"
                   >
                     {s.label}
                   </span>
                 </div>
                 {idx < steps.length - 1 && (
                   <div
+                    className="booking-flow-step-connector"
                     style={{
                       width: '24px',
                       height: '1px',

@@ -14,7 +14,7 @@ export default function UserLayout() {
       {/* Main Content Area */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
         <Topbar onMenuClick={() => setMobileOpen(!mobileOpen)} />
-        <main style={{ flex: 1, padding: '36px 40px 60px', overflowY: 'auto' }}>
+        <main className="user-layout-main" style={{ flex: 1, padding: '36px 40px 60px', overflowY: 'auto' }}>
           <Outlet />
         </main>
       </div>

@@ -409,7 +409,7 @@ export default function Payment() {
   }
 
   return (
-    <div
+    <div className="booking-flow-page booking-flow-page--payment"
       style={{
         backgroundColor:
           'var(--dusky-ivory)',
@@ -422,7 +422,7 @@ export default function Payment() {
         backText="Back to Guest Details"
       />
 
-      <main
+      <main className="booking-flow-main"
         style={{
           maxWidth: '1100px',
           margin: '0 auto',
@@ -453,7 +453,7 @@ export default function Payment() {
             Step 2 of 2
           </span>
 
-          <h1
+          <h1 className="booking-flow-title"
             style={{
               fontFamily:
                 'var(--font-display)',
@@ -542,7 +542,7 @@ export default function Payment() {
         </div>
 
         <div
-          className="payment-content-grid"
+          className="payment-content-grid booking-content-grid"
           style={{
             display: 'grid',
             gridTemplateColumns:
@@ -1089,7 +1089,7 @@ export default function Payment() {
               BOOKING SUMMARY
           ========================= */}
 
-          <Card
+          <Card className="booking-summary-card"
             style={{
               padding: '24px',
               position: 'sticky',
