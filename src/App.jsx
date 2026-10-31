@@ -27,7 +27,7 @@ import Offers from './pages/Offers';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <AuthProvider>
         <BookingProvider>
           <ToastProvider>
