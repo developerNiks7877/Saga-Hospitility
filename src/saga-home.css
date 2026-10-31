@@ -7584,10 +7584,82 @@ body.saga-past-orbit .site-nav .nav-book {
 }
 
 
-/* Mobile experience rail: keep the image panel and selector compact. */
-@media (max-width: 760px) {
+/* Tablet experience rail: keep the selector compact below the image. */
+@media (max-width: 1100px) {
   .saga-film-shell {
     min-height: 0 !important;
+  }
+
+  .saga-film-rail {
+    min-height: 0 !important;
+  }
+
+  .saga-film-items {
+    flex-direction: row;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .saga-film-item {
+    min-width: 150px;
+  }
+}
+
+/* Mobile experience rail: keep the image panel and selector compact. */
+@media (max-width: 760px), (pointer: coarse) {
+  .jawai-orbit-experience,
+  .jawai-orbit-scene {
+    min-height: min(720px, max(640px, 100svh));
+  }
+
+  .jawai-orbit-copy,
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+    top: 8% !important;
+    width: 84vw !important;
+  }
+
+  .jawai-orbit-copy h2,
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2 {
+    font-size: clamp(24px, 6.5vw, 34px) !important;
+    line-height: 1.05 !important;
+  }
+
+  .jawai-orbit-ring {
+    top: 63% !important;
+  }
+
+  .jawai-orbit-photo {
+    width: 100px !important;
+    height: 142px !important;
+    margin: -71px 0 0 -50px !important;
+  }
+
+  .saga-film-experiences {
+    padding: 76px 18px 62px;
+  }
+
+  .saga-film-shell {
+    gap: 26px;
+    min-height: 0 !important;
+  }
+
+  .saga-film-copy h2 {
+    font-size: clamp(42px, 12vw, 62px) !important;
+    line-height: .94 !important;
+  }
+
+  .saga-film-intro {
+    font-size: clamp(17px, 5vw, 20px);
+  }
+
+  .saga-film-stage {
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+  }
+
+  .saga-film-video-count {
+    top: 16px;
+    left: 16px;
   }
 
   .saga-film-rail {
@@ -7599,11 +7671,75 @@ body.saga-past-orbit .site-nav .nav-book {
     width: 100% !important;
     overflow-x: auto !important;
     justify-content: flex-start !important;
+    gap: 12px !important;
+    padding-bottom: 6px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
   }
 
   .saga-film-item {
     flex: 0 0 150px !important;
     min-width: 150px !important;
+    min-height: 56px;
+    scroll-snap-align: start;
+  }
+
+  .jawai-orbit-copy .eyebrow {
+    font-size: 8px !important;
+    letter-spacing: .2em !important;
+  }
+
+  .jawai-orbit-copy p,
+  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy p {
+    width: 88%;
+    font-size: 11px !important;
+    line-height: 1.55 !important;
+  }
+
+  .jawai-orbit-photo {
+    filter: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saga-gallery {
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .saga-gallery-top {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    padding: 48px 5vw 24px;
+  }
+
+  .saga-gallery-track {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  .saga-gallery-panel {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 0 5vw 24px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  .saga-gallery-frame {
+    height: min(52vh, 480px) !important;
+  }
+
+  .saga-gallery-dots {
+    display: none !important;
   }
 }
 

@@ -138,6 +138,13 @@ export default function SagaHome() {
 
   useGSAP(
     () => {
+      const isMobile = window.matchMedia(
+        '(max-width: 760px), (pointer: coarse)'
+      ).matches;
+      const prefersReducedMotion = window.matchMedia(
+        '(prefers-reduced-motion: reduce)'
+      ).matches;
+
       ScrollTrigger.defaults({
         invalidateOnRefresh: true,
       });
@@ -147,9 +154,9 @@ export default function SagaHome() {
         scrollTrigger: {
           trigger: '.hero',
           start: 'top top',
-          end: '+=130%',
-          scrub: 1.2,
-          pin: true,
+          end: isMobile ? '+=65%' : '+=130%',
+          scrub: isMobile ? 0.35 : 1.2,
+          pin: !isMobile && !prefersReducedMotion,
         },
       });
 
@@ -228,7 +235,7 @@ export default function SagaHome() {
             trigger: '.intro-visual',
             start: 'top 85%',
             end: 'bottom 40%',
-            scrub: 1,
+          scrub: isMobile ? 0.25 : 1,
           },
         }
       );
@@ -248,7 +255,7 @@ export default function SagaHome() {
             trigger: '.wildlife-split',
             start: 'top bottom',
             end: 'bottom top',
-            scrub: 1.4,
+          scrub: isMobile ? 0.25 : 1.4,
           },
         }
       );
@@ -263,7 +270,7 @@ export default function SagaHome() {
             trigger: '.wildlife-split',
             start: 'top 95%',
             end: 'top 25%',
-            scrub: 1.1,
+          scrub: isMobile ? 0.25 : 1.1,
           },
         }
       );
@@ -283,7 +290,7 @@ export default function SagaHome() {
             trigger: '.wildlife-split',
             start: 'top 65%',
             end: 'top 20%',
-            scrub: 1,
+          scrub: isMobile ? 0.25 : 1,
           },
         }
       );
@@ -310,6 +317,7 @@ export default function SagaHome() {
         let autoTimer = null;
         let sectionVisible = false;
         let interactionActive = false;
+        const canAutoPlay = !isMobile && !prefersReducedMotion;
 
         const wrap = (value) =>
           ((value % total) + total) % total;
@@ -518,7 +526,7 @@ export default function SagaHome() {
         const scheduleAuto = () => {
           clearTimeout(autoTimer);
 
-          if (interactionActive) {
+          if (interactionActive || !canAutoPlay || !sectionVisible) {
             return;
           }
 
@@ -692,18 +700,22 @@ export default function SagaHome() {
 
           onEnter: () => {
             sectionVisible = true;
+            scheduleAuto();
           },
 
           onEnterBack: () => {
             sectionVisible = true;
+            scheduleAuto();
           },
 
           onLeave: () => {
             sectionVisible = false;
+            clearTimeout(autoTimer);
           },
 
           onLeaveBack: () => {
             sectionVisible = false;
+            clearTimeout(autoTimer);
           },
         });
 
@@ -711,7 +723,7 @@ export default function SagaHome() {
         /*
          * Keep your existing short pin behaviour.
          */
-        ScrollTrigger.create({
+        if (!isMobile && !prefersReducedMotion) ScrollTrigger.create({
 
           trigger: orbitSection,
 
@@ -827,7 +839,7 @@ export default function SagaHome() {
       /* 8 IMAGE GALLERY */
       const galleryPanels = gsap.utils.toArray('.saga-gallery-panel');
 
-      if (galleryPanels.length > 1) {
+      if (galleryPanels.length > 1 && !isMobile && !prefersReducedMotion) {
         const galleryTween = gsap.to(galleryPanels, {
           xPercent: -100 * (galleryPanels.length - 1),
           ease: 'none',
@@ -1603,15 +1615,46 @@ export default function SagaHome() {
           opacity: .65;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 760px), (pointer: coarse) {
+          .saga-gallery {
+            height: auto;
+            min-height: 0;
+            overflow: hidden;
+          }
+
+          .saga-gallery-top {
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            padding: 82px 18px 28px;
+          }
+
+          .saga-gallery-top h2 {
+            font-size: clamp(52px, 14vw, 66px);
+          }
+
+          .saga-gallery-track {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: auto;
+            gap: 0;
+            transform: none !important;
+            will-change: auto;
+          }
+
           .saga-gallery-panel {
-            padding: 20vh 18px 12vh;
+            flex: 0 0 auto;
+            width: 100%;
+            height: auto;
+            padding: 0 18px 24px;
             grid-template-columns: 1fr;
             gap: 14px;
           }
 
           .saga-gallery-frame {
-            height: 32vh;
+            height: clamp(220px, 36svh, 320px);
           }
 
           .saga-gallery-frame:nth-child(2) {
@@ -1619,7 +1662,11 @@ export default function SagaHome() {
           }
 
           .saga-gallery-top {
-            top: 7vh;
+            top: auto;
+          }
+
+          .saga-gallery-dots {
+            display: none;
           }
 
           .founder-quote {
