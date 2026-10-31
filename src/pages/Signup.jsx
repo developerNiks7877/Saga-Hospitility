@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { publicAsset } from '../utils/publicAsset';
 import { useNavigate, Link } from 'react-router-dom';
 import { User, Mail, Phone, Lock, Eye, EyeOff, Check, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
@@ -135,7 +136,7 @@ export default function Signup() {
           {/* Top Logo */}
           <div style={{ maxWidth: '420px', display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img
-              src="/SAGA-JAWAI-LOGO.png"
+              src={publicAsset('/SAGA-JAWAI-LOGO.png')}
               alt="SAGA"
               style={{ width: '48px', height: '48px', objectFit: 'contain' }}
             />
@@ -211,7 +212,7 @@ export default function Signup() {
           <div style={{ marginBottom: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
               <img
-                src="/SAGA-JAWAI-LOGO.png"
+                src={publicAsset('/SAGA-JAWAI-LOGO.png')}
                 alt="SAGA"
                 style={{ width: '36px', height: '36px', objectFit: 'contain' }}
               />

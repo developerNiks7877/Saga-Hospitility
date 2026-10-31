@@ -1,3 +1,5 @@
+import { publicAsset } from '../utils/publicAsset';
+
 export const hotelData = {
   id: 'saga-jawai',
   name: 'SAGA',
@@ -9,7 +11,7 @@ export const hotelData = {
   reviewsCount: 348,
   checkInTime: '2:00 PM',
   checkOutTime: '11:00 AM',
-  logo: '/SAGA-JAWAI-LOGO.png',
+  logo: publicAsset('/SAGA-JAWAI-LOGO.png'),
   heroImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1400&q=80',
   images: [
     'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80',

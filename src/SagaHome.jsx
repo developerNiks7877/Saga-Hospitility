@@ -135,7 +135,6 @@ export default function SagaHome() {
   }, [menuOpen]);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [experienceIndex, setExperienceIndex] = useState(0);
-  const [experienceMuted, setExperienceMuted] = useState(true);
 
   useGSAP(
     () => {
@@ -1867,7 +1866,6 @@ export default function SagaHome() {
                 text: 'A quieter side of Jawai, revealed where water meets the wilderness.',
                 detail: 'Beyond the granite hills, flowing water brings an unexpected softness to the landscape — secluded, refreshing and shaped entirely by nature.',
                 poster: publicAsset('/assets/legacy/landscape.jpg'),
-                video: publicAsset('/assets/experiences/videos/experience-01.mp4'),
               },
               {
                 eyebrow: 'DESERT EVENINGS',
@@ -1875,7 +1873,6 @@ export default function SagaHome() {
                 text: 'Camels, open roads and journeys beneath the fading desert light.',
                 detail: 'As evening settles over Rajasthan, travellers move through the landscape while the desert slowly changes colour beneath the setting sun.',
                 poster: publicAsset('/assets/legacy/architecture.jpg'),
-                video: publicAsset('/assets/experiences/videos/experience-02.mp4'),
               },
               {
                 eyebrow: 'ON THE ROAD',
@@ -1883,7 +1880,6 @@ export default function SagaHome() {
                 text: 'Some journeys reveal the character of a place before you ever arrive.',
                 detail: 'A jeep moves through the open road carrying the everyday energy, movement and character of Rajasthan.',
                 poster: publicAsset('/assets/gallery/gallery-05.jpg'),
-                video: publicAsset('/assets/experiences/videos/experience-03.mp4'),
               },
               {
                 eyebrow: 'EVERYDAY LIFE',
@@ -1891,7 +1887,6 @@ export default function SagaHome() {
                 text: 'The smallest everyday moments often reveal the most about a place.',
                 detail: 'At a village handpump, a quiet pause for water becomes a glimpse into a life grounded in simplicity and deeply connected to the land.',
                 poster: publicAsset('/assets/gallery/gallery-08.jpg'),
-                video: publicAsset('/assets/experiences/videos/experience-04.mp4'),
               },
               {
                 eyebrow: 'LIVING HERITAGE',
@@ -1899,7 +1894,6 @@ export default function SagaHome() {
                 text: 'Some stories of Rajasthan are remembered not in words, but in song.',
                 detail: 'A local musician plays and sings, carrying traditions forward through melody, memory and the living culture of Rajasthan.',
                 poster: publicAsset('/assets/gallery/gallery-02.jpg'),
-                video: publicAsset('/assets/experiences/videos/experience-05.mp4'),
               },
               {
                 eyebrow: 'WILDLIFE',
@@ -1907,7 +1901,6 @@ export default function SagaHome() {
                 text: 'For a brief moment, the wilderness unfolds in extraordinary colour.',
                 detail: 'A peacock spreads its magnificent feathers against the earthy landscape — a vivid encounter with the quieter wildlife of the region.',
                 poster: publicAsset('/assets/legacy/interior.jpg'),
-                video: publicAsset('/assets/experiences/videos/experience-06.mp4'),
               },
               {
                 eyebrow: 'LEOPARD COUNTRY',
@@ -1915,7 +1908,6 @@ export default function SagaHome() {
                 text: 'Quiet footsteps through the landscape that has become synonymous with Jawai.',
                 detail: 'A leopard moves through its territory with effortless calm — a rare glimpse of the animal at the heart of Jawai’s wilderness.',
                 poster: publicAsset('/assets/gallery/gallery-01.jpg'),
-                video: publicAsset('/assets/experiences/videos/experience-07.mp4'),
               },
             ];
 
@@ -1923,7 +1915,6 @@ export default function SagaHome() {
               experiences[experienceIndex];
 
             const changeExperience = (index) => {
-              setExperienceMuted(true);
               setExperienceIndex(index);
             };
 
@@ -1981,21 +1972,12 @@ export default function SagaHome() {
 
                 <div className="saga-film-stage">
 
-                  <video
-                    key={active.video}
+                  <img
+                    key={active.poster}
                     className="saga-film-video"
-                    poster={active.poster}
-                    autoPlay
-                    muted={experienceMuted}
-                    loop
-                    playsInline
-                    preload="metadata"
-                  >
-                    <source
-                      src={active.video}
-                      type="video/mp4"
-                    />
-                  </video>
+                    src={active.poster}
+                    alt={active.title}
+                  />
 
                   <div className="saga-film-shade" />
 
@@ -2004,22 +1986,6 @@ export default function SagaHome() {
                     {' / '}
                     {String(experiences.length).padStart(2, '0')}
                   </span>
-
-                  <button
-                    type="button"
-                    className={`saga-film-sound ${
-                      !experienceMuted ? 'is-on' : ''
-                    }`}
-                    onClick={() =>
-                      setExperienceMuted((value) => !value)
-                    }
-                    aria-label="Toggle experience video sound"
-                  >
-                    <span className="saga-film-sound-icon">
-                      {experienceMuted ? '×' : '♪'}
-                    </span>
-                    {experienceMuted ? 'SOUND' : 'SOUND ON'}
-                  </button>
 
                 </div>
 
@@ -2053,17 +2019,11 @@ export default function SagaHome() {
                         }
                       >
                         <div className="saga-film-thumb">
-                          <video
-                            poster={item.poster}
-                            muted
-                            playsInline
-                            preload="none"
-                          >
-                            <source
-                              src={item.video}
-                              type="video/mp4"
-                            />
-                          </video>
+                          <img
+                            src={item.poster}
+                            alt=""
+                            loading="lazy"
+                          />
 
                           <span>
                             {String(index + 1).padStart(2, '0')}
