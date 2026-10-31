@@ -9,7 +9,7 @@ export default function UserLayout() {
   return (
     <div style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-page)' }}>
       {/* Reusable Sidebar Navigation */}
-      <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <Sidebar isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
       {/* Main Content Area */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0 }}>
