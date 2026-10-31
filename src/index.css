@@ -1730,6 +1730,14 @@ input[type="range"] {
 }
 
 /* Booking flow: responsive polish */
+.booking-mobile-navigation {
+  display: none;
+}
+
+.booking-flow-menu {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .user-layout-main {
     padding: 22px 16px 36px !important;
@@ -1775,18 +1783,39 @@ input[type="range"] {
 
   .booking-flow-header-inner {
     display: grid !important;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto 1fr auto;
     gap: 12px !important;
   }
 
-  .booking-flow-back {
+  .booking-mobile-navigation {
+    display: block;
     grid-column: 1;
+    grid-row: 1;
+  }
+
+  .booking-flow-menu {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid var(--border-light);
+    border-radius: 10px;
+    background: #fff;
+    color: var(--deep-olive);
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .booking-flow-back {
+    grid-column: 2;
     grid-row: 1;
     font-size: 12px !important;
   }
 
   .booking-flow-brand {
-    grid-column: 2;
+    grid-column: 3;
     grid-row: 1;
     font-size: 15px !important;
     letter-spacing: .06em !important;

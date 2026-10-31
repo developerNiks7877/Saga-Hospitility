@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, Check, Lock } from 'lucide-react';
+import { ArrowLeft, Check, Menu } from 'lucide-react';
+import Sidebar from './Sidebar';
 
 export default function BookingHeader({ currentStep = 1, backTo = '/search', backText = 'Back to Stays' }) {
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const steps = [
     { step: 1, label: 'Guest Details' },
@@ -35,6 +37,19 @@ export default function BookingHeader({ currentStep = 1, backTo = '/search', bac
           gap: '16px'
         }}
       >
+        <div className="booking-mobile-navigation">
+          <button
+            type="button"
+            className="booking-flow-menu"
+            onClick={() => setMenuOpen(true)}
+            aria-label="Open navigation menu"
+            aria-expanded={menuOpen}
+          >
+            <Menu size={21} />
+          </button>
+          <Sidebar isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+        </div>
+
         {/* Back Link */}
         <button
           className="booking-flow-back"
