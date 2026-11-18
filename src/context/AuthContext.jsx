@@ -4,11 +4,12 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import API_BASE_URL from '../config/api';
 
 const AuthContext = createContext(null);
 
 
- const API_BASE = 'http://localhost:5001';
+const API_BASE = API_BASE_URL;
 
 const LOGIN_URL = `${API_BASE}/api/auth/login`;
 const SIGNUP_URL = `${API_BASE}/api/auth/signup`;
@@ -129,6 +130,10 @@ export function AuthProvider({ children }) {
     setLoading(true);
 
     try {
+      if (!API_BASE) {
+        throw new Error('Account access will be available soon.');
+      }
+
       const response = await fetch(
         LOGIN_URL,
         {
@@ -208,6 +213,10 @@ export function AuthProvider({ children }) {
     setLoading(true);
 
     try {
+      if (!API_BASE) {
+        throw new Error('Account access will be available soon.');
+      }
+
       const response = await fetch(
         SIGNUP_URL,
         {
@@ -308,6 +317,10 @@ export function AuthProvider({ children }) {
     setLoading(true);
 
     try {
+      if (!API_BASE) {
+        throw new Error('Account access will be available soon.');
+      }
+
       const response = await fetch(
         GOOGLE_URL,
         {
@@ -370,6 +383,11 @@ export function AuthProvider({ children }) {
   const refreshAccessToken =
     async () => {
       if (!refreshToken) {
+        clearSession();
+        return null;
+      }
+
+      if (!API_BASE) {
         clearSession();
         return null;
       }

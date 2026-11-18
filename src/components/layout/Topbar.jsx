@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useBooking } from '../../context/BookingContext';
+import { publicAsset } from '../../utils/publicAsset';
 
 export default function Topbar({ onMenuToggle }) {
   const { user, logout } = useAuth();
@@ -38,6 +39,7 @@ export default function Topbar({ onMenuToggle }) {
 
   return (
     <header
+      className="user-topbar"
       style={{
         height: 'var(--topbar-height)',
         backgroundColor: '#FFFFFF',
@@ -53,7 +55,7 @@ export default function Topbar({ onMenuToggle }) {
       }}
     >
       {/* Left: Mobile Toggle & Big Clean Logo */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+      <div className="user-topbar-brand" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <button
           onClick={onMenuToggle}
           className="mobile-menu-btn"
@@ -72,7 +74,7 @@ export default function Topbar({ onMenuToggle }) {
         {/* Big Official Logo Display */}
         <Link to="/dashboard" style={{ display: 'flex', alignItems: 'center', gap: '14px', textDecoration: 'none' }}>
           <img
-            src="/assets/logo/saga-hospitality-logo.png"
+            src={publicAsset('/assets/logo/saga-hospitality-logo.png')}
             alt="SAGA"
             style={{
               height: '56px',
@@ -92,13 +94,13 @@ export default function Topbar({ onMenuToggle }) {
             }}
           >
             <MapPin size={12} style={{ color: 'var(--warm-gold)' }} />
-            Jawai Bandh, Rajasthan
+            Pali District, Rajasthan
           </span>
         </Link>
       </div>
 
       {/* Right Controls: Availability CTA, Notifications & User Avatar */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '18px', position: 'relative' }}>
+      <div className="user-topbar-actions" style={{ display: 'flex', alignItems: 'center', gap: '18px', position: 'relative' }}>
         {/* Fast Booking CTA */}
         <Link
           to="/rooms"
@@ -159,6 +161,7 @@ export default function Topbar({ onMenuToggle }) {
           {/* Notifications Dropdown */}
           {showNotifications && (
             <div
+              className="topbar-notifications-panel"
               style={{
                 position: 'absolute',
                 top: '48px',

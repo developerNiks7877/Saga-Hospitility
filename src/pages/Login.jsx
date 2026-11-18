@@ -5,6 +5,7 @@ import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import Button from '../components/ui/Button';
+import { publicAsset } from '../utils/publicAsset';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function Login() {
       const res = await login(email, password);
       showToast(
         'success',
-        res.message || 'Welcome back to SAGA JAWAAI'
+        res.message || 'Welcome back to SAGA Hospitality'
       );
       navigate('/dashboard');
     } catch (err) {
@@ -144,7 +145,7 @@ export default function Login() {
             }}
           >
             <img
-              src="/assets/logo/saga-hospitality-logo.png"
+              src={publicAsset('/assets/logo/saga-hospitality-logo.png')}
               alt="SAGA"
               style={{
                 width: '48px',

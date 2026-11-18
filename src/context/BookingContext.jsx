@@ -190,6 +190,12 @@ export const BookingProvider = ({ children }) => {
   useEffect(() => {
     let cancelled = false;
 
+    if (!API_BASE_URL) {
+      setRooms(hotelData.rooms || []);
+      setRoomsLoading(false);
+      return undefined;
+    }
+
     const fetchRooms = async () => {
       try {
         setRoomsLoading(true);
@@ -360,6 +366,10 @@ export const BookingProvider = ({ children }) => {
     try {
       setAvailabilityLoading(true);
       setAvailabilityError(null);
+
+      if (!API_BASE_URL) {
+        throw new Error('Bookings are coming soon.');
+      }
 
       if (
         !params.checkIn ||
@@ -601,6 +611,10 @@ export const BookingProvider = ({ children }) => {
   const completeBooking = async (
     paymentMethod = 'Credit Card'
   ) => {
+    if (!API_BASE_URL) {
+      throw new Error('Bookings are coming soon.');
+    }
+
     if (!activeDraft.room) {
       throw new Error('No room selected.');
     }
@@ -736,7 +750,7 @@ export const BookingProvider = ({ children }) => {
 
       location:
         hotel.location ||
-        'Jawai, Rajasthan',
+        'Rajasthan, India',
 
       image:
         activeDraft.room.image ||

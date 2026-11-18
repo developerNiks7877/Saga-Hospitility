@@ -166,7 +166,7 @@ export default function Dashboard() {
             }}
           >
             <Sparkles size={14} />
-            {hotel.name} • Jawai, Rajasthan
+            {hotel.name} • Rajasthan, India
           </span>
           <h1
             className="entry-reveal-text"
@@ -254,7 +254,7 @@ export default function Dashboard() {
                 display: 'block'
               }}
             >
-              Jawai Bandh, Pali • Rajasthan, India
+              Pali District • Rajasthan, India
             </span>
             <h2
               className="hero-content-reveal"

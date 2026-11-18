@@ -1,6 +1,8 @@
-/* SAGA JAWAI — CLEAN HOME STYLES
+/* SAGA RAJASTHAN — CLEAN HOME STYLES
    Removed unused legacy chapter / stay / old gallery / old footer rules.
 */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Italiana&display=swap');
 
 :root {
   --black: #11110e;
@@ -227,6 +229,7 @@ img {
 
 .hero-media {
   position: absolute;
+  z-index: 0;
   inset: -8%;
   width: 116%;
   height: 116%;
@@ -241,6 +244,28 @@ img {
   pointer-events: none;
 }
 
+.saga-film-control {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .72);
+  border-radius: 50%;
+  background: rgba(18, 20, 16, .28);
+  color: #fff;
+  font: 15px/1 Arial, sans-serif;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background .25s ease, transform .25s ease;
+}
+
+.saga-film-control:hover {
+  background: rgba(18, 20, 16, .62);
+  transform: scale(1.06);
+}
+
 .hero-main-logo {
   display: block;
   width: clamp(260px, 38vw, 620px);
@@ -252,6 +277,7 @@ img {
 
 .hero-shade {
   position: absolute;
+  z-index: 1;
   inset: 0;
   background: linear-gradient(
     180deg,
@@ -509,10 +535,10 @@ img {
 }
 
 /* =========================
-   JAWAI ORGANIC 3D ORBIT
+   RAJASTHAN ORGANIC 3D ORBIT
 ========================= */
 
-.jawai-orbit-experience {
+.rajasthan-orbit-experience {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -521,7 +547,7 @@ img {
   background: #eee7db;
 }
 
-.jawai-orbit-scene {
+.rajasthan-orbit-scene {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -532,7 +558,7 @@ img {
   isolation: isolate;
 }
 
-.jawai-orbit-atmosphere {
+.rajasthan-orbit-atmosphere {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -546,7 +572,7 @@ img {
     );
 }
 
-.jawai-orbit-ring {
+.rajasthan-orbit-ring {
   position: absolute;
   z-index: 20;
   top: 50%;
@@ -556,7 +582,7 @@ img {
   transform-style: preserve-3d;
 }
 
-.jawai-orbit-photo {
+.rajasthan-orbit-photo {
   position: absolute;
   top: 0;
   left: 0;
@@ -575,7 +601,7 @@ img {
   will-change: transform, opacity;
 }
 
-.jawai-orbit-photo::after {
+.rajasthan-orbit-photo::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -588,7 +614,7 @@ img {
   pointer-events: none;
 }
 
-.jawai-orbit-photo img {
+.rajasthan-orbit-photo img {
   display: block;
   width: 100%;
   height: 100%;
@@ -596,7 +622,7 @@ img {
   transform: scale(1.035);
 }
 
-.jawai-orbit-number {
+.rajasthan-orbit-number {
   position: absolute;
   z-index: 3;
   right: 13px;
@@ -607,7 +633,7 @@ img {
   letter-spacing: .2em;
 }
 
-.jawai-orbit-core {
+.rajasthan-orbit-core {
   position: absolute;
   z-index: 105;
   top: 50%;
@@ -624,14 +650,14 @@ img {
   will-change: transform, opacity;
 }
 
-.jawai-orbit-core img {
+.rajasthan-orbit-core img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.jawai-core-overlay {
+.rajasthan-core-overlay {
   position: absolute;
   inset: 0;
   background:
@@ -642,7 +668,7 @@ img {
     );
 }
 
-.jawai-core-label {
+.rajasthan-core-label {
   position: absolute;
   z-index: 3;
   left: 20px;
@@ -653,7 +679,7 @@ img {
   letter-spacing: .24em;
 }
 
-.jawai-orbit-copy {
+.rajasthan-orbit-copy {
   position: absolute;
   z-index: 140;
   top: 50%;
@@ -664,7 +690,7 @@ img {
   pointer-events: none;
 }
 
-.jawai-orbit-copy .eyebrow {
+.rajasthan-orbit-copy .eyebrow {
   display: block;
   margin-bottom: 19px;
   color: #d2aa61;
@@ -675,7 +701,7 @@ img {
     0 2px 14px rgba(0,0,0,.4);
 }
 
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-copy h2 {
   margin: 0;
   color: #f8f3e9;
   font-family: "Bigila", "Times New Roman", serif;
@@ -687,11 +713,11 @@ img {
     0 3px 24px rgba(0,0,0,.48);
 }
 
-.jawai-orbit-copy h2 em {
+.rajasthan-orbit-copy h2 em {
   font-weight: 400;
 }
 
-.jawai-orbit-copy p {
+.rajasthan-orbit-copy p {
   width: min(450px, 78%);
   margin: 24px auto 0;
   color: rgba(255,255,255,.86);
@@ -702,7 +728,7 @@ img {
     0 2px 12px rgba(0,0,0,.5);
 }
 
-.jawai-orbit-progress {
+.rajasthan-orbit-progress {
   position: absolute;
   z-index: 160;
   left: 50%;
@@ -714,7 +740,7 @@ img {
   transform: translateX(-50%);
 }
 
-.jawai-orbit-progress span {
+.rajasthan-orbit-progress span {
   display: block;
   width: 1px;
   height: 30px;
@@ -722,7 +748,7 @@ img {
     rgba(62,47,31,.42);
 }
 
-.jawai-orbit-progress small {
+.rajasthan-orbit-progress small {
   font-family: "Garet", Arial, sans-serif;
   font-size: 6px;
   letter-spacing: .28em;
@@ -732,31 +758,31 @@ img {
 
 @media (max-width: 760px) {
 
-  .jawai-orbit-scene {
+  .rajasthan-orbit-scene {
     perspective: 1100px;
   }
 
-  .jawai-orbit-photo {
+  .rajasthan-orbit-photo {
     width: 27vw;
     height: 36vw;
     margin:
       -18vw 0 0 -13.5vw;
   }
 
-  .jawai-orbit-core {
+  .rajasthan-orbit-core {
     width: 52vw;
     height: 52vh;
   }
 
-  .jawai-orbit-copy {
+  .rajasthan-orbit-copy {
     width: 74vw;
   }
 
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-copy h2 {
     font-size: 8.5vw;
   }
 
-  .jawai-orbit-copy p {
+  .rajasthan-orbit-copy p {
     display: none;
   }
 
@@ -1267,7 +1293,7 @@ img {
 }
 
 /* =========================================
-   SAGA JAWAI — HOSPITALITY STORY
+   SAGA RAJASTHAN — HOSPITALITY STORY
 ========================================= */
 
 .hospitality-story {
@@ -1313,6 +1339,16 @@ img {
   line-height: 1.9;
   letter-spacing: .015em;
   color: rgba(36, 34, 29, .7);
+}
+
+.hospitality-signature {
+  display: inline-block;
+  margin-top: 8px;
+  color: #9a7747;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.14em;
+  font-weight: 600;
+  line-height: 1.25;
 }
 
 .hospitality-gallery-btn {
@@ -2413,10 +2449,10 @@ img {
 
 
 /* =========================================
-   SAGA JAWAI — FINAL 3D ORBIT
+   SAGA RAJASTHAN — FINAL 3D ORBIT
 ========================================= */
 
-.jawai-orbit-experience {
+.rajasthan-orbit-experience {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -2427,7 +2463,7 @@ img {
   background: #eee7db;
 }
 
-.jawai-orbit-scene {
+.rajasthan-orbit-scene {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -2439,7 +2475,7 @@ img {
   isolation: isolate;
 }
 
-.jawai-orbit-ring {
+.rajasthan-orbit-ring {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -2449,7 +2485,7 @@ img {
   transform-style: preserve-3d;
 }
 
-.jawai-orbit-photo {
+.rajasthan-orbit-photo {
   position: absolute;
   top: 0;
   left: 0;
@@ -2480,14 +2516,14 @@ img {
     rgba(38, 27, 16, .15);
 }
 
-.jawai-orbit-photo img {
+.rajasthan-orbit-photo img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.jawai-orbit-photo::before {
+.rajasthan-orbit-photo::before {
   content: "";
   position: absolute;
   z-index: 3;
@@ -2500,7 +2536,7 @@ img {
   pointer-events: none;
 }
 
-.jawai-orbit-photo::after {
+.rajasthan-orbit-photo::after {
   content: "";
   position: absolute;
   z-index: 2;
@@ -2516,13 +2552,13 @@ img {
   pointer-events: none;
 }
 
-.jawai-orbit-photo.is-selected {
+.rajasthan-orbit-photo.is-selected {
   box-shadow:
     0 42px 110px
     rgba(36,24,13,.27);
 }
 
-.jawai-orbit-number {
+.rajasthan-orbit-number {
   position: absolute;
   z-index: 5;
   right: 13px;
@@ -2538,11 +2574,11 @@ img {
   letter-spacing: .2em;
 }
 
-.jawai-orbit-core {
+.rajasthan-orbit-core {
   display: none !important;
 }
 
-.jawai-orbit-copy {
+.rajasthan-orbit-copy {
   position: absolute;
 
   z-index: 190;
@@ -2561,7 +2597,7 @@ img {
   pointer-events: none;
 }
 
-.jawai-orbit-copy .eyebrow {
+.rajasthan-orbit-copy .eyebrow {
   display: block;
 
   margin-bottom: 19px;
@@ -2579,7 +2615,7 @@ img {
     rgba(0,0,0,.4);
 }
 
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-copy h2 {
   margin: 0;
 
   color: #f8f3e9;
@@ -2601,11 +2637,11 @@ img {
     rgba(0,0,0,.62);
 }
 
-.jawai-orbit-copy h2 em {
+.rajasthan-orbit-copy h2 em {
   font-weight: 400;
 }
 
-.jawai-orbit-copy p {
+.rajasthan-orbit-copy p {
   width:
     min(450px, 78%);
 
@@ -2626,7 +2662,7 @@ img {
     rgba(0,0,0,.62);
 }
 
-.jawai-orbit-progress {
+.rajasthan-orbit-progress {
   position: absolute;
 
   z-index: 200;
@@ -2645,7 +2681,7 @@ img {
   pointer-events: none;
 }
 
-.jawai-orbit-progress span {
+.rajasthan-orbit-progress span {
   width: 1px;
   height: 28px;
 
@@ -2653,7 +2689,7 @@ img {
     rgba(56,42,27,.4);
 }
 
-.jawai-orbit-progress small {
+.rajasthan-orbit-progress small {
   font-family:
     "Garet", Arial, sans-serif;
 
@@ -2668,11 +2704,11 @@ img {
 
 @media (max-width: 760px) {
 
-  .jawai-orbit-scene {
+  .rajasthan-orbit-scene {
     perspective: 1200px;
   }
 
-  .jawai-orbit-photo {
+  .rajasthan-orbit-photo {
     width: 112px;
     height: 160px;
 
@@ -2680,15 +2716,15 @@ img {
       -80px 0 0 -56px;
   }
 
-  .jawai-orbit-copy {
+  .rajasthan-orbit-copy {
     width: 74vw;
   }
 
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-copy h2 {
     font-size: 8vw;
   }
 
-  .jawai-orbit-copy p {
+  .rajasthan-orbit-copy p {
     display: none;
   }
 }
@@ -2698,59 +2734,59 @@ img {
    ORBIT — KEEP COPY CLEAR OF SELECTED IMAGE
 ========================================= */
 
-.jawai-orbit-copy {
+.rajasthan-orbit-copy {
   transition:
     top 0.8s cubic-bezier(.22, 1, .36, 1),
     transform 0.8s cubic-bezier(.22, 1, .36, 1);
 }
 
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy {
   top: 17%;
   transform: translate(-50%, 0);
 }
 
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy .eyebrow {
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy .eyebrow {
   margin-bottom: 10px;
   color: #b98a3e;
   text-shadow: none;
 }
 
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2 {
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy h2 {
   color: #46382a;
   font-size: clamp(30px, 2.8vw, 48px);
   line-height: 0.98;
   text-shadow: none;
 }
 
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy p {
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy p {
   margin-top: 13px;
   color: rgba(47, 37, 25, .68);
   text-shadow: none;
 }
 
 @media (max-width: 760px) {
-  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+  .rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy {
     top: 13%;
   }
 
-  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2 {
+  .rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy h2 {
     font-size: 7vw;
   }
 }
 
 /* =========================================================
-   SAGA JAWAI — ORBIT REFERENCE LAYOUT
+   SAGA RAJASTHAN — ORBIT REFERENCE LAYOUT
    Copy above / selected image below / no overlap
 ========================================================= */
 
-.jawai-orbit-experience {
+.rajasthan-orbit-experience {
   height: 100vh;
   min-height: 760px;
   background: #eee7db;
   overflow: hidden;
 }
 
-.jawai-orbit-scene {
+.rajasthan-orbit-scene {
   height: 100%;
   min-height: 760px;
   perspective: 1900px;
@@ -2759,21 +2795,21 @@ img {
 
 /* Orbit centre moves DOWN so the selected image
    has its own visual area below the copy */
-.jawai-orbit-ring {
+.rajasthan-orbit-ring {
   top: 63%;
   left: 50%;
 }
 
 /* Selected/side image base size */
-.jawai-orbit-photo {
+.rajasthan-orbit-photo {
   width: 205px;
   height: 285px;
   margin: -142.5px 0 0 -102.5px;
 }
 
 /* COPY IS NOW A SEPARATE TOP LAYER */
-.jawai-orbit-copy,
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+.rajasthan-orbit-copy,
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy {
   top: 15%;
   left: 50%;
 
@@ -2791,9 +2827,9 @@ img {
     transform .75s cubic-bezier(.22,1,.36,1);
 }
 
-.jawai-orbit-copy .eyebrow,
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy .eyebrow {
+.rajasthan-orbit-copy .eyebrow,
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy .eyebrow {
   display: block;
 
   margin: 0 0 12px;
@@ -2807,9 +2843,9 @@ img {
   text-shadow: none;
 }
 
-.jawai-orbit-copy h2,
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-copy h2,
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy h2 {
   margin: 0;
 
   color: #403428;
@@ -2827,15 +2863,15 @@ img {
   text-shadow: none;
 }
 
-.jawai-orbit-copy h2 em,
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy h2 em {
+.rajasthan-orbit-copy h2 em,
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy h2 em {
   font-weight: 400;
 }
 
-.jawai-orbit-copy p,
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy p {
+.rajasthan-orbit-copy p,
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy p {
   width: min(520px, 80%);
 
   margin: 16px auto 0;
@@ -2850,16 +2886,16 @@ img {
 }
 
 /* Scroll indicator stays underneath image */
-.jawai-orbit-progress {
+.rajasthan-orbit-progress {
   z-index: 300;
   bottom: 18px;
 }
 
-.jawai-orbit-progress span {
+.rajasthan-orbit-progress span {
   background: rgba(56,42,27,.38);
 }
 
-.jawai-orbit-progress small {
+.rajasthan-orbit-progress small {
   color: rgba(47,37,25,.55);
 }
 
@@ -2870,20 +2906,20 @@ img {
 
 @media (max-width: 1000px) {
 
-  .jawai-orbit-ring {
+  .rajasthan-orbit-ring {
     top: 62%;
   }
 
-  .jawai-orbit-copy,
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy {
+  .rajasthan-orbit-copy,
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy {
     top: 14%;
     width: 78vw;
   }
 
-  .jawai-orbit-copy h2,
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-copy h2,
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy h2 {
     font-size: clamp(32px, 4.5vw, 46px);
   }
 }
@@ -2895,48 +2931,48 @@ img {
 
 @media (max-width: 760px) {
 
-  .jawai-orbit-experience,
-  .jawai-orbit-scene {
+  .rajasthan-orbit-experience,
+  .rajasthan-orbit-scene {
     min-height: 700px;
   }
 
-  .jawai-orbit-scene {
+  .rajasthan-orbit-scene {
     perspective: 1200px;
   }
 
-  .jawai-orbit-ring {
+  .rajasthan-orbit-ring {
     top: 61%;
   }
 
-  .jawai-orbit-photo {
+  .rajasthan-orbit-photo {
     width: 112px;
     height: 160px;
     margin: -80px 0 0 -56px;
   }
 
-  .jawai-orbit-copy,
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy {
+  .rajasthan-orbit-copy,
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy {
     top: 12%;
     width: 82vw;
   }
 
-  .jawai-orbit-copy .eyebrow,
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy .eyebrow {
+  .rajasthan-orbit-copy .eyebrow,
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy .eyebrow {
     margin-bottom: 9px;
   }
 
-  .jawai-orbit-copy h2,
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-copy h2,
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy h2 {
     font-size: 7vw;
     line-height: 1;
   }
 
-  .jawai-orbit-copy p,
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy p {
+  .rajasthan-orbit-copy p,
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy p {
     display: block;
 
     width: 90%;
@@ -2949,13 +2985,13 @@ img {
 
 
 /* =========================================================
-   SAGA JAWAI — FINAL ORBIT SPACING FIX
+   SAGA RAJASTHAN — FINAL ORBIT SPACING FIX
    Text higher + selected image smaller
 ========================================================= */
 
 /* Move copy clearly above the selected photograph */
-.jawai-orbit-copy,
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+.rajasthan-orbit-copy,
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy {
   top: 9% !important;
   left: 50% !important;
   width: min(720px, 70vw) !important;
@@ -2964,33 +3000,33 @@ img {
 }
 
 /* Slightly tighten typography */
-.jawai-orbit-copy .eyebrow,
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy .eyebrow {
+.rajasthan-orbit-copy .eyebrow,
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy .eyebrow {
   margin-bottom: 9px !important;
 }
 
-.jawai-orbit-copy h2,
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2 {
+.rajasthan-orbit-copy h2,
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy h2 {
   font-size: clamp(31px, 2.6vw, 46px) !important;
   line-height: 0.98 !important;
 }
 
-.jawai-orbit-copy p,
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy p {
+.rajasthan-orbit-copy p,
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy p {
   width: min(500px, 78%) !important;
   margin-top: 11px !important;
   line-height: 1.55 !important;
 }
 
 /* Give image its own lower zone */
-.jawai-orbit-ring {
+.rajasthan-orbit-ring {
   top: 64% !important;
 }
 
 /* Make ONLY the selected centre image smaller.
    Existing GSAP gives desktop selected card scale: 2.12.
    CSS base reduction keeps orbit geometry unchanged. */
-.jawai-orbit-photo {
+.rajasthan-orbit-photo {
   width: 180px !important;
   height: 250px !important;
   margin: -125px 0 0 -90px !important;
@@ -3000,12 +3036,12 @@ img {
 /* TABLET */
 @media (max-width: 1000px) {
 
-  .jawai-orbit-copy,
-  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+  .rajasthan-orbit-copy,
+  .rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy {
     top: 8% !important;
   }
 
-  .jawai-orbit-ring {
+  .rajasthan-orbit-ring {
     top: 64% !important;
   }
 }
@@ -3014,27 +3050,27 @@ img {
 /* MOBILE */
 @media (max-width: 760px) {
 
-  .jawai-orbit-copy,
-  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+  .rajasthan-orbit-copy,
+  .rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy {
     top: 8% !important;
     width: 84vw !important;
   }
 
-  .jawai-orbit-copy h2,
-  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2 {
+  .rajasthan-orbit-copy h2,
+  .rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy h2 {
     font-size: 6.5vw !important;
   }
 
-  .jawai-orbit-copy p,
-  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy p {
+  .rajasthan-orbit-copy p,
+  .rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy p {
     font-size: 7px !important;
   }
 
-  .jawai-orbit-ring {
+  .rajasthan-orbit-ring {
     top: 63% !important;
   }
 
-  .jawai-orbit-photo {
+  .rajasthan-orbit-photo {
     width: 100px !important;
     height: 142px !important;
     margin: -71px 0 0 -50px !important;
@@ -3043,13 +3079,13 @@ img {
 
 
 /* =========================================================
-   SAGA JAWAI — DYNAMIC ORBIT COPY
+   SAGA RAJASTHAN — DYNAMIC ORBIT COPY
    Default = centre
    Clicked = animated to top
 ========================================================= */
 
 /* DEFAULT STATE — text stays between orbit images */
-.jawai-orbit-copy {
+.rajasthan-orbit-copy {
   top: 50% !important;
   left: 50% !important;
 
@@ -3068,12 +3104,12 @@ img {
 }
 
 /* Initial text styling — readable in centre */
-.jawai-orbit-copy .eyebrow {
+.rajasthan-orbit-copy .eyebrow {
   margin-bottom: 16px !important;
   color: #bd8d43 !important;
 }
 
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-copy h2 {
   color: #403428 !important;
 
   font-size:
@@ -3088,7 +3124,7 @@ img {
     color 0.6s ease !important;
 }
 
-.jawai-orbit-copy p {
+.rajasthan-orbit-copy p {
   width: min(470px, 80%) !important;
 
   margin:
@@ -3111,8 +3147,8 @@ img {
    Text smoothly travels above selected photograph
 ========================================================= */
 
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy {
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy {
   top: 8% !important;
 
   width:
@@ -3122,21 +3158,21 @@ img {
     translate(-50%, 0) !important;
 }
 
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy .eyebrow {
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy .eyebrow {
   margin-bottom: 9px !important;
 }
 
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy h2 {
   font-size:
     clamp(31px, 2.6vw, 46px) !important;
 
   line-height: .98 !important;
 }
 
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy p {
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy p {
   width:
     min(500px, 78%) !important;
 
@@ -3149,7 +3185,7 @@ img {
 
 
 /* Keep orbit/image position as currently approved */
-.jawai-orbit-ring {
+.rajasthan-orbit-ring {
   top: 64% !important;
 }
 
@@ -3160,7 +3196,7 @@ img {
 
 @media (max-width: 760px) {
 
-  .jawai-orbit-copy {
+  .rajasthan-orbit-copy {
     top: 48% !important;
 
     width:
@@ -3170,13 +3206,13 @@ img {
       translate(-50%, -50%) !important;
   }
 
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-copy h2 {
     font-size:
       8vw !important;
   }
 
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy {
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy {
     top: 7% !important;
 
     width:
@@ -3186,8 +3222,8 @@ img {
       translate(-50%, 0) !important;
   }
 
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy h2 {
     font-size:
       6.5vw !important;
   }
@@ -3195,7 +3231,7 @@ img {
 
 
 /* =========================================================
-   SAGA JAWAI — FINAL COPY POSITIONING
+   SAGA RAJASTHAN — FINAL COPY POSITIONING
    INITIAL:
    heading = centre between images
    paragraph = below images
@@ -3207,7 +3243,7 @@ img {
 
 /* ---------- INITIAL HEADING ---------- */
 
-.jawai-orbit-copy {
+.rajasthan-orbit-copy {
   top: 50% !important;
   left: 50% !important;
 
@@ -3226,7 +3262,7 @@ img {
 }
 
 
-.jawai-orbit-copy .eyebrow {
+.rajasthan-orbit-copy .eyebrow {
   display: block;
 
   margin-bottom: 13px !important;
@@ -3238,7 +3274,7 @@ img {
 }
 
 
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-copy h2 {
   margin: 0 !important;
 
   color: #403428 !important;
@@ -3260,7 +3296,7 @@ img {
    It sits BELOW the orbit images.
 ------------------------------------------------ */
 
-.jawai-orbit-copy p {
+.rajasthan-orbit-copy p {
   position: fixed !important;
 
   left: 50% !important;
@@ -3294,8 +3330,8 @@ img {
    Heading + paragraph move into upper clean area
 ========================================================= */
 
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy {
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy {
   top: 7% !important;
 
   width: min(720px, 70vw) !important;
@@ -3304,14 +3340,14 @@ img {
 }
 
 
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy .eyebrow {
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy .eyebrow {
   margin-bottom: 9px !important;
 }
 
 
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy h2 {
   font-size:
     clamp(30px, 2.5vw, 44px) !important;
 
@@ -3321,8 +3357,8 @@ img {
 
 /* Description joins heading after click */
 
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy p {
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy p {
   position: static !important;
 
   width: min(500px, 78%) !important;
@@ -3340,7 +3376,7 @@ img {
    SCROLL INDICATOR
 ========================================================= */
 
-.jawai-orbit-progress {
+.rajasthan-orbit-progress {
   bottom: 2.5% !important;
 }
 
@@ -3351,34 +3387,34 @@ img {
 
 @media (max-width: 760px) {
 
-  .jawai-orbit-copy {
+  .rajasthan-orbit-copy {
     top: 48% !important;
     width: 70vw !important;
   }
 
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-copy h2 {
     font-size: 7.5vw !important;
   }
 
-  .jawai-orbit-copy p {
+  .rajasthan-orbit-copy p {
     bottom: 9% !important;
     width: 76vw !important;
     font-size: 7px !important;
   }
 
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy {
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy {
     top: 6% !important;
     width: 84vw !important;
   }
 
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy h2 {
     font-size: 6.2vw !important;
   }
 
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy p {
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy p {
     width: 90% !important;
     margin-top: 9px !important;
   }
@@ -3391,7 +3427,7 @@ img {
 
 /* INITIAL:
    heading exactly in the empty centre between images */
-.jawai-orbit-copy {
+.rajasthan-orbit-copy {
   top: 64% !important;
   left: 50% !important;
 
@@ -3409,11 +3445,11 @@ img {
     width .95s cubic-bezier(.22,1,.36,1) !important;
 }
 
-.jawai-orbit-copy .eyebrow {
+.rajasthan-orbit-copy .eyebrow {
   margin: 0 0 10px !important;
 }
 
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-copy h2 {
   margin: 0 !important;
 
   font-size: clamp(29px, 2.35vw, 41px) !important;
@@ -3427,7 +3463,7 @@ img {
 /* INITIAL DESCRIPTION:
    completely separate from heading
    and below ALL orbit photographs */
-.jawai-orbit-copy p {
+.rajasthan-orbit-copy p {
   position: fixed !important;
 
   left: 50% !important;
@@ -3457,7 +3493,7 @@ img {
 
 
 /* Scroll indicator below description */
-.jawai-orbit-progress {
+.rajasthan-orbit-progress {
   bottom: 1.8% !important;
 }
 
@@ -3467,8 +3503,8 @@ img {
    Entire copy moves above selected photograph
 ========================================================= */
 
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy {
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy {
   top: 7% !important;
 
   width: min(700px, 70vw) !important;
@@ -3477,15 +3513,15 @@ img {
 }
 
 
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy h2 {
   font-size: clamp(30px, 2.5vw, 44px) !important;
 }
 
 
 /* Paragraph rejoins heading after click */
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy p {
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy p {
   position: static !important;
 
   width: min(500px, 80%) !important;
@@ -3505,16 +3541,16 @@ img {
 
 @media (max-width: 760px) {
 
-  .jawai-orbit-copy {
+  .rajasthan-orbit-copy {
     top: 61% !important;
     width: 42vw !important;
   }
 
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-copy h2 {
     font-size: 6vw !important;
   }
 
-  .jawai-orbit-copy p {
+  .rajasthan-orbit-copy p {
     bottom: 8% !important;
 
     width: 78vw !important;
@@ -3523,25 +3559,25 @@ img {
     font-size: 7px !important;
   }
 
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy {
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy {
     top: 6% !important;
     width: 84vw !important;
   }
 
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy h2 {
     font-size: 6.2vw !important;
   }
 }
 
 
 /* =========================================================
-   SAGA JAWAI — CLEAN ORBIT FINAL ADJUSTMENT
+   SAGA RAJASTHAN — CLEAN ORBIT FINAL ADJUSTMENT
 ========================================================= */
 
 /* Main heading — larger and clean in centre */
-.jawai-orbit-copy {
+.rajasthan-orbit-copy {
   top: 63% !important;
   left: 50% !important;
 
@@ -3553,7 +3589,7 @@ img {
   z-index: 300 !important;
 }
 
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-copy h2 {
   margin: 0 !important;
 
   font-size: clamp(36px, 3vw, 52px) !important;
@@ -3568,7 +3604,7 @@ img {
 
 
 /* Slightly larger orbit photographs */
-.jawai-orbit-photo {
+.rajasthan-orbit-photo {
   width: 195px !important;
   height: 270px !important;
 
@@ -3579,8 +3615,8 @@ img {
 
 /* Clicked state:
    heading smoothly moves above selected image */
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy {
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy {
   top: 8% !important;
 
   width: 600px !important;
@@ -3588,8 +3624,8 @@ img {
   transform: translate(-50%, 0) !important;
 }
 
-.jawai-orbit-experience.has-selected-photo
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-experience.has-selected-photo
+.rajasthan-orbit-copy h2 {
   font-size: clamp(34px, 2.8vw, 48px) !important;
 }
 
@@ -3597,16 +3633,16 @@ img {
 /* Mobile */
 @media (max-width: 760px) {
 
-  .jawai-orbit-copy {
+  .rajasthan-orbit-copy {
     top: 61% !important;
     width: 48vw !important;
   }
 
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-copy h2 {
     font-size: 7vw !important;
   }
 
-  .jawai-orbit-photo {
+  .rajasthan-orbit-photo {
     width: 108px !important;
     height: 154px !important;
 
@@ -3614,8 +3650,8 @@ img {
       -77px 0 0 -54px !important;
   }
 
-  .jawai-orbit-experience.has-selected-photo
-  .jawai-orbit-copy {
+  .rajasthan-orbit-experience.has-selected-photo
+  .rajasthan-orbit-copy {
     top: 7% !important;
     width: 82vw !important;
   }
@@ -3626,24 +3662,24 @@ img {
    ORBIT CLICK HEADING – FINAL ADJUSTMENT
 ========================================= */
 
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy{
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy{
   top: 12% !important;
   width: 680px !important;
 }
 
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2{
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy h2{
   font-size: clamp(42px, 3.4vw, 58px) !important;
   line-height: 1.02 !important;
   margin: 0 !important;
 }
 
 @media(max-width:760px){
-  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy{
+  .rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy{
     top: 11% !important;
     width: 86vw !important;
   }
 
-  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2{
+  .rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy h2{
     font-size: 7vw !important;
   }
 }
@@ -3908,18 +3944,14 @@ body.saga-past-orbit .site-nav .nav-book {
 
 
 /* =========================================================
-   SAGA JAWAI — LUXURY EDITORIAL DISPLAY FONT
+   SAGA RAJASTHAN — LUXURY EDITORIAL DISPLAY FONT
    Replaces handwritten/cursive display typography
 ========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap');
-
-
 /* Main editorial / section headings */
 
 .wildlife-split-copy h2,
 .rabari-split-copy h2,
-.jawai-orbit-copy h2,
+.rajasthan-orbit-copy h2,
 .founder-quote blockquote,
 .saga-legacy h2,
 .legacy-copy h2,
@@ -3941,7 +3973,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 .wildlife-split-copy h2 em,
 .rabari-split-copy h2 em,
-.jawai-orbit-copy h2 em,
+.rajasthan-orbit-copy h2 em,
 .saga-legacy h2 em,
 .legacy-copy h2 em,
 .accommodation-section h2 em,
@@ -3978,7 +4010,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 /* 3D orbit title */
 
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-copy h2 {
   font-size: clamp(46px, 4.2vw, 72px) !important;
   line-height: .96 !important;
 }
@@ -3987,12 +4019,8 @@ body.saga-past-orbit .site-nav .nav-book {
 
 
 /* =========================================================
-   SAGA JAWAI — FINAL LUXURY TYPOGRAPHY FIX
+   SAGA RAJASTHAN — FINAL LUXURY TYPOGRAPHY FIX
    ========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Italiana&display=swap');
-
-
 /* ---------------------------------------------------------
    01. LEGACY OF WILD HOSPITALITY
    Remove handwritten/cursive appearance
@@ -4032,7 +4060,7 @@ body.saga-past-orbit .site-nav .nav-book {
    03. 3D ORBIT TITLE
    --------------------------------------------------------- */
 
-.jawai-orbit-copy {
+.rajasthan-orbit-copy {
   width: min(620px, 46vw) !important;
 
   text-align: center !important;
@@ -4043,7 +4071,7 @@ body.saga-past-orbit .site-nav .nav-book {
 }
 
 
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-copy h2 {
   margin: 0 !important;
 
   font-family:
@@ -4063,7 +4091,7 @@ body.saga-past-orbit .site-nav .nav-book {
 }
 
 
-.jawai-orbit-copy h2 em {
+.rajasthan-orbit-copy h2 em {
   font-family:
     "Cormorant Garamond",
     "Times New Roman",
@@ -4094,11 +4122,11 @@ body.saga-past-orbit .site-nav .nav-book {
     font-size: clamp(42px, 11vw, 60px) !important;
   }
 
-  .jawai-orbit-copy {
+  .rajasthan-orbit-copy {
     width: 82vw !important;
   }
 
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-copy h2 {
     font-size: clamp(38px, 10vw, 54px) !important;
   }
 
@@ -4117,7 +4145,7 @@ body.saga-past-orbit .site-nav .nav-book {
    Center remains clean for selected image
    ========================================================= */
 
-.jawai-orbit-copy {
+.rajasthan-orbit-copy {
   position: absolute !important;
 
   top: 14% !important;
@@ -4135,7 +4163,7 @@ body.saga-past-orbit .site-nav .nav-book {
 }
 
 
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-copy h2 {
   margin: 0 !important;
 
   font-family:
@@ -4155,7 +4183,7 @@ body.saga-past-orbit .site-nav .nav-book {
 }
 
 
-.jawai-orbit-copy h2 em {
+.rajasthan-orbit-copy h2 em {
   font-family:
     "Cormorant Garamond",
     "Times New Roman",
@@ -4170,7 +4198,7 @@ body.saga-past-orbit .site-nav .nav-book {
 /* Move orbit/image system slightly downward
    so selected image never collides with title */
 
-.jawai-orbit-ring {
+.rajasthan-orbit-ring {
   top: 58% !important;
 }
 
@@ -4178,7 +4206,7 @@ body.saga-past-orbit .site-nav .nav-book {
 /* Give the selected / orbit cards a little more
    visual breathing room */
 
-.jawai-orbit-photo {
+.rajasthan-orbit-photo {
   width: clamp(185px, 18vw, 300px) !important;
 }
 
@@ -4226,21 +4254,21 @@ body.saga-past-orbit .site-nav .nav-book {
 
 @media (max-width: 768px) {
 
-  .jawai-orbit-copy {
+  .rajasthan-orbit-copy {
     top: 16% !important;
     width: 88vw !important;
   }
 
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-copy h2 {
     font-size: clamp(34px, 9vw, 46px) !important;
     line-height: .96 !important;
   }
 
-  .jawai-orbit-ring {
+  .rajasthan-orbit-ring {
     top: 60% !important;
   }
 
-  .jawai-orbit-photo {
+  .rajasthan-orbit-photo {
     width: clamp(145px, 42vw, 220px) !important;
   }
 
@@ -4256,12 +4284,12 @@ body.saga-past-orbit .site-nav .nav-book {
 
 
 /* =========================================================
-   SAGA JAWAI — ORBIT FINAL LAYOUT OVERRIDE
+   SAGA RAJASTHAN — ORBIT FINAL LAYOUT OVERRIDE
    Initial: heading above + image in centre
    Click: heading disappears + selected image owns centre
    ========================================================= */
 
-.jawai-orbit-experience {
+.rajasthan-orbit-experience {
   position: relative !important;
   min-height: 100vh !important;
   overflow: hidden !important;
@@ -4271,7 +4299,7 @@ body.saga-past-orbit .site-nav .nav-book {
    Move the whole orbit slightly lower so the heading
    gets its own clean space above the photography.
 */
-.jawai-orbit-ring {
+.rajasthan-orbit-ring {
   position: absolute !important;
   left: 50% !important;
   top: 58% !important;
@@ -4282,15 +4310,15 @@ body.saga-past-orbit .site-nav .nav-book {
 }
 
 /* Base card */
-.jawai-orbit-photo {
+.rajasthan-orbit-photo {
   width: clamp(205px, 18vw, 290px) !important;
   aspect-ratio: 4 / 5 !important;
   transform-origin: center center !important;
 }
 
 /* Heading gets a completely separate area ABOVE images */
-.jawai-orbit-copy,
-.jawai-orbit-experience:not(.has-selected-photo) .jawai-orbit-copy {
+.rajasthan-orbit-copy,
+.rajasthan-orbit-experience:not(.has-selected-photo) .rajasthan-orbit-copy {
   position: absolute !important;
 
   top: 16% !important;
@@ -4316,7 +4344,7 @@ body.saga-past-orbit .site-nav .nav-book {
 }
 
 /* Luxury heading sizing */
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-copy h2 {
   margin: 0 !important;
 
   font-size: clamp(40px, 4vw, 66px) !important;
@@ -4327,7 +4355,7 @@ body.saga-past-orbit .site-nav .nav-book {
   color: #352b22 !important;
 }
 
-.jawai-orbit-copy h2 em {
+.rajasthan-orbit-copy h2 em {
   display: inline-block !important;
   font-weight: 400 !important;
 }
@@ -4338,7 +4366,7 @@ body.saga-past-orbit .site-nav .nav-book {
    .has-selected-photo
    ========================================================= */
 
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy {
   opacity: 0 !important;
 
   transform:
@@ -4351,12 +4379,12 @@ body.saga-past-orbit .site-nav .nav-book {
 }
 
 /* Selected centre image stays above every other card */
-.jawai-orbit-photo.is-selected {
+.rajasthan-orbit-photo.is-selected {
   z-index: 250 !important;
 }
 
 /* Progress stays at bottom */
-.jawai-orbit-progress {
+.rajasthan-orbit-progress {
   position: absolute !important;
   left: 50% !important;
   bottom: 3.5% !important;
@@ -4371,26 +4399,26 @@ body.saga-past-orbit .site-nav .nav-book {
 
 @media (max-width: 760px) {
 
-  .jawai-orbit-ring {
+  .rajasthan-orbit-ring {
     top: 59% !important;
   }
 
-  .jawai-orbit-photo {
+  .rajasthan-orbit-photo {
     width: clamp(145px, 42vw, 190px) !important;
   }
 
-  .jawai-orbit-copy,
-  .jawai-orbit-experience:not(.has-selected-photo) .jawai-orbit-copy {
+  .rajasthan-orbit-copy,
+  .rajasthan-orbit-experience:not(.has-selected-photo) .rajasthan-orbit-copy {
     top: 17% !important;
     width: 88vw !important;
   }
 
-  .jawai-orbit-copy h2 {
+  .rajasthan-orbit-copy h2 {
     font-size: clamp(31px, 9vw, 45px) !important;
     line-height: 1 !important;
   }
 
-  .jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+  .rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy {
     transform:
       translateX(-50%)
       translateY(-20px) !important;
@@ -4463,7 +4491,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 
 /* =========================================================
-   SAGA JAWAI — LUXURY FULLSCREEN MENU OVERRIDE
+   SAGA RAJASTHAN — LUXURY FULLSCREEN MENU OVERRIDE
    ========================================================= */
 
 /* Menu overlay should remain locked to viewport */
@@ -4556,7 +4584,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 
 /* =========================================================
-   SAGA JAWAI — EDITORIAL FULLSCREEN MENU
+   SAGA RAJASTHAN — EDITORIAL FULLSCREEN MENU
 ========================================================= */
 
 .menu-panel {
@@ -4981,7 +5009,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 
 /* =========================================================
-   SAGA JAWAI — CINEMATIC EXPERIENCE FILM LIBRARY
+   SAGA RAJASTHAN — CINEMATIC EXPERIENCE FILM LIBRARY
 ========================================================= */
 
 .saga-film-experiences {
@@ -5238,52 +5266,14 @@ body.saga-past-orbit .site-nav .nav-book {
     );
 }
 
-.saga-film-video-count {
+.saga-film-controls {
   position: absolute;
-  top: 28px;
-  left: 30px;
-
-  color: rgba(255,255,255,.92);
-
-  font-family: Arial, sans-serif;
-  font-size: 10px;
-  letter-spacing: .18em;
-}
-
-.saga-film-sound {
-  position: absolute;
+  z-index: 4;
   right: 25px;
   bottom: 22px;
-
   display: flex;
   align-items: center;
-  gap: 10px;
-
-  padding: 0;
-
-  border: 0;
-  background: transparent;
-
-  color: #fff;
-
-  font-family: Arial, sans-serif;
-  font-size: 8px;
-  letter-spacing: .22em;
-
-  cursor: pointer;
-}
-
-.saga-film-sound-icon {
-  display: grid;
-  place-items: center;
-
-  width: 39px;
-  height: 39px;
-
-  border: 1px solid rgba(255,255,255,.72);
-  border-radius: 50%;
-
-  font-size: 16px;
+  gap: 9px;
 }
 
 
@@ -5350,7 +5340,8 @@ body.saga-past-orbit .site-nav .nav-book {
   background: #292a24;
 }
 
-.saga-film-thumb video {
+.saga-film-thumb video,
+.saga-film-thumb img {
   width: 100%;
   height: 100%;
 
@@ -5608,7 +5599,7 @@ body.saga-past-orbit .site-nav .nav-book {
 }
 
 /* =========================================================
-   SAGA JAWAI — WILDLIFE FOOTER
+   SAGA RAJASTHAN — WILDLIFE FOOTER
    ========================================================= */
 
 .saga-final-footer {
@@ -5644,7 +5635,7 @@ body.saga-past-orbit .site-nav .nav-book {
 .saga-footer-wildlife-image {
   position: absolute;
   inset: 0;
-  background-image: url('/assets/footer/saga-wildlife-footer.webp');
+  background-image: url('/assets/safari-experiences/DSC00019.webp');
   background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
@@ -5899,26 +5890,26 @@ body.saga-past-orbit .site-nav .nav-book {
 
 /* SAGA — DEPTH TUNNEL FINAL POLISH */
 
-.jawai-orbit-experience {
+.rajasthan-orbit-experience {
   overflow: hidden !important;
   perspective: 1400px !important;
   perspective-origin: 50% 58% !important;
 }
 
-.jawai-orbit-ring {
+.rajasthan-orbit-ring {
   transform-style: preserve-3d !important;
   perspective: 1400px !important;
   perspective-origin: 50% 50% !important;
 }
 
-.jawai-orbit-photo {
+.rajasthan-orbit-photo {
   backface-visibility: hidden !important;
   -webkit-backface-visibility: hidden !important;
   will-change: transform, opacity, filter !important;
   transform-style: preserve-3d !important;
 }
 
-.jawai-orbit-photo img {
+.rajasthan-orbit-photo img {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
@@ -5926,13 +5917,167 @@ body.saga-past-orbit .site-nav .nav-book {
   backface-visibility: hidden !important;
 }
 
-.jawai-orbit-photo.is-selected {
+.rajasthan-orbit-photo.is-selected {
   z-index: 250 !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .jawai-orbit-photo {
+  .rajasthan-orbit-photo {
     transition: none !important;
+  }
+}
+
+.saga-experience-intro {
+  margin-bottom: 0;
+  padding-top: 0;
+}
+
+.saga-film-experiences {
+  padding-top: 72px;
+  padding-bottom: 32px;
+}
+
+.saga-film-shell {
+  min-height: 320px;
+}
+
+.saga-film-kicker i {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .saga-experience-intro {
+    margin-bottom: 0;
+  }
+
+  .saga-film-experiences {
+    padding-top: 48px;
+    padding-bottom: 24px;
+  }
+
+  .saga-film-shell {
+    min-height: 0;
+  }
+}
+
+.home-stay-story {
+  max-width: 820px;
+  margin: 0 auto 88px;
+  text-align: center;
+}
+
+.home-stay-story > span {
+  color: #a87b37;
+  font: 600 10px/1.4 Arial, sans-serif;
+  letter-spacing: .28em;
+}
+
+.home-stay-story h2 {
+  margin: 13px 0 22px;
+  color: #20261c;
+  font: 400 clamp(40px, 5vw, 68px)/1 'Cormorant Garamond', Georgia, serif;
+}
+
+.home-stay-story p {
+  max-width: 720px;
+  margin: 0 auto 12px;
+  color: #555447;
+  font: 14px/1.8 'Garet', Arial, sans-serif;
+}
+
+.home-stay-story em {
+  display: inline-block;
+  margin-top: 12px;
+  color: #9a7747;
+  font: italic 600 20px/1.3 'Cormorant Garamond', Georgia, serif;
+}
+
+@media (max-width: 760px) {
+  .home-stay-story {
+    margin-bottom: 58px;
+  }
+
+  .home-stay-story h2 {
+    font-size: 42px;
+  }
+
+  .home-stay-story p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+}
+
+.rabari-journey {
+  min-height: 82vh;
+}
+
+.rabari-journey-copy {
+  padding-top: 6vh;
+  padding-bottom: 6vh;
+}
+
+@media (max-width: 900px) {
+  .rabari-journey-copy {
+    padding: 58px 7vw 48px;
+  }
+
+  .rabari-eyebrow {
+    margin-bottom: 24px;
+  }
+
+  .rabari-intro {
+    margin-top: 22px;
+  }
+
+  .rabari-journey-media {
+    height: 52vh;
+  }
+}
+
+.saga-experience-intro {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto 58px;
+  text-align: center;
+}
+
+.saga-experience-intro > span {
+  color: #a87b37;
+  font: 600 10px/1.4 Arial, sans-serif;
+  letter-spacing: .28em;
+}
+
+.saga-experience-intro h2 {
+  margin: 12px 0 18px;
+  color: #20261c;
+  font: 400 clamp(38px, 5.2vw, 66px)/1 'Cormorant Garamond', Georgia, serif;
+}
+
+.saga-experience-intro p {
+  margin: 0 auto 10px;
+  max-width: 720px;
+  color: #555447;
+  font: 14px/1.8 'Garet', Arial, sans-serif;
+}
+
+@media (max-width: 760px) {
+  .saga-film-experiences {
+    padding-top: 76px;
+  }
+
+  .saga-experience-intro {
+    margin-bottom: 34px;
+    padding: 0 4px;
+  }
+
+  .saga-experience-intro h2 {
+    font-size: 39px;
+  }
+
+  .saga-experience-intro p {
+    font-size: 13px;
+    line-height: 1.7;
   }
 }
 
@@ -5941,19 +6086,19 @@ body.saga-past-orbit .site-nav .nav-book {
    SAGA — SMOOTH CENTER CAROUSEL FINAL
    ========================================================= */
 
-.jawai-orbit-experience {
+.rajasthan-orbit-experience {
   overflow: hidden !important;
   perspective: 1600px !important;
   perspective-origin: 50% 60% !important;
 }
 
-.jawai-orbit-ring {
+.rajasthan-orbit-ring {
   transform-style: preserve-3d !important;
   perspective: 1600px !important;
   perspective-origin: 50% 50% !important;
 }
 
-.jawai-orbit-photo {
+.rajasthan-orbit-photo {
   transform-origin: center center !important;
   transform-style: preserve-3d !important;
 
@@ -5972,7 +6117,7 @@ body.saga-past-orbit .site-nav .nav-book {
   transition: none !important;
 }
 
-.jawai-orbit-photo img {
+.rajasthan-orbit-photo img {
   width: 100% !important;
   height: 100% !important;
 
@@ -5984,30 +6129,30 @@ body.saga-past-orbit .site-nav .nav-book {
   backface-visibility: hidden;
 }
 
-.jawai-orbit-photo.is-selected {
+.rajasthan-orbit-photo.is-selected {
   z-index: 250 !important;
 }
 
 /* No hover scaling — prevents popup effect */
-.jawai-orbit-photo:hover,
-.jawai-orbit-photo.is-selected:hover {
+.rajasthan-orbit-photo:hover,
+.rajasthan-orbit-photo.is-selected:hover {
   transform-origin: center center !important;
 }
 
 /* smoother GPU rendering */
-.jawai-orbit-ring,
-.jawai-orbit-photo,
-.jawai-orbit-photo img {
+.rajasthan-orbit-ring,
+.rajasthan-orbit-photo,
+.rajasthan-orbit-photo img {
   -webkit-font-smoothing: antialiased;
 }
 
 @media (max-width: 760px) {
 
-  .jawai-orbit-experience {
+  .rajasthan-orbit-experience {
     perspective: 1100px !important;
   }
 
-  .jawai-orbit-ring {
+  .rajasthan-orbit-ring {
     perspective: 1100px !important;
   }
 }
@@ -6015,7 +6160,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 /* SAGA ORBIT — FINAL SELECTED HEADING VISIBILITY FIX */
 
-.jawai-orbit-copy {
+.rajasthan-orbit-copy {
   opacity: 1 !important;
   visibility: visible !important;
   transition:
@@ -6024,7 +6169,7 @@ body.saga-past-orbit .site-nav .nav-book {
     visibility 0s linear 0s !important;
 }
 
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy {
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
@@ -6035,7 +6180,7 @@ body.saga-past-orbit .site-nav .nav-book {
     visibility 0s linear 0.55s !important;
 }
 
-.jawai-orbit-experience.has-selected-photo .jawai-orbit-copy h2 {
+.rajasthan-orbit-experience.has-selected-photo .rajasthan-orbit-copy h2 {
   opacity: 0 !important;
 }
 
@@ -6540,7 +6685,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 
 /* =========================================================
-   SAGA JAWAI — BRAND KIT / HERO + NAV / PASS 01
+   SAGA RAJASTHAN — BRAND KIT / HERO + NAV / PASS 01
    Visual treatment only. No layout or animation changes.
 ========================================================= */
 
@@ -6592,7 +6737,7 @@ body.saga-past-orbit .site-nav .nav-book {
   --saga-nav-gold: var(--saga-brand-gold);
 }
 
-/* FULLSCREEN MENU — deeper Jawai forest */
+/* FULLSCREEN MENU — deeper Rajasthan forest */
 .menu-panel {
   background:
     radial-gradient(
@@ -6647,7 +6792,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 
 /* =========================================================
-   SAGA JAWAI — BRAND KIT / PASS 02
+   SAGA RAJASTHAN — BRAND KIT / PASS 02
    Hospitality Story + Curated Experiences
    Visual treatment only
 ========================================================= */
@@ -6845,7 +6990,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 
 /* =========================================================
-   SAGA JAWAI — BRAND KIT / PASS 03
+   SAGA RAJASTHAN — BRAND KIT / PASS 03
    Accommodation + 3D Orbit
    Visual treatment only — geometry untouched
 ========================================================= */
@@ -6961,7 +7106,7 @@ body.saga-past-orbit .site-nav .nav-book {
    IMPORTANT: no geometry / transforms changed here
 --------------------------------------------------------- */
 
-.jawai-orbit-experience {
+.rajasthan-orbit-experience {
   background:
     radial-gradient(
       circle at 50% 55%,
@@ -6976,7 +7121,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 /* Atmospheric depth behind orbit */
 
-.jawai-orbit-atmosphere {
+.rajasthan-orbit-atmosphere {
   background:
     radial-gradient(
       ellipse at center,
@@ -6989,7 +7134,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 /* Orbit cards — only surface styling */
 
-.jawai-orbit-photo {
+.rajasthan-orbit-photo {
   background: #252b20 !important;
 
   box-shadow:
@@ -6999,7 +7144,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 /* Image treatment without transform */
 
-.jawai-orbit-photo img {
+.rajasthan-orbit-photo img {
   filter:
     saturate(.92)
     contrast(1.025)
@@ -7009,7 +7154,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 /* Number detail */
 
-.jawai-orbit-number {
+.rajasthan-orbit-number {
   color: rgba(244, 237, 221, .90) !important;
   border-color: rgba(184, 138, 59, .55) !important;
 }
@@ -7019,15 +7164,15 @@ body.saga-past-orbit .site-nav .nav-book {
    ORBIT EDITORIAL COPY
 --------------------------------------------------------- */
 
-.jawai-orbit-copy,
-.jawai-orbit-experience:not(.has-selected-photo) .jawai-orbit-copy {
+.rajasthan-orbit-copy,
+.rajasthan-orbit-experience:not(.has-selected-photo) .rajasthan-orbit-copy {
   color: #252c21 !important;
 }
 
 
 /* Current JSX uses a direct span as eyebrow */
 
-.jawai-orbit-copy > span {
+.rajasthan-orbit-copy > span {
   color: var(--saga-brand-gold) !important;
 
   letter-spacing: .30em !important;
@@ -7036,7 +7181,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 /* Main heading */
 
-.jawai-orbit-copy h2 {
+.rajasthan-orbit-copy h2 {
   color: #242a20 !important;
 }
 
@@ -7045,15 +7190,15 @@ body.saga-past-orbit .site-nav .nav-book {
    SCROLL PROGRESS
 --------------------------------------------------------- */
 
-.jawai-orbit-progress {
+.rajasthan-orbit-progress {
   color: rgba(42, 47, 36, .58) !important;
 }
 
-.jawai-orbit-progress > span {
+.rajasthan-orbit-progress > span {
   background: var(--saga-brand-gold) !important;
 }
 
-.jawai-orbit-progress small {
+.rajasthan-orbit-progress small {
   color: rgba(42, 47, 36, .58) !important;
 }
 
@@ -7071,7 +7216,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 
 /* =========================================================
-   SAGA JAWAI — BRAND KIT / PASS 04
+   SAGA RAJASTHAN — BRAND KIT / PASS 04
    Gallery + Rabari / The Local Welcome
    Visual treatment only
 ========================================================= */
@@ -7334,7 +7479,7 @@ body.saga-past-orbit .site-nav .nav-book {
 
 
 /* =========================================================
-   SAGA JAWAI — BRAND KIT / PASS 05
+   SAGA RAJASTHAN — BRAND KIT / PASS 05
    Statement + Final Footer
    Visual treatment only
 ========================================================= */
@@ -7555,3 +7700,1163 @@ body.saga-past-orbit .site-nav .nav-book {
     ) !important;
 }
 
+
+/* THE SAGA JOURNAL — EXPANDABLE EDITORIAL CARDS */
+.home-journal {
+  position: relative;
+  padding: clamp(76px, 10vw, 145px) 7vw;
+  overflow: hidden;
+  background: #e9e2d4;
+  color: #24251c;
+}
+
+.home-journal::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background: radial-gradient(ellipse at 85% 8%, rgba(182, 154, 101, .1), transparent 38%);
+}
+
+.home-journal-heading,
+.home-journal-link {
+  position: relative;
+  z-index: 1;
+}
+
+.home-journal-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  max-width: 1280px;
+  margin: 0 auto 34px;
+}
+
+.home-journal-eyebrow {
+  color: #8b7547;
+  font-family: 'Garet', Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: .22em;
+}
+
+.home-journal-heading h2 {
+  margin: 12px 0 0;
+  color: #24251c;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 400;
+  line-height: .92;
+}
+
+.home-journal-heading > p {
+  max-width: 390px;
+  margin: 0 0 5px;
+  color: rgba(36, 37, 28, .72);
+  font-family: 'Garet', Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.expandable-journal-viewport {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.expandable-journal-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 8px 4px 22px;
+  scroll-padding-inline: 20%;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.expandable-journal-track::-webkit-scrollbar {
+  display: none;
+}
+
+.expandable-journal-card {
+  position: relative;
+  flex: 0 0 218px;
+  height: 348px;
+  overflow: hidden;
+  border: 1px solid rgba(197, 170, 112, .38);
+  background: #f4efe6;
+  scroll-snap-align: center;
+  transition: flex-basis .45s cubic-bezier(.23, 1, .32, 1), border-color .3s ease;
+}
+
+.expandable-journal-card.is-selected {
+  flex-basis: min(560px, calc(100vw - 100px));
+  border-color: rgba(197, 170, 112, .88);
+}
+
+.expandable-journal-face {
+  position: absolute;
+  inset: 0 auto 0 0;
+  display: flex;
+  width: 218px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 20px;
+  color: #fff;
+  text-align: left;
+}
+
+.expandable-journal-face::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: "";
+  background: linear-gradient(180deg, rgba(15, 16, 12, .48), transparent 38%, rgba(15, 16, 12, .7));
+  pointer-events: none;
+}
+
+.expandable-journal-face img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .75s cubic-bezier(.2,.7,.2,1);
+}
+
+.expandable-journal-card:hover .expandable-journal-face img,
+.expandable-journal-card.is-selected .expandable-journal-face img {
+  transform: scale(1.045);
+}
+
+.expandable-journal-number,
+.expandable-journal-category,
+.expandable-journal-title,
+.expandable-journal-hint {
+  position: relative;
+  z-index: 1;
+}
+
+.expandable-journal-number {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.expandable-journal-category,
+.expandable-journal-hint,
+.expandable-journal-copy-kicker {
+  font-family: 'Garet', Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: .17em;
+}
+
+.expandable-journal-category {
+  margin-top: auto;
+  margin-bottom: 15px;
+  color: #d7bd81;
+}
+
+.expandable-journal-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 29px;
+  font-weight: 500;
+  line-height: .98;
+}
+
+.expandable-journal-hint {
+  margin-top: 18px;
+  color: rgba(255, 255, 255, .78);
+}
+
+.expandable-journal-copy {
+  position: absolute;
+  inset: 0 0 0 218px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 30px 28px;
+  overflow: auto;
+  background: #f4efe6;
+  color: #24251c;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(12px);
+  transition: opacity .25s ease .08s, transform .35s ease .08s;
+}
+
+.expandable-journal-card.is-selected .expandable-journal-copy {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.expandable-journal-copy-kicker {
+  color: #8b7547;
+}
+
+.expandable-journal-copy h3 {
+  margin: 16px 0 12px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 34px;
+  font-weight: 500;
+  line-height: .98;
+}
+
+.expandable-journal-copy p {
+  margin: 0;
+  color: #5e5b50;
+  font-family: 'Garet', Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.expandable-journal-copy a {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 18px;
+  border-top: 1px solid rgba(36, 37, 28, .2);
+  color: #655536;
+  font-family: 'Garet', Arial, sans-serif;
+  font-size: 9px;
+  letter-spacing: .15em;
+  text-decoration: none;
+}
+
+.expandable-journal-copy a:hover span {
+  transform: translate(3px, -3px);
+}
+
+.expandable-journal-copy a span {
+  font-size: 16px;
+  transition: transform .2s ease;
+}
+
+.expandable-journal-face:focus-visible,
+.expandable-journal-copy a:focus-visible {
+  outline: 2px solid #c5aa70;
+  outline-offset: -4px;
+}
+
+.home-journal-link {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 25px auto 0;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(197, 170, 112, .75);
+  color: #24251c;
+  font-family: 'Garet', Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: .18em;
+}
+
+.home-journal-link span {
+  color: #c5aa70;
+  font-size: 18px;
+  transition: transform .2s ease;
+}
+
+.home-journal-link:hover span {
+  transform: translateX(5px);
+}
+
+@media (max-width: 700px) {
+  .home-journal-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 25px;
+  }
+
+  .expandable-journal-card {
+    flex-basis: 158px;
+    height: 315px;
+  }
+
+  .expandable-journal-card.is-selected {
+    flex-basis: 86vw;
+  }
+
+  .expandable-journal-face {
+    width: 158px;
+    padding: 16px;
+  }
+
+  .expandable-journal-copy {
+    left: 158px;
+    padding: 19px 15px;
+  }
+
+  .expandable-journal-title {
+    font-size: 25px;
+  }
+
+  .expandable-journal-copy h3 {
+    margin: 12px 0 10px;
+    font-size: 26px;
+  }
+
+  .expandable-journal-copy p {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 390px) {
+  .expandable-journal-card {
+    flex-basis: 138px;
+  }
+
+  .expandable-journal-card.is-selected {
+    flex-basis: 88vw;
+  }
+
+  .expandable-journal-face {
+    width: 138px;
+  }
+
+  .expandable-journal-copy {
+    left: 138px;
+    padding: 16px 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .expandable-journal-card,
+  .expandable-journal-face img,
+  .expandable-journal-copy,
+  .expandable-journal-copy a span {
+    transition-duration: 0.01ms;
+  }
+}
+
+/* Compact Local Welcome section */
+.rabari-journey {
+  min-height: 70vh !important;
+  padding-block: 4vh !important;
+}
+
+.rabari-journey-copy {
+  padding-top: 4vh !important;
+  padding-bottom: 4vh !important;
+}
+
+.rabari-journey-media {
+  height: auto !important;
+  max-height: none !important;
+  align-self: stretch !important;
+  min-height: 0 !important;
+}
+
+@media (min-width: 901px) {
+  .rabari-journey-media {
+    margin-block: -4vh !important;
+  }
+}
+
+.rabari-journey-media > img {
+  height: 100% !important;
+  min-height: 0 !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+@media (max-width: 900px) {
+  .rabari-journey {
+    min-height: 0 !important;
+  }
+
+  .rabari-journey-copy {
+    padding: 42px 7vw 36px !important;
+  }
+
+  .rabari-journey-media {
+    height: 50vh !important;
+  }
+}
+
+.founder-quote-inner blockquote .philosophy-eyebrow,
+.founder-quote-inner blockquote strong,
+.founder-quote-inner blockquote > span:not(.philosophy-eyebrow),
+.founder-quote-inner blockquote em {
+  display: block;
+}
+
+.founder-quote-inner blockquote .philosophy-eyebrow {
+  margin-bottom: 18px;
+  color: #d7ad64;
+  font: 600 10px/1.4 Arial, sans-serif;
+  letter-spacing: .28em;
+}
+
+.founder-quote-inner blockquote strong {
+  margin-bottom: 22px;
+  font: 400 clamp(36px, 4vw, 54px)/1.05 'Cormorant Garamond', Georgia, serif;
+}
+
+.founder-quote-inner blockquote > span:not(.philosophy-eyebrow) {
+  margin: 0 auto 14px;
+  max-width: 760px;
+  font: 400 15px/1.75 'Garet', Arial, sans-serif;
+}
+
+.founder-quote-inner blockquote em {
+  margin-top: 22px;
+  color: #e2bd78;
+  font: italic 500 21px/1.4 'Cormorant Garamond', Georgia, serif;
+}
+
+.safari-experience-intro {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 24px 0;
+  text-align: center;
+}
+
+.rajasthan-orbit-experience {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  padding-bottom: 0 !important;
+  margin-top: -64px !important;
+}
+
+.rajasthan-orbit-experience > .rajasthan-orbit-scene {
+  height: 34vh !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.rajasthan-orbit-experience > .rajasthan-orbit-scene > .rajasthan-orbit-ring {
+  top: 50% !important;
+}
+
+.safari-experience-intro > span {
+  color: #a87b37;
+  font: 600 10px/1.4 Arial, sans-serif;
+  letter-spacing: .28em;
+}
+
+.home-journal {
+  padding-top: 24px !important;
+}
+
+.safari-experience-intro h2 {
+  margin: 12px 0 18px;
+  color: #20261c;
+  font: 400 clamp(42px, 5vw, 66px)/1 'Cormorant Garamond', Georgia, serif;
+}
+
+.safari-experience-intro p {
+  max-width: 760px;
+  margin: 0 auto 10px;
+  color: #555447;
+  font: 14px/1.8 'Garet', Arial, sans-serif;
+}
+
+/* Restored editorial welcome and compact safari orbit spacing. */
+.saga-local-welcome {
+  display: grid !important;
+  grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr) !important;
+  min-height: 65vh !important;
+  padding: 34px 0 !important;
+  overflow: hidden !important;
+  background: #642d20 !important;
+  color: #f4eadb !important;
+}
+
+.story-mantra {
+  margin-top: 20px !important;
+  color: #b78e49 !important;
+  font: italic 500 clamp(19px, 2vw, 25px)/1.35 'Cormorant Garamond', Georgia, serif !important;
+}
+
+.saga-local-copy {
+  align-self: center !important;
+  padding: 34px clamp(28px, 7.8vw, 110px) !important;
+}
+
+.saga-local-copy > span:first-child {
+  color: #d2ad68 !important;
+  font: 600 9px/1.5 Arial, sans-serif !important;
+  letter-spacing: .25em !important;
+}
+
+.saga-local-copy h2 {
+  margin: 20px 0 18px !important;
+  color: #f4eadb !important;
+  font: 400 clamp(42px, 5vw, 68px)/.96 'Cormorant Garamond', Georgia, serif !important;
+}
+
+.saga-local-copy h2 em {
+  display: block;
+  color: #d5b26e !important;
+  font-weight: 400;
+}
+
+.saga-local-copy p {
+  color: rgba(248, 240, 224, .78) !important;
+  font: 12px/1.7 'Garet', Arial, sans-serif !important;
+}
+
+.saga-local-note {
+  margin-top: 20px !important;
+  padding-top: 16px !important;
+  border-top: 1px solid rgba(213, 178, 110, .35) !important;
+}
+
+.saga-local-note small,
+.saga-local-signoff {
+  color: #d5b26e !important;
+  font: 600 8px/1.5 Arial, sans-serif !important;
+  letter-spacing: .2em !important;
+}
+
+.saga-local-note p { margin: 10px 0 !important; }
+.saga-local-signoff { display: block; margin-top: 14px; }
+
+.saga-local-copy button {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 18px !important;
+  margin-top: 16px !important;
+  color: #d5b26e !important;
+  font: 600 9px/1.4 Arial, sans-serif !important;
+  letter-spacing: .15em !important;
+}
+
+.saga-local-copy button svg {
+  display: block !important;
+  width: 34px !important;
+  height: 15px !important;
+  overflow: visible !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 1.2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+.saga-local-image {
+  position: relative !important;
+  align-self: stretch !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+.saga-local-image img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.rajasthan-orbit-experience {
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.rajasthan-orbit-experience > .rajasthan-orbit-scene {
+  height: min(78vh, 820px) !important;
+  min-height: 620px !important;
+}
+
+.rajasthan-orbit-experience > .rajasthan-orbit-scene > .rajasthan-orbit-copy {
+  top: 7% !important;
+  width: min(780px, 84vw) !important;
+}
+
+.rajasthan-orbit-copy > p {
+  max-width: 760px;
+  margin: 13px auto 0;
+  color: #555447;
+  font: 12px/1.6 'Garet', Arial, sans-serif;
+}
+
+.rajasthan-orbit-experience > .rajasthan-orbit-scene > .rajasthan-orbit-ring {
+  top: 63% !important;
+}
+
+.home-journal { padding-top: 36px !important; }
+
+@media (max-width: 760px) {
+  .saga-local-welcome {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+    padding: 24px 0 0 !important;
+  }
+
+  .saga-local-copy { padding: 34px 24px 28px !important; }
+  .saga-local-image { height: 42vh !important; min-height: 270px !important; }
+  .rajasthan-orbit-experience > .rajasthan-orbit-scene {
+    height: 740px !important;
+    min-height: 740px !important;
+  }
+  .rajasthan-orbit-experience > .rajasthan-orbit-scene > .rajasthan-orbit-copy {
+    top: 5% !important;
+    width: 90vw !important;
+  }
+  .rajasthan-orbit-copy > p { font-size: 11px; line-height: 1.55; }
+  .rajasthan-orbit-experience > .rajasthan-orbit-scene > .rajasthan-orbit-ring {
+    top: 68% !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .safari-experience-intro {
+    padding: 54px 20px 4px;
+  }
+
+  .safari-experience-intro h2 {
+    font-size: 42px;
+  }
+
+  .safari-experience-intro p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+}
+
+/* Mobile-only layout polish. Desktop styles remain unchanged. */
+@media (max-width: 760px) {
+  .saga-page {
+    overflow-x: clip;
+  }
+
+  .site-nav {
+    padding-inline: 16px !important;
+  }
+
+  .home-accommodation {
+    padding: 56px 18px 64px !important;
+  }
+
+  .home-stay-story {
+    margin-bottom: 42px;
+    padding-inline: 2px;
+  }
+
+  .home-stay-story h2 {
+    font-size: clamp(34px, 10vw, 42px);
+  }
+
+  .home-stay-story p {
+    font-size: 12px;
+  }
+
+  .home-room-grid {
+    gap: 14px;
+  }
+
+  .home-room-card {
+    flex: 0 0 min(78vw, 310px);
+  }
+
+  .home-journal {
+    padding: 34px 18px 52px !important;
+  }
+
+  .home-journal-heading {
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+
+  .home-journal-heading h2 {
+    font-size: clamp(42px, 12vw, 58px);
+  }
+
+  .home-journal-heading > p {
+    max-width: 100%;
+    font-size: 12px;
+  }
+
+  .saga-experience-intro {
+    padding: 40px 18px 0;
+  }
+
+  .saga-film-experiences {
+    padding: 44px 18px 42px !important;
+  }
+
+  .saga-film-shell {
+    gap: 22px;
+  }
+
+  .saga-film-copy h2 {
+    font-size: clamp(40px, 12vw, 58px) !important;
+  }
+
+  .saga-film-rail {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .saga-film-items {
+    min-height: 0 !important;
+  }
+
+  .rabari-journey {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+  }
+
+  .rabari-journey-copy {
+    padding: 44px 22px 38px !important;
+  }
+
+  .rabari-journey .rabari-eyebrow {
+    margin-bottom: 20px !important;
+  }
+
+  .rabari-journey h2 {
+    font-size: clamp(42px, 13vw, 60px) !important;
+  }
+
+  .rabari-intro {
+    margin-top: 18px !important;
+    font-size: 12px !important;
+    line-height: 1.7 !important;
+  }
+
+  .rabari-description {
+    margin-top: 22px !important;
+    padding-top: 17px !important;
+  }
+
+  .rabari-description p {
+    font-size: 11px !important;
+    line-height: 1.7 !important;
+  }
+
+  .rabari-journey-footer {
+    margin-top: 20px !important;
+    gap: 14px !important;
+  }
+
+  .rabari-journey-media {
+    height: 44vh !important;
+    min-height: 250px !important;
+  }
+
+  .rajasthan-orbit-experience {
+    margin-top: 0 !important;
+  }
+
+  .rajasthan-orbit-experience > .rajasthan-orbit-scene {
+    height: 38vh !important;
+    min-height: 280px !important;
+  }
+
+  .rajasthan-orbit-experience > .rajasthan-orbit-scene > .rajasthan-orbit-ring {
+    top: 50% !important;
+  }
+
+  .saga-gallery {
+    height: 100svh !important;
+    min-height: 620px !important;
+  }
+
+  .saga-gallery-panel {
+    box-sizing: border-box !important;
+    padding: 16vh 18px 12vh !important;
+    gap: 12px !important;
+  }
+
+  .saga-gallery-frame {
+    height: 28vh !important;
+    min-height: 170px;
+  }
+
+  .founder-quote {
+    min-height: 0 !important;
+    padding: 64px 22px !important;
+  }
+
+  .founder-quote-inner {
+    width: 100% !important;
+  }
+
+  .founder-quote-inner blockquote > span:not(.philosophy-eyebrow) {
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  .founder-quote-inner blockquote em {
+    font-size: 18px;
+  }
+}
+
+/* Final scroll reveal defaults; keep this after the legacy section rules. */
+[data-scroll-reveal] {
+  opacity: 0;
+  translate: 0 16px;
+  transition: opacity 560ms ease, translate 650ms cubic-bezier(.2, .7, .2, 1);
+}
+
+[data-scroll-reveal].is-inview {
+  opacity: 1;
+  translate: 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-reveal],
+  [data-scroll-reveal].is-inview {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+}
+
+/* Give Safari Experience copy its own clear space above the image orbit. */
+.rajasthan-orbit-experience > .rajasthan-orbit-scene {
+  height: min(112vh, 860px) !important;
+  min-height: 760px !important;
+}
+
+.rajasthan-orbit-experience > .rajasthan-orbit-scene > .rajasthan-orbit-copy {
+  top: 5% !important;
+  width: min(920px, 88vw) !important;
+}
+
+.rajasthan-orbit-copy > span {
+  display: block !important;
+  margin: 0 0 14px !important;
+  font-size: 11px !important;
+  line-height: 1.5 !important;
+}
+
+.rajasthan-orbit-copy > h2 {
+  margin: 0 0 18px !important;
+  font-size: clamp(52px, 5.2vw, 76px) !important;
+  line-height: .98 !important;
+}
+
+.rajasthan-orbit-copy > p {
+  width: min(760px, 90%) !important;
+  margin: 0 auto 10px !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+}
+
+.rajasthan-orbit-experience > .rajasthan-orbit-scene > .rajasthan-orbit-ring {
+  top: 75% !important;
+}
+
+@media (max-width: 760px) {
+  .rajasthan-orbit-experience > .rajasthan-orbit-scene {
+    height: 900px !important;
+    min-height: 900px !important;
+  }
+
+  .rajasthan-orbit-experience > .rajasthan-orbit-scene > .rajasthan-orbit-copy {
+    top: 4% !important;
+    width: 90vw !important;
+  }
+
+  .rajasthan-orbit-copy > h2 {
+    font-size: clamp(44px, 10vw, 58px) !important;
+  }
+
+  .rajasthan-orbit-copy > p {
+    width: 92% !important;
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+  }
+
+  .rajasthan-orbit-experience > .rajasthan-orbit-scene > .rajasthan-orbit-ring {
+    top: 76% !important;
+  }
+}
+
+/* Keep Safari copy in its own section row above the animated photo orbit. */
+#experience.rajasthan-orbit-experience {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+
+#experience.rajasthan-orbit-experience > .rajasthan-orbit-copy {
+  position: relative !important;
+  inset: auto !important;
+  transform: none !important;
+  width: min(920px, 88vw) !important;
+  margin: 0 auto !important;
+  padding: 42px 24px 26px !important;
+  text-align: center !important;
+  z-index: 300 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#experience.rajasthan-orbit-experience.has-selected-photo > .rajasthan-orbit-copy {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+#experience.rajasthan-orbit-experience.has-selected-photo > .rajasthan-orbit-copy > h2 {
+  opacity: 1 !important;
+}
+
+#experience.rajasthan-orbit-experience > .rajasthan-orbit-copy > span {
+  display: block !important;
+  margin: 0 0 14px !important;
+  font-size: 11px !important;
+  line-height: 1.5 !important;
+}
+
+#experience.rajasthan-orbit-experience > .rajasthan-orbit-copy > h2 {
+  margin: 0 0 18px !important;
+  font-size: clamp(54px, 5.4vw, 78px) !important;
+  line-height: .98 !important;
+}
+
+#experience.rajasthan-orbit-experience > .rajasthan-orbit-copy > p {
+  width: min(760px, 92%) !important;
+  margin: 0 auto 10px !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+}
+
+#experience.rajasthan-orbit-experience > .rajasthan-orbit-scene {
+  flex: 0 0 min(70vh, 680px) !important;
+  height: min(70vh, 680px) !important;
+  min-height: 620px !important;
+}
+
+#experience.rajasthan-orbit-experience > .rajasthan-orbit-scene > .rajasthan-orbit-ring {
+  top: 50% !important;
+}
+
+@media (max-width: 760px) {
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-copy {
+    width: 94vw !important;
+    padding: 34px 12px 22px !important;
+  }
+
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-copy > h2 {
+    font-size: clamp(44px, 10vw, 58px) !important;
+  }
+
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-copy > p {
+    width: 96% !important;
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+  }
+
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-scene {
+    flex-basis: 600px !important;
+    height: 600px !important;
+    min-height: 600px !important;
+  }
+}
+
+/* Compact Safari heading with both descriptions directly beneath it. */
+#experience.rajasthan-orbit-experience > .rajasthan-orbit-copy {
+  width: min(980px, 92vw) !important;
+  padding: 24px 20px 18px !important;
+}
+
+#experience.rajasthan-orbit-experience > .rajasthan-orbit-copy > h2 {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 0 10px !important;
+  font-size: clamp(42px, 3.8vw, 54px) !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+#experience.rajasthan-orbit-experience > .rajasthan-orbit-copy > p,
+#experience.rajasthan-orbit-experience.has-selected-photo > .rajasthan-orbit-copy > p {
+  display: block !important;
+  position: static !important;
+  width: min(780px, 94%) !important;
+  max-width: 780px !important;
+  margin: 0 auto 8px !important;
+  font-size: 14px !important;
+  line-height: 1.55 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+@media (max-width: 760px) {
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-copy > h2 {
+    font-size: clamp(38px, 8vw, 48px) !important;
+    white-space: normal !important;
+  }
+
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-copy > p,
+  #experience.rajasthan-orbit-experience.has-selected-photo > .rajasthan-orbit-copy > p {
+    width: 96% !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* Let Safari descriptions run wider so they use fewer lines. */
+#experience.rajasthan-orbit-experience > .rajasthan-orbit-copy {
+  width: min(1180px, 96vw) !important;
+}
+
+#experience.rajasthan-orbit-experience > .rajasthan-orbit-copy > p,
+#experience.rajasthan-orbit-experience.has-selected-photo > .rajasthan-orbit-copy > p {
+  width: 100% !important;
+  max-width: 1120px !important;
+}
+
+@media (max-width: 760px) {
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-copy {
+    box-sizing: border-box !important;
+    width: 100vw !important;
+    padding-right: 12px !important;
+    padding-left: 12px !important;
+  }
+
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-copy > p,
+  #experience.rajasthan-orbit-experience.has-selected-photo > .rajasthan-orbit-copy > p {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
+
+/* Keep the philosophy signature clear of the clipped section edge. */
+.founder-quote-with-leopard .founder-quote-inner {
+  box-sizing: border-box !important;
+  padding-top: 4vh !important;
+  padding-bottom: 3vh !important;
+}
+
+/* Mobile-only layout pass. Desktop composition remains untouched. */
+@media (max-width: 760px) {
+  .saga-page, .saga-page main { width: 100%; max-width: 100%; overflow-x: clip; }
+  .site-nav { height: 68px !important; grid-template-columns: 1fr 1fr !important; padding: 0 16px !important; }
+  .menu-trigger { gap: 9px !important; font-size: 8px !important; letter-spacing: .16em !important; }
+  .menu-lines { width: 23px !important; }
+  .nav-book { padding: 9px 0 !important; font-size: 8px !important; }
+  .menu-panel { min-height: 100svh; padding: 22px 22px 24px !important; overflow-y: auto; }
+  .menu-panel-head img { width: 82px !important; }
+  .overlay-navigation { top: 50% !important; width: calc(100% - 44px) !important; max-height: calc(100svh - 150px); overflow-y: auto; }
+  .overlay-navigation button { gap: 12px !important; padding: 9px 0 !important; font-size: clamp(30px, 8vw, 46px) !important; line-height: 1 !important; }
+  .overlay-navigation button small { margin-top: 7px !important; font-size: 7px !important; }
+  .menu-panel-bottom { left: 22px !important; right: 22px !important; bottom: 16px !important; font-size: 7px !important; }
+
+  .hero { height: 100svh !important; min-height: 560px !important; max-height: 900px; }
+  .hero-media { object-position: center !important; }
+
+  .hospitality-story { min-height: 0 !important; grid-template-columns: minmax(0, 1fr) !important; gap: 30px !important; padding: 86px 22px 62px !important; }
+  .hospitality-copy { width: 100% !important; max-width: 640px !important; margin-inline: auto !important; }
+  .hospitality-copy h2 { margin-bottom: 24px !important; font-size: clamp(40px, 11vw, 58px) !important; }
+  .hospitality-text p { margin-bottom: 17px !important; font-size: 13px !important; line-height: 1.75 !important; }
+  .story-mantra { font-size: 18px !important; }
+  .hospitality-collage { width: 100% !important; max-width: 640px !important; margin-inline: auto !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; grid-template-rows: repeat(2, clamp(150px, 48vw, 230px)) !important; gap: 10px !important; }
+  .hospitality-image { min-width: 0 !important; border-radius: 8px !important; }
+  .hospitality-image-one, .hospitality-image-two, .hospitality-image-three, .hospitality-image-four { width: auto !important; height: auto !important; transform: none !important; }
+
+  .saga-film-experiences { min-height: 0 !important; padding: 76px 18px 62px !important; }
+  .saga-film-shell { display: flex !important; flex-direction: column !important; gap: 20px !important; min-height: 0 !important; }
+  .saga-film-copy { width: 100% !important; padding: 0 !important; }
+  .saga-film-kicker { gap: 12px !important; margin-bottom: 18px !important; font-size: 8px !important; }
+  .saga-film-count { margin-bottom: 12px !important; font-size: 8px !important; }
+  .saga-film-copy h2 { max-width: 100% !important; margin-bottom: 12px !important; font-size: clamp(40px, 11vw, 58px) !important; line-height: .96 !important; }
+  .saga-film-intro { max-width: 100% !important; margin-bottom: 10px !important; font-size: 18px !important; line-height: 1.4 !important; }
+  .saga-film-detail { max-width: 100% !important; font-size: 12px !important; line-height: 1.65 !important; }
+  .saga-film-features { gap: 12px !important; margin-top: 16px !important; font-size: 7px !important; }
+  .saga-film-explore { width: 100% !important; max-width: 320px !important; margin-top: 18px !important; padding: 14px 16px !important; }
+  .saga-film-stage { order: 0 !important; width: 100% !important; aspect-ratio: 16 / 10 !important; border-radius: 4px !important; }
+  .saga-film-controls { right: 12px !important; bottom: 12px !important; }
+  .saga-film-control { width: 38px !important; height: 38px !important; }
+  .saga-film-rail { order: 0 !important; display: block !important; width: 100% !important; min-height: 0 !important; height: auto !important; overflow: visible !important; }
+  .saga-film-items { display: flex !important; width: 100% !important; gap: 10px !important; overflow-x: auto !important; padding: 2px 2px 10px !important; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .saga-film-items::-webkit-scrollbar { display: none; }
+  .saga-film-item { flex: 0 0 145px !important; min-width: 145px !important; grid-template-columns: 1fr !important; gap: 7px !important; scroll-snap-align: start; }
+  .saga-film-item.is-active { transform: none !important; }
+  .saga-film-thumb { width: 100% !important; height: 82px !important; }
+  .saga-film-item strong { font-size: 7px !important; }
+  .saga-film-rail-line, .saga-film-rail > small { display: none !important; }
+
+  .home-accommodation { padding: 68px 18px 72px !important; }
+  .home-accommodation-head { margin-bottom: 28px !important; }
+  .home-accommodation-head > span { margin-bottom: 10px !important; font-size: 8px !important; }
+  .home-accommodation-head h2 { font-size: clamp(38px, 10vw, 54px) !important; }
+  .home-accommodation-head p { margin-top: 14px !important; font-size: 12px !important; line-height: 1.7 !important; }
+  .home-room-grid { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; gap: 26px !important; }
+  .home-room-card { width: 100% !important; min-width: 0 !important; }
+  .home-room-image-wrap { aspect-ratio: 1.14 / 1 !important; }
+  .home-room-view { opacity: 1 !important; transform: none !important; right: 12px !important; bottom: 12px !important; padding: 10px 12px !important; font-size: 8px !important; }
+  .home-room-card-bottom { gap: 10px !important; padding-top: 12px !important; }
+  .home-room-all { margin-top: 28px !important; }
+
+  .saga-gallery { height: 100svh !important; min-height: 560px !important; max-height: 900px; }
+  .saga-gallery-top { top: max(76px, 10svh) !important; }
+  .saga-gallery .saga-gallery-top h2 { font-size: clamp(42px, 12vw, 64px) !important; }
+  .saga-gallery-panel { box-sizing: border-box !important; height: 100% !important; padding: 22vh 18px 14vh !important; grid-template-columns: minmax(0, 1fr) !important; grid-template-rows: repeat(2, minmax(0, 1fr)) !important; gap: 12px !important; }
+  .saga-gallery-frame, .saga-gallery-frame:nth-child(2) { width: 100% !important; height: 100% !important; min-height: 0 !important; transform: none !important; }
+  .saga-gallery-dots { bottom: 5vh !important; }
+
+  .saga-local-welcome { min-height: 0 !important; grid-template-columns: minmax(0, 1fr) !important; gap: 0 !important; padding: 0 !important; }
+  .saga-local-copy { width: 100% !important; padding: 54px 22px 40px !important; }
+  .saga-local-copy h2 { margin: 14px 0 !important; font-size: clamp(40px, 11vw, 58px) !important; }
+  .saga-local-copy p { font-size: 13px !important; line-height: 1.7 !important; }
+  .saga-local-note { margin-top: 17px !important; padding-top: 14px !important; }
+  .saga-local-note p { margin: 8px 0 !important; }
+  .saga-local-copy button { min-height: 44px; }
+  .saga-local-image { width: 100% !important; height: clamp(280px, 82vw, 430px) !important; min-height: 0 !important; }
+
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-copy { box-sizing: border-box !important; width: 100% !important; padding: 48px 18px 20px !important; }
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-copy > h2 { font-size: clamp(38px, 10vw, 50px) !important; }
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-copy > p, #experience.rajasthan-orbit-experience.has-selected-photo > .rajasthan-orbit-copy > p { width: 100% !important; font-size: 12px !important; line-height: 1.6 !important; }
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-scene { flex-basis: 510px !important; height: 510px !important; min-height: 510px !important; margin-bottom: 0 !important; }
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-scene > .rajasthan-orbit-ring { top: 52% !important; }
+
+  .home-journal { padding: 58px 18px 62px !important; }
+  .home-journal-heading { display: flex !important; flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; margin-bottom: 24px !important; }
+  .home-journal-heading h2 { font-size: clamp(42px, 12vw, 58px) !important; line-height: .96 !important; }
+  .home-journal-heading > p { max-width: 100% !important; font-size: 12px !important; line-height: 1.65 !important; }
+  .home-journal-link { min-height: 44px; }
+
+  .founder-quote { min-height: 0 !important; padding: 58px 20px 48px !important; }
+  .founder-quote-with-leopard .founder-quote-inner { width: 100% !important; padding: 0 !important; }
+  .founder-quote-inner blockquote { width: 100% !important; }
+  .founder-quote-inner blockquote strong { font-size: clamp(35px, 9vw, 48px) !important; line-height: 1 !important; }
+  .founder-quote-inner blockquote > span:not(.philosophy-eyebrow) { font-size: 12px !important; line-height: 1.65 !important; }
+  .founder-quote-inner blockquote em { font-size: 17px !important; }
+  .founder-credit { margin-top: 22px !important; }
+  .founder-signature { margin-top: 12px !important; font-size: 48px !important; }
+  .quote-leopard { opacity: .28 !important; }
+
+  .saga-final-footer { padding: 34px 22px 28px !important; }
+  .saga-final-footer .saga-footer-rule { margin-bottom: 32px !important; }
+  .saga-footer-grid { grid-template-columns: minmax(0, 1fr) !important; gap: 32px !important; }
+  .saga-footer-grid h3 { margin-bottom: 14px !important; font-size: 26px !important; }
+  .saga-footer-newsletter { min-width: 0 !important; }
+  .saga-footer-newsletter input[type="email"] { min-width: 0 !important; padding-inline: 16px !important; }
+  .saga-footer-bottom { position: relative !important; inset: auto !important; display: flex !important; flex-direction: column !important; gap: 10px !important; margin-top: 32px !important; text-align: center !important; font-size: 8px !important; }
+}
+
+@media (max-width: 390px) {
+  .saga-film-experiences { padding-inline: 14px !important; }
+  .saga-film-item { flex-basis: 132px !important; min-width: 132px !important; }
+  .hospitality-story { padding-inline: 17px !important; }
+  .saga-local-copy { padding-inline: 18px !important; }
+  #experience.rajasthan-orbit-experience > .rajasthan-orbit-scene { flex-basis: 455px !important; height: 455px !important; min-height: 455px !important; }
+}

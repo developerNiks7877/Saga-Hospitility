@@ -432,7 +432,7 @@ export default function Rooms() {
         >
           Choose your dates and discover
           available rooms for your time
-          in Jawai.
+          in Rajasthan.
         </p>
       </div>
 

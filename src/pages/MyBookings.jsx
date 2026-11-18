@@ -50,7 +50,7 @@ export default function MyBookings() {
       reference: booking.bookingId,
 
       hotelName: 'SAGA',
-      location: 'Jawai, Rajasthan',
+      location: 'Rajasthan, India',
 
       image: booking.room?.image || '',
       roomName: booking.room?.name || 'SAGA Room',
@@ -375,7 +375,7 @@ export default function MyBookings() {
           <p style={{ fontSize: '14px', color: 'var(--text-muted)', marginTop: '4px', marginBottom: '20px' }}>
             Discover our handpicked collection of heritage havelis and royal palace suites.
           </p>
-          <Button variant="primary" onClick={() => navigate('/search')}>
+          <Button variant="primary" onClick={() => navigate('/coming-soon')}>
             Find a Stay Now
           </Button>
         </Card>

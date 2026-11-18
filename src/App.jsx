@@ -10,24 +10,15 @@ import { AuthProvider } from './context/AuthContext';
 import { BookingProvider } from './context/BookingContext';
 import { ToastProvider } from './context/ToastContext';
 
-import UserLayout from './components/layout/UserLayout';
-
 import SagaHome from "./SagaHome";
 
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import Dashboard from './pages/Dashboard';
-import Rooms from './pages/Rooms';
-import GuestDetails from './pages/GuestDetails';
-import Payment from './pages/Payment';
-import BookingConfirmed from './pages/BookingConfirmed';
-import MyBookings from './pages/MyBookings';
-import MyProfile from './pages/MyProfile';
-import Offers from './pages/Offers';
+import ComingSoon from './pages/ComingSoon';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '') || '/'}>
       <AuthProvider>
         <BookingProvider>
           <ToastProvider>
@@ -41,95 +32,28 @@ export default function App() {
               />
 
 
-              {/* AUTH */}
+              {/* BOOKING NOTICE */}
               <Route
-                path="/login"
-                element={<Login />}
+                path="/coming-soon"
+                element={<ComingSoon />}
               />
 
-              <Route
-                path="/signup"
-                element={<Signup />}
-              />
+              {/* JOURNAL */}
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/blog" element={<Blog />} />
 
-
-              {/* BOOKING FLOW */}
-              <Route
-                path="/booking/guest"
-                element={<GuestDetails />}
-              />
-
-              <Route
-                path="/booking/payment"
-                element={<Payment />}
-              />
-
-              <Route
-                path="/booking/confirmation"
-                element={<BookingConfirmed />}
-              />
-
-
-              {/* MAIN USER / ROOM INTERFACE */}
-              <Route element={<UserLayout />}>
-
-                <Route
-                  path="/dashboard"
-                  element={<Dashboard />}
-                />
-
-                <Route
-                  path="/rooms"
-                  element={<Rooms />}
-                />
-
-                <Route
-                  path="/offers"
-                  element={<Offers />}
-                />
-
-                <Route
-                  path="/my-bookings"
-                  element={<MyBookings />}
-                />
-
-                <Route
-                  path="/profile"
-                  element={<MyProfile />}
-                />
-
-                <Route
-                  path="/hotel"
-                  element={
-                    <Navigate
-                      to="/rooms"
-                      replace
-                    />
-                  }
-                />
-
-                <Route
-                  path="/search"
-                  element={
-                    <Navigate
-                      to="/rooms"
-                      replace
-                    />
-                  }
-                />
-
-                <Route
-                  path="/details/:id"
-                  element={
-                    <Navigate
-                      to="/rooms"
-                      replace
-                    />
-                  }
-                />
-
-              </Route>
-
+              {/* ACCOUNT AND BOOKING ARE PAUSED UNTIL THE BACKEND IS READY. */}
+              <Route path="/login" element={<Navigate to="/coming-soon" replace />} />
+              <Route path="/signup" element={<Navigate to="/coming-soon" replace />} />
+              <Route path="/booking/*" element={<Navigate to="/coming-soon" replace />} />
+              <Route path="/dashboard" element={<Navigate to="/coming-soon" replace />} />
+              <Route path="/my-bookings" element={<Navigate to="/coming-soon" replace />} />
+              <Route path="/profile" element={<Navigate to="/coming-soon" replace />} />
+              <Route path="/rooms" element={<Navigate to="/coming-soon" replace />} />
+              <Route path="/offers" element={<Navigate to="/coming-soon" replace />} />
+              <Route path="/hotel" element={<Navigate to="/coming-soon" replace />} />
+              <Route path="/search" element={<Navigate to="/coming-soon" replace />} />
+              <Route path="/details/:id" element={<Navigate to="/coming-soon" replace />} />
 
               {/* FALLBACK */}
               <Route

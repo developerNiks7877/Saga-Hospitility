@@ -13,6 +13,7 @@ export default function BookingHeader({ currentStep = 1, backTo = '/search', bac
 
   return (
     <header
+      className="booking-header"
       style={{
         backgroundColor: '#FFFFFF',
         borderBottom: '1px solid var(--border-light)',
@@ -23,6 +24,7 @@ export default function BookingHeader({ currentStep = 1, backTo = '/search', bac
       }}
     >
       <div
+        className="booking-header-inner"
         style={{
           maxWidth: '1200px',
           margin: '0 auto',
@@ -66,7 +68,7 @@ export default function BookingHeader({ currentStep = 1, backTo = '/search', bac
             textTransform: 'uppercase'
           }}
         >
-          SAGA JAWAAI
+          SAGA HOSPITALITY
         </Link>
 
         {/* Step Indicator */}

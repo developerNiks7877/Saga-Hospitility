@@ -1,15 +1,16 @@
+import { publicAsset } from '../utils/publicAsset';
+
 export const hotelData = {
-  id: 'saga-jawai',
+  id: 'saga-hospitality',
   name: 'SAGA',
   tagline: 'Wild by Nature, Rooted in Purpose',
-  location: 'Jawai Bandh, Pali District, Rajasthan 306126, India',
+  location: 'Pali District, Rajasthan 306126, India',
   phone: '+91 98765 43210',
-  email: 'reservations@sagajawai.com',
   rating: 4.95,
   reviewsCount: 348,
   checkInTime: '2:00 PM',
   checkOutTime: '11:00 AM',
-  logo: '/SAGA-JAWAI-LOGO.png',
+  logo: publicAsset('/assets/logo/saga-hospitality-logo.png'),
   heroImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1400&q=80',
   images: [
     'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80',
@@ -18,7 +19,7 @@ export const hotelData = {
     'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1000&q=80',
     'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1000&q=80'
   ],
-  description: 'SAGA is a premier luxury hotel located in Jawai, Rajasthan. We offer world-class hospitality, elegantly appointed rooms, fine dining, and personalized guest service for an exceptional stay.',
+  description: 'SAGA is a premier luxury hotel located in Rajasthan. We offer world-class hospitality, elegantly appointed rooms, fine dining, and personalized guest service for an exceptional stay.',
   amenities: [
     { id: 'pool', name: 'Swimming Pool', icon: 'Waves', desc: 'Temperature-controlled outdoor pool with sun loungers' },
     { id: 'dining', name: 'Multi-Cuisine Restaurant', icon: 'Utensils', desc: 'Authentic Rajasthani and global delicacies' },

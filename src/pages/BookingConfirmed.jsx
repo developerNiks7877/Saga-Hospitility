@@ -115,7 +115,7 @@ export default function BookingConfirmed() {
           marginBottom: '36px'
         }}
       >
-        We look forward to welcoming you to SAGA JAWAAI. A formal confirmation voucher and concierge itinerary have been dispatched to your email.
+        We look forward to welcoming you to SAGA Hospitality. A formal confirmation voucher and concierge itinerary have been dispatched to your email.
       </p>
 
       {/* Booking Receipt Card */}

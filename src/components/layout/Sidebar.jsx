@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useBooking } from '../../context/BookingContext';
+import { publicAsset } from '../../utils/publicAsset';
 import Button from '../ui/Button';
 
 export default function Sidebar({ isOpen, onClose }) {
@@ -97,7 +98,7 @@ export default function Sidebar({ isOpen, onClose }) {
               }}
             >
               <img
-                src="/assets/logo/saga-hospitality-logo.png"
+                src={publicAsset('/assets/logo/saga-hospitality-logo.png')}
                 alt="SAGA"
                 style={{
                   width: '100%',

@@ -67,6 +67,10 @@ const getFreshAccessToken = async () => {
 };
 
 export const authFetch = async (url, options = {}) => {
+  if (!API_BASE_URL) {
+    throw new Error('SERVICE_UNAVAILABLE');
+  }
+
   let accessToken =
     localStorage.getItem('saga_access_token');
 

@@ -4,6 +4,7 @@ import { User, Mail, Phone, Lock, Eye, EyeOff, Check, ArrowRight } from 'lucide-
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import Button from '../components/ui/Button';
+import { publicAsset } from '../utils/publicAsset';
 
 const INTERESTS = ['Luxury', 'Heritage', 'Business', 'Family', 'Beach', 'Nature', 'Desert Safaris'];
 
@@ -135,8 +136,8 @@ export default function Signup() {
           {/* Top Logo */}
           <div style={{ maxWidth: '420px', display: 'flex', alignItems: 'center', gap: '12px' }}>
             <img
-              src="/SAGA-JAWAI-LOGO.png"
-              alt="SAGA"
+              src={publicAsset('/assets/logo/saga-hospitality-logo.png')}
+              alt="SAGA Hospitality"
               style={{ width: '48px', height: '48px', objectFit: 'contain' }}
             />
             <div>
@@ -211,8 +212,8 @@ export default function Signup() {
           <div style={{ marginBottom: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
               <img
-                src="/SAGA-JAWAI-LOGO.png"
-                alt="SAGA"
+                src={publicAsset('/assets/logo/saga-hospitality-logo.png')}
+                alt="SAGA Hospitality"
                 style={{ width: '36px', height: '36px', objectFit: 'contain' }}
               />
               <span

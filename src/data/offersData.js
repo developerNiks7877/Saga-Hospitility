@@ -1,7 +1,7 @@
 export const offersData = [
   {
     id: 'offer-1',
-    title: 'SAGA JAWAAI Wilderness Safari Escape',
+    title: 'SAGA Hospitality Wilderness Safari Escape',
     tagline: 'EXCLUSIVE DIRECT BOOKING VOUCHER',
     discountText: 'Enjoy 25% OFF on all Luxury Suites & Villas + complimentary morning 4x4 leopard tracking safari.',
     code: 'SUMMER25',
@@ -14,7 +14,7 @@ export const offersData = [
     id: 'offer-2',
     title: 'Royal Ayurvedic Spa & Rejuvenation Retreat',
     tagline: 'WELLNESS PACKAGE',
-    discountText: 'Complimentary 90-minute Desert Botanical therapy + 15% off your stay at SAGA JAWAAI.',
+    discountText: 'Complimentary 90-minute Desert Botanical therapy + 15% off your stay at SAGA Hospitality.',
     code: 'HERITAGE15',
     discountPercent: 15,
     validUntil: 'Valid on 3+ night bookings',

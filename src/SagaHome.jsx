@@ -1,89 +1,131 @@
-import { useNavigate } from 'react-router-dom';
-import './saga-home.css';
-import { hotelData } from './data/hotelData';
-import React, { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-
-
+import { useNavigate } from "react-router-dom";
+import "./saga-home.css";
+import { hotelData } from "./data/hotelData";
+import { blogPosts } from "./data/blogData";
+import ExpandableJournalCards from "./components/common/ExpandableJournalCards";
+import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { publicAsset } from "./utils/publicAsset";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const MEDIA = {
   intro:
-    'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=2000&q=90',
+    "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=2000&q=90",
   leopard:
-    'https://images.unsplash.com/photo-1456926631375-92c8ce872def?auto=format&fit=crop&w=2200&q=90',
+    "https://images.unsplash.com/photo-1456926631375-92c8ce872def?auto=format&fit=crop&w=2200&q=90",
 
   float1:
-    'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1400&q=90',
+    "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1400&q=90",
   float2:
-    'https://images.unsplash.com/photo-1456926631375-92c8ce872def?auto=format&fit=crop&w=1400&q=90',
+    "https://images.unsplash.com/photo-1456926631375-92c8ce872def?auto=format&fit=crop&w=1400&q=90",
   float3:
-    'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1400&q=90',
+    "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1400&q=90",
   float4:
-    'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1400&q=90',
+    "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1400&q=90",
   float5:
-    'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1400&q=90',
+    "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1400&q=90",
   float6:
-    'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1400&q=90',
+    "https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1400&q=90",
 
   gallery1:
-    'https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1800&q=90',
+    "https://images.unsplash.com/photo-1549366021-9f761d450615?auto=format&fit=crop&w=1800&q=90",
   gallery2:
-    'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1800&q=90',
+    "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1800&q=90",
   gallery3:
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=90',
+    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=90",
   gallery4:
-    'https://images.unsplash.com/photo-1456926631375-92c8ce872def?auto=format&fit=crop&w=1800&q=90',
+    "https://images.unsplash.com/photo-1456926631375-92c8ce872def?auto=format&fit=crop&w=1800&q=90",
   gallery5:
-    'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1800&q=90',
+    "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1800&q=90",
   gallery6:
-    'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1800&q=90',
+    "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1800&q=90",
   gallery7:
-    'https://images.unsplash.com/photo-1519955045385-7cdb8e07c7f7?auto=format&fit=crop&w=1800&q=90',
+    "https://images.unsplash.com/photo-1519955045385-7cdb8e07c7f7?auto=format&fit=crop&w=1800&q=90",
   gallery8:
-    'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1800&q=90',
+    "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1800&q=90",
 };
 
-const gallerySlides = [
-  ['/assets/gallery/gallery-01.jpg', '/assets/gallery/gallery-02.jpg'],
-  ['/assets/gallery/gallery-03.jpg', '/assets/gallery/gallery-04.jpg'],
-  ['/assets/gallery/gallery-05.jpg', '/assets/gallery/gallery-06.jpg'],
-  ['/assets/gallery/gallery-07.jpg', '/assets/gallery/gallery-08.jpg'],
+const driveImage = (id, width = 1600) =>
+  `https://lh3.googleusercontent.com/d/${id}=w${width}`;
+
+const galleryImages = [
+  driveImage("14V3pYDkKZ0ouWDh6FewHQRkze3eXsOEd", 1600),
+  driveImage("1ub7gicbO2xiRzmY36kG4lpF_CIwIvtWf", 1600),
+  driveImage("1q9ZV4HWXLSMv6zB_fefd9Q6KQg0wg1Y8", 1600),
+  driveImage("1rKm7frGRBakx9e9FYPdb9A68ds4-JUxM", 1600),
+  driveImage("1dT5IILIi8RrdIyhv7cPiPtG_cPVQiRSF", 1600),
+  driveImage("1QQmQOVxJO4QQlSBJh1JAsTebO115xols", 1600),
+  driveImage("13pZxWrFf7aL7HFZd8TQuDtOdLlhKfLRg", 1600),
+  driveImage("1AuyW7b0SNyXc63v3Srn6Z0ZKpD4rYwq0", 1600),
 ];
+
+const gallerySlides = Array.from({ length: Math.ceil(galleryImages.length / 2) }, (_, index) =>
+  galleryImages.slice(index * 2, index * 2 + 2),
+);
+
+const HOME_STAY_IMAGES = [
+  driveImage("1DuMUP3-VJJP0MunUxB98gFF2YN-LyNKe", 1600),
+  driveImage("1GzhB3tFOcU3AyTVne_n1SuhbQFL82N0L", 1600),
+  driveImage("1Sv9e7lF5eOdf0EqvWrtzKKatDYtMkfIP", 1600),
+];
+
+const SAFARI_EXPERIENCE_IMAGES = [
+  driveImage("1oCVIMnCv02YL3EPbeshsh9QIm4lvhMiG", 1600),
+  driveImage("1nsrrJy36rxVlrJn1fkxJ0XgjBw61vhYi", 1600),
+  driveImage("1c5YqTwJY-sXCh8hmqoEzx2yZhAvWdTYP", 1600),
+  driveImage("1mJm0zKJBMlapm_nvukI8ZlI-6lqmgOR2", 1600),
+  driveImage("14EjtQjckMUmripH0RdzhKf17H8Am0NoW", 1600),
+  driveImage("1Gt2hZWwmjHBH8-EeR3PjuwE5HWcgbac8", 1600),
+  driveImage("1u1baHcfVZcxNCzkqwU0GI_j3w-2Plu1N", 1600),
+  driveImage("19twJpfBvqUtn_Pe7UyO53UyMvT-YiqfH", 1600),
+  publicAsset("/assets/safari-experiences/DSC09850.webp"),
+  publicAsset("/assets/safari-experiences/IMG_1491.webp"),
+];
+
+const HERO_VIDEO = publicAsset("/assets/video/saga-hero-1080p.mp4");
+// Local MP4s keep the frame switch fast. The repeated clips match the public
+// fallbacks already used where the newer Drive links require sign-in.
+const EXPERIENCE_VIDEO_ASSETS = [
+  "experience-01.mp4",
+  "experience-02.mp4",
+  "experience-03.mp4",
+  "experience-04.mp4",
+  "experience-05.mp4",
+  "experience-02.mp4",
+  "experience-03.mp4",
+].map((name) => publicAsset(`/assets/video/curated/${name}`));
+const EXPERIENCE_POSTERS = EXPERIENCE_VIDEO_ASSETS.map((video) =>
+  video.replace(".mp4", "-poster.jpg"),
+);
 
 const experiences = [
   {
-    title: 'Wilderness Drives',
+    title: "Wilderness Drives",
     image: MEDIA.leopard,
-    text:
-      'Explore Jawai’s granite hills and grasslands in search of its resident wildlife, guided through an immersive journey into the landscape.',
+    text: "Explore Rajasthan’s granite hills and grasslands in search of its resident wildlife, guided through an immersive journey into the landscape.",
   },
   {
-    title: 'Temple Trail',
+    title: "Temple Trail",
     image: MEDIA.float4,
-    text:
-      'Discover ancient shrines and temples woven into Jawai’s granite hills where spirituality, landscape and local tradition continue to meet.',
+    text: "Discover ancient shrines and temples woven into Rajasthan’s granite hills where spirituality, landscape and local tradition continue to meet.",
   },
   {
-    title: 'Horse Riding',
+    title: "Horse Riding",
     image: MEDIA.float5,
-    text:
-      'Ride through open trails, rocky outcrops and the raw wilderness of Jawai from an entirely different perspective.',
+    text: "Ride through open trails, rocky outcrops and the raw wilderness of Rajasthan from an entirely different perspective.",
   },
   {
-    title: 'Village Wander',
+    title: "Village Wander",
     image: MEDIA.float2,
-    text:
-      'Meet the communities of Jawai and discover everyday life, traditions and stories shaped by generations of belonging.',
+    text: "Meet the communities of Rajasthan and discover everyday life, traditions and stories shaped by generations of belonging.",
   },
   {
-    title: 'Walks & Hikes',
+    title: "Walks & Hikes",
     image: MEDIA.float3,
-    text:
-      'Move slowly through granite formations and open terrain on guided walks that reveal the quieter details of Jawai.',
+    text: "Move slowly through granite formations and open terrain on guided walks that reveal the quieter details of Rajasthan.",
   },
 ];
 
@@ -106,6 +148,7 @@ function Arrow() {
 
 export default function SagaHome() {
   const navigate = useNavigate();
+  const root = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
   /* Lock the page completely while fullscreen menu is open */
@@ -114,27 +157,153 @@ export default function SagaHome() {
 
     const scrollY = window.scrollY;
 
-    document.body.style.position = 'fixed';
+    document.body.style.position = "fixed";
     document.body.style.top = `-${scrollY}px`;
-    document.body.style.left = '0';
-    document.body.style.right = '0';
-    document.body.style.width = '100%';
-    document.body.style.overflow = 'hidden';
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      document.body.style.width = '';
-      document.body.style.overflow = '';
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      document.body.style.overflow = "";
 
       window.scrollTo(0, scrollY);
     };
   }, [menuOpen]);
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [experienceIndex, setExperienceIndex] = useState(0);
-  const [experienceMuted, setExperienceMuted] = useState(true);
+  const [experienceVideoReady, setExperienceVideoReady] = useState(false);
+  const experienceVideoRef = useRef(null);
+  const heroVideoRef = useRef(null);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.loop = true;
+    video.playsInline = true;
+
+    let disposed = false;
+    const play = () => {
+      if (disposed || !video.isConnected) return;
+      video.play().catch(() => {});
+    };
+    const replayFromStart = () => {
+      video.currentTime = 0;
+      play();
+    };
+    const resumeWhenVisible = () => {
+      if (document.visibilityState === "visible") play();
+    };
+
+    video.addEventListener("loadeddata", play);
+    video.addEventListener("canplay", play);
+    video.addEventListener("ended", replayFromStart);
+    document.addEventListener("visibilitychange", resumeWhenVisible);
+    window.addEventListener("pageshow", play);
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) play();
+
+    return () => {
+      disposed = true;
+      video.removeEventListener("loadeddata", play);
+      video.removeEventListener("canplay", play);
+      video.removeEventListener("ended", replayFromStart);
+      document.removeEventListener("visibilitychange", resumeWhenVisible);
+      window.removeEventListener("pageshow", play);
+    };
+  }, []);
+
+  useEffect(() => {
+    const page = root.current;
+    if (!page) return;
+
+    const revealItems = page.querySelectorAll("[data-scroll-reveal]");
+    if (!("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => item.classList.add("is-inview"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(({ isIntersecting, target }) => {
+          target.classList.toggle("is-inview", isIntersecting);
+        });
+      },
+      { rootMargin: "0px 0px 240px 0px", threshold: 0.08 },
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!experienceVideoReady) return;
+    const video = experienceVideoRef.current;
+    if (!video) return;
+    video.muted = true;
+
+    let disposed = false;
+    const tryAutoplay = () => {
+      if (disposed || !video.isConnected) return;
+      video.play().catch(() => {});
+    };
+
+    video.addEventListener("loadeddata", tryAutoplay);
+    video.addEventListener("canplay", tryAutoplay);
+    video.addEventListener("ended", tryAutoplay);
+    document.addEventListener("visibilitychange", tryAutoplay);
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) tryAutoplay();
+
+    return () => {
+      disposed = true;
+      video.removeEventListener("loadeddata", tryAutoplay);
+      video.removeEventListener("canplay", tryAutoplay);
+      video.removeEventListener("ended", tryAutoplay);
+      document.removeEventListener("visibilitychange", tryAutoplay);
+    };
+  }, [experienceIndex, experienceVideoReady]);
+
+  useEffect(() => {
+    if (!experienceVideoReady) return;
+    const nextIndex = (experienceIndex + 1) % EXPERIENCE_VIDEO_ASSETS.length;
+    const preloader = document.createElement("video");
+    preloader.preload = "auto";
+    preloader.muted = true;
+    preloader.src = EXPERIENCE_VIDEO_ASSETS[nextIndex];
+    preloader.load();
+
+    return () => {
+      preloader.pause();
+      preloader.removeAttribute("src");
+      preloader.load();
+    };
+  }, [experienceIndex, experienceVideoReady]);
+
+  useEffect(() => {
+    const experienceSection = root.current?.querySelector("#experiences");
+    if (!experienceSection) return;
+    if (!("IntersectionObserver" in window)) {
+      setExperienceVideoReady(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setExperienceVideoReady(true);
+        observer.disconnect();
+      },
+      { rootMargin: "1600px 0px", threshold: 0 },
+    );
+    observer.observe(experienceSection);
+    return () => observer.disconnect();
+  }, []);
 
   useGSAP(
     () => {
@@ -145,9 +314,9 @@ export default function SagaHome() {
       /* HERO */
       const heroTl = gsap.timeline({
         scrollTrigger: {
-          trigger: '.hero',
-          start: 'top top',
-          end: '+=130%',
+          trigger: ".hero",
+          start: "top top",
+          end: "+=130%",
           scrub: 1.2,
           pin: true,
         },
@@ -155,87 +324,81 @@ export default function SagaHome() {
 
       heroTl
         .to(
-          '.hero-media',
+          ".hero-media",
           {
             scale: 1.18,
             yPercent: 6,
-            ease: 'none',
+            ease: "none",
           },
-          0
+          0,
         )
         .to(
-          '.floating-saga-logo',
+          ".floating-saga-logo",
           {
-            top: () =>
-              window.innerWidth <= 700
-                ? '38px'
-                : '36px',
-            width: () =>
-              window.innerWidth <= 700
-                ? '85px'
-                : '110px',
-            ease: 'none',
+            top: () => (window.innerWidth <= 700 ? "38px" : "36px"),
+            width: () => (window.innerWidth <= 700 ? "85px" : "110px"),
+            ease: "none",
           },
-          0
+          0,
         )
         .to(
-          '.hero-meta',
+          ".hero-meta",
           {
             y: -80,
             opacity: 0,
-            ease: 'none',
+            ease: "none",
           },
-          0
+          0,
         )
         .to(
-          '.hero-shade',
+          ".hero-shade",
           {
             opacity: 0.62,
           },
-          0
+          0,
         );
 
       /* TEXT REVEALS */
-      gsap.utils.toArray('.reveal-line').forEach((line) => {
+      gsap.utils.toArray(".reveal-line").forEach((line) => {
         gsap.fromTo(
           line,
           { yPercent: 120 },
           {
             yPercent: 0,
             duration: 1.35,
-            ease: 'power4.out',
+            ease: "power4.out",
             scrollTrigger: {
               trigger: line,
-              start: 'top 88%',
+              start: "top 88%",
               once: true,
             },
-          }
+          },
         );
       });
 
       /* INTRO IMAGE */
       gsap.fromTo(
-        '.intro-image',
+        ".intro-image",
         {
-          clipPath: 'inset(15% 15% 15% 15%)',
+          clipPath: "inset(15% 15% 15% 15%)",
           scale: 1.15,
         },
         {
-          clipPath: 'inset(0% 0% 0% 0%)',
+          clipPath: "inset(0% 0% 0% 0%)",
           scale: 1,
-          ease: 'none',
+          ease: "none",
           scrollTrigger: {
-            trigger: '.intro-visual',
-            start: 'top 85%',
-            end: 'bottom 40%',
+            trigger: ".intro-visual",
+            start: "top 85%",
+            end: "bottom 40%",
             scrub: 1,
           },
-        }
+        },
       );
 
       /* WILDERNESS SPLIT */
       gsap.fromTo(
-        '.wildlife-split-image img',
+        ".wildlife-split-image img",
         {
           scale: 1.18,
           xPercent: -6,
@@ -243,33 +406,33 @@ export default function SagaHome() {
         {
           scale: 1,
           xPercent: 0,
-          ease: 'none',
+          ease: "none",
           scrollTrigger: {
-            trigger: '.wildlife-split',
-            start: 'top bottom',
-            end: 'bottom top',
+            trigger: ".wildlife-split",
+            start: "top bottom",
+            end: "bottom top",
             scrub: 1.4,
           },
-        }
+        },
       );
 
       gsap.fromTo(
-        '.wildlife-split-copy',
+        ".wildlife-split-copy",
         { xPercent: 18 },
         {
           xPercent: 0,
-          ease: 'none',
+          ease: "none",
           scrollTrigger: {
-            trigger: '.wildlife-split',
-            start: 'top 95%',
-            end: 'top 25%',
+            trigger: ".wildlife-split",
+            start: "top 95%",
+            end: "top 25%",
             scrub: 1.1,
           },
-        }
+        },
       );
 
       gsap.fromTo(
-        '.wildlife-split-copy > *',
+        ".wildlife-split-copy > *",
         {
           y: 45,
           opacity: 0,
@@ -278,30 +441,28 @@ export default function SagaHome() {
           y: 0,
           opacity: 1,
           stagger: 0.08,
-          ease: 'power3.out',
+          ease: "power3.out",
           scrollTrigger: {
-            trigger: '.wildlife-split',
-            start: 'top 65%',
-            end: 'top 20%',
+            trigger: ".wildlife-split",
+            start: "top 65%",
+            end: "top 20%",
             scrub: 1,
           },
-        }
+        },
       );
-
 
       /* =========================================
          SAGA — CINEMATIC CENTER CAROUSEL
          Smooth glide + progressive depth blur
       ========================================= */
 
-      const orbitSection =
-        document.querySelector('.jawai-orbit-experience');
+      const orbitSection = document.querySelector(
+        ".rajasthan-orbit-experience",
+      );
 
-      const orbitCards =
-        gsap.utils.toArray('.jawai-orbit-photo');
+      const orbitCards = gsap.utils.toArray(".rajasthan-orbit-photo");
 
       if (orbitSection && orbitCards.length) {
-
         const total = orbitCards.length;
 
         let position = 0;
@@ -311,8 +472,7 @@ export default function SagaHome() {
         let sectionVisible = false;
         let interactionActive = false;
 
-        const wrap = (value) =>
-          ((value % total) + total) % total;
+        const wrap = (value) => ((value % total) + total) % total;
 
         const distanceToPosition = (index, pos) => {
           let distance = index - pos;
@@ -329,20 +489,14 @@ export default function SagaHome() {
         };
 
         const renderCarousel = () => {
-
-          const mobile =
-            window.innerWidth <= 760;
+          const mobile = window.innerWidth <= 760;
 
           orbitCards.forEach((card, index) => {
+            const distance = distanceToPosition(index, position);
 
-            const distance =
-              distanceToPosition(index, position);
+            const abs = Math.abs(distance);
 
-            const abs =
-              Math.abs(distance);
-
-            const direction =
-              distance < 0 ? -1 : 1;
+            const direction = distance < 0 ? -1 : 1;
 
             /*
              * Horizontal cinematic layout
@@ -362,7 +516,6 @@ export default function SagaHome() {
             let rotateY;
 
             if (abs <= 1) {
-
               /*
                * Most important interpolation.
                *
@@ -371,140 +524,79 @@ export default function SagaHome() {
                * travelling toward x = 0.
                */
 
-              const t =
-                1 - abs;
+              const t = 1 - abs;
 
-              const smoothT =
-                t * t * (3 - 2 * t);
+              const smoothT = t * t * (3 - 2 * t);
 
-              x =
-                distance *
-                (mobile ? 145 : 355);
+              x = distance * (mobile ? 145 : 355);
 
-              y =
-                (1 - smoothT) *
-                (mobile ? 20 : 30);
+              y = (1 - smoothT) * (mobile ? 20 : 30);
 
-              z =
-                -80 +
-                smoothT * 260;
+              z = -80 + smoothT * 260;
 
-              scale =
-                (mobile ? 0.78 : 0.80) +
-                smoothT *
-                (mobile ? 0.62 : 0.76);
+              scale = (mobile ? 0.78 : 0.8) + smoothT * (mobile ? 0.62 : 0.76);
 
-              opacity =
-                0.86 +
-                smoothT * 0.14;
+              opacity = 0.86 + smoothT * 0.14;
 
-              blur =
-                (1 - smoothT) * 0.15;
+              blur = (1 - smoothT) * 0.15;
 
-              rotateY =
-                -distance *
-                (mobile ? 4 : 6);
-
+              rotateY = -distance * (mobile ? 4 : 6);
             } else {
+              const depth = abs - 1;
 
-              const depth =
-                abs - 1;
+              const spacing = mobile ? 92 : 185;
 
-              const spacing =
-                mobile ? 92 : 185;
+              x = direction * ((mobile ? 145 : 355) + depth * spacing);
 
-              x =
-                direction *
-                (
-                  (mobile ? 145 : 355) +
-                  depth * spacing
-                );
+              y = (mobile ? 20 : 30) + depth * (mobile ? 10 : 14);
 
-              y =
-                (mobile ? 20 : 30) +
-                depth *
-                (mobile ? 10 : 14);
+              z = -80 - depth * 145;
 
-              z =
-                -80 -
-                depth * 145;
+              scale = Math.max(
+                mobile ? 0.42 : 0.43,
+                (mobile ? 0.78 : 0.8) - depth * 0.15,
+              );
 
-              scale =
-                Math.max(
-                  mobile ? 0.42 : 0.43,
-                  (mobile ? 0.78 : 0.80) -
-                  depth * 0.15
-                );
-
-              opacity =
-                Math.max(
-                  0,
-                  0.86 -
-                  depth * 0.23
-                );
+              opacity = Math.max(0, 0.86 - depth * 0.23);
 
               /*
                * First left/right images stay sharp.
                * Blur begins BEHIND those cards.
                */
 
-              blur =
-                Math.max(
-                  0,
-                  (depth - 0.15) * 2.1
-                );
+              blur = Math.max(0, (depth - 0.15) * 2.1);
 
-              rotateY =
-                direction *
-                -(mobile ? 9 : 13);
+              rotateY = direction * -(mobile ? 9 : 13);
             }
 
-            const visible =
-              abs < (mobile ? 3.1 : 4.1);
+            const visible = abs < (mobile ? 3.1 : 4.1);
 
             gsap.set(card, {
               x,
               y,
               z,
               scale,
-              opacity:
-                visible
-                  ? opacity
-                  : 0,
+              opacity: visible ? opacity : 0,
 
               rotateY,
               rotateZ: 0,
 
-              filter:
-                `blur(${blur}px)`,
+              filter: `blur(${blur}px)`,
 
-              visibility:
-                visible
-                  ? 'visible'
-                  : 'hidden',
+              visibility: visible ? "visible" : "hidden",
 
-              pointerEvents:
-                abs <= 2.2
-                  ? 'auto'
-                  : 'none',
+              pointerEvents: abs <= 2.2 ? "auto" : "none",
 
-              zIndex:
-                Math.round(
-                  200 - abs * 25
-                ),
+              zIndex: Math.round(200 - abs * 25),
 
               transformPerspective: 1400,
-              transformOrigin: '50% 50%',
+              transformOrigin: "50% 50%",
               force3D: true,
             });
 
-            const isCenter =
-              abs < 0.08;
+            const isCenter = abs < 0.08;
 
-            card.classList.toggle(
-              'is-selected',
-              isCenter
-            );
+            card.classList.toggle("is-selected", isCenter);
 
             if (isCenter) {
               selectedIndex = index;
@@ -512,18 +604,17 @@ export default function SagaHome() {
           });
         };
 
-
         let autoIndex = selectedIndex;
 
         const scheduleAuto = () => {
           clearTimeout(autoTimer);
 
-          if (interactionActive) {
+          if (interactionActive || !sectionVisible) {
             return;
           }
 
           autoTimer = setTimeout(() => {
-            if (interactionActive) {
+            if (interactionActive || !sectionVisible) {
               scheduleAuto();
               return;
             }
@@ -534,27 +625,16 @@ export default function SagaHome() {
           }, 2600);
         };
 
-
-        const moveTo = (
-          index,
-          fromClick = false
-        ) => {
-
+        const moveTo = (index, fromClick = false) => {
           clearTimeout(autoTimer);
 
           if (motionTween) {
             motionTween.kill();
           }
 
-          const distance =
-            distanceToPosition(
-              index,
-              position
-            );
+          const distance = distanceToPosition(index, position);
 
-          if (
-            Math.abs(distance) < 0.015
-          ) {
+          if (Math.abs(distance) < 0.015) {
             selectedIndex = index;
             scheduleAuto();
             return;
@@ -563,109 +643,73 @@ export default function SagaHome() {
           interactionActive = true;
 
           if (fromClick) {
-            orbitSection.classList.add(
-              'has-selected-photo'
-            );
+            orbitSection.classList.add("has-selected-photo");
           }
 
           const state = {
-            value: position
+            value: position,
           };
 
-          const target =
-            position + distance;
+          const target = position + distance;
 
-          motionTween =
-            gsap.to(state, {
+          motionTween = gsap.to(state, {
+            value: target,
 
-              value: target,
+            /*
+             * Slower luxury movement.
+             * No spring / no popup.
+             */
+            duration: fromClick ? 1.35 : 1.55,
 
-              /*
-               * Slower luxury movement.
-               * No spring / no popup.
-               */
-              duration:
-                fromClick ? 1.35 : 1.55,
+            ease: "power2.inOut",
 
-              ease:
-                'power2.inOut',
+            onUpdate: () => {
+              position = state.value;
 
-              onUpdate: () => {
+              renderCarousel();
+            },
 
-                position =
-                  state.value;
+            onComplete: () => {
+              position = target;
 
-                renderCarousel();
-              },
+              selectedIndex = wrap(index);
 
-              onComplete: () => {
+              position = selectedIndex;
 
-                position = target;
+              autoIndex = selectedIndex;
 
-                selectedIndex =
-                  wrap(index);
+              interactionActive = false;
 
-                position =
-                  selectedIndex;
+              renderCarousel();
 
-                autoIndex =
-                  selectedIndex;
-
-                interactionActive = false;
-
-                renderCarousel();
-
-                scheduleAuto();
-              },
-            });
+              scheduleAuto();
+            },
+          });
         };
 
+        orbitCards.forEach((card, index) => {
+          card.setAttribute("role", "button");
 
-        orbitCards.forEach(
-          (card, index) => {
+          card.setAttribute("tabindex", "0");
 
-            card.setAttribute(
-              'role',
-              'button'
-            );
+          card.addEventListener("click", () => {
+            if (interactionActive) {
+              return;
+            }
 
-            card.setAttribute(
-              'tabindex',
-              '0'
-            );
+            moveTo(index, true);
+          });
 
-            card.addEventListener(
-              'click',
-              () => {
+          card.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
 
-                if (interactionActive) {
-                  return;
-                }
-
+              if (!interactionActive) {
                 moveTo(index, true);
               }
-            );
-
-            card.addEventListener(
-              'keydown',
-              (event) => {
-
-                if (
-                  event.key === 'Enter' ||
-                  event.key === ' '
-                ) {
-
-                  event.preventDefault();
-
-                  if (!interactionActive) {
-                    moveTo(index, true);
-                  }
-                }
-              }
-            );
-          }
-        );
-
+            }
+          });
+        });
 
         /*
          * Render immediately.
@@ -679,45 +723,49 @@ export default function SagaHome() {
         autoIndex = selectedIndex;
         scheduleAuto();
 
-
         /*
          * Visibility watcher.
          */
         ScrollTrigger.create({
-
           trigger: orbitSection,
 
-          start: 'top 85%',
-          end: 'bottom 15%',
+          start: "top 85%",
+          end: "bottom 15%",
 
           onEnter: () => {
             sectionVisible = true;
+            if (motionTween?.paused()) motionTween.resume();
+            else scheduleAuto();
           },
 
           onEnterBack: () => {
             sectionVisible = true;
+            if (motionTween?.paused()) motionTween.resume();
+            else scheduleAuto();
           },
 
           onLeave: () => {
             sectionVisible = false;
+            clearTimeout(autoTimer);
+            motionTween?.pause();
           },
 
           onLeaveBack: () => {
             sectionVisible = false;
+            clearTimeout(autoTimer);
+            motionTween?.pause();
           },
         });
-
 
         /*
          * Keep your existing short pin behaviour.
          */
         ScrollTrigger.create({
-
           trigger: orbitSection,
 
-          start: 'top top',
+          start: "top top",
 
-          end: '+=10%',
+          end: "+=10%",
 
           pin: true,
 
@@ -730,55 +778,41 @@ export default function SagaHome() {
           onRefresh: renderCarousel,
         });
 
-
-        window.addEventListener(
-          'resize',
-          renderCarousel
-        );
+        window.addEventListener("resize", renderCarousel);
       }
-
-
 
       /* =========================================
          NAV LOGO VISIBILITY — ORBIT BOUNDARY
       ========================================= */
 
-      const orbitLogoBoundary =
-        document.querySelector('.jawai-orbit-experience');
+      const orbitLogoBoundary = document.querySelector(
+        ".rajasthan-orbit-experience",
+      );
 
-      const siteNavigation =
-        document.querySelector('.site-nav');
+      const siteNavigation = document.querySelector(".site-nav");
 
       if (orbitLogoBoundary && siteNavigation) {
-
         ScrollTrigger.create({
           trigger: orbitLogoBoundary,
 
-          start: 'bottom top',
+          start: "bottom top",
 
           onEnter: () => {
-            siteNavigation.classList.add(
-              'nav-after-orbit'
-            );
+            siteNavigation.classList.add("nav-after-orbit");
           },
 
           onLeaveBack: () => {
-            siteNavigation.classList.remove(
-              'nav-after-orbit'
-            );
+            siteNavigation.classList.remove("nav-after-orbit");
           },
 
           onRefresh: (self) => {
             siteNavigation.classList.toggle(
-              'nav-after-orbit',
-              self.progress === 1 &&
-              self.direction >= 0
+              "nav-after-orbit",
+              self.progress === 1 && self.direction >= 0,
             );
           },
         });
       }
-
-
 
       /* =============================================
          FINAL NAV LOGO VISIBILITY
@@ -788,15 +822,11 @@ export default function SagaHome() {
       ============================================= */
 
       const updateNavLogoAfterOrbit = () => {
-        const orbit =
-          document.querySelector(
-            '.jawai-orbit-experience'
-          );
+        const orbit = document.querySelector(".rajasthan-orbit-experience");
 
         if (!orbit) return;
 
-        const orbitBottom =
-          orbit.getBoundingClientRect().bottom;
+        const orbitBottom = orbit.getBoundingClientRect().bottom;
 
         /*
          * Once bottom edge of orbit has passed
@@ -804,38 +834,28 @@ export default function SagaHome() {
          */
         const pastOrbit = orbitBottom <= 1;
 
-        document.body.classList.toggle(
-          'saga-past-orbit',
-          pastOrbit
-        );
+        document.body.classList.toggle("saga-past-orbit", pastOrbit);
       };
 
       updateNavLogoAfterOrbit();
 
-      window.addEventListener(
-        'scroll',
-        updateNavLogoAfterOrbit,
-        { passive: true }
-      );
+      window.addEventListener("scroll", updateNavLogoAfterOrbit, {
+        passive: true,
+      });
 
-      window.addEventListener(
-        'resize',
-        updateNavLogoAfterOrbit
-      );
-
+      window.addEventListener("resize", updateNavLogoAfterOrbit);
 
       /* 8 IMAGE GALLERY */
-      const galleryPanels = gsap.utils.toArray('.saga-gallery-panel');
+      const galleryPanels = gsap.utils.toArray(".saga-gallery-panel");
 
       if (galleryPanels.length > 1) {
         const galleryTween = gsap.to(galleryPanels, {
           xPercent: -100 * (galleryPanels.length - 1),
-          ease: 'none',
+          ease: "none",
           scrollTrigger: {
-            trigger: '.saga-gallery',
-            start: 'top top',
-            end: () =>
-              `+=${window.innerWidth * (galleryPanels.length - 1)}`,
+            trigger: ".saga-gallery",
+            start: "top top",
+            end: () => `+=${window.innerWidth * (galleryPanels.length - 1)}`,
             scrub: 1,
             pin: true,
             anticipatePin: 1,
@@ -847,14 +867,12 @@ export default function SagaHome() {
                 max: 0.45,
               },
               delay: 0.03,
-              ease: 'power1.inOut',
+              ease: "power1.inOut",
             },
             onUpdate: (self) => {
               const index = Math.min(
                 galleryPanels.length - 1,
-                Math.round(
-                  self.progress * (galleryPanels.length - 1)
-                )
+                Math.round(self.progress * (galleryPanels.length - 1)),
               );
 
               setGalleryIndex(index);
@@ -863,29 +881,29 @@ export default function SagaHome() {
         });
 
         galleryPanels.forEach((panel) => {
-          const images = panel.querySelectorAll('img');
+          const images = panel.querySelectorAll("img");
 
           gsap.fromTo(
             images,
             { scale: 1.08 },
             {
               scale: 1,
-              ease: 'none',
+              ease: "none",
               scrollTrigger: {
                 trigger: panel,
                 containerAnimation: galleryTween,
-                start: 'left 90%',
-                end: 'right 10%',
+                start: "left 90%",
+                end: "right 10%",
                 scrub: 1,
               },
-            }
+            },
           );
         });
       }
 
       /* QUOTE */
       gsap.fromTo(
-        '.founder-quote-inner > *',
+        ".founder-quote-inner > *",
         {
           y: 45,
           opacity: 0,
@@ -895,57 +913,56 @@ export default function SagaHome() {
           opacity: 1,
           stagger: 0.12,
           duration: 1,
-          ease: 'power3.out',
+          ease: "power3.out",
           scrollTrigger: {
-            trigger: '.founder-quote',
-            start: 'top 72%',
+            trigger: ".founder-quote",
+            start: "top 72%",
             once: true,
           },
-        }
+        },
       );
 
       /* NAV */
       ScrollTrigger.create({
-        trigger: '.intro-section',
-        start: 'top 80',
-        end: 'bottom 80',
+        trigger: ".intro-section",
+        start: "top 80",
+        end: "bottom 80",
         toggleClass: {
-          targets: '.site-nav',
-          className: 'nav-dark',
+          targets: ".site-nav",
+          className: "nav-dark",
         },
       });
 
       const refresh = () => ScrollTrigger.refresh();
-      window.addEventListener('load', refresh);
+      window.addEventListener("load", refresh);
 
       return () => {
-        window.removeEventListener('load', refresh);
+        window.removeEventListener("load", refresh);
 
-        window.removeEventListener(
-          'scroll',
-          updateNavLogoAfterOrbit
-        );
+        window.removeEventListener("scroll", updateNavLogoAfterOrbit);
 
-        window.removeEventListener(
-          'resize',
-          updateNavLogoAfterOrbit
-        );
+        window.removeEventListener("resize", updateNavLogoAfterOrbit);
 
-        document.body.classList.remove(
-          'saga-past-orbit'
-        );
+        document.body.classList.remove("saga-past-orbit");
       };
     },
     {
       scope: root,
-    }
+    },
   );
 
   const goTo = (id) => {
+    const target = document.getElementById(id);
     setMenuOpen(false);
 
-    document.getElementById(id)?.scrollIntoView({
-      behavior: 'smooth',
+    // Let the menu's scroll lock restore first, then move to the destination.
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        target?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
     });
   };
 
@@ -1108,7 +1125,7 @@ export default function SagaHome() {
 
 
         /* ==========================================
-           JAWAI WILDLIFE FOOTER TRANSITION
+           RAJASTHAN WILDLIFE FOOTER TRANSITION
            ========================================== */
 
         .footer-wildlife {
@@ -1645,76 +1662,66 @@ export default function SagaHome() {
 
       {/* NAV */}
       <header className="site-nav">
-        <button
-          className="menu-trigger"
-          onClick={() => setMenuOpen(true)}
-        >
+        <button className="menu-trigger" onClick={() => setMenuOpen(true)}>
           <MenuIcon />
           <span>MENU</span>
         </button>
 
-
-
-       
-         <button
-  type="button"
-  className="nav-book"
-  onClick={() => navigate('/rooms')}
->
-  BOOK NOW
-</button>
-</header>
+        <button
+          type="button"
+          className="nav-book"
+          onClick={() => navigate("/coming-soon")}
+        >
+          BOOK NOW
+        </button>
+      </header>
       {/* MENU */}
-      <aside
-        className={`menu-panel ${menuOpen ? 'is-open' : ''}`}
-      >
+      <aside className={`menu-panel ${menuOpen ? "is-open" : ""}`}>
         <div className="menu-panel-head">
-          <button
-            className="close-menu"
-            onClick={() => setMenuOpen(false)}
-          >
+          <button className="close-menu" onClick={() => setMenuOpen(false)}>
             <span>×</span>
             CLOSE
           </button>
 
-          <img
-            src="/assets/logo/saga-jawai-logo.png"
-            alt=""
-          />
+          <img src={publicAsset("/assets/logo/saga-hospitality-logo.png")} alt="" />
         </div>
 
         <nav className="overlay-navigation">
-        <button onClick={() => goTo('story')}>
-          <small>01</small>The Story
-        </button>
+          <button onClick={() => goTo("story")}>
+            <small>01</small>The Story
+          </button>
 
-        <button onClick={() => goTo('experiences')}>
-          <small>02</small>Curated Experiences
-        </button>
+          <button onClick={() => goTo("experiences")}>
+            <small>02</small>Curated Experiences
+          </button>
 
-        <button onClick={() => goTo('stay')}>
-          <small>03</small>Stay at SAGA
-        </button>
+          <button onClick={() => goTo("stay")}>
+            <small>03</small>Stay at SAGA
+          </button>
 
-        <button onClick={() => goTo('gallery')}>
-          <small>04</small>Gallery
-        </button>
+          <button onClick={() => goTo("gallery")}>
+            <small>04</small>Gallery
+          </button>
 
-        <button onClick={() => goTo('local-welcome')}>
-          <small>05</small>The Local Welcome
-        </button>
+          <button onClick={() => goTo("local-welcome")}>
+            <small>05</small>The Local Welcome
+          </button>
 
-        <button onClick={() => goTo('experience')}>
-          <small>06</small>Safari Experience
-        </button>
+          <button onClick={() => goTo("experience")}>
+            <small>06</small>Safari Experience
+          </button>
 
-        <button onClick={() => goTo('quote')}>
-          <small>07</small>Our Philosophy
-        </button>
-      </nav>
+          <button onClick={() => goTo("quote")}>
+            <small>07</small>Our Philosophy
+          </button>
+
+          <button onClick={() => goTo("blog")}>
+            <small>08</small>Blog
+          </button>
+        </nav>
 
         <div className="menu-panel-bottom">
-          <span>JAWAI · RAJASTHAN · INDIA</span>
+          <span>RAJASTHAN · INDIA</span>
           <span>WILD BY NATURE</span>
         </div>
       </aside>
@@ -1726,12 +1733,12 @@ export default function SagaHome() {
         onClick={() =>
           window.scrollTo({
             top: 0,
-            behavior: 'smooth',
+            behavior: "smooth",
           })
         }
       >
         <img
-          src="/assets/logo/saga-hospitality-logo.png"
+          src={publicAsset("/assets/logo/saga-hospitality-logo.png")}
           alt="SAGA Hospitality"
         />
       </button>
@@ -1740,182 +1747,154 @@ export default function SagaHome() {
         {/* HERO */}
         <section className="hero">
           <video
+            ref={heroVideoRef}
             className="hero-media hero-video"
+            src={HERO_VIDEO}
+            poster={publicAsset("/assets/video/saga-hero-poster.jpg")}
             autoPlay
             muted
+            controls={false}
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
             aria-hidden="true"
-          >
-            <source
-              src="/assets/video/saga-jawai-hero.mp4"
-              type="video/mp4"
-            />
-          </video>
+            tabIndex={-1}
+          />
 
           <div className="hero-shade" />
-
-
-
-          <div className="hero-meta">
-            <span>25.1160° N</span>
-
-            <p>
-              A wilderness retreat
-              <br />
-              in Rajasthan
-            </p>
-
-            <span>73.1437° E</span>
-          </div>
-
-          <button
-            className="hero-scroll"
-            onClick={() => goTo('story')}
-          >
-            SCROLL TO DISCOVER
-            <i />
-          </button>
         </section>
 
         {/* HOSPITALITY STORY */}
-        <section
-          id="story"
-          className="hospitality-story"
-        >
-          <div className="hospitality-copy">
-            
-
-            <h2>
-              A Legacy of
-              <br />
-              Wild Hospitality
-            </h2>
+        <section id="story" className="hospitality-story">
+          <div className="hospitality-copy" data-scroll-reveal>
+            <h2>Jawai Came First.</h2>
 
             <div className="hospitality-text">
               <p>
-                SAGA is shaped by a landscape where
-                granite hills, wildlife and village life have
-                existed side by side for generations.
+                Long before Saga Hospitality took shape, there was the land.
+                Ancient granite hills, quiet village paths, the presence of
+                leopards, and a way of life deeply connected to nature. We
+                didn't want to create something that stood apart from it. We
+                wanted to become a part of its story.
               </p>
 
               <p>
-                Our approach to hospitality is rooted in this
-                rhythm — thoughtful spaces, considered
-                experiences and a deeper connection with the land.
+                Saga Hospitality was born from that thought.
               </p>
 
               <p>
-                Every stay is designed to let Jawai unfold
-                naturally, balancing quiet luxury with the raw
-                character of Rajasthan.
+                Inspired by the rugged landscape, local traditions, and untamed
+                character of Jawai, every detail takes its cue from the
+                surroundings. From architecture rooted in traditional forms to
+                spaces that carry the warmth and simplicity of the region, the
+                idea has always been to stay true to this land.
+              </p>
+
+              <p>
+                But our story goes beyond the place we're creating. It's about
+                the people who call Jawai home, the wildlife that defines its
+                landscape, and the quieter moments that make this destination
+                worth discovering. We're not here to change Jawai. We're here
+                to share a little more of it with you.
+              </p>
+              <p className="story-mantra">
+                <em>Saga Hospitality — Wild by Nature, Rooted in Purpose.</em>
               </p>
             </div>
 
             <button
               type="button"
               className="hospitality-gallery-btn"
-              onClick={() => goTo('gallery')}
+              onClick={() => goTo("gallery")}
             >
               View Gallery
             </button>
           </div>
 
-          <div className="hospitality-collage">
+          <div className="hospitality-collage" data-scroll-reveal>
             <figure className="hospitality-image hospitality-image-one">
-              <img
-                src="/assets/legacy/architecture.jpg"
-                alt="SAGA architecture"
-              />
+              <img src={driveImage("1SEOb62mXsvpBoPYVKqhp-JHvp0Ssv1t2", 1600)} alt="SAGA story" loading="lazy" decoding="async" />
             </figure>
 
             <figure className="hospitality-image hospitality-image-two">
-              <img
-                src="/assets/legacy/interior.jpg"
-                alt="SAGA interior"
-              />
+              <img src={driveImage("1kFk3di_vk_IR83-H0HbOZ57JsMNtj6PQ", 1600)} alt="SAGA story" loading="lazy" decoding="async" />
             </figure>
 
             <figure className="hospitality-image hospitality-image-three">
-              <img
-                src="/assets/legacy/room.jpg"
-                alt="SAGA room"
-              />
+              <img src={driveImage("1_TOpA5r432MEXHC8TuKyy6QAjyZW_IVF", 1600)} alt="SAGA story" loading="lazy" decoding="async" />
             </figure>
 
             <figure className="hospitality-image hospitality-image-four">
-              <img
-                src="/assets/legacy/landscape.jpg"
-                alt="SAGA landscape"
-              />
+              <img src={driveImage("1EGGDLGwqzvw5Y03BcvwILrqQUFQVRjso", 1600)} alt="SAGA story" loading="lazy" decoding="async" />
             </figure>
           </div>
         </section>
 
         {/* EXPERIENCES — CINEMATIC FILM LIBRARY */}
-        <section
-          id="experiences"
-          className="saga-film-experiences"
-        >
+        <section id="experiences" className="saga-film-experiences">
           {(() => {
             const experiences = [
               {
-                eyebrow: 'NATURAL WONDERS',
-                title: 'Hidden Waters',
-                text: 'A quieter side of Jawai, revealed where water meets the wilderness.',
-                detail: 'Beyond the granite hills, flowing water brings an unexpected softness to the landscape — secluded, refreshing and shaped entirely by nature.',
-                video: '/assets/experiences/videos/experience-01.mp4',
+                eyebrow: "NATURAL WONDERS",
+                title: "Written in Stone, Shaped by Time.",
+                text: "Jawai's ancient granite hills rise above open landscapes and calm waters, creating a setting unlike the usual Rajasthan scenery.",
+                detail:
+                  "Watch the light move across the rocks, discover quiet corners, and take in the raw beauty of a landscape that has been here long before us.",
+                video: EXPERIENCE_VIDEO_ASSETS[0],
               },
               {
-                eyebrow: 'DESERT EVENINGS',
-                title: 'Rajasthan at Dusk',
-                text: 'Camels, open roads and journeys beneath the fading desert light.',
-                detail: 'As evening settles over Rajasthan, travellers move through the landscape while the desert slowly changes colour beneath the setting sun.',
-                video: '/assets/experiences/videos/experience-02.mp4',
+                eyebrow: "DESERT EVENINGS",
+                title: "Stay for the Last Light.",
+                text: "Evenings in Jawai have their own pace. The rocks turn warm beneath the setting sun, the sky changes colour, and the surroundings settle into silence.",
+                detail:
+                  "Find a quiet spot, watch the horizon, and let the day end without a hurry.",
+                video: EXPERIENCE_VIDEO_ASSETS[1],
               },
               {
-                eyebrow: 'ON THE ROAD',
-                title: 'Roads of Rajasthan',
-                text: 'Some journeys reveal the character of a place before you ever arrive.',
-                detail: 'A jeep moves through the open road carrying the everyday energy, movement and character of Rajasthan.',
-                video: '/assets/experiences/videos/experience-03.mp4',
+                eyebrow: "ON THE ROAD",
+                title: "A Different View at Every Turn.",
+                text: "The roads around Jawai take you past rocky hills, open countryside, and small settlements.",
+                detail:
+                  "Each stretch offers a closer look at the region, from its changing terrain to the everyday scenes unfolding along the way. Sometimes, the journey is reason enough to explore.",
+                video: EXPERIENCE_VIDEO_ASSETS[2],
               },
               {
-                eyebrow: 'EVERYDAY LIFE',
-                title: 'A Simple Ritual',
-                text: 'The smallest everyday moments often reveal the most about a place.',
-                detail: 'At a village handpump, a quiet pause for water becomes a glimpse into a life grounded in simplicity and deeply connected to the land.',
-                video: '/assets/experiences/videos/experience-04.mp4',
+                eyebrow: "EVERYDAY LIFE",
+                title: "The Beauty of the Ordinary.",
+                text: "Morning routines, village lanes, cattle moving along familiar paths, and conversations that fill the day.",
+                detail:
+                  "Beyond its wildlife and landscapes, Jawai is a place people call home. A closer look at everyday life reveals the warmth and character of the region.",
+                video: EXPERIENCE_VIDEO_ASSETS[3],
               },
               {
-                eyebrow: 'LIVING HERITAGE',
-                title: 'Songs of the Land',
-                text: 'Some stories of Rajasthan are remembered not in words, but in song.',
-                detail: 'A local musician plays and sings, carrying traditions forward through melody, memory and the living culture of Rajasthan.',
-                video: '/assets/experiences/videos/experience-05.mp4',
+                eyebrow: "LIVING HERITAGE",
+                title: "A Culture Still Lived.",
+                text: "Heritage in Jawai isn't confined to monuments or history books. It lives in traditional clothing, local customs, rural homes, and the knowledge passed between generations.",
+                detail:
+                  "Discover the people and practices that continue to shape the identity of this land.",
+                video: EXPERIENCE_VIDEO_ASSETS[4],
               },
               {
-                eyebrow: 'WILDLIFE',
-                title: 'A Dance of Colour',
-                text: 'For a brief moment, the wilderness unfolds in extraordinary colour.',
-                detail: 'A peacock spreads its magnificent feathers against the earthy landscape — a vivid encounter with the quieter wildlife of the region.',
-                video: '/assets/experiences/videos/experience-06.mp4',
+                eyebrow: "WILDLIFE",
+                title: "The Land Has Its Own Rhythm.",
+                text: "Jawai's rocky terrain, open landscapes, and waters support a variety of wildlife and birdlife.",
+                detail:
+                  "Spend time observing their natural surroundings, following the changing sounds and movements of the landscape. Here, every sighting is a moment worth appreciating.",
+                video: EXPERIENCE_VIDEO_ASSETS[5],
               },
               {
-                eyebrow: 'LEOPARD COUNTRY',
-                title: 'Into the Wild',
-                text: 'Quiet footsteps through the landscape that has become synonymous with Jawai.',
-                detail: 'A leopard moves through its territory with effortless calm — a rare glimpse of the animal at the heart of Jawai’s wilderness.',
-                video: '/assets/experiences/videos/experience-07.mp4',
+                eyebrow: "LEOPARD COUNTRY",
+                title: "The Wild Belongs Here.",
+                text: "Among Jawai's granite formations, leopards move through a landscape that has long been their home.",
+                detail:
+                  "Discover the character of leopard country through responsible wildlife exploration, where patience matters and nature decides what it reveals. A glimpse may last only a moment, but the memory can stay much longer.",
+                video: EXPERIENCE_VIDEO_ASSETS[6],
               },
             ];
 
-            const active =
-              experiences[experienceIndex];
+            const active = experiences[experienceIndex];
 
             const changeExperience = (index) => {
-              setExperienceMuted(true);
               setExperienceIndex(index);
             };
 
@@ -1929,29 +1908,23 @@ export default function SagaHome() {
 
             return (
               <div className="saga-film-shell">
-
-                <div className="saga-film-copy">
-
+                <div className="saga-film-copy" data-scroll-reveal>
                   <div className="saga-film-kicker">
                     <span>CURATED EXPERIENCES</span>
                     <i />
                   </div>
 
                   <div className="saga-film-count">
-                    {String(experienceIndex + 1).padStart(2, '0')}
+                    {String(experienceIndex + 1).padStart(2, "0")}
                     <span>/</span>
-                    {String(experiences.length).padStart(2, '0')}
+                    {String(experiences.length).padStart(2, "0")}
                   </div>
 
                   <h2>{active.title}</h2>
 
-                  <p className="saga-film-intro">
-                    {active.text}
-                  </p>
+                  <p className="saga-film-intro">{active.text}</p>
 
-                  <p className="saga-film-detail">
-                    {active.detail}
-                  </p>
+                  <p className="saga-film-detail">{active.detail}</p>
 
                   <div className="saga-film-features">
                     <span>IMMERSIVE</span>
@@ -1967,63 +1940,41 @@ export default function SagaHome() {
                     NEXT EXPERIENCE
                     <span>→</span>
                   </button>
-
                 </div>
 
-
-                <div className="saga-film-stage">
-
+                <div className="saga-film-stage" data-scroll-reveal>
                   <video
-                    key={active.video}
+                    key={experienceIndex}
+                    ref={experienceVideoRef}
                     className="saga-film-video"
-                    autoPlay
-                    muted={experienceMuted}
+                    src={experienceVideoReady ? active.video : undefined}
+                    autoPlay={experienceVideoReady}
+                    muted
+                    defaultMuted
+                    controls={false}
                     loop
                     playsInline
-                    preload="metadata"
-                  >
-                    <source
-                      src={active.video}
-                      type="video/mp4"
-                    />
-                  </video>
+                    preload={experienceVideoReady ? "auto" : "none"}
+                    fetchPriority={experienceVideoReady ? "high" : "auto"}
+                    poster={EXPERIENCE_POSTERS[experienceIndex]}
+                  />
 
                   <div className="saga-film-shade" />
 
                   <span className="saga-film-video-count">
-                    {String(experienceIndex + 1).padStart(2, '0')}
-                    {' / '}
-                    {String(experiences.length).padStart(2, '0')}
+                    {String(experienceIndex + 1).padStart(2, "0")}
+                    {" / "}
+                    {String(experiences.length).padStart(2, "0")}
                   </span>
-
-                  <button
-                    type="button"
-                    className={`saga-film-sound ${
-                      !experienceMuted ? 'is-on' : ''
-                    }`}
-                    onClick={() =>
-                      setExperienceMuted((value) => !value)
-                    }
-                    aria-label="Toggle experience video sound"
-                  >
-                    <span className="saga-film-sound-icon">
-                      {experienceMuted ? '×' : '♪'}
-                    </span>
-                    {experienceMuted ? 'SOUND' : 'SOUND ON'}
-                  </button>
 
                 </div>
 
-
-                <aside className="saga-film-rail">
-
+                <aside className="saga-film-rail" data-scroll-reveal>
                   <div className="saga-film-rail-line">
                     <span
                       style={{
                         top: `${
-                          (experienceIndex /
-                            (experiences.length - 1)) *
-                          100
+                          (experienceIndex / (experiences.length - 1)) * 100
                         }%`,
                       }}
                     />
@@ -2035,42 +1986,28 @@ export default function SagaHome() {
                         type="button"
                         key={item.title}
                         className={`saga-film-item ${
-                          index === experienceIndex
-                            ? 'is-active'
-                            : ''
+                          index === experienceIndex ? "is-active" : ""
                         }`}
-                        onClick={() =>
-                          changeExperience(index)
-                        }
+                        onClick={() => changeExperience(index)}
                       >
                         <div className="saga-film-thumb">
-                          <video
-                            muted
-                            playsInline
-                            preload="metadata"
-                          >
-                            <source
-                              src={item.video}
-                              type="video/mp4"
-                            />
-                          </video>
+                          <img
+                            src={EXPERIENCE_POSTERS[index]}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                          />
 
-                          <span>
-                            {String(index + 1).padStart(2, '0')}
-                          </span>
+                          <span>{String(index + 1).padStart(2, "0")}</span>
                         </div>
 
-                        <strong>
-                          {item.eyebrow}
-                        </strong>
+                        <strong>{item.eyebrow}</strong>
                       </button>
                     ))}
                   </div>
 
                   <small>SELECT A FILM</small>
-
                 </aside>
-
               </div>
             );
           })()}
@@ -2078,29 +2015,33 @@ export default function SagaHome() {
 
         {/* ACCOMMODATION & SUITES */}
         <section id="stay" className="home-accommodation">
-          <div className="home-accommodation-head">
-            
-
-            <h2>Accommodation &amp; Suites</h2>
-
+          <div className="home-accommodation-head" data-scroll-reveal>
+            <span>STAY AT SAGA HOSPITALITY</span>
+            <h2>More Than a Place to Return To.</h2>
             <p>
-              Thoughtfully designed spaces for slowing down,
-              settling in and experiencing Jawai at your own pace.
+              A stay in Jawai is about everything that happens between arriving
+              and leaving: the roads you explore, the landscapes you discover,
+              the stories you hear, and the moments you didn't plan for.
             </p>
+            <p>
+              Saga Hospitality is imagined as a place to return to after those
+              discoveries. Somewhere to slow down, enjoy your own time, and feel
+              connected to the region without giving up the comforts of a
+              thoughtful stay. Here, the destination is always part of the
+              experience.
+            </p>
+            <em>Stay close to Jawai. Take a little of it home.</em>
           </div>
 
-          <div className="home-room-grid">
-            {hotelData.rooms.slice(0, 3).map((room) => (
+          <div className="home-room-grid" data-scroll-reveal>
+            {hotelData.rooms.slice(0, 3).map((room, index) => (
               <article
                 className="home-room-card"
                 key={room.id}
-                onClick={() => navigate('/rooms')}
+                onClick={() => navigate("/coming-soon")}
                 onKeyDown={(event) => {
-                  if (
-                    event.key === 'Enter' ||
-                    event.key === ' '
-                  ) {
-                    navigate('/rooms');
+                  if (event.key === "Enter" || event.key === " ") {
+                    navigate("/coming-soon");
                   }
                 }}
                 role="button"
@@ -2108,15 +2049,14 @@ export default function SagaHome() {
               >
                 <div className="home-room-image-wrap">
                   <img
-                    src={room.image}
+                    src={HOME_STAY_IMAGES[index]}
                     alt={room.name}
                     className="home-room-image"
                     loading="lazy"
+                    decoding="async"
                   />
 
-                  <span className="home-room-view">
-                    VIEW ROOM
-                  </span>
+                  <span className="home-room-view">VIEW ROOM</span>
                 </div>
 
                 <div className="home-room-card-bottom">
@@ -2133,38 +2073,29 @@ export default function SagaHome() {
           <button
             type="button"
             className="home-room-all"
-            onClick={() => navigate('/rooms')}
+            data-scroll-reveal
+            onClick={() => navigate("/coming-soon")}
           >
             EXPLORE ALL ROOMS
           </button>
         </section>
 
-        {/* 8 IMAGE GALLERY */}
-        <section
-          id="gallery"
-          className="saga-gallery"
-        >
-          <div className="saga-gallery-top">
-            
+        {/* DRIVE IMAGE GALLERY */}
+        <section id="gallery" className="saga-gallery">
+          <div className="saga-gallery-top" data-scroll-reveal>
             <h2>Gallery</h2>
           </div>
 
           <div className="saga-gallery-track">
             {gallerySlides.map((slide, slideIndex) => (
-              <div
-                className="saga-gallery-panel"
-                key={slideIndex}
-              >
+              <div className="saga-gallery-panel" key={slideIndex}>
                 {slide.map((image, imageIndex) => (
-                  <figure
-                    className="saga-gallery-frame"
-                    key={image}
-                  >
+                  <figure className="saga-gallery-frame" key={image}>
                     <img
                       src={image}
-                      alt={`SAGA gallery ${
-                        slideIndex * 2 + imageIndex + 1
-                      }`}
+                      alt={`SAGA gallery ${slideIndex * 2 + imageIndex + 1}`}
+                      loading="eager"
+                      decoding="async"
                     />
                   </figure>
                 ))}
@@ -2177,7 +2108,7 @@ export default function SagaHome() {
               <button
                 key={i}
                 className={`saga-gallery-dot ${
-                  galleryIndex === i ? 'is-active' : ''
+                  galleryIndex === i ? "is-active" : ""
                 }`}
                 aria-label={`Gallery slide ${i + 1}`}
               />
@@ -2185,170 +2116,130 @@ export default function SagaHome() {
           </div>
         </section>
 
-        {/* RABARI — KEEPERS OF THE HILLS */}
-        <section id="local-welcome" className="rabari-journey">
-
-          <div className="rabari-journey-copy">
-
-            <span className="rabari-eyebrow">
-              THE LOCAL WELCOME
-            </span>
-
-            <h2>
-              Walk with the
-              <br />
-              <em>Keepers of the Hills</em>
-            </h2>
-
-            <p className="rabari-intro">
-              Follow the Rabari shepherds through Jawai's granite
-              landscape, moving with their sheep and goats from
-              morning until dusk.
+        {/* THE LOCAL WELCOME */}
+        <section id="local-welcome" className="saga-local-welcome">
+          <div className="saga-local-copy" data-scroll-reveal>
+            <span>THE LOCAL WELCOME</span>
+            <h2>The People <em>Make the Place.</em></h2>
+            <p>
+              Beyond the granite hills and wilderness lies another side of
+              Jawai, one shaped by its people. Their traditions, everyday
+              routines, and connection to the land give the region a character
+              that no landscape alone can capture.
             </p>
-
-            <div className="rabari-description">
-              <span>THE EXPERIENCE</span>
-
+            <div className="saga-local-note">
+              <small>A WELCOME ROOTED IN PEOPLE</small>
               <p>
-                In the granite hills of Jawai, time moves to the rhythm
-                of the flock. Walk beside the Rabari shepherds as they
-                guide their sheep and goats across open fields, rocky
-                trails and thorny scrub.
+                At Saga Hospitality, we believe discovering a destination also
+                means appreciating the people who call it home.
               </p>
-
               <p>
-                Share a simple meal beneath the open sky, pause in the
-                grazing grounds for warm goat-milk chai, and spend a day
-                following a pastoral rhythm that has remained almost
-                unchanged for centuries.
+                Our approach to hospitality draws from that belief, creating a
+                welcome that feels genuine, considered, and connected to
+                Rajasthan.
+              </p>
+              <p>
+                Because the most lasting memories of a place often begin with
+                its people.
               </p>
             </div>
-
-            <div className="rabari-time">
-              <div>
-                <strong>10 AM</strong>
-                <span>MORNING DEPARTURE</span>
-              </div>
-
-              <i />
-
-              <div>
-                <strong>6 PM</strong>
-                <span>RETURN AT DUSK</span>
-              </div>
-            </div>
-
-            <div className="rabari-highlights">
-
-              <div>
-                <small>01</small>
-                <strong>Walk</strong>
-                <span>With the shepherds &amp; their flocks</span>
-              </div>
-
-              <div>
-                <small>02</small>
-                <strong>Share</strong>
-                <span>A simple meal beneath the open sky</span>
-              </div>
-
-              <div>
-                <small>03</small>
-                <strong>Taste</strong>
-                <span>Goat-milk chai prepared in the phads</span>
-              </div>
-
-              <div>
-                <small>04</small>
-                <strong>Connect</strong>
-                <span>With a centuries-old pastoral rhythm</span>
-              </div>
-
-            </div>
-
-            <div className="rabari-journey-footer">
-              <span>APPROX. 8 HOURS · PRIVATE EXPERIENCE</span>
-
-              <button
-                type="button"
-                onClick={() => navigate('/experiences')}
-              >
-                DISCOVER THE RABARI JOURNEY
-                <Arrow />
-              </button>
-            </div>
-
+            <span className="saga-local-signoff">THE PEOPLE MAKE THE PLACE</span>
+            <button type="button" onClick={() => navigate("/coming-soon")}>
+              DISCOVER LOCAL EXPERIENCES <Arrow />
+            </button>
           </div>
-
-          <div className="rabari-journey-media">
+          <div className="saga-local-image">
             <img
-              src="/assets/rabari/rabari-walk.png"
-              alt="Rabari shepherds walking through the landscape of Jawai"
+              src={driveImage("15e7m4KrpPNeHw3Nd1cDVPy4RRapurAor", 1600)}
+              alt="Local people and village life in Rajasthan"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              onError={(event) => {
+                event.currentTarget.onerror = null;
+                    event.currentTarget.src = galleryImages[0];
+              }}
             />
-
-            <div className="rabari-media-shade" />
-
-            <div className="rabari-location">
-              <span>JAWAI · RAJASTHAN</span>
-              <small>25.1160° N · 73.1437° E</small>
-            </div>
+            <span>RAJASTHAN</span>
+            <small>25.1160° N · 73.1437° E</small>
           </div>
-
         </section>
 
-        {/* JAWAI — ORGANIC 3D IMAGE ORBIT */}
-        <section
-          id="experience"
-          className="jawai-orbit-experience"
-        >
-          <div className="jawai-orbit-scene">
+        {/* RAJASTHAN — ORGANIC 3D IMAGE ORBIT */}
+        <section id="experience" className="rajasthan-orbit-experience">
+          <div className="rajasthan-orbit-copy rajasthan-orbit-copy-refined">
+            <span>SAFARI EXPERIENCE</span>
+            <h2>Follow the Wild.</h2>
+            <p>
+              Out here, the landscape sets the pace. The trails wind past
+              granite formations, open terrain, and the natural habitats of
+              Jawai's wildlife. Every moment brings a chance to notice
+              something unexpected.
+            </p>
+            <p>
+              From the quiet of the hills to the possibility of spotting a
+              leopard in its natural surroundings, the experience is shaped
+              by patience, observation, and the thrill of the unknown. No two
+              journeys through the wild are ever quite the same.
+            </p>
+          </div>
 
-            <div className="jawai-orbit-atmosphere" />
+          <div className="rajasthan-orbit-scene">
+            <div className="rajasthan-orbit-atmosphere" />
 
-            <div className="jawai-orbit-ring">
-
-              {[
-                MEDIA.float1,
-                MEDIA.float2,
-                MEDIA.float3,
-                MEDIA.float4,
-                MEDIA.float5,
-                MEDIA.float6,
-                '/assets/legacy/interior.jpg',
-                '/assets/legacy/landscape.jpg',
-                '/assets/legacy/room.jpg',
-                '/assets/legacy/architecture.jpg',
-              ].map((image, index) => (
-                <figure
-                  className="jawai-orbit-photo"
-                  key={image}
-                >
+            <div className="rajasthan-orbit-ring">
+              {SAFARI_EXPERIENCE_IMAGES.map((image, index) => (
+                <figure className="rajasthan-orbit-photo" key={image}>
                   <img
                     src={image}
-                    alt={`Jawai wilderness experience ${index + 1}`}
+                    alt={`Rajasthan wilderness experience ${index + 1}`}
+                    loading="lazy"
+                    decoding="async"
                   />
 
-                  <span className="jawai-orbit-number">
-                    0{index + 1}
-                  </span>
+                  <span className="rajasthan-orbit-number">0{index + 1}</span>
                 </figure>
               ))}
-
             </div>
 
-            <div className="jawai-orbit-copy jawai-orbit-copy-refined">
-              <span>THE WILDER SIDE OF JAWAI</span>
-              <h2>
-                Moments from the wild.
-              </h2>
-            </div>
-
-            <div className="jawai-orbit-progress">
+            <div className="rajasthan-orbit-progress">
               <span />
               <small>SCROLL TO EXPLORE</small>
             </div>
-
           </div>
+        </section>
+
+        {/* THE SAGA JOURNAL */}
+        <section id="blog" className="home-journal">
+          <div className="home-journal-heading" data-scroll-reveal>
+            <div>
+              <span className="home-journal-eyebrow">THE SAGA JOURNAL</span>
+              <h2>Stories from Rajasthan</h2>
+            </div>
+            <p>
+              Dispatches from Rajasthan’s wild heart: stories of place, people
+              and time well spent.
+            </p>
+          </div>
+
+          <ExpandableJournalCards
+            cards={[
+              blogPosts[0],
+              blogPosts[2],
+              blogPosts[6],
+              blogPosts[7],
+              blogPosts[5],
+            ]}
+          />
+
+          <button
+            type="button"
+            className="home-journal-link"
+            data-scroll-reveal
+            onClick={() => navigate("/blog")}
+          >
+            VIEW ALL BLOGS <span aria-hidden="true">→</span>
+          </button>
         </section>
 
         {/* SAGA STATEMENT */}
@@ -2356,42 +2247,46 @@ export default function SagaHome() {
           id="quote"
           className="founder-quote founder-quote-with-leopard"
         >
-          <div
-            className="quote-leopard"
-            aria-hidden="true"
-          >
-            <img
-              src="/assets/leopard/saga-running-leopard.png"
-              alt=""
-            />
+          <div className="quote-leopard" aria-hidden="true">
+            <img src={publicAsset("/assets/leopard/saga-running-leopard.png")} alt="" />
           </div>
           <div className="founder-quote-inner">
             <blockquote>
-              “SAGA is inspired by the granite hills of
-              the region, the leopards and the communities that
-              call this remarkable landscape home. Every
-              journey here is shaped by a deep respect for the
-              land, its wildlife and the people who have lived
-              alongside it for generations.”
+              <span className="philosophy-eyebrow">OUR PHILOSOPHY</span>
+              <strong>A Different Way to Belong.</strong>
+              <span>
+                To us, hospitality begins with understanding the place we call
+                home.
+              </span>
+              <span>
+                It means drawing inspiration from local life, respecting the
+                natural environment, and creating spaces that feel comfortable
+                without losing their connection to Jawai.
+              </span>
+              <span>
+                We believe the most meaningful experiences are often the
+                simplest: a quiet morning, a conversation with someone local,
+                or time spent observing the landscape.
+              </span>
+              <span>
+                At Saga Hospitality, we want every stay to feel less like
+                stepping away from the destination and more like becoming part
+                of its rhythm.
+              </span>
+              <em>Stay connected to the place. Take its stories with you.</em>
             </blockquote>
 
             <div className="founder-credit">
-              
-              <span>
-                Wild by Nature · Rooted in Purpose
-              </span>
+              <span>WILD BY NATURE · ROOTED IN PURPOSE</span>
             </div>
 
-            <div className="founder-signature">
-              Saga
-            </div>
+            <div className="founder-signature">Saga</div>
           </div>
         </section>
       </main>
 
       {/* FOOTER */}
       <footer className="saga-final-footer">
-
         <div className="saga-footer-rule" />
 
         <div className="saga-footer-grid">
@@ -2401,39 +2296,27 @@ export default function SagaHome() {
             <p>
               Reservations
               <br />
-              Jawai, Rajasthan
+              Rajasthan, India
               <br />
               India
             </p>
 
-            <button className="footer-signup">
-              CONTACT US
-            </button>
+            <button className="footer-signup">CONTACT US</button>
           </div>
 
           <div>
             <h3>Explore</h3>
 
             <div className="saga-footer-links">
-              <button onClick={() => goTo('story')}>
-                OUR STORY
-              </button>
+              <button onClick={() => goTo("story")}>OUR STORY</button>
 
-              <button onClick={() => goTo('experience')}>
-                EXPERIENCE
-              </button>
+              <button onClick={() => goTo("experience")}>EXPERIENCE</button>
 
-              <button onClick={() => goTo('experiences')}>
-                EXPERIENCES
-              </button>
+              <button onClick={() => goTo("experiences")}>EXPERIENCES</button>
 
-              <button onClick={() => goTo('gallery')}>
-                GALLERY
-              </button>
+              <button onClick={() => goTo("gallery")}>GALLERY</button>
 
-              <button onClick={() => goTo('quote')}>
-                OUR PHILOSOPHY
-              </button>
+              <button onClick={() => goTo("quote")}>OUR PHILOSOPHY</button>
             </div>
           </div>
 
@@ -2441,32 +2324,24 @@ export default function SagaHome() {
             <h3>Stay Connected with SAGA</h3>
 
             <p>
-              Share your email with us to receive stories,
-              travel inspiration and updates from the world of
-              SAGA.
+              Share your email with us to receive stories, travel inspiration
+              and updates from the world of SAGA.
             </p>
 
-            <input
-              type="email"
-              placeholder="EMAIL ADDRESS"
-            />
+            <input type="email" placeholder="EMAIL ADDRESS" />
 
             <label className="footer-accept">
               <input type="checkbox" />
-              <span>
-                I accept the Terms & Conditions
-              </span>
+              <span>I accept the Terms & Conditions</span>
             </label>
 
-            <button className="footer-signup">
-              SIGN UP
-            </button>
+            <button className="footer-signup">SIGN UP</button>
           </div>
         </div>
 
         <div className="saga-footer-bottom">
           <span>© 2026 SAGA</span>
-          <span>JAWAI · RAJASTHAN · INDIA</span>
+          <span>RAJASTHAN · INDIA</span>
         </div>
       </footer>
     </div>

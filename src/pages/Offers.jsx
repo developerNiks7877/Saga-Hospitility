@@ -22,7 +22,7 @@ export default function Offers() {
   const handleApplyOffer = (offer) => {
     applyPromoDiscount(offer.discountPercent, offer.code);
     showToast('success', `Offer '${offer.title}' applied! Proceeding to royal search.`);
-    navigate('/search');
+    navigate('/coming-soon');
   };
 
   return (
