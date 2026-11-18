@@ -178,6 +178,7 @@ export default function SagaHome() {
   const [galleryIndex, setGalleryIndex] = useState(0);
   const [experienceIndex, setExperienceIndex] = useState(0);
   const [experienceVideoReady, setExperienceVideoReady] = useState(false);
+  const [heroVideoReady, setHeroVideoReady] = useState(false);
   const experienceVideoRef = useRef(null);
   const heroVideoRef = useRef(null);
 
@@ -192,6 +193,7 @@ export default function SagaHome() {
     let disposed = false;
     const play = () => {
       if (disposed || !video.isConnected) return;
+      setHeroVideoReady(true);
       video.play().catch(() => {});
     };
     const replayFromStart = () => {
@@ -1743,6 +1745,19 @@ export default function SagaHome() {
         />
       </button>
 
+      <div
+        className={`saga-site-loader${heroVideoReady ? " is-hidden" : ""}`}
+        role="status"
+        aria-label="Loading SAGA Hospitality"
+        aria-hidden={heroVideoReady}
+      >
+        <img
+          src={publicAsset("/assets/logo/saga-hospitality-logo.png")}
+          alt="SAGA Hospitality"
+        />
+        <span className="saga-site-loader-indicator" aria-hidden="true" />
+      </div>
+
       <main>
         {/* HERO */}
         <section className="hero">
@@ -1759,6 +1774,8 @@ export default function SagaHome() {
             preload="auto"
             aria-hidden="true"
             tabIndex={-1}
+            onLoadedData={() => setHeroVideoReady(true)}
+            onError={() => setHeroVideoReady(true)}
           />
 
           <div className="hero-shade" />

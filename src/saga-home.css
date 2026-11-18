@@ -244,6 +244,66 @@ img {
   pointer-events: none;
 }
 
+.saga-site-loader {
+  position: fixed;
+  z-index: 100000;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  background: #f2ecdf;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 650ms ease, visibility 650ms ease;
+}
+
+.saga-site-loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.saga-site-loader img {
+  display: block;
+  width: clamp(170px, 19vw, 270px);
+  max-height: 130px;
+  object-fit: contain;
+}
+
+.saga-site-loader-indicator {
+  position: relative;
+  display: block;
+  width: 82px;
+  height: 1px;
+  overflow: hidden;
+  background: rgba(174, 129, 57, .25);
+}
+
+.saga-site-loader-indicator::after {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 42%;
+  background: #b58b45;
+  content: "";
+  animation: saga-loader-travel 1.35s ease-in-out infinite;
+}
+
+@keyframes saga-loader-travel {
+  0% { transform: translateX(-105%); }
+  100% { transform: translateX(245%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .saga-site-loader,
+  .saga-site-loader-indicator::after {
+    transition-duration: 0ms;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+}
+
 .saga-film-control {
   display: grid;
   place-items: center;
