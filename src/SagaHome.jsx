@@ -179,8 +179,10 @@ export default function SagaHome() {
   const [experienceIndex, setExperienceIndex] = useState(0);
   const [experienceVideoReady, setExperienceVideoReady] = useState(false);
   const [heroVideoReady, setHeroVideoReady] = useState(false);
+  const [loaderLogoReady, setLoaderLogoReady] = useState(false);
   const experienceVideoRef = useRef(null);
   const heroVideoRef = useRef(null);
+  const heroReadyForReveal = heroVideoReady && loaderLogoReady;
 
   useEffect(() => {
     const video = heroVideoRef.current;
@@ -1746,14 +1748,16 @@ export default function SagaHome() {
       </button>
 
       <div
-        className={`saga-site-loader${heroVideoReady ? " is-hidden" : ""}`}
+        className={`saga-site-loader${heroReadyForReveal ? " is-hidden" : ""}`}
         role="status"
         aria-label="Loading SAGA Hospitality"
-        aria-hidden={heroVideoReady}
+        aria-hidden={heroReadyForReveal}
       >
         <img
           src={publicAsset("/assets/logo/saga-hospitality-logo.png")}
           alt="SAGA Hospitality"
+          onLoad={() => setLoaderLogoReady(true)}
+          onError={() => setLoaderLogoReady(true)}
         />
         <span className="saga-site-loader-indicator" aria-hidden="true" />
       </div>
