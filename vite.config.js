@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-const base = process.env.GITHUB_ACTIONS ? '/Saga-Jawaai/' : '/'
+const repositoryName = process.env.GITHUB_REPOSITORY?.split('/')[1] || 'Saga-Hospitility'
+const base = process.env.GITHUB_ACTIONS ? `/${repositoryName}/` : '/'
 
 const publicAssetCssBase = {
   name: 'public-asset-css-base',

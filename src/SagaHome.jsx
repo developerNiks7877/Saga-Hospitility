@@ -73,14 +73,14 @@ const HOME_STAY_IMAGES = [
 ];
 
 const SAFARI_EXPERIENCE_IMAGES = [
-  driveImage("1oCVIMnCv02YL3EPbeshsh9QIm4lvhMiG", 1600),
-  driveImage("1nsrrJy36rxVlrJn1fkxJ0XgjBw61vhYi", 1600),
-  driveImage("1c5YqTwJY-sXCh8hmqoEzx2yZhAvWdTYP", 1600),
-  driveImage("1mJm0zKJBMlapm_nvukI8ZlI-6lqmgOR2", 1600),
-  driveImage("14EjtQjckMUmripH0RdzhKf17H8Am0NoW", 1600),
-  driveImage("1Gt2hZWwmjHBH8-EeR3PjuwE5HWcgbac8", 1600),
-  driveImage("1u1baHcfVZcxNCzkqwU0GI_j3w-2Plu1N", 1600),
-  driveImage("19twJpfBvqUtn_Pe7UyO53UyMvT-YiqfH", 1600),
+  driveImage("1oCVIMnCv02YL3EPbeshsh9QIm4lvhMiG", 1200),
+  driveImage("1nsrrJy36rxVlrJn1fkxJ0XgjBw61vhYi", 1200),
+  driveImage("1c5YqTwJY-sXCh8hmqoEzx2yZhAvWdTYP", 1200),
+  driveImage("1mJm0zKJBMlapm_nvukI8ZlI-6lqmgOR2", 1200),
+  driveImage("14EjtQjckMUmripH0RdzhKf17H8Am0NoW", 1200),
+  driveImage("1Gt2hZWwmjHBH8-EeR3PjuwE5HWcgbac8", 1200),
+  driveImage("1u1baHcfVZcxNCzkqwU0GI_j3w-2Plu1N", 1200),
+  driveImage("19twJpfBvqUtn_Pe7UyO53UyMvT-YiqfH", 1200),
   publicAsset("/assets/safari-experiences/DSC09850.webp"),
   publicAsset("/assets/safari-experiences/IMG_1491.webp"),
 ];
@@ -211,6 +211,7 @@ export default function SagaHome() {
     video.addEventListener("ended", replayFromStart);
     document.addEventListener("visibilitychange", resumeWhenVisible);
     window.addEventListener("pageshow", play);
+    window.addEventListener("online", play);
     if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) play();
 
     return () => {
@@ -220,7 +221,15 @@ export default function SagaHome() {
       video.removeEventListener("ended", replayFromStart);
       document.removeEventListener("visibilitychange", resumeWhenVisible);
       window.removeEventListener("pageshow", play);
+      window.removeEventListener("online", play);
     };
+  }, []);
+
+  useEffect(() => {
+    // Do not trap visitors behind the loader if a mobile browser asks them
+    // to approve video data use. The poster keeps the hero visually complete.
+    const loaderFailsafe = window.setTimeout(() => setHeroVideoReady(true), 8000);
+    return () => window.clearTimeout(loaderFailsafe);
   }, []);
 
   useEffect(() => {
@@ -262,6 +271,8 @@ export default function SagaHome() {
     video.addEventListener("canplay", tryAutoplay);
     video.addEventListener("ended", tryAutoplay);
     document.addEventListener("visibilitychange", tryAutoplay);
+    window.addEventListener("pageshow", tryAutoplay);
+    window.addEventListener("online", tryAutoplay);
     if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) tryAutoplay();
 
     return () => {
@@ -270,11 +281,18 @@ export default function SagaHome() {
       video.removeEventListener("canplay", tryAutoplay);
       video.removeEventListener("ended", tryAutoplay);
       document.removeEventListener("visibilitychange", tryAutoplay);
+      window.removeEventListener("pageshow", tryAutoplay);
+      window.removeEventListener("online", tryAutoplay);
     };
   }, [experienceIndex, experienceVideoReady]);
 
   useEffect(() => {
     if (!experienceVideoReady) return;
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const onMobile = window.matchMedia("(max-width: 760px)").matches;
+    const dataSaving = connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || "");
+    if (onMobile || dataSaving) return;
+
     const nextIndex = (experienceIndex + 1) % EXPERIENCE_VIDEO_ASSETS.length;
     const preloader = document.createElement("video");
     preloader.preload = "auto";
@@ -303,7 +321,12 @@ export default function SagaHome() {
         setExperienceVideoReady(true);
         observer.disconnect();
       },
-      { rootMargin: "1600px 0px", threshold: 0 },
+      {
+        rootMargin: window.matchMedia("(max-width: 760px)").matches
+          ? "420px 0px"
+          : "1600px 0px",
+        threshold: 0,
+      },
     );
     observer.observe(experienceSection);
     return () => observer.disconnect();
@@ -311,6 +334,7 @@ export default function SagaHome() {
 
   useGSAP(
     () => {
+      let cleanupOrbitCarousel = () => {};
       ScrollTrigger.defaults({
         invalidateOnRefresh: true,
       });
@@ -475,6 +499,11 @@ export default function SagaHome() {
         let autoTimer = null;
         let sectionVisible = false;
         let interactionActive = false;
+        let transitionDuration = 0;
+        let suppressClickUntil = 0;
+        const cardHandlers = [];
+        const orbitScene = orbitSection.querySelector(".rajasthan-orbit-scene");
+        let pointerStart = null;
 
         const wrap = (value) => ((value % total) + total) % total;
 
@@ -578,14 +607,14 @@ export default function SagaHome() {
             gsap.set(card, {
               x,
               y,
-              z,
+              z: mobile ? 0 : z,
               scale,
               opacity: visible ? opacity : 0,
 
-              rotateY,
+              rotateY: mobile ? 0 : rotateY,
               rotateZ: 0,
 
-              filter: `blur(${blur}px)`,
+              filter: mobile ? "none" : `blur(${blur}px)`,
 
               visibility: visible ? "visible" : "hidden",
 
@@ -593,9 +622,9 @@ export default function SagaHome() {
 
               zIndex: Math.round(200 - abs * 25),
 
-              transformPerspective: 1400,
+              transformPerspective: mobile ? 0 : 1400,
               transformOrigin: "50% 50%",
-              force3D: true,
+              force3D: !mobile,
             });
 
             const isCenter = abs < 0.08;
@@ -617,6 +646,8 @@ export default function SagaHome() {
             return;
           }
 
+          const interval = 2000;
+          const delay = Math.max(0, interval - transitionDuration);
           autoTimer = setTimeout(() => {
             if (interactionActive || !sectionVisible) {
               scheduleAuto();
@@ -626,7 +657,7 @@ export default function SagaHome() {
             autoIndex = wrap(autoIndex + 1);
 
             moveTo(autoIndex, false);
-          }, 2600);
+          }, delay);
         };
 
         const moveTo = (index, fromClick = false) => {
@@ -640,6 +671,7 @@ export default function SagaHome() {
 
           if (Math.abs(distance) < 0.015) {
             selectedIndex = index;
+            transitionDuration = 0;
             scheduleAuto();
             return;
           }
@@ -655,6 +687,11 @@ export default function SagaHome() {
           };
 
           const target = position + distance;
+          transitionDuration = fromClick
+            ? window.innerWidth <= 760 ? 0.4 : 0.55
+            : window.innerWidth <= 760
+              ? 0.85
+              : 1.1;
 
           motionTween = gsap.to(state, {
             value: target,
@@ -663,7 +700,7 @@ export default function SagaHome() {
              * Slower luxury movement.
              * No spring / no popup.
              */
-            duration: fromClick ? 1.35 : 1.55,
+            duration: transitionDuration,
 
             ease: "power2.inOut",
 
@@ -696,15 +733,20 @@ export default function SagaHome() {
 
           card.setAttribute("tabindex", "0");
 
-          card.addEventListener("click", () => {
+          const handleClick = (event) => {
+            if (Date.now() < suppressClickUntil) {
+              event.preventDefault();
+              event.stopPropagation();
+              return;
+            }
             if (interactionActive) {
               return;
             }
 
             moveTo(index, true);
-          });
+          };
 
-          card.addEventListener("keydown", (event) => {
+          const handleKeyDown = (event) => {
             if (event.key === "Enter" || event.key === " ") {
               event.preventDefault();
 
@@ -712,8 +754,41 @@ export default function SagaHome() {
                 moveTo(index, true);
               }
             }
-          });
+          };
+
+          card.addEventListener("click", handleClick);
+          card.addEventListener("keydown", handleKeyDown);
+          cardHandlers.push({ card, handleClick, handleKeyDown });
         });
+
+        const handlePointerDown = (event) => {
+          if (event.pointerType === "mouse" && event.button !== 0) return;
+          pointerStart = { x: event.clientX, y: event.clientY };
+        };
+
+        const handlePointerUp = (event) => {
+          if (!pointerStart) return;
+          const deltaX = event.clientX - pointerStart.x;
+          const deltaY = event.clientY - pointerStart.y;
+          pointerStart = null;
+
+          if (
+            Math.abs(deltaX) < 34 ||
+            Math.abs(deltaX) < Math.abs(deltaY) * 1.15 ||
+            interactionActive
+          ) return;
+
+          suppressClickUntil = Date.now() + 500;
+          moveTo(wrap(selectedIndex + (deltaX < 0 ? 1 : -1)), true);
+        };
+
+        const handlePointerCancel = () => {
+          pointerStart = null;
+        };
+
+        orbitScene?.addEventListener("pointerdown", handlePointerDown, { passive: true });
+        orbitScene?.addEventListener("pointerup", handlePointerUp);
+        orbitScene?.addEventListener("pointercancel", handlePointerCancel);
 
         /*
          * Render immediately.
@@ -783,6 +858,19 @@ export default function SagaHome() {
         });
 
         window.addEventListener("resize", renderCarousel);
+
+        cleanupOrbitCarousel = () => {
+          clearTimeout(autoTimer);
+          motionTween?.kill();
+          window.removeEventListener("resize", renderCarousel);
+          cardHandlers.forEach(({ card, handleClick, handleKeyDown }) => {
+            card.removeEventListener("click", handleClick);
+            card.removeEventListener("keydown", handleKeyDown);
+          });
+          orbitScene?.removeEventListener("pointerdown", handlePointerDown);
+          orbitScene?.removeEventListener("pointerup", handlePointerUp);
+          orbitScene?.removeEventListener("pointercancel", handlePointerCancel);
+        };
       }
 
       /* =========================================
@@ -941,6 +1029,7 @@ export default function SagaHome() {
       window.addEventListener("load", refresh);
 
       return () => {
+        cleanupOrbitCarousel();
         window.removeEventListener("load", refresh);
 
         window.removeEventListener("scroll", updateNavLogoAfterOrbit);
@@ -970,8 +1059,17 @@ export default function SagaHome() {
     });
   };
 
+  const protectDisplayedMedia = (event) => {
+    if (event.target.closest?.("img, video")) event.preventDefault();
+  };
+
   return (
-    <div ref={root} className="saga-page">
+    <div
+      ref={root}
+      className="saga-page"
+      onContextMenu={protectDisplayedMedia}
+      onDragStart={protectDisplayedMedia}
+    >
       {/* Only styles not already kept in saga-home.css */}
       <style>{`
         .saga-gallery {
@@ -1773,6 +1871,9 @@ export default function SagaHome() {
             autoPlay
             muted
             controls={false}
+            controlsList="nodownload noremoteplayback"
+            disablePictureInPicture
+            disableRemotePlayback
             loop
             playsInline
             preload="auto"
@@ -1973,6 +2074,9 @@ export default function SagaHome() {
                     muted
                     defaultMuted
                     controls={false}
+                    controlsList="nodownload noremoteplayback"
+                    disablePictureInPicture
+                    disableRemotePlayback
                     loop
                     playsInline
                     preload={experienceVideoReady ? "auto" : "none"}
@@ -2214,7 +2318,8 @@ export default function SagaHome() {
                   <img
                     src={image}
                     alt={`Rajasthan wilderness experience ${index + 1}`}
-                    loading="lazy"
+                    loading={index === 0 || index === 1 || index === SAFARI_EXPERIENCE_IMAGES.length - 1 ? "eager" : "lazy"}
+                    fetchPriority={index === 0 ? "high" : "auto"}
                     decoding="async"
                   />
 

@@ -8920,3 +8920,34 @@ body.saga-past-orbit .site-nav .nav-book {
   .saga-local-copy { padding-inline: 18px !important; }
   #experience.rajasthan-orbit-experience > .rajasthan-orbit-scene { flex-basis: 455px !important; height: 455px !important; min-height: 455px !important; }
 }
+
+@media (max-width: 760px) {
+  .hospitality-gallery-btn {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    margin-top: 26px !important;
+    margin-bottom: 8px !important;
+  }
+
+  #experience .rajasthan-orbit-photo {
+    backface-visibility: hidden;
+  }
+
+  #experience .rajasthan-orbit-photo img {
+    filter: none !important;
+    backface-visibility: hidden;
+  }
+
+  #experience .rajasthan-orbit-scene {
+    touch-action: pan-y pinch-zoom;
+  }
+}
+
+.saga-page img,
+.saga-page video {
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
