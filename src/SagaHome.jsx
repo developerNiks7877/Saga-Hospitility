@@ -363,7 +363,7 @@ export default function SagaHome() {
         .to(
           ".floating-saga-logo",
           {
-            top: () => (window.innerWidth <= 700 ? "38px" : "36px"),
+            top: () => (window.innerWidth <= 700 ? "29px" : "38px"),
             width: () => (window.innerWidth <= 700 ? "85px" : "110px"),
             ease: "none",
           },
@@ -385,6 +385,22 @@ export default function SagaHome() {
           },
           0,
         );
+
+      const siteNavigation = root.current?.querySelector(".site-nav");
+      if (siteNavigation) {
+        ScrollTrigger.create({
+          trigger: ".hero",
+          start: "top top",
+          end: "+=130%",
+          onUpdate: (self) => {
+            siteNavigation.classList.toggle("nav-scrolled", self.progress > 0.06);
+          },
+          onRefresh: (self) => {
+            siteNavigation.classList.toggle("nav-scrolled", self.progress > 0.06);
+          },
+          onLeaveBack: () => siteNavigation.classList.remove("nav-scrolled"),
+        });
+      }
 
       /* TEXT REVEALS */
       gsap.utils.toArray(".reveal-line").forEach((line) => {
@@ -881,8 +897,6 @@ export default function SagaHome() {
         ".rajasthan-orbit-experience",
       );
 
-      const siteNavigation = document.querySelector(".site-nav");
-
       if (orbitLogoBoundary && siteNavigation) {
         ScrollTrigger.create({
           trigger: orbitLogoBoundary,
@@ -1013,17 +1027,6 @@ export default function SagaHome() {
           },
         },
       );
-
-      /* NAV */
-      ScrollTrigger.create({
-        trigger: ".intro-section",
-        start: "top 80",
-        end: "bottom 80",
-        toggleClass: {
-          targets: ".site-nav",
-          className: "nav-dark",
-        },
-      });
 
       const refresh = () => ScrollTrigger.refresh();
       window.addEventListener("load", refresh);

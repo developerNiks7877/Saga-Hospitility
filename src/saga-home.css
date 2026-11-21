@@ -8951,3 +8951,24 @@ body.saga-past-orbit .site-nav .nav-book {
   -webkit-touch-callout: none;
   user-select: none;
 }
+
+.site-nav {
+  transition: background-color .3s ease, box-shadow .3s ease;
+}
+
+.site-nav.nav-scrolled {
+  inset-inline: 0 !important;
+  width: auto !important;
+  height: 76px !important;
+  display: grid !important;
+  align-items: center !important;
+  background-color: #f1ede3 !important;
+  color: #24251c !important;
+  box-shadow: 0 7px 22px rgba(31, 32, 25, .09);
+}
+
+@media (max-width: 760px) {
+  .site-nav.nav-scrolled {
+    height: 58px !important;
+  }
+}
