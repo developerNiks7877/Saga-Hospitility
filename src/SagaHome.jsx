@@ -176,12 +176,17 @@ export default function SagaHome() {
     };
   }, [menuOpen]);
   const [galleryIndex, setGalleryIndex] = useState(0);
+  const [safariImageIndex, setSafariImageIndex] = useState(0);
   const [experienceIndex, setExperienceIndex] = useState(0);
   const [experienceVideoReady, setExperienceVideoReady] = useState(false);
   const [heroVideoReady, setHeroVideoReady] = useState(false);
   const [loaderLogoReady, setLoaderLogoReady] = useState(false);
   const experienceVideoRef = useRef(null);
   const heroVideoRef = useRef(null);
+  const safariSectionRef = useRef(null);
+  const safariAutoResetRef = useRef(null);
+  const safariSwipeStartRef = useRef(null);
+  const safariSwipedRef = useRef(false);
   const heroReadyForReveal = heroVideoReady && loaderLogoReady;
 
   useEffect(() => {
@@ -253,6 +258,43 @@ export default function SagaHome() {
 
     revealItems.forEach((item) => observer.observe(item));
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const section = safariSectionRef.current;
+    if (!section) return;
+    let visible = false;
+    let timer = null;
+    const clearTimer = () => {
+      if (timer) window.clearTimeout(timer);
+      timer = null;
+    };
+    const scheduleNext = () => {
+      clearTimer();
+      if (!visible || document.visibilityState !== "visible") return;
+      timer = window.setTimeout(() => {
+        setSafariImageIndex((current) => (current + 1) % SAFARI_EXPERIENCE_IMAGES.length);
+        scheduleNext();
+      }, 2000);
+    };
+    safariAutoResetRef.current = scheduleNext;
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting && entry.intersectionRatio >= 0.15;
+      if (visible) scheduleNext();
+      else clearTimer();
+    }, { threshold: [0, 0.15, 0.4] });
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "visible") scheduleNext();
+      else clearTimer();
+    };
+    observer.observe(section);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => {
+      clearTimer();
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      safariAutoResetRef.current = null;
+    };
   }, []);
 
   useEffect(() => {
@@ -363,8 +405,8 @@ export default function SagaHome() {
         .to(
           ".floating-saga-logo",
           {
-            top: () => (window.innerWidth <= 700 ? "29px" : "38px"),
-            width: () => (window.innerWidth <= 700 ? "85px" : "110px"),
+            top: () => (window.innerWidth <= 700 ? "34px" : "44px"),
+            width: () => (window.innerWidth <= 700 ? "96px" : "128px"),
             ease: "none",
           },
           0,
@@ -894,7 +936,7 @@ export default function SagaHome() {
       ========================================= */
 
       const orbitLogoBoundary = document.querySelector(
-        ".rajasthan-orbit-experience",
+        ".safari-experience-section",
       );
 
       if (orbitLogoBoundary && siteNavigation) {
@@ -928,7 +970,7 @@ export default function SagaHome() {
       ============================================= */
 
       const updateNavLogoAfterOrbit = () => {
-        const orbit = document.querySelector(".rajasthan-orbit-experience");
+        const orbit = document.querySelector(".safari-experience-section");
 
         if (!orbit) return;
 
@@ -1060,6 +1102,31 @@ export default function SagaHome() {
         });
       });
     });
+  };
+
+  const moveSafariSlide = (step) => {
+    setSafariImageIndex((current) =>
+      (current + step + SAFARI_EXPERIENCE_IMAGES.length) % SAFARI_EXPERIENCE_IMAGES.length,
+    );
+    safariAutoResetRef.current?.();
+  };
+  const jumpToSafariSlide = (index) => {
+    setSafariImageIndex(index);
+    safariAutoResetRef.current?.();
+  };
+  const handleSafariPointerDown = (event) => {
+    safariSwipeStartRef.current = { x: event.clientX, y: event.clientY };
+  };
+  const handleSafariPointerUp = (event) => {
+    const start = safariSwipeStartRef.current;
+    safariSwipeStartRef.current = null;
+    if (!start) return;
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    if (Math.abs(dx) < 42 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+    safariSwipedRef.current = true;
+    window.setTimeout(() => { safariSwipedRef.current = false; }, 450);
+    moveSafariSlide(dx < 0 ? 1 : -1);
   };
 
   const protectDisplayedMedia = (event) => {
@@ -1584,7 +1651,6 @@ export default function SagaHome() {
         /* subtle interaction */
 
         @media (hover: hover) {
-          .saga-leopard-track:hover 
         }
 
         /* TABLET */
@@ -1680,6 +1746,28 @@ export default function SagaHome() {
           flex-direction: column;
           align-items: flex-start;
           gap: 14px;
+        }
+
+        .saga-footer-contact-link {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-family: "Garet", Arial, sans-serif;
+          font-size: 11px;
+          line-height: 1.75;
+          color: inherit;
+          text-decoration: none;
+          opacity: .85;
+          transition: opacity .2s;
+        }
+
+        .saga-footer-contact-link:hover {
+          opacity: 1;
+        }
+
+        .saga-footer-contact-link svg {
+          flex-shrink: 0;
+          opacity: .7;
         }
 
         .saga-footer-newsletter input[type="email"] {
@@ -1900,27 +1988,17 @@ export default function SagaHome() {
                 Ancient granite hills, quiet village paths, the presence of
                 leopards, and a way of life deeply connected to nature. We
                 didn't want to create something that stood apart from it. We
-                wanted to become a part of its story.
-              </p>
-
-              <p>
-                Saga Hospitality was born from that thought.
-              </p>
-
-              <p>
-                Inspired by the rugged landscape, local traditions, and untamed
-                character of Jawai, every detail takes its cue from the
-                surroundings. From architecture rooted in traditional forms to
-                spaces that carry the warmth and simplicity of the region, the
-                idea has always been to stay true to this land.
-              </p>
-
-              <p>
-                But our story goes beyond the place we're creating. It's about
-                the people who call Jawai home, the wildlife that defines its
-                landscape, and the quieter moments that make this destination
-                worth discovering. We're not here to change Jawai. We're here
-                to share a little more of it with you.
+                wanted to become a part of its story. Saga Hospitality was born
+                from that thought. Inspired by the rugged landscape, local
+                traditions, and untamed character of Jawai, every detail takes
+                its cue from the surroundings. From architecture rooted in
+                traditional forms to spaces that carry the warmth and
+                simplicity of the region, the idea has always been to stay true
+                to this land. But our story goes beyond the place we're
+                creating. It's about the people who call Jawai home, the
+                wildlife that defines its landscape, and the quieter moments
+                that make this destination worth discovering. We're not here to
+                change Jawai. We're here to share a little more of it with you.
               </p>
               <p className="story-mantra">
                 <em>Saga Hospitality — Wild by Nature, Rooted in Purpose.</em>
@@ -2075,7 +2153,6 @@ export default function SagaHome() {
                     src={experienceVideoReady ? active.video : undefined}
                     autoPlay={experienceVideoReady}
                     muted
-                    defaultMuted
                     controls={false}
                     controlsList="nodownload noremoteplayback"
                     disablePictureInPicture
@@ -2083,7 +2160,7 @@ export default function SagaHome() {
                     loop
                     playsInline
                     preload={experienceVideoReady ? "auto" : "none"}
-                    fetchPriority={experienceVideoReady ? "high" : "auto"}
+                    fetchpriority={experienceVideoReady ? "high" : "auto"}
                     poster={EXPERIENCE_POSTERS[experienceIndex]}
                   />
 
@@ -2149,11 +2226,9 @@ export default function SagaHome() {
             <p>
               A stay in Jawai is about everything that happens between arriving
               and leaving: the roads you explore, the landscapes you discover,
-              the stories you hear, and the moments you didn't plan for.
-            </p>
-            <p>
-              Saga Hospitality is imagined as a place to return to after those
-              discoveries. Somewhere to slow down, enjoy your own time, and feel
+              the stories you hear, and the moments you didn't plan for. Saga
+              Hospitality is imagined as a place to return to after those
+              discoveries—somewhere to slow down, enjoy your own time, and feel
               connected to the region without giving up the comforts of a
               thoughtful stay. Here, the destination is always part of the
               experience.
@@ -2294,48 +2369,90 @@ export default function SagaHome() {
         </section>
 
         {/* RAJASTHAN — ORGANIC 3D IMAGE ORBIT */}
-        <section id="experience" className="rajasthan-orbit-experience">
-          <div className="rajasthan-orbit-copy rajasthan-orbit-copy-refined">
-            <span>SAFARI EXPERIENCE</span>
-            <h2>Follow the Wild.</h2>
+        <section
+          id="experience"
+          className="safari-experience-section"
+          ref={safariSectionRef}
+          aria-labelledby="safari-experience-title"
+        >
+          <div className="safari-experience-copy">
+            <span className="safari-experience-eyebrow">SAFARI EXPERIENCE</span>
+            <h2 id="safari-experience-title">Follow the Wild.</h2>
             <p>
-              Out here, the landscape sets the pace. The trails wind past
-              granite formations, open terrain, and the natural habitats of
-              Jawai's wildlife. Every moment brings a chance to notice
-              something unexpected.
-            </p>
-            <p>
-              From the quiet of the hills to the possibility of spotting a
-              leopard in its natural surroundings, the experience is shaped
-              by patience, observation, and the thrill of the unknown. No two
-              journeys through the wild are ever quite the same.
+              Out here, the landscape sets the pace. Trails wind past granite
+              formations, open terrain, and the natural habitats of Jawai’s
+              wildlife. From quiet hillsides to the possibility of a leopard
+              sighting, every journey is shaped by patience, observation, and
+              the thrill of the unknown. No two journeys through the wild are
+              ever quite the same.
             </p>
           </div>
 
-          <div className="rajasthan-orbit-scene">
-            <div className="rajasthan-orbit-atmosphere" />
+          <div
+            className="safari-carousel-stage"
+            aria-label="Jawai safari photographs"
+            onPointerDown={handleSafariPointerDown}
+            onPointerUp={handleSafariPointerUp}
+            onPointerCancel={() => { safariSwipeStartRef.current = null; }}
+          >
+            {SAFARI_EXPERIENCE_IMAGES.map((image, index) => {
+              const count = SAFARI_EXPERIENCE_IMAGES.length;
+              let distance = (index - safariImageIndex + count) % count;
+              if (distance > count / 2) distance -= count;
+              const position = distance === 0
+                ? "active"
+                : distance === -1
+                  ? "previous"
+                  : distance === 1
+                    ? "next"
+                    : distance === -2
+                      ? "far-previous"
+                      : distance === 2
+                        ? "far-next"
+                        : distance === -3
+                          ? "outer-previous"
+                          : distance === 3
+                            ? "outer-next"
+                            : distance === -4
+                              ? "edge-previous"
+                              : distance === 4
+                                ? "edge-next"
+                                : distance < 0
+                                  ? "extreme-previous"
+                                  : "hidden";
+              return (
+                <button
+                  className={`safari-slide safari-slide-${position}`}
+                  key={image}
+                  type="button"
+                  aria-label={`Show safari image ${index + 1} of ${count}`}
+                  aria-pressed={distance === 0}
+                  tabIndex={distance === 0 ? 0 : -1}
+                  onClick={(event) => {
+                    if (safariSwipedRef.current) {
+                      event.preventDefault();
+                      return;
+                    }
+                    jumpToSafariSlide(index);
+                  }}
+                >
+                  <img src={image} alt={`Jawai wilderness landscape, image ${index + 1}`} loading="eager" decoding="async" draggable="false" />
+                  <span className="safari-slide-shade" />
+                </button>
+              );
+            })}
+          </div>
 
-            <div className="rajasthan-orbit-ring">
+          <div className="safari-carousel-controls" aria-label="Safari image controls">
+            <button type="button" className="safari-arrow" onClick={() => moveSafariSlide(-1)} aria-label="Previous image"><span aria-hidden="true">←</span></button>
+            <div className="safari-slide-dots" aria-label="Choose an image">
               {SAFARI_EXPERIENCE_IMAGES.map((image, index) => (
-                <figure className="rajasthan-orbit-photo" key={image}>
-                  <img
-                    src={image}
-                    alt={`Rajasthan wilderness experience ${index + 1}`}
-                    loading={index === 0 || index === 1 || index === SAFARI_EXPERIENCE_IMAGES.length - 1 ? "eager" : "lazy"}
-                    fetchPriority={index === 0 ? "high" : "auto"}
-                    decoding="async"
-                  />
-
-                  <span className="rajasthan-orbit-number">0{index + 1}</span>
-                </figure>
+                <button key={image} type="button" className={index === safariImageIndex ? "is-active" : ""} onClick={() => jumpToSafariSlide(index)} aria-label={`Go to image ${index + 1}`} aria-current={index === safariImageIndex ? "true" : undefined} />
               ))}
             </div>
-
-            <div className="rajasthan-orbit-progress">
-              <span />
-              <small>SCROLL TO EXPLORE</small>
-            </div>
+            <button type="button" className="safari-arrow" onClick={() => moveSafariSlide(1)} aria-label="Next image"><span aria-hidden="true">→</span></button>
           </div>
+          <span className="safari-carousel-hint">SWIPE OR USE ARROWS TO EXPLORE</span>
         </section>
 
         {/* THE SAGA JOURNAL */}
@@ -2343,11 +2460,13 @@ export default function SagaHome() {
           <div className="home-journal-heading" data-scroll-reveal>
             <div>
               <span className="home-journal-eyebrow">THE SAGA JOURNAL</span>
-              <h2>Stories from Rajasthan</h2>
+              <h2>Blogs</h2>
             </div>
             <p>
               Dispatches from Rajasthan’s wild heart: stories of place, people
-              and time well spent.
+              and time well spent. For travellers from Jodhpur and across
+              Rajasthan, each story offers a closer look at Jawai’s landscape
+              and living culture.
             </p>
           </div>
 
@@ -2422,15 +2541,45 @@ export default function SagaHome() {
           <div>
             <h3>Contact Us</h3>
 
-            <p>
-              Reservations
-              <br />
-              Rajasthan, India
-              <br />
-              India
-            </p>
+            <div className="saga-footer-links">
+              <a
+                href="tel:+919783100471"
+                className="saga-footer-contact-link"
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.1 6.1l.98-.98a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                97831 00471
+              </a>
 
-            <button className="footer-signup">CONTACT US</button>
+              <a
+                href="https://maps.app.goo.gl/YPB5FwdaUbc15dZm8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="saga-footer-contact-link"
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 13-8 13s-8-7-8-13a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                SAGA Jawai, Rajasthan
+              </a>
+
+              <a
+                href="https://www.instagram.com/sagajawai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="saga-footer-contact-link"
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                @sagajawai
+              </a>
+
+              <a
+                href="https://www.facebook.com/share/1E5a864iTp/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="saga-footer-contact-link"
+              >
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                SAGA Jawai
+              </a>
+            </div>
           </div>
 
           <div>
@@ -2457,14 +2606,7 @@ export default function SagaHome() {
               and updates from the world of SAGA.
             </p>
 
-            <input type="email" placeholder="EMAIL ADDRESS" />
-
-            <label className="footer-accept">
-              <input type="checkbox" />
-              <span>I accept the Terms & Conditions</span>
-            </label>
-
-            <button className="footer-signup">SIGN UP</button>
+            <button className="footer-signup" onClick={() => navigate("/coming-soon")}>SIGN UP</button>
           </div>
         </div>
 

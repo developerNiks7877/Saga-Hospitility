@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from '../data/blogData';
 import { publicAsset } from '../utils/publicAsset';
+import PublicFooter from '../components/PublicFooter';
 import './Blog.css';
 
 export default function Blog() {
@@ -146,7 +147,21 @@ export default function Blog() {
       </header>
 
       <section className="journal-page-heading">
+        <span>THE SAGA JOURNAL</span>
         <h1>Blogs</h1>
+        <p>Stories of place, people and time well spent across Jawai and Rajasthan.</p>
+        <nav className="journal-toc" aria-label="Explore stories">
+          <span>EXPLORE STORIES</span>
+          {blogPosts.map((post, index) => (
+            <a
+              key={post.slug}
+              href={`#${post.slug}`}
+              onClick={() => document.getElementById(post.slug)?.classList.add('is-visible')}
+            >
+              <small>{String(index + 1).padStart(2, '0')}</small>{post.title}
+            </a>
+          ))}
+        </nav>
       </section>
 
       <section className="journal-list" aria-label="All blog stories">
@@ -159,6 +174,7 @@ export default function Blog() {
         </div>
         {blogPosts.map((post, index) => (
           <article
+            id={post.slug}
             className={`journal-card journal-reveal${index === 0 ? ' is-visible' : ''}`}
             key={post.slug}
           >
@@ -194,10 +210,7 @@ export default function Blog() {
         ))}
       </section>
 
-      <footer className="journal-footer">
-        <img src={publicAsset('/assets/logo/saga-hospitality-logo.png')} alt="SAGA Hospitality" />
-        <span>WILD BY NATURE · ROOTED IN PURPOSE</span>
-      </footer>
+      <PublicFooter />
     </main>
   );
 }
