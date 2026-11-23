@@ -1003,7 +1003,10 @@ export default function SagaHome() {
           scrollTrigger: {
             trigger: ".saga-gallery",
             start: "top top",
-            end: () => `+=${window.innerWidth * (galleryPanels.length - 1)}`,
+            end: () => {
+              const panelWidth = galleryPanels[0]?.getBoundingClientRect().width || document.documentElement.clientWidth;
+              return `+=${panelWidth * (galleryPanels.length - 1)}`;
+            },
             scrub: 1,
             pin: true,
             anticipatePin: 1,
@@ -2444,13 +2447,17 @@ export default function SagaHome() {
           </div>
 
           <div className="safari-carousel-controls" aria-label="Safari image controls">
-            <button type="button" className="safari-arrow" onClick={() => moveSafariSlide(-1)} aria-label="Previous image"><span aria-hidden="true">←</span></button>
+            <button type="button" className="safari-arrow" onClick={() => moveSafariSlide(-1)} aria-label="Previous image">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6 6-6-6 6-6" /></svg>
+            </button>
             <div className="safari-slide-dots" aria-label="Choose an image">
               {SAFARI_EXPERIENCE_IMAGES.map((image, index) => (
                 <button key={image} type="button" className={index === safariImageIndex ? "is-active" : ""} onClick={() => jumpToSafariSlide(index)} aria-label={`Go to image ${index + 1}`} aria-current={index === safariImageIndex ? "true" : undefined} />
               ))}
             </div>
-            <button type="button" className="safari-arrow" onClick={() => moveSafariSlide(1)} aria-label="Next image"><span aria-hidden="true">→</span></button>
+            <button type="button" className="safari-arrow" onClick={() => moveSafariSlide(1)} aria-label="Next image">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            </button>
           </div>
           <span className="safari-carousel-hint">SWIPE OR USE ARROWS TO EXPLORE</span>
         </section>
@@ -2560,25 +2567,26 @@ export default function SagaHome() {
                 SAGA Jawai, Rajasthan
               </a>
 
-              <a
-                href="https://www.instagram.com/sagajawai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="saga-footer-contact-link"
-              >
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                @sagajawai
-              </a>
-
-              <a
-                href="https://www.facebook.com/share/1E5a864iTp/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="saga-footer-contact-link"
-              >
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                SAGA Jawai
-              </a>
+              <div className="saga-footer-socials" aria-label="Social media">
+                <a
+                  href="https://www.instagram.com/sagajawai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  title="Instagram"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".7" fill="currentColor" stroke="none"/></svg>
+                </a>
+                <a
+                  href="https://www.facebook.com/share/1E5a864iTp/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  title="Facebook"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.4 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.5 1.6-1.5h1.7V3.1c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.6v2H6.8v3.2h2.9V21h3.7Z"/></svg>
+                </a>
+              </div>
             </div>
           </div>
 

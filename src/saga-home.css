@@ -8953,6 +8953,12 @@ body.saga-past-orbit .site-nav .nav-book {
   user-select: none;
 }
 
+/* Balance the logo artwork's optical top and bottom breathing room in the scrolled nav. */
+.site-nav.nav-scrolled ~ .floating-saga-logo img {
+  transform: translateY(4px);
+  transition: transform .25s ease;
+}
+
 .site-nav {
   transition: background-color .3s ease, box-shadow .3s ease;
 }
@@ -9075,8 +9081,13 @@ body.saga-past-orbit .site-nav .nav-book {
 .site-nav .menu-trigger:hover,
 .site-nav .menu-trigger:focus-visible {
   background: transparent !important;
+  color: #fff !important;
+  text-shadow: 0 1px 7px rgba(0, 0, 0, .42);
+}
+.site-nav.nav-scrolled .menu-trigger:hover,
+.site-nav.nav-scrolled .menu-trigger:focus-visible {
   color: #24251c !important;
-  text-shadow: 0 1px 7px rgba(255, 255, 255, .72);
+  text-shadow: none;
 }
 .site-nav .nav-book {
   justify-self: end !important;
@@ -9390,6 +9401,7 @@ body.saga-past-orbit .site-nav .nav-book {
   margin: 12px auto 0;
 }
 .saga-page .safari-arrow {
+  position: relative;
   display: grid;
   width: 42px;
   height: 42px;
@@ -9399,9 +9411,27 @@ body.saga-past-orbit .site-nav .nav-book {
   background: transparent;
   color: #826536;
   cursor: pointer;
-  font-size: 18px;
-  line-height: 1;
+  box-shadow: 0 2px 8px rgba(50, 44, 31, .08);
   transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.saga-page .safari-arrow::before {
+  position: absolute;
+  inset: 4px;
+  content: '';
+  border: 1px solid rgba(154, 128, 80, .24);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.saga-page .safari-arrow svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 .saga-page .safari-arrow:hover,
 .saga-page .safari-arrow:focus-visible {
@@ -9409,6 +9439,8 @@ body.saga-past-orbit .site-nav .nav-book {
   background: #876a3c;
   color: #fffaf0;
 }
+.saga-page .safari-arrow:hover::before,
+.saga-page .safari-arrow:focus-visible::before { border-color: rgba(255, 250, 240, .42); }
 .saga-page .safari-slide-count {
   display: inline-flex;
   align-items: center;
@@ -9475,4 +9507,459 @@ body.saga-past-orbit .site-nav .nav-book {
   .saga-page .safari-slide,
   .saga-page .safari-arrow,
   .saga-page .safari-slide-dots button { transition-duration: .01ms; }
+}
+
+/* Match the menu control to the Book Now button treatment. */
+.site-nav .menu-trigger,
+.site-nav .nav-book {
+  box-sizing: border-box;
+  width: 112px;
+  height: 40px;
+}
+.site-nav .menu-trigger {
+  position: relative;
+  height: 40px !important;
+  min-height: 40px !important;
+  padding: 0 18px !important;
+  gap: 10px;
+  border: 1px solid #c5a66c !important;
+  background: linear-gradient(135deg, #c7a66a 0%, #a98549 54%, #92713d 100%) !important;
+  color: #fffaf0 !important;
+  font-size: 10px !important;
+  text-shadow: none !important;
+  box-shadow: 0 3px 12px rgba(32, 29, 20, .16), inset 0 1px 0 rgba(255, 255, 255, .35);
+  transition: background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
+}
+.site-nav .menu-trigger::before {
+  position: absolute;
+  inset: 4px;
+  content: '';
+  background:
+    linear-gradient(currentColor, currentColor) left top / 8px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) left top / 1px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) right top / 8px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) right top / 1px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / 8px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / 1px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / 8px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / 1px 8px no-repeat;
+  opacity: .62;
+  pointer-events: none;
+  transition: opacity .25s ease, inset .25s ease;
+}
+.site-nav .menu-trigger::after { display: none !important; }
+.site-nav .menu-trigger .menu-lines i {
+  background-color: #fffaf0 !important;
+  box-shadow: none !important;
+}
+.site-nav .menu-trigger:hover,
+.site-nav .menu-trigger:focus-visible {
+  border-color: #24251c !important;
+  background: #24251c !important;
+  color: #fff !important;
+  box-shadow: 0 5px 16px rgba(24, 25, 19, .22);
+}
+.site-nav.nav-scrolled .menu-trigger:hover,
+.site-nav.nav-scrolled .menu-trigger:focus-visible { color: #fff !important; }
+.site-nav .menu-trigger:hover::before,
+.site-nav .menu-trigger:focus-visible::before {
+  inset: 3px;
+  opacity: .92;
+}
+.site-nav .menu-trigger:hover .menu-lines i,
+.site-nav .menu-trigger:focus-visible .menu-lines i { background-color: #fff !important; }
+@media (max-width: 760px) {
+  .site-nav .menu-trigger { width: 90px; height: 34px !important; min-height: 34px !important; padding-inline: 12px !important; font-size: 8px !important; }
+  .site-nav .nav-book { box-sizing: border-box; width: 90px; height: 34px; min-height: 34px; padding-inline: 12px !important; }
+}
+.site-nav:not(.nav-scrolled) .menu-trigger,
+.site-nav.nav-scrolled .menu-trigger,
+.site-nav:not(.nav-scrolled) .menu-trigger > span:not(.menu-lines),
+.site-nav.nav-scrolled .menu-trigger > span:not(.menu-lines) {
+  color: #fff !important;
+  text-shadow: none !important;
+}
+.site-nav:not(.nav-scrolled) .menu-trigger,
+.site-nav.nav-scrolled .menu-trigger {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em !important;
+  -webkit-text-stroke: 0 !important;
+}
+.site-nav .menu-trigger .menu-lines { width: 23px !important; }
+.site-nav:not(.nav-scrolled) .menu-trigger .menu-lines i,
+.site-nav.nav-scrolled .menu-trigger .menu-lines i {
+  background-color: #fff !important;
+  box-shadow: none !important;
+}
+.hospitality-collage .hospitality-image-four {
+  transform: translateY(34px) !important;
+}
+.hospitality-collage .hospitality-image-three {
+  height: 240px !important;
+}
+.hospitality-collage .hospitality-image-four {
+  height: 280px !important;
+}
+.saga-page main .saga-film-kicker > span,
+.saga-page main .home-accommodation-head > span,
+.saga-page main .saga-local-copy > span:first-child,
+.saga-page main .home-journal-eyebrow,
+.saga-page main .philosophy-eyebrow {
+  color: #ae8240 !important;
+  font-family: 'Garet', Arial, sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  letter-spacing: .34em !important;
+  line-height: 1.5 !important;
+  text-transform: uppercase !important;
+}
+.saga-page .home-accommodation-head > span {
+  opacity: 1 !important;
+}
+.saga-page .home-accommodation-head h2 {
+  color: #20261c !important;
+  opacity: 1 !important;
+}
+.saga-page main p:not(.story-mantra):not(.saga-film-intro):not(.saga-film-detail),
+.saga-page > footer p {
+  color: #777466;
+  font-family: 'Garet', Arial, sans-serif !important;
+  font-weight: 400;
+  letter-spacing: .015em;
+}
+.saga-page .home-accommodation-head p {
+  color: #777466 !important;
+  opacity: 1 !important;
+}
+/* Keep readable contrast where the site's copy sits on dark surfaces. */
+.saga-page #story .hospitality-text p:not(.story-mantra) {
+  color: #777466 !important;
+}
+.saga-page .saga-local-copy p,
+.saga-page > footer p {
+  color: rgba(238, 228, 216, .78) !important;
+}
+@media (max-width: 760px) {
+  .saga-page main .saga-film-kicker > span,
+  .saga-page main .home-accommodation-head > span,
+  .saga-page main .saga-local-copy > span:first-child,
+  .saga-page main .home-journal-eyebrow,
+  .saga-page main .philosophy-eyebrow { font-size: 9px !important; }
+  .site-nav:not(.nav-scrolled) .menu-trigger,
+  .site-nav.nav-scrolled .menu-trigger { font-size: 8px !important; letter-spacing: .16em !important; }
+  .hospitality-collage { padding-bottom: 16px; }
+  .hospitality-collage .hospitality-image-four { transform: translateY(16px) !important; }
+  .hospitality-collage .hospitality-image-three { height: clamp(130px, 38vw, 160px) !important; }
+  .hospitality-collage .hospitality-image-four { height: clamp(155px, 44vw, 190px) !important; }
+}
+.saga-page .home-room-all {
+  display: flex;
+  width: fit-content;
+  min-width: 190px;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  margin: 38px auto 0;
+  padding: 0 24px;
+  border: 1px solid #a98745 !important;
+  border-bottom: 1px solid #a98745 !important;
+  background: #a98745 !important;
+  color: #fffaf0 !important;
+  font-family: 'Garet', Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  line-height: 1.2;
+  text-align: center;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
+}
+.saga-page .home-room-all:hover,
+.saga-page .home-room-all:focus-visible {
+  border-color: #a98745 !important;
+  background: #fffaf0 !important;
+  color: #806333 !important;
+  letter-spacing: .2em;
+  transform: translateY(-2px);
+}
+.saga-page .home-journal-link {
+  position: relative;
+  display: flex;
+  width: fit-content;
+  min-width: 198px;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  margin: 30px auto 0;
+  padding: 0 42px 0 24px;
+  border: 1px solid #c5a66c !important;
+  border-bottom: 1px solid #c5a66c !important;
+  background: linear-gradient(135deg, #c7a66a 0%, #a98549 54%, #92713d 100%) !important;
+  color: #fffaf0 !important;
+  box-shadow: 0 5px 16px rgba(57, 47, 27, .13), inset 0 1px 0 rgba(255, 255, 255, .34);
+  font-family: 'Garet', Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  line-height: 1.2;
+  text-align: center;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease, transform .25s ease;
+}
+.saga-page .home-journal-link::before {
+  position: absolute;
+  inset: 4px;
+  content: '';
+  background:
+    linear-gradient(currentColor, currentColor) left top / 8px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) left top / 1px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) right top / 8px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) right top / 1px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / 8px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) left bottom / 1px 8px no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / 8px 1px no-repeat,
+    linear-gradient(currentColor, currentColor) right bottom / 1px 8px no-repeat;
+  opacity: .56;
+  pointer-events: none;
+  transition: opacity .25s ease;
+}
+.saga-page .home-journal-link span {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  color: #fffaf0 !important;
+  line-height: 1;
+  transform: translateY(-50%);
+  transition: color .25s ease, transform .25s ease;
+}
+.saga-page .home-journal-link:hover,
+.saga-page .home-journal-link:focus-visible {
+  border-color: #a98745 !important;
+  background: #fffaf0 !important;
+  color: #806333 !important;
+  box-shadow: 0 7px 18px rgba(57, 47, 27, .12);
+  transform: translateY(-2px);
+}
+.saga-page .home-journal-link:hover::before,
+.saga-page .home-journal-link:focus-visible::before { opacity: .84; }
+.saga-page .home-journal-link:hover span,
+.saga-page .home-journal-link:focus-visible span {
+  color: #806333 !important;
+  transform: translate(4px, -50%);
+}
+@media (max-width: 760px) {
+  .saga-page .home-room-all { min-width: 180px; min-height: 44px; margin-top: 26px; padding-inline: 18px; }
+  .saga-page .home-journal-link { min-width: 180px; min-height: 44px; margin-top: 24px; }
+}
+
+/* Keep the philosophy copy centered as a block, with a natural left edge. */
+.saga-page #quote .founder-quote-inner blockquote {
+  width: min(100%, 960px) !important;
+  margin-inline: auto !important;
+  text-align: center !important;
+}
+.saga-page #quote .founder-quote-inner blockquote > span:not(.philosophy-eyebrow) {
+  width: min(100%, 790px) !important;
+  max-width: 790px !important;
+  margin: 0 auto 16px !important;
+  font-family: 'Plus Jakarta Sans', Arial, sans-serif !important;
+  font-size: clamp(14px, 1.05vw, 16px) !important;
+  line-height: 1.85 !important;
+  letter-spacing: .005em !important;
+  color: rgba(250, 246, 235, .88) !important;
+}
+.saga-page #quote .founder-quote-inner blockquote .philosophy-eyebrow,
+.saga-page #quote .founder-quote-inner blockquote > strong {
+  text-align: center !important;
+}
+.saga-page #quote .founder-quote-inner blockquote em {
+  display: block;
+  text-align: center !important;
+  margin: 24px auto 0 !important;
+  max-width: 790px;
+}
+
+@media (max-width: 760px) {
+  .saga-page #quote .founder-quote-inner blockquote > span:not(.philosophy-eyebrow) {
+    width: 100% !important;
+    font-size: 14px !important;
+    line-height: 1.75 !important;
+    margin-bottom: 13px !important;
+  }
+  .saga-page #quote .founder-quote-inner blockquote em {
+    margin-top: 20px !important;
+  }
+}
+
+/* Compact footer layout with a dedicated, tidy social icon row. */
+.saga-page .saga-final-footer {
+  padding: 34px 5vw 72px !important;
+}
+.saga-page .saga-final-footer .saga-footer-rule {
+  margin-bottom: 34px !important;
+}
+.saga-page .saga-footer-grid {
+  gap: clamp(32px, 5vw, 78px) !important;
+}
+.saga-page .saga-footer-grid h3 {
+  margin-bottom: 20px !important;
+}
+.saga-page .saga-footer-links {
+  gap: 13px !important;
+}
+.saga-page .saga-footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+.saga-page .saga-footer-socials a {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid rgba(217, 179, 109, .52);
+  border-radius: 50%;
+  color: #e1bd78;
+  transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.saga-page .saga-footer-socials svg {
+  width: 16px;
+  height: 16px;
+}
+.saga-page .saga-footer-socials a:hover,
+.saga-page .saga-footer-socials a:focus-visible {
+  color: #1c2319;
+  background: #e1bd78;
+  border-color: #e1bd78;
+  transform: translateY(-2px);
+}
+@media (max-width: 760px) {
+  .saga-page .saga-final-footer { padding: 30px 22px 66px !important; }
+  .saga-page .saga-final-footer .saga-footer-rule { margin-bottom: 26px !important; }
+  .saga-page .saga-footer-grid { gap: 25px !important; }
+  .saga-page .saga-footer-grid h3 { margin-bottom: 14px !important; }
+}
+
+/* Keep the browser's mobile-preview scrollbar gutter from rendering black. */
+html,
+body {
+  scrollbar-width: thin;
+  scrollbar-color: #8c8478 #eee7db;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar { width: 6px; background: #eee7db; }
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track { background: #eee7db; }
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  border: 1px solid #eee7db;
+  border-radius: 8px;
+  background: #8c8478;
+}
+
+/* Crop the narrow encoded edge on the hero video so it never leaves a black seam. */
+.saga-page .hero-video {
+  scale: 1.045;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+@media (max-width: 760px) {
+  .saga-page .hero-video {
+    inset: -2% !important;
+    width: 104% !important;
+    max-width: none !important;
+    height: 104% !important;
+    scale: 1.09;
+  }
+}
+
+/* Use Book Now's exact gold treatment for the other primary actions. */
+.saga-page .site-nav .menu-trigger,
+.saga-page .home-room-all,
+.saga-page .home-journal-link {
+  border-color: #9a8050 !important;
+  background: #9a8050 !important;
+  color: #fff !important;
+}
+.saga-page .site-nav .menu-trigger {
+  box-shadow: none !important;
+}
+.saga-page .site-nav .menu-trigger .menu-lines i {
+  background-color: #fff !important;
+}
+.saga-page .home-room-all:hover,
+.saga-page .home-room-all:focus-visible,
+.saga-page .home-journal-link:hover,
+.saga-page .home-journal-link:focus-visible,
+.saga-page .site-nav .menu-trigger:hover,
+.saga-page .site-nav .menu-trigger:focus-visible {
+  border-color: #24251c !important;
+  background: #24251c !important;
+  color: #fff !important;
+}
+.saga-page .home-journal-link span,
+.saga-page .home-journal-link:hover span,
+.saga-page .home-journal-link:focus-visible span {
+  color: #fff !important;
+}
+.saga-page .site-nav .menu-trigger:hover .menu-lines i,
+.saga-page .site-nav .menu-trigger:focus-visible .menu-lines i {
+  background-color: #fff !important;
+}
+
+/* Laptop widths: keep the editorial layouts fluid between common screen sizes. */
+@media (min-width: 901px) and (max-width: 1280px) {
+  .saga-page .site-nav { padding-inline: clamp(24px, 4vw, 52px) !important; }
+  .saga-page .hospitality-story {
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr) !important;
+    gap: clamp(28px, 4vw, 54px) !important;
+    padding: clamp(86px, 11vh, 126px) clamp(28px, 5vw, 64px) !important;
+  }
+  .saga-page .hospitality-collage {
+    min-width: 0;
+    grid-template-rows: clamp(185px, 20vw, 245px) clamp(230px, 25vw, 300px) !important;
+    gap: clamp(10px, 1.4vw, 18px) !important;
+  }
+  .saga-page .home-accommodation {
+    padding: clamp(70px, 9vh, 100px) clamp(28px, 5vw, 64px) !important;
+  }
+  .saga-page .home-room-grid { gap: clamp(16px, 2.2vw, 28px) !important; }
+  .saga-page .saga-local-welcome {
+    grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr) !important;
+    min-height: 0 !important;
+  }
+  .saga-page .saga-local-copy { padding-inline: clamp(28px, 4vw, 58px) !important; }
+  .saga-page .saga-local-image { min-width: 0; min-height: 460px; }
+  .saga-page .home-journal { padding-inline: clamp(28px, 5vw, 64px) !important; }
+  .saga-page .home-journal-heading { gap: clamp(20px, 3vw, 36px) !important; }
+  .saga-page .saga-final-footer { padding-inline: clamp(28px, 5vw, 64px) !important; }
+}
+
+/* Curated media has a two-column tablet/laptop layout without fixed track widths. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .saga-page .saga-film-experiences {
+    min-height: 0 !important;
+    padding: clamp(76px, 10vh, 108px) clamp(28px, 4vw, 48px) 72px !important;
+  }
+  .saga-page .saga-film-shell {
+    width: 100% !important;
+    min-height: 0 !important;
+    grid-template-columns: minmax(0, .82fr) minmax(0, 1.5fr) !important;
+    gap: clamp(20px, 3vw, 34px) !important;
+  }
+  .saga-page .saga-film-copy,
+  .saga-page .saga-film-stage { min-width: 0 !important; }
+  .saga-page .saga-film-rail { min-width: 0 !important; }
+}
+
+/* Short laptop viewports: reduce top/bottom pressure while allowing content to grow. */
+@media (min-width: 761px) and (max-height: 820px) {
+  .saga-page .saga-film-experiences {
+    min-height: 0 !important;
+    padding-block: clamp(58px, 8vh, 78px) 54px !important;
+  }
+  .saga-page .saga-film-shell { min-height: 0 !important; }
+  .saga-page .saga-local-welcome { min-height: 0 !important; }
+  .saga-page .safari-experience-section { padding-block: clamp(42px, 6vh, 60px) !important; }
+  .saga-page .saga-final-footer { padding-top: 30px !important; }
 }
