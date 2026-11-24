@@ -9881,8 +9881,42 @@ body::-webkit-scrollbar-thumb {
   background: #9a8050 !important;
   color: #fff !important;
 }
-.saga-page .site-nav .menu-trigger {
+.saga-page .site-nav .menu-trigger,
+.saga-page .site-nav .nav-book {
+  height: 40px;
+  min-height: 40px;
+  border: 1px solid #9a8050 !important;
+  border-radius: 0;
+  background: #9a8050 !important;
+  color: #fff !important;
   box-shadow: none !important;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+.saga-page .site-nav .menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px !important;
+}
+.saga-page .site-nav .menu-trigger::before,
+.saga-page .site-nav .menu-trigger::after,
+.saga-page .home-journal-link::before {
+  display: none !important;
+}
+.saga-page .home-journal-link {
+  min-width: 198px;
+  min-height: 40px;
+  padding: 0 24px;
+  border-radius: 0;
+  box-shadow: none !important;
+  font-size: 9px;
+  letter-spacing: .2em;
+}
+.saga-page .home-journal-link span {
+  right: 14px;
+  color: #fff !important;
 }
 .saga-page .site-nav .menu-trigger .menu-lines i {
   background-color: #fff !important;
@@ -9905,6 +9939,18 @@ body::-webkit-scrollbar-thumb {
 .saga-page .site-nav .menu-trigger:hover .menu-lines i,
 .saga-page .site-nav .menu-trigger:focus-visible .menu-lines i {
   background-color: #fff !important;
+}
+@media (max-width: 760px) {
+  .saga-page .site-nav .menu-trigger,
+  .saga-page .site-nav .nav-book {
+    width: 90px;
+    height: 34px;
+    min-height: 34px;
+  }
+  .saga-page .home-journal-link {
+    min-width: 180px;
+    min-height: 44px;
+  }
 }
 
 /* Laptop widths: keep the editorial layouts fluid between common screen sizes. */
