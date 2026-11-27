@@ -94,8 +94,8 @@ const EXPERIENCE_VIDEO_ASSETS = [
   "experience-03.mp4",
   "experience-04.mp4",
   "experience-05.mp4",
-  "experience-02.mp4",
-  "experience-03.mp4",
+  "experience-06.mp4",
+  "experience-07.mp4",
 ].map((name) => publicAsset(`/assets/video/curated/${name}`));
 const EXPERIENCE_POSTERS = EXPERIENCE_VIDEO_ASSETS.map((video) =>
   video.replace(".mp4", "-poster.jpg"),
